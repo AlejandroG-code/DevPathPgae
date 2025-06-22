@@ -1,16 +1,18 @@
 // src/app/pomodoro/page.tsx
 
-'use client'; // Essential for state management and useEffect
+'use client';
 
-import React, { useState, useEffect } from 'react';
-// No need to import Navbar or BackgroundNeumorphic here, as they are handled by src/app/layout.tsx
+import React, { useState, useEffect, useRef } from 'react';
 
 const PomodoroAppPage: React.FC = () => {
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const [mode, setMode] = useState<'focus' | 'shortBreak' | 'longBreak'>('focus'); // focus, shortBreak, longBreak
+  const [mode, setMode] = useState<'focus' | 'shortBreak' | 'longBreak'>('focus');
   const [pomodorosCompleted, setPomodorosCompleted] = useState(0);
+
+  // Audio ref for the timer end sound
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Configuración de tiempos (en minutos)
   const timerSettings = {
@@ -20,6 +22,9 @@ const PomodoroAppPage: React.FC = () => {
   };
 
   useEffect(() => {
+    // Initialize audio element when component mounts
+    audioRef.current = new Audio('/sounds/bell.mp3'); // Ensure this path is correct
+
     let interval: NodeJS.Timeout | null = null;
     if (isActive) {
       interval = setInterval(() => {
@@ -28,7 +33,7 @@ const PomodoroAppPage: React.FC = () => {
             // Timer finished
             clearInterval(interval!);
             setIsActive(false);
-            handleTimerEnd(); // Handle what happens when timer ends
+            handleTimerEnd();
           } else {
             setMinutes(minutes => minutes - 1);
             setSeconds(59);
@@ -43,7 +48,7 @@ const PomodoroAppPage: React.FC = () => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isActive, minutes, seconds, mode]); // Added mode as dependency
+  }, [isActive, minutes, seconds, mode]);
 
   const toggleTimer = () => {
     setIsActive(!isActive);
@@ -52,7 +57,7 @@ const PomodoroAppPage: React.FC = () => {
   const resetTimer = () => {
     setIsActive(false);
     setSeconds(0);
-    setMinutes(timerSettings[mode]); // Reset to current mode's time
+    setMinutes(timerSettings[mode]);
   };
 
   const switchMode = (newMode: 'focus' | 'shortBreak' | 'longBreak') => {
@@ -63,29 +68,28 @@ const PomodoroAppPage: React.FC = () => {
   };
 
   const handleTimerEnd = () => {
-    // Aquí podrías añadir lógica para sonidos, notificaciones de navegador,
-    // o un modal personalizado en lugar de `alert()`.
-    // Por ejemplo: showCustomNotification(`¡${mode === 'focus' ? 'Tiempo de descanso!' : '¡Tiempo de enfoque!'}`, 'Suena el timbre');
+    if (audioRef.current) {
+      audioRef.current.play(); // Play sound when timer ends
+    }
 
     if (mode === 'focus') {
       setPomodorosCompleted(prev => prev + 1);
-      // Decide next break type
-      if ((pomodorosCompleted + 1) % 4 === 0) { // After 4 focus sessions (4th completed)
+      if ((pomodorosCompleted + 1) % 4 === 0) {
         switchMode('longBreak');
       } else {
         switchMode('shortBreak');
       }
     } else {
-      switchMode('focus'); // After break, go back to focus
+      switchMode('focus');
     }
   };
 
   const formatTime = (num: number) => num < 10 ? `0${num}` : num;
 
   return (
-    // The outer div should be adjusted for consistent page layout within the layout.tsx wrapper
-    <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-64px)]">
-      <div className="p-8 bg-[#24243a]/70 rounded-xl shadow-2xl border border-[#00FFC6]/20 text-white text-center w-full max-w-2xl">
+    <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-64px)] text-white">
+      {/* Main container with transparent/blurred background and wider max-width */}
+      <div className="bg-transparent backdrop-blur-md p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 text-white text-center w-full max-w-7xl"> {/* Wider: max-w-7xl, transparent/blurred background */}
         <h3 className="text-4xl font-extrabold mb-8 text-vibrant-teal drop-shadow-md">
           Aplicación de Estudio con Técnica Pomodoro Gamificada
         </h3>
@@ -94,7 +98,7 @@ const PomodoroAppPage: React.FC = () => {
         </p>
 
         {/* Timer Display */}
-        <div className="my-10 p-6 bg-[#1a1b26] rounded-lg shadow-inner border border-gray-700">
+        <div className="my-10 p-6 bg-transparent backdrop-blur-sm rounded-lg shadow-inner border border-gray-700"> {/* Transparent/blurred inner background */}
           <div className="text-9xl font-mono font-bold text-white drop-shadow-lg mb-4 leading-none">
             {formatTime(minutes)}:{formatTime(seconds)}
           </div>
@@ -123,7 +127,7 @@ const PomodoroAppPage: React.FC = () => {
         </div>
 
         {/* Mode Switch Buttons */}
-        <div className="flex justify-center space-x-3 text-lg mb-4 p-4 bg-[#1a1b26] rounded-lg border border-gray-700 shadow-inner">
+        <div className="flex justify-center space-x-3 text-lg mb-4 p-4 bg-transparent backdrop-blur-sm rounded-lg border border-gray-700 shadow-inner"> {/* Transparent/blurred inner background */}
           <button
             onClick={() => switchMode('focus')}
             className={`py-2 px-5 rounded-full transition-colors duration-200 font-medium hover:scale-[1.05]
@@ -149,9 +153,7 @@ const PomodoroAppPage: React.FC = () => {
             Descanso Largo ({timerSettings.longBreak}min)
           </button>
         </div>
-        <p className="text-gray-500 text-sm mt-6">
-          *Este temporizador es una herramienta básica. Para sonidos y notificaciones, considera el uso de APIs de navegador.
-        </p>
+        {/* Removed the footnote text as requested */}
       </div>
     </div>
   );

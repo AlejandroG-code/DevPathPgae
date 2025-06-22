@@ -1,40 +1,34 @@
 // src/app/passwords/page.tsx
 
-'use client'; // Essential for state management and event handlers
+'use client';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useState, useCallback, useEffect } from 'react';
-// No need to import Navbar or BackgroundNeumorphic here, as they are handled by src/app/layout.tsx
 
 const PasswordGeneratorPage: React.FC = () => {
-  // Estados para la configuración y el resultado de la contraseña
-  const [passwordLength, setPasswordLength] = useState(16); // Longitud inicial más segura
+  const [passwordLength, setPasswordLength] = useState(16);
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
-  const [includeSymbols, setIncludeSymbols] = useState(false); // Por defecto, no símbolos para simplicidad inicial
+  const [includeSymbols, setIncludeSymbols] = useState(false);
   const [generatedPassword, setGeneratedPassword] = useState('');
-  const [copyStatus, setCopyStatus] = useState(''); // Para mostrar el estado de copiado
+  const [copyStatus, setCopyStatus] = useState('');
 
-  // Caracteres disponibles para la generación de contraseñas
   const charSets = {
     uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     lowercase: 'abcdefghijklmnopqrstuvwxyz',
     numbers: '0123456789',
-    symbols: '!@#$%^&*()_+~`|}{[]:;?><,./-=', // Símbolos comunes
+    symbols: '!@#$%^&*()_+~`|}{[]:;?><,./-=',
   };
 
-  // Función local para mezclar arrays, ahora definida como una función auxiliar normal
   const randomizeArray = useCallback((arr: string[]) => {
-    const arrayCopy = [...arr]; // Crea una copia para no modificar el original
+    const arrayCopy = [...arr];
     for (let i = arrayCopy.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]]; // Intercambia elementos
+      [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
     }
     return arrayCopy;
-  }, []); // El useCallback asegura que esta función no cambie innecesariamente, optimizando generatePassword
+  }, []);
 
-  // Función para generar la contraseña
   const generatePassword = useCallback(() => {
     let validChars = '';
     const selectedCharTypes = [];
@@ -56,7 +50,6 @@ const PasswordGeneratorPage: React.FC = () => {
       selectedCharTypes.push(charSets.symbols);
     }
 
-    // Si no hay tipos de caracteres seleccionados, o la longitud es menor que los tipos obligatorios
     if (!validChars || passwordLength < selectedCharTypes.length) {
       setGeneratedPassword('¡Ajusta longitud y opciones!');
       setCopyStatus('');
@@ -65,29 +58,23 @@ const PasswordGeneratorPage: React.FC = () => {
 
     let passwordArray: string[] = [];
 
-    // Asegura que al menos un caracter de cada tipo seleccionado esté presente
-    // Esto se hace solo si la longitud de la contraseña es suficiente
     for (let i = 0; i < selectedCharTypes.length; i++) {
         passwordArray.push(selectedCharTypes[i][Math.floor(Math.random() * selectedCharTypes[i].length)]);
     }
 
-    // Rellena el resto de la contraseña con caracteres aleatorios del conjunto total
     for (let i = passwordArray.length; i < passwordLength; i++) {
       const randomIndex = Math.floor(Math.random() * validChars.length);
       passwordArray.push(validChars[randomIndex]);
     }
 
-    // Mezcla la contraseña para asegurar la aleatoriedad de la posición de los caracteres obligatorios
-    passwordArray = randomizeArray(passwordArray); // Ahora llama a la función local
+    passwordArray = randomizeArray(passwordArray);
 
     setGeneratedPassword(passwordArray.join(''));
-    setCopyStatus(''); // Reset copy status on new generation
-  }, [passwordLength, includeUppercase, includeLowercase, includeNumbers, includeSymbols, randomizeArray]); // Añadir randomizeArray a las dependencias del useCallback
+    setCopyStatus('');
+  }, [passwordLength, includeUppercase, includeLowercase, includeNumbers, includeSymbols, randomizeArray]);
 
-  // Función para copiar la contraseña al portapapeles
   const copyToClipboard = () => {
     if (generatedPassword && generatedPassword !== '¡Ajusta longitud y opciones!') {
-      // document.execCommand('copy') es más compatible en algunos entornos iframe
       const el = document.createElement('textarea');
       el.value = generatedPassword;
       document.body.appendChild(el);
@@ -95,23 +82,21 @@ const PasswordGeneratorPage: React.FC = () => {
       document.execCommand('copy');
       document.body.removeChild(el);
       setCopyStatus('¡Copiado!');
-      setTimeout(() => setCopyStatus(''), 2000); // Clear status after 2 seconds
+      setTimeout(() => setCopyStatus(''), 2000);
     } else {
         setCopyStatus('Nada que copiar.');
         setTimeout(() => setCopyStatus(''), 2000);
     }
   };
 
-
-  // Genera una contraseña inicial al cargar el componente y cada vez que cambian las opciones
-  React.useEffect(() => {
+  useEffect(() => {
     generatePassword();
-  }, [generatePassword]); // Dependencia de generatePassword para que se ejecute una vez y al cambiar settings
+  }, [generatePassword]);
 
   return (
-    // The outer div should be adjusted for consistent page layout within the layout.tsx wrapper
     <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-64px)]">
-      <div className="p-8 bg-[#24243a]/70 rounded-xl shadow-2xl border border-[#00FFC6]/20 text-white w-full max-w-2xl">
+      {/* Main container with transparent/blurred background and wider max-width */}
+      <div className="bg-transparent backdrop-blur-md p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 text-white w-full max-w-7xl"> {/* Wider: max-w-7xl, transparent/blurred background */}
         <h3 className="text-4xl font-extrabold mb-8 text-vibrant-teal text-center drop-shadow-md">
           Generador de Contraseñas Seguras
         </h3>
@@ -122,7 +107,7 @@ const PasswordGeneratorPage: React.FC = () => {
         {/* Contraseña Generada */}
         <div className="mb-8">
           <label className="block text-gray-100 text-xl font-semibold mb-4">Tu Contraseña Segura:</label>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-[#1a1b26] rounded-lg border border-gray-700 shadow-md">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-transparent backdrop-blur-sm rounded-lg border border-gray-700 shadow-md"> {/* Transparent/blurred inner background */}
             <input
               type="text"
               readOnly
@@ -145,7 +130,7 @@ const PasswordGeneratorPage: React.FC = () => {
         </div>
 
         {/* Longitud de la Contraseña */}
-        <div className="mb-8 p-6 bg-[#1a1b26] rounded-xl shadow-inner border border-gray-700">
+        <div className="mb-8 p-6 bg-transparent backdrop-blur-sm rounded-xl shadow-inner border border-gray-700"> {/* Transparent/blurred inner background */}
           <label htmlFor="length" className="block text-gray-100 text-xl font-semibold mb-4">
             Longitud de la Contraseña: <span className="text-vibrant-teal">{passwordLength}</span>
           </label>
@@ -168,7 +153,7 @@ const PasswordGeneratorPage: React.FC = () => {
         </div>
 
         {/* Opciones de Inclusión */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 p-6 bg-[#1a1b26] rounded-xl shadow-inner border border-gray-700">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 p-6 bg-transparent backdrop-blur-sm rounded-xl shadow-inner border border-gray-700"> {/* Transparent/blurred inner background */}
           <label className="flex items-center p-4 rounded-lg cursor-pointer bg-gray-800/50 border border-gray-700 hover:bg-gray-700/50 transition-colors duration-200">
             <input
               type="checkbox"

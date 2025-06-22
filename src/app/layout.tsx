@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 // Define the modules here once, to be passed to the Navbar and Dashboard
 const modules = [
   {
-    id: 'dashboard', // Added dashboard as a module for the Navbar (link back to hub)
+    id: 'dashboard',
     name: 'Dashboard',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256" fill="currentColor">
         <path d="M220,136a4,4,0,0,1-4,4H204V208a4,4,0,0,1-4,4H152a4,4,0,0,1-4-4V160a4,4,0,0,0-4-4H108a4,4,0,0,0-4,4v48a4,4,0,0,1-4,4H56a4,4,0,0,1-4-4V140H36a4,4,0,0,1-4-4,4,4,0,0,1,1.52-3.12l88-75.43a4,4,0,0,1,5,0l88,75.43A4,4,0,0,1,220,136Z"></path>
       </svg>
     ),
-    href: '/dashboard', // Link to the dashboard page
+    route: '/dashboard', // Using 'route' here, which is correct
     description: 'Your central hub for all DevPath tools and features.',
   },
   {
@@ -36,7 +36,7 @@ const modules = [
       </svg>
     ),
     description: 'Una extensa biblioteca de desafíos para principiantes e intermedios.',
-    href: '/problems',
+    route: '/problems',
   },
   {
     id: 'roadmaps',
@@ -47,7 +47,7 @@ const modules = [
       </svg>
     ),
     description: 'Guías visuales y estructuradas para diversas rutas de desarrollo.',
-    href: '/roadmaps',
+    route: '/roadmaps',
   },
   {
     id: 'puzzles',
@@ -58,7 +58,7 @@ const modules = [
       </svg>
     ),
     description: 'Componente interactivo para ejercitar el pensamiento crítico y la resolución de problemas.',
-    href: '/puzzles',
+    route: '/puzzles',
   },
   {
     id: 'cost-calculator',
@@ -69,7 +69,7 @@ const modules = [
       </svg>
     ),
     description: 'Herramienta interactiva para estimar costos de proyectos web.',
-    href: '/calculator',
+    route: '/calculator',
   },
   {
     id: 'password-generator',
@@ -80,7 +80,7 @@ const modules = [
       </svg>
     ),
     description: 'Genera contraseñas aleatorias y robustas.',
-    href: '/passwords',
+    route: '/passwords',
   },
   {
     id: 'pomodoro-app',
@@ -91,7 +91,7 @@ const modules = [
       </svg>
     ),
     description: 'Herramienta de productividad para optimizar el enfoque y la gestión del tiempo de estudio.',
-    href: '/pomodoro',
+    route: '/pomodoro',
   },
 ];
 

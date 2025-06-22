@@ -34,10 +34,12 @@ const BackgroundNeumorphic: React.FC = () => {
       <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.04] pointer-events-none"></div>
 
       {/* Luces animadas */}
-      <div className="absolute w-[600px] h-[600px] bg-[#00FFC6]/20 rounded-full blur-[250px] animate-pulse-slow top-[20%] left-[15%]" />
-      <div className="absolute w-[500px] h-[500px] bg-[#FF6B00]/20 rounded-full blur-[200px] animate-float-fast bottom-[15%] right-[10%]" />
-      <div className="absolute w-[400px] h-[400px] bg-[#6A5ACD]/25 rounded-full blur-[200px] animate-float-medium top-[40%] right-[30%]" />
-      <div className="absolute w-[300px] h-[300px] bg-[#FF1493]/20 rounded-full blur-[200px] animate-pulse-medium bottom-[25%] left-[20%]" />
+      <div className="fixed inset-0 z-0 overflow-hidden min-h-screen"> {/* Changed h-screen to min-h-screen if it was h-screen, or ensure it's fixed/absolute to cover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#1a1b26] to-[#0a0a0a]"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-vibrant-teal rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-bright-orange rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-accent-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+      </div>
 
       {/* Estrellas animadas */}
       {stars.map((star, i) => (

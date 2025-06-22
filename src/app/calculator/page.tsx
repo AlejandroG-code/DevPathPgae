@@ -86,8 +86,9 @@ const ProjectCalculatorPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-64px)]"> {/* Adjusted min-height */}
-      <div className="p-8 bg-[#24243a]/70 rounded-xl shadow-2xl border border-[#00FFC6]/20 text-white w-full max-w-4xl"> {/* Asegura texto blanco por defecto */}
+    <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-64px)]">
+      {/* Main container with transparent/blurred background and wider max-width */}
+      <div className="p-8 bg-transparent backdrop-blur-md rounded-xl shadow-2xl border border-[#00FFC6]/20 text-white w-full max-w-7xl">
         <h3 className="text-4xl font-extrabold mb-8 text-vibrant-teal text-center drop-shadow-md">
           Calculadora de Costo de Proyectos Web
         </h3>
@@ -96,7 +97,7 @@ const ProjectCalculatorPage: React.FC = () => {
         </p>
 
         {/* Sección: Tipo de Proyecto */}
-        <div className="mb-10 p-6 bg-[#1a1b26] rounded-xl shadow-inner border border-gray-700">
+        <div className="mb-10 p-6 bg-transparent backdrop-blur-sm rounded-xl shadow-inner border border-gray-700">
           <label className="block text-gray-100 text-xl font-semibold mb-4 border-b border-gray-600 pb-3">
             1. Selecciona el Tipo de Proyecto:
           </label>
@@ -123,7 +124,7 @@ const ProjectCalculatorPage: React.FC = () => {
                   ${selectedProjectType === type.name ? 'border-vibrant-teal bg-vibrant-teal' : 'border-gray-500'}`
                 }>
                   {selectedProjectType === type.name && (
-                    <div className="w-3 h-3 rounded-full bg-black"></div>
+                    <div className="w-3 h-3 rounded-full bg-white"></div> 
                   )}
                 </div>
                 <span className="text-lg font-medium flex-1">
@@ -135,7 +136,7 @@ const ProjectCalculatorPage: React.FC = () => {
         </div>
 
         {/* Sección: Funcionalidades Adicionales */}
-        <div className="mb-10 p-6 bg-[#1a1b26] rounded-xl shadow-inner border border-gray-700">
+        <div className="mb-10 p-6 bg-transparent backdrop-blur-sm rounded-xl shadow-inner border border-gray-700">
           <label className="block text-gray-100 text-xl font-semibold mb-4 border-b border-gray-600 pb-3">
             2. Elige Funcionalidades Adicionales:
           </label>
@@ -161,7 +162,7 @@ const ProjectCalculatorPage: React.FC = () => {
                   ${selectedFunctionalities.includes(func.name) ? 'border-bright-orange bg-bright-orange' : 'border-gray-500'}`
                 }>
                   {selectedFunctionalities.includes(func.name) && (
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> {/* Checkmark blanco */}
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> {/* White checkmark */}
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
                     </svg>
                   )}
@@ -189,7 +190,7 @@ const ProjectCalculatorPage: React.FC = () => {
         </div>
 
         {/* Sección: Complejidad del Diseño */}
-        <div className="mb-10 p-6 bg-[#1a1b26] rounded-xl shadow-inner border border-gray-700">
+        <div className="mb-10 p-6 bg-transparent backdrop-blur-sm rounded-xl shadow-inner border border-gray-700">
           <label className="block text-gray-100 text-xl font-semibold mb-4 border-b border-gray-600 pb-3">
             4. Define la Complejidad del Diseño:
           </label>
@@ -216,7 +217,7 @@ const ProjectCalculatorPage: React.FC = () => {
                   ${selectedDesignComplexity === design.name ? 'border-accent-purple bg-accent-purple' : 'border-gray-500'}`
                 }>
                   {selectedDesignComplexity === design.name && (
-                    <div className="w-3 h-3 rounded-full bg-black"></div>
+                    <div className="w-3 h-3 rounded-full bg-white"></div> // Changed to white
                   )}
                 </div>
                 <span className="text-lg font-medium flex-1">
@@ -229,7 +230,7 @@ const ProjectCalculatorPage: React.FC = () => {
 
         {/* Sección: Resultado de la Estimación */}
         <div className="mt-12 p-8 bg-gradient-to-r from-vibrant-teal to-bright-orange text-black rounded-xl shadow-2xl text-center transform hover:scale-[1.01] transition-transform duration-300">
-          <h4 className="text-3xl font-bold mb-3 text-white">Costo Estimado del Proyecto:</h4> {/* Texto blanco */}
+          <h4 className="text-3xl font-bold mb-3 text-white">Costo Estimado del Proyecto:</h4>
           <div className="flex items-center justify-center mb-4">
             <p className="text-7xl font-extrabold text-white drop-shadow-lg leading-tight mr-4">
               {currencySymbols[selectedCurrency]}{displayCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -239,6 +240,12 @@ const ProjectCalculatorPage: React.FC = () => {
               value={selectedCurrency}
               onChange={(e) => setSelectedCurrency(e.target.value)}
               className="p-3 rounded-lg bg-[#1a1b26] text-white border border-gray-600 focus:border-vibrant-teal focus:ring-1 focus:ring-vibrant-teal outline-none text-xl font-medium"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")`, // White arrow SVG
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 0.75rem center',
+                backgroundSize: '1.5em 1.5em',
+              }}
             >
               {Object.keys(exchangeRates).map(currencyCode => (
                 <option key={currencyCode} value={currencyCode}>
@@ -247,7 +254,7 @@ const ProjectCalculatorPage: React.FC = () => {
               ))}
             </select>
           </div>
-          <p className="text-base mt-4 text-gray-200 font-semibold"> {/* Texto visible */}
+          <p className="text-base mt-4 text-gray-200 font-semibold">
             *Esta es una estimación aproximada y puede variar significativamente según los detalles específicos del proyecto, el proveedor, la ubicación y el alcance final. Siempre se recomienda una consulta detallada.
           </p>
         </div>

@@ -1,14 +1,13 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 // src/app/problems/page.tsx
 
-'use client'; // Essential for state management and event handlers
+'use client';
 
-import React, { useState, useEffect } from 'react';
-// No need to import Navbar or BackgroundNeumorphic here, as they are handled by src/app/layout.tsx
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React, { useState, useCallback, useEffect } from 'react';
 
-// Define the Challenge interface, matching JSON structure
 interface Challenge {
-  id: string; // Ensure your JSON has an 'id' field for each challenge
+  id: string;
   title: string;
   description: string;
   examples: { input: string; output: string }[];
@@ -21,7 +20,7 @@ interface Challenge {
   score: number;
 }
 
-const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
+const ProblemsPage: React.FC = () => {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [loadingChallenges, setLoadingChallenges] = useState(true);
   const [errorChallenges, setErrorChallenges] = useState<string | null>(null);
@@ -31,11 +30,8 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
   const [selectedLanguage, setSelectedLanguage] = useState<'solutionJs' | 'solutionPython' | 'solutionJava' | 'solutionCpp'>('solutionJs');
   const [filterDifficulty, setFilterDifficulty] = useState<'Todos' | 'Fácil' | 'Medio' | 'Difícil'>('Todos');
 
-  // --- IMPORTANT: This path refers to your public directory ---
-  // The JSON file should be placed in `public/data/programming_challenges.json`
   const jsonUrl = '/data/programming_challenges.json';
 
-  // Fetch challenges from JSON URL
   useEffect(() => {
     const fetchChallenges = async () => {
       setLoadingChallenges(true);
@@ -47,22 +43,18 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
         }
         const data: Challenge[] = await response.json();
         
-        // Ensure each challenge has an 'id'. If not, generate one or use a fallback.
         const processedData = data.map((challenge, index) => ({
             ...challenge,
-            id: challenge.id || `challenge-${index}` // Fallback ID if not provided in JSON
+            id: challenge.id || `challenge-${index}`
         }));
 
-        // Sort challenges in memory after fetching
         const sortedChallenges = processedData.sort((a, b) => {
             const difficulties = {'Fácil': 1, 'Medio': 2, 'Difícil': 3};
-            // First, sort by difficulty
             const diffA = difficulties[a.difficulty];
             const diffB = difficulties[b.difficulty];
             if (diffA !== diffB) {
                 return diffA - diffB;
             }
-            // Then, sort by ID for stable order within the same difficulty
             return a.id.localeCompare(b.id);
         });
         setChallenges(sortedChallenges);
@@ -75,9 +67,8 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
     };
 
     fetchChallenges();
-  }, [jsonUrl]); // Re-run effect if jsonUrl changes
+  }, [jsonUrl]);
 
-  // Filter challenges based on selected difficulty
   const filteredChallenges = challenges.filter(challenge =>
     filterDifficulty === 'Todos' || challenge.difficulty === filterDifficulty
   );
@@ -86,7 +77,7 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
     setSelectedChallenge(challenge);
     setRevealedHints([]);
     setShowSolution(false);
-    setSelectedLanguage('solutionJs'); // Reset language when a new challenge is selected
+    setSelectedLanguage('solutionJs');
   };
 
   const handleRevealHint = (index: number) => {
@@ -96,9 +87,6 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
   };
 
   const handleRevealSolution = () => {
-    // Custom confirmation logic (replace with a real modal for production)
-    // IMPORTANT: window.confirm is used here as a placeholder.
-    // In a production environment, you should use a custom modal UI.
     const confirmed = window.confirm('¿Estás seguro de que quieres ver la solución? Esto no te otorgará puntos.');
     if (confirmed) {
       setShowSolution(true);
@@ -116,16 +104,17 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
   };
 
   return (
-    // The outer div is adjusted for consistent page layout within the layout.tsx wrapper
-    <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-64px)]">
-      <div className="p-8 bg-[#24243a]/70 rounded-xl shadow-2xl border border-[#00FFC6]/20 text-white w-full max-w-5xl"> {/* Increased max-width for better layout */}
-        <h3 className="text-4xl font-extrabold mb-8 text-vibrant-teal text-center drop-shadow-md">
-          Problemas de Programación
-        </h3>
-        <p className="text-gray-200 mb-8 text-center text-lg max-w-2xl mx-auto">
-          Pon a prueba tus habilidades de programación y lógica con nuestra colección de desafíos.
-        </p>
+    <div className="flex flex-col items-center p-8 min-h-[calc(100vh-64px)] text-white">
+      {/* Título y descripción movidos fuera del contenedor principal */}
+      <h1 className="text-5xl font-extrabold mb-4 text-vibrant-teal text-center drop-shadow-md">
+        Problemas de Programación
+      </h1>
+      <p className="text-gray-200 mb-8 text-center text-lg max-w-3xl mx-auto">
+        Pon a prueba tus habilidades de programación y lógica con nuestra colección de desafíos.
+      </p>
 
+      {/* Contenedor principal de problemas: más ancho y con fondo difuminado */}
+      <div className="bg-transparent backdrop-blur-md p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 w-full max-w-7xl"> {/* Wider: max-w-7xl, transparent/blurred background */}
         {loadingChallenges ? (
           <div className="text-center py-20">
             <p className="text-xl text-gray-300">Cargando problemas...</p>
@@ -163,7 +152,7 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
                   <div
                       key={challenge.id}
                       onClick={() => handleSelectChallenge(challenge)}
-                      className="bg-[#1a1b26] p-6 rounded-lg shadow-md cursor-pointer hover:scale-[1.02] transition-transform duration-200 border border-gray-700 hover:border-vibrant-teal text-white"
+                      className="bg-transparent backdrop-blur-sm p-6 rounded-lg shadow-md cursor-pointer hover:scale-[1.02] transition-transform duration-200 border border-gray-700 hover:border-vibrant-teal text-white" // Transparent/blurred background
                   >
                       <h4 className="text-2xl font-semibold mb-2 text-white">{challenge.title}</h4>
                       <p className="text-gray-400 text-sm mb-3 line-clamp-3">{challenge.description}</p>
@@ -190,7 +179,7 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
           // Challenge Detail View
           <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Panel: Instructions, Examples, Hints */}
-            <div className="bg-[#1a1b26] p-6 rounded-lg shadow-md border border-gray-700 flex flex-col">
+            <div className="bg-transparent backdrop-blur-sm p-6 rounded-lg shadow-md border border-gray-700 flex flex-col"> {/* Transparent/blurred background */}
               <button
                 onClick={() => setSelectedChallenge(null)}
                 className="mb-4 text-vibrant-teal hover:text-[#00FFC6]/80 transition-colors duration-200 flex items-center text-lg font-medium"
@@ -217,9 +206,9 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
 
                   <h5 className="text-xl font-semibold mt-6 mb-2 text-vibrant-teal">Ejemplos:</h5>
                   {selectedChallenge.examples.map((example, index) => (
-                  <div key={index} className="bg-gray-800 p-4 rounded-lg mb-3 text-sm border border-gray-600">
-                      <p className="font-mono text-gray-300"><span className="text-gray-400">Input:</span> <code className="text-white bg-gray-900 px-1 rounded">{example.input}</code></p>
-                      <p className="font-mono text-gray-300"><span className="text-gray-400">Output:</span> <code className="text-white bg-gray-900 px-1 rounded">{example.output}</code></p>
+                  <div key={index} className="bg-gray-800/50 p-4 rounded-lg mb-3 text-sm border border-gray-600"> {/* Inner example box, slightly transparent */}
+                      <p className="font-mono text-gray-300"><span className="text-gray-400">Input:</span> <code className="text-white bg-gray-900/50 px-1 rounded">{example.input}</code></p>
+                      <p className="font-mono text-gray-300"><span className="text-gray-400">Output:</span> <code className="text-white bg-gray-900/50 px-1 rounded">{example.output}</code></p>
                   </div>
                   ))}
 
@@ -242,9 +231,9 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
             </div>
 
             {/* Right Panel: Code Area & Solution */}
-            <div className="bg-[#1a1b26] p-6 rounded-lg shadow-md border border-gray-700 flex flex-col">
+            <div className="bg-transparent backdrop-blur-sm p-6 rounded-lg shadow-md border border-gray-700 flex flex-col"> {/* Transparent/blurred background */}
               <h5 className="text-xl font-semibold mb-4 text-vibrant-teal">Tu Área de Código:</h5>
-              <div className="flex-1 bg-gray-800 rounded-lg p-4 text-gray-300 font-mono text-sm overflow-auto mb-4 border border-gray-600">
+              <div className="flex-1 bg-gray-800/50 rounded-lg p-4 text-gray-300 font-mono text-sm overflow-auto mb-4 border border-gray-600"> {/* Inner code area, slightly transparent */}
                 <p className="text-gray-400">// Escribe tu código aquí</p>
                 <p className="text-gray-400">// Por ahora, esto es un placeholder.</p>
                 <p className="text-gray-400">// En el futuro, aquí habrá un editor de código funcional.</p>
@@ -290,9 +279,9 @@ const ProblemsPage: React.FC = () => { // Renamed from DailyChallenges
                 Revelar Solución Oficial (No Otorga Puntos)
               </button>
               {showSolution && selectedChallenge && (
-                <div className="mt-4 bg-gray-900 p-4 rounded-lg overflow-auto text-sm border border-gray-700">
+                <div className="mt-4 bg-gray-900/50 p-4 rounded-lg overflow-auto text-sm border border-gray-700"> {/* Solution box, slightly transparent */}
                   <h6 className="text-lg font-semibold text-vibrant-teal mb-2">Solución Oficial ({selectedLanguage.replace('solution', '')}):</h6>
-                  <pre className="text-green-300 whitespace-pre-wrap p-2 bg-black rounded-md">{getSolutionCode(selectedChallenge, selectedLanguage)}</pre>
+                  <pre className="text-green-300 whitespace-pre-wrap p-2 bg-black/50 rounded-md">{getSolutionCode(selectedChallenge, selectedLanguage)}</pre>
                 </div>
               )}
             </div>
