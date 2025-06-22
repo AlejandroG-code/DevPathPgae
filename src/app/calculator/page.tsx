@@ -3,36 +3,36 @@
 'use client'; // Essential for state management and event handlers
 
 import React, { useState, useMemo } from 'react';
-// Removed Navbar and BackgroundNeumorphic imports as they are in layout.tsx
+// Navbar and BackgroundNeumorphic imports are handled in layout.tsx
 
 const ProjectCalculatorPage: React.FC = () => {
-  // Definición de las opciones y sus costos base
+  // Definition of options and their base costs
   const projectTypes = [
     { name: 'Landing Page', cost: 500 },
-    { name: 'Blog Personal', cost: 800 },
-    { name: 'E-commerce Pequeño (hasta 20 productos)', cost: 1500 },
-    { name: 'Aplicación Web Compleja (CRM, SaaS)', cost: 3000 },
+    { name: 'Personal Blog', cost: 800 },
+    { name: 'Small E-commerce (up to 20 products)', cost: 1500 },
+    { name: 'Complex Web Application (CRM, SaaS)', cost: 3000 },
   ];
 
   const functionalities = [
-    { name: 'Autenticación de Usuarios', cost: 400 },
-    { name: 'Panel de Administración', cost: 700 },
-    { name: 'Pasarela de Pago (ej. Stripe, PayPal)', cost: 600 },
-    { name: 'Integración de API de Terceros', cost: 350 },
-    { name: 'Sistema de Notificaciones (Email/SMS)', cost: 250 },
-    { name: 'Soporte Multi-idioma', cost: 300 },
-    { name: 'Optimización SEO Básica', cost: 200 },
-    { name: 'Funcionalidad de Búsqueda', cost: 300 },
-    { name: 'Galería de Imágenes/Videos Avanzada', cost: 200 },
+    { name: 'User Authentication', cost: 400 },
+    { name: 'Admin Panel', cost: 700 },
+    { name: 'Payment Gateway (e.g. Stripe, PayPal)', cost: 600 },
+    { name: 'Third-Party API Integration', cost: 350 },
+    { name: 'Notification System (Email/SMS)', cost: 250 },
+    { name: 'Multi-language Support', cost: 300 },
+    { name: 'Basic SEO Optimization', cost: 200 },
+    { name: 'Search Functionality', cost: 300 },
+    { name: 'Advanced Image/Video Gallery', cost: 200 },
   ];
 
   const designComplexities = [
-    { name: 'Básico (Plantilla Adaptada)', multiplier: 1.0 },
-    { name: 'Medio (Diseño Semi-Personalizado)', multiplier: 1.3 },
-    { name: 'Personalizado (Diseño Único)', multiplier: 1.8 },
+    { name: 'Basic (Adapted Template)', multiplier: 1.0 },
+    { name: 'Medium (Semi-Custom Design)', multiplier: 1.3 },
+    { name: 'Custom (Unique Design)', multiplier: 1.8 },
   ];
 
-  // Tasas de cambio (fijas para la demo)
+  // Exchange rates (fixed for demo)
   const exchangeRates: { [key: string]: number } = {
     'USD': 1,
     'MXN': 17.0,
@@ -42,7 +42,7 @@ const ProjectCalculatorPage: React.FC = () => {
     'JPY': 158.0,
   };
 
-  // Símbolos de moneda para mostrar
+  // Currency symbols for display
   const currencySymbols: { [key: string]: string } = {
     'USD': '$',
     'MXN': 'MX$',
@@ -52,15 +52,15 @@ const ProjectCalculatorPage: React.FC = () => {
     'JPY': '¥',
   };
 
-  // Estados para las selecciones del usuario
+  // States for user selections
   const [selectedProjectType, setSelectedProjectType] = useState(projectTypes[0].name);
   const [selectedFunctionalities, setSelectedFunctionalities] = useState<string[]>([]);
   const [selectedDesignComplexity, setSelectedDesignComplexity] = useState(designComplexities[0].name);
   const [customFeaturesText, setCustomFeaturesText] = useState('');
-  const [selectedCurrency, setSelectedCurrency] = useState('USD'); // Estado para la moneda seleccionada
+  const [selectedCurrency, setSelectedCurrency] = useState('USD'); // State for the selected currency
 
 
-  // Calcular el costo total dinámicamente
+  // Calculate total cost dynamically
   const totalCostUSD = useMemo(() => {
     const baseCost = projectTypes.find(type => type.name === selectedProjectType)?.cost || 0;
     const functionalitiesCost = selectedFunctionalities.reduce((sum, funcName) => {
@@ -71,13 +71,13 @@ const ProjectCalculatorPage: React.FC = () => {
     return (baseCost + functionalitiesCost) * designMultiplier;
   }, [selectedProjectType, selectedFunctionalities, selectedDesignComplexity]);
 
-  // Convertir el costo a la moneda seleccionada
+  // Convert cost to the selected currency
   const displayCost = useMemo(() => {
     const rate = exchangeRates[selectedCurrency] || 1;
     return totalCostUSD * rate;
   }, [totalCostUSD, selectedCurrency, exchangeRates]);
 
-  // Manejar cambios en las funcionalidades seleccionadas
+  // Handle changes in selected functionalities
   const handleFunctionalityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
     setSelectedFunctionalities(prev =>
@@ -90,16 +90,16 @@ const ProjectCalculatorPage: React.FC = () => {
       {/* Main container with transparent/blurred background and wider max-width */}
       <div className="p-8 bg-transparent backdrop-blur-md rounded-xl shadow-2xl border border-[#00FFC6]/20 text-white w-full max-w-7xl">
         <h3 className="text-4xl font-extrabold mb-8 text-vibrant-teal text-center drop-shadow-md">
-          Calculadora de Costo de Proyectos Web
+          Web Project Cost Calculator
         </h3>
         <p className="text-gray-200 mb-8 text-center text-lg max-w-2xl mx-auto">
-          Obtén una estimación aproximada del presupuesto para tu próximo proyecto web, ajustando las características y la complejidad.
+          Get an approximate budget estimate for your next web project, adjusting features and complexity.
         </p>
 
-        {/* Sección: Tipo de Proyecto */}
+        {/* Section: Project Type */}
         <div className="mb-10 p-6 bg-transparent backdrop-blur-sm rounded-xl shadow-inner border border-gray-700">
           <label className="block text-gray-100 text-xl font-semibold mb-4 border-b border-gray-600 pb-3">
-            1. Selecciona el Tipo de Proyecto:
+            1. Select Project Type:
           </label>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
             {projectTypes.map(type => (
@@ -117,14 +117,14 @@ const ProjectCalculatorPage: React.FC = () => {
                   value={type.name}
                   checked={selectedProjectType === type.name}
                   onChange={(e) => setSelectedProjectType(e.target.value)}
-                  className="hidden" // Oculta el radio button nativo
+                  className="hidden" // Hides the native radio button
                 />
                 {/* Custom Radio Button */}
                 <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 mr-3
                   ${selectedProjectType === type.name ? 'border-vibrant-teal bg-vibrant-teal' : 'border-gray-500'}`
                 }>
                   {selectedProjectType === type.name && (
-                    <div className="w-3 h-3 rounded-full bg-white"></div> 
+                    <div className="w-3 h-3 rounded-full bg-white"></div>
                   )}
                 </div>
                 <span className="text-lg font-medium flex-1">
@@ -135,10 +135,10 @@ const ProjectCalculatorPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Sección: Funcionalidades Adicionales */}
+        {/* Section: Additional Functionalities */}
         <div className="mb-10 p-6 bg-transparent backdrop-blur-sm rounded-xl shadow-inner border border-gray-700">
           <label className="block text-gray-100 text-xl font-semibold mb-4 border-b border-gray-600 pb-3">
-            2. Elige Funcionalidades Adicionales:
+            2. Choose Additional Functionalities:
           </label>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
             {functionalities.map(func => (
@@ -155,7 +155,7 @@ const ProjectCalculatorPage: React.FC = () => {
                   value={func.name}
                   checked={selectedFunctionalities.includes(func.name)}
                   onChange={handleFunctionalityChange}
-                  className="hidden" // Oculta el checkbox nativo
+                  className="hidden" // Hides the native checkbox
                 />
                 {/* Custom Checkbox */}
                 <div className={`w-6 h-6 rounded-md border-2 flex items-center justify-center flex-shrink-0 mr-3
@@ -175,7 +175,7 @@ const ProjectCalculatorPage: React.FC = () => {
           </div>
           <div className="mt-8">
               <label htmlFor="customFeatures" className="block text-gray-100 text-xl font-semibold mb-3 border-b border-gray-600 pb-3">
-                  3. Otras características/notas (opcional):
+                  3. Other features/notes (optional):
               </label>
               <textarea
                   id="customFeatures"
@@ -183,16 +183,16 @@ const ProjectCalculatorPage: React.FC = () => {
                   value={customFeaturesText}
                   onChange={(e) => setCustomFeaturesText(e.target.value)}
                   className="w-full p-4 rounded-lg bg-[#1a1b26] text-gray-200 border border-gray-700 focus:border-vibrant-teal focus:ring-2 focus:ring-vibrant-teal outline-none transition-colors duration-200 text-base"
-                  placeholder="Ej. Integración con CRM específico, reportes de analíticas avanzados, funcionalidades de IA..."
+                  placeholder="e.g. Integration with specific CRM, advanced analytics reports, AI functionalities..."
               ></textarea>
-              <p className="text-gray-500 text-sm mt-2">Esta sección es para tus notas; no afecta el cálculo automático del presupuesto.</p>
+              <p className="text-gray-500 text-sm mt-2">This section is for your notes; it does not affect the automatic budget calculation.</p>
           </div>
         </div>
 
-        {/* Sección: Complejidad del Diseño */}
+        {/* Section: Design Complexity */}
         <div className="mb-10 p-6 bg-transparent backdrop-blur-sm rounded-xl shadow-inner border border-gray-700">
           <label className="block text-gray-100 text-xl font-semibold mb-4 border-b border-gray-600 pb-3">
-            4. Define la Complejidad del Diseño:
+            4. Define Design Complexity:
           </label>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
             {designComplexities.map(design => (
@@ -210,14 +210,14 @@ const ProjectCalculatorPage: React.FC = () => {
                   value={design.name}
                   checked={selectedDesignComplexity === design.name}
                   onChange={(e) => setSelectedDesignComplexity(e.target.value)}
-                  className="hidden" // Oculta el radio button nativo
+                  className="hidden" // Hides the native radio button
                 />
                 {/* Custom Radio Button */}
                 <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 mr-3
                   ${selectedDesignComplexity === design.name ? 'border-accent-purple bg-accent-purple' : 'border-gray-500'}`
                 }>
                   {selectedDesignComplexity === design.name && (
-                    <div className="w-3 h-3 rounded-full bg-white"></div> // Changed to white
+                    <div className="w-3 h-3 rounded-full bg-white"></div>
                   )}
                 </div>
                 <span className="text-lg font-medium flex-1">
@@ -228,14 +228,14 @@ const ProjectCalculatorPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Sección: Resultado de la Estimación */}
+        {/* Section: Estimation Result */}
         <div className="mt-12 p-8 bg-gradient-to-r from-vibrant-teal to-bright-orange text-black rounded-xl shadow-2xl text-center transform hover:scale-[1.01] transition-transform duration-300">
-          <h4 className="text-3xl font-bold mb-3 text-white">Costo Estimado del Proyecto:</h4>
+          <h4 className="text-3xl font-bold mb-3 text-white">Estimated Project Cost:</h4>
           <div className="flex items-center justify-center mb-4">
             <p className="text-7xl font-extrabold text-white drop-shadow-lg leading-tight mr-4">
               {currencySymbols[selectedCurrency]}{displayCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
-            {/* Selector de Moneda */}
+            {/* Currency Selector */}
             <select
               value={selectedCurrency}
               onChange={(e) => setSelectedCurrency(e.target.value)}
@@ -255,7 +255,7 @@ const ProjectCalculatorPage: React.FC = () => {
             </select>
           </div>
           <p className="text-base mt-4 text-gray-200 font-semibold">
-            *Esta es una estimación aproximada y puede variar significativamente según los detalles específicos del proyecto, el proveedor, la ubicación y el alcance final. Siempre se recomienda una consulta detallada.
+            *This is an approximate estimation and may vary significantly based on specific project details, provider, location, and final scope. A detailed consultation is always recommended.
           </p>
         </div>
       </div>

@@ -754,7 +754,7 @@
   },
   {
     "id": "M01",
-    "title": "Problema Medio 1: Invertir Array",
+    "title": "Invertir Array",
     "description": "Dada una matriz de enteros, inviértela en su lugar. No crees una nueva matriz.",
     "examples": [
       {"input": "arr = [1, 2, 3, 4, 5]", "output": "[5, 4, 3, 2, 1]"},
@@ -773,7 +773,7 @@
   },
   {
     "id": "M02",
-    "title": "Problema Medio 2: Palíndromo de Cadena",
+    "title": "Palíndromo de Cadena",
     "description": "Dada una cadena, determina si es un palíndromo, ignorando mayúsculas/minúsculas y caracteres no alfanuméricos.",
     "examples": [
       {"input": "cadena = \"A man, a plan, a canal: Panama\"", "output": "true"},
@@ -792,7 +792,7 @@
   },
   {
     "id": "M03",
-    "title": "Problema Medio 3: Contar Vocales",
+    "title": "Contar Vocales",
     "description": "Dada una cadena, devuelve el número de vocales (`a, e, i, o, u`) en ella. Ignora mayúsculas y minúsculas.",
     "examples": [
       {"input": "cadena = \"Hello World\"", "output": "3"},
@@ -811,7 +811,7 @@
   },
   {
     "id": "M04",
-    "title": "Problema Medio 4: Encontrar Mayor Elemento en Array",
+    "title": " Encontrar Mayor Elemento en Array",
     "description": "Dada una matriz de números, encuentra y devuelve el elemento más grande.",
     "examples": [
       {"input": "arr = [3, 1, 4, 1, 5, 9, 2]", "output": "9"},
@@ -830,7 +830,7 @@
   },
   {
     "id": "M05",
-    "title": "Problema Medio 5: Eliminar Duplicados de Array",
+    "title": "Eliminar Duplicados de Array",
     "description": "Dada una matriz de enteros, elimina los elementos duplicados de la matriz en su lugar y devuelve la nueva longitud de la matriz sin duplicados. El orden de los elementos restantes puede cambiar.",
     "examples": [
       {"input": "arr = [1, 1, 2]", "output": "2 (arr debería ser [1, 2] o similar)"},
@@ -849,7 +849,7 @@
   },
   {
     "id": "M06",
-    "title": "Problema Medio 6: Suma de Números Primos",
+    "title": "6: Suma de Números Primos",
     "description": "Dada un entero `n`, devuelve la suma de todos los números primos hasta `n` (inclusive).",
     "examples": [
       {"input": "n = 10", "output": "17 (2 + 3 + 5 + 7)"},
@@ -868,7 +868,7 @@
   },
   {
     "id": "M07",
-    "title": "Problema Medio 7: Factorial de un Número",
+    "title": "7: Factorial de un Número",
     "description": "Calcula el factorial de un número entero no negativo `n`. El factorial de 0 es 1.",
     "examples": [
       {"input": "n = 5", "output": "120 (5 * 4 * 3 * 2 * 1)"},
@@ -887,7 +887,7 @@
   },
   {
     "id": "M08",
-    "title": "Problema Medio 8: Encontrar el n-ésimo Número de Fibonacci",
+    "title": "8: Encontrar el n-ésimo Número de Fibonacci",
     "description": "Calcula el n-ésimo número de Fibonacci. La secuencia comienza con F(0) = 0 y F(1) = 1.",
     "examples": [
       {"input": "n = 0", "output": "0"},
@@ -907,7 +907,7 @@
   },
   {
     "id": "M09",
-    "title": "Problema Medio 9: Validar Paréntesis",
+    "title": "9: Validar Paréntesis",
     "description": "Dada una cadena `s` que contiene solo los caracteres '(', ')', '{', '}', '[' y ']', determina si la cadena de entrada es válida. Una cadena de entrada es válida si: 1. Los paréntesis de apertura deben cerrarse con el mismo tipo de paréntesis. 2. Los paréntesis de apertura deben cerrarse en el orden correcto. 3. Cada paréntesis de cierre tiene un paréntesis de apertura correspondiente del mismo tipo.",
     "examples": [
       {"input": "s = \"()\"", "output": "true"},
@@ -927,7 +927,7 @@
   },
   {
     "id": "M10",
-    "title": "Problema Medio 10: Combinaciones de Suma",
+    "title": "10: Combinaciones de Suma",
     "description": "Dada una lista de números y un número objetivo `target`, encuentra si hay dos números en la lista que sumen el `target`. Devuelve `true` si existen, `false` en caso contrario.",
     "examples": [
       {"input": "nums = [2, 7, 11, 15], target = 9", "output": "true (2+7=9)"},
@@ -946,7 +946,7 @@
   },
   {
     "id": "M11",
-    "title": "Problema Medio 11: Mover Ceros al Final",
+    "title": "11: Mover Ceros al Final",
     "description": "Dada una matriz de enteros, mueve todos los ceros al final de ella, manteniendo el orden relativo de los elementos no nulos.",
     "examples": [
       {"input": "nums = [0, 1, 0, 3, 12]", "output": "[1, 3, 12, 0, 0]"},
@@ -965,7 +965,7 @@
   },
   {
     "id": "M12",
-    "title": "Problema Medio 12: Longitud de la Última Palabra",
+    "title": "12: Longitud de la Última Palabra",
     "description": "Dada una cadena `s` que consta de palabras y espacios, devuelve la longitud de la última palabra en la cadena. Una palabra se define como una secuencia máxima de caracteres que no son espacios.",
     "examples": [
       {"input": "s = \"Hello World\"", "output": "5"},
@@ -984,7 +984,7 @@
   },
   {
     "id": "M13",
-    "title": "Problema Medio 13: Rotar Array",
+    "title": "13: Rotar Array",
     "description": "Dada una matriz `nums`, rotar la matriz hacia la derecha por `k` pasos, donde `k` es un número no negativo.",
     "examples": [
       {"input": "nums = [1, 2, 3, 4, 5, 6, 7], k = 3", "output": "[5, 6, 7, 1, 2, 3, 4]"},
@@ -1003,7 +1003,7 @@
   },
   {
     "id": "M14",
-    "title": "Problema Medio 14: Subarray Contiguo Máximo",
+    "title": "14: Subarray Contiguo Máximo",
     "description": "Dado un array de enteros `nums`, encuentra el subarray contiguo (que contenga al menos un número) que tiene la mayor suma y devuelve su suma.",
     "examples": [
       {"input": "nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]", "output": "6 (porque [4, -1, 2, 1] tiene la suma máxima)"},
@@ -1022,7 +1022,7 @@
   },
   {
     "id": "M15",
-    "title": "Problema Medio 15: Anagrama Válido",
+    "title": "15: Anagrama Válido",
     "description": "Dadas dos cadenas `s` y `t`, devuelve `true` si `t` es un anagrama de `s`, y `false` en caso contrario. Un anagrama es una palabra o frase formada reorganizando las letras de una palabra o frase diferente, típicamente usando todas las letras originales exactamente una vez.",
     "examples": [
       {"input": "s = \"anagram\", t = \"nagaram\"", "output": "true"},
@@ -1041,7 +1041,7 @@
   },
   {
     "id": "M16",
-    "title": "Problema Medio 16: Intersección de Dos Arrays",
+    "title": "16: Intersección de Dos Arrays",
     "description": "Dados dos arrays de enteros `nums1` y `nums2`, devuelve un array de su intersección. Cada elemento en el resultado debe aparecer tantas veces como aparezca en ambos arrays y puedes devolver el resultado en cualquier orden.",
     "examples": [
       {"input": "nums1 = [1, 2, 2, 1], nums2 = [2, 2]", "output": "[2, 2]"},
@@ -1060,7 +1060,7 @@
   },
   {
     "id": "M17",
-    "title": "Problema Medio 17: Único Número",
+    "title": "17: Único Número",
     "description": "Dado un array no vacío de enteros `nums`, cada elemento aparece dos veces excepto uno. Encuentra ese único.",
     "examples": [
       {"input": "nums = [2, 2, 1]", "output": "1"},
@@ -1079,7 +1079,7 @@
   },
   {
     "id": "M18",
-    "title": "Problema Medio 18: Escalera (Climbing Stairs)",
+    "title": "18: Escalera (Climbing Stairs)",
     "description": "Tienes que subir `n` escalones. Cada vez puedes subir 1 o 2 escalones. ¿De cuántas maneras distintas puedes subir a la cima?",
     "examples": [
       {"input": "n = 2", "output": "2 (1+1, 2)"},
@@ -1098,7 +1098,7 @@
   },
   {
     "id": "M19",
-    "title": "Problema Medio 19: Merge Sorted Arrays",
+    "title": "19: Merge Sorted Arrays",
     "description": "Dados dos arrays de enteros `nums1` y `nums2`, ordenados en orden no decreciente, y dos enteros `m` y `n`, que representan el número de elementos en `nums1` y `nums2` respectivamente. Fusiona `nums1` y `nums2` en un solo array ordenado (no decreciente). La matriz final no debe ser devuelta por la función, sino que debe almacenarse dentro de la matriz `nums1`. Para acomodar esto, `nums1` tiene una longitud de `m + n`, donde los primeros `m` elementos denotan los elementos que deben fusionarse y los últimos `n` elementos son `0` y deben ignorarse. `nums2` tiene una longitud de `n`.",
     "examples": [
       {"input": "nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3", "output": "[1,2,2,3,5,6]"},
@@ -1117,7 +1117,7 @@
   },
   {
     "id": "M20",
-    "title": "Problema Medio 20: Contar Frecuencia de Caracteres",
+    "title": "20: Contar Frecuencia de Caracteres",
     "description": "Dada una cadena, devuelve un objeto/mapa que contenga la frecuencia de cada caracter en la cadena.",
     "examples": [
       {"input": "cadena = \"hello\"", "output": "{'h': 1, 'e': 1, 'l': 2, 'o': 1}"},
@@ -1136,7 +1136,7 @@
   },
   {
     "id": "M21",
-    "title": "Problema Medio 21: Eliminar Elemento",
+    "title": "21: Eliminar Elemento",
     "description": "Dado un array `nums` y un valor `val`, elimina todas las ocurrencias de `val` en `nums` en su lugar. El orden de los elementos puede cambiarse. Devuelve el número de elementos que no son iguales a `val`.",
     "examples": [
       {"input": "nums = [3, 2, 2, 3], val = 3", "output": "2 (nums = [2, 2, _, _])"},
@@ -1154,7 +1154,7 @@
   },
   {
     "id": "M22",
-    "title": "Problema Medio 22: Buscar Insertar Posición",
+    "title": "22: Buscar Insertar Posición",
     "description": "Dado un array ordenado de enteros distintos y un valor objetivo, devuelve el índice si se encuentra el objetivo. Si no, devuelve el índice donde se insertaría si se mantuviera el orden.",
     "examples": [
       {"input": "nums = [1, 3, 5, 6], target = 5", "output": "2"},
@@ -1174,7 +1174,7 @@
   },
   {
     "id": "M23",
-    "title": "Problema Medio 23: Suma de Números del 1 al N",
+    "title": "23: Suma de Números del 1 al N",
     "description": "Calcula la suma de todos los números enteros positivos desde 1 hasta `n` (inclusive).",
     "examples": [
       {"input": "n = 5", "output": "15 (1 + 2 + 3 + 4 + 5)"},
@@ -1193,7 +1193,7 @@
   },
   {
     "id": "M24",
-    "title": "Problema Medio 24: Verificar si un Número es Potencia de Dos",
+    "title": "24: Verificar si un Número es Potencia de Dos",
     "description": "Dada un entero `n`, devuelve `true` si es una potencia de dos. De lo contrario, devuelve `false`. Un entero `n` es una potencia de dos si existe un entero `x` tal que `n == 2^x`.",
     "examples": [
       {"input": "n = 1", "output": "true (2^0)"},
@@ -1213,7 +1213,7 @@
   },
   {
     "id": "M25",
-    "title": "Problema Medio 25: Revertir Dígitos de un Entero",
+    "title": "25: Revertir Dígitos de un Entero",
     "description": "Dada un entero `x`, devuelve `x` con sus dígitos invertidos. Si invertir `x` hace que el valor exceda el rango de enteros con signo de 32 bits `[-2^31, 2^31 - 1]`, devuelve 0.",
     "examples": [
       {"input": "x = 123", "output": "321"},
@@ -1234,7 +1234,7 @@
   },
   {
     "id": "M26",
-    "title": "Problema Medio 26: Raíz Cuadrada (sqrt(x))",
+    "title": "26: Raíz Cuadrada (sqrt(x))",
     "description": "Dada un entero no negativo `x`, calcula y devuelve la raíz cuadrada entera de `x`. Dado que el valor de retorno es un entero, los decimales se truncan y solo se devuelve la parte entera.",
     "examples": [
       {"input": "x = 4", "output": "2"},
@@ -1253,7 +1253,7 @@
   },
   {
     "id": "M27",
-    "title": "Problema Medio 27: Duplicados en Array",
+    "title": "27: Duplicados en Array",
     "description": "Dado un array de enteros `nums` de longitud `n` donde todos los enteros están en el rango `[1, n]` y cada entero aparece una o dos veces, devuelve un array de todos los enteros que aparecen dos veces.",
     "examples": [
       {"input": "nums = [4, 3, 2, 7, 8, 2, 3, 1]", "output": "[2, 3]"},
@@ -1272,7 +1272,7 @@
   },
   {
     "id": "M28",
-    "title": "Problema Medio 28: Suma de Números Pares",
+    "title": "28: Suma de Números Pares",
     "description": "Dada una matriz de enteros `nums`, devuelve la suma de todos los números pares en la matriz.",
     "examples": [
       {"input": "nums = [1, 2, 3, 4, 5, 6]", "output": "12 (2 + 4 + 6)"},
@@ -1290,7 +1290,7 @@
   },
   {
     "id": "M29",
-    "title": "Problema Medio 29: Invertir Palabras en una Cadena",
+    "title": "29: Invertir Palabras en una Cadena",
     "description": "Dada una frase, invierte el orden de las palabras en la frase. Las palabras están separadas por un solo espacio.",
     "examples": [
       {"input": "frase = \"hello world\"", "output": "\"world hello\""},
@@ -1309,7 +1309,7 @@
   },
   {
     "id": "M30",
-    "title": "Problema Medio 30: Convertir Número Romano a Entero",
+    "title": "30: Convertir Número Romano a Entero",
     "description": "Dado una cadena que representa un número romano, conviértela a un entero.",
     "examples": [
       {"input": "s = \"III\"", "output": "3"},

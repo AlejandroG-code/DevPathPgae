@@ -16,7 +16,7 @@ interface Challenge {
   solutionPython: string;
   solutionJava: string;
   solutionCpp: string;
-  difficulty: 'Fácil' | 'Medio' | 'Difícil';
+  difficulty: 'Easy' | 'Medium' | 'Hard'; // Translated difficulty levels
   score: number;
 }
 
@@ -28,7 +28,7 @@ const ProblemsPage: React.FC = () => {
   const [revealedHints, setRevealedHints] = useState<number[]>([]);
   const [showSolution, setShowSolution] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<'solutionJs' | 'solutionPython' | 'solutionJava' | 'solutionCpp'>('solutionJs');
-  const [filterDifficulty, setFilterDifficulty] = useState<'Todos' | 'Fácil' | 'Medio' | 'Difícil'>('Todos');
+  const [filterDifficulty, setFilterDifficulty] = useState<'All' | 'Easy' | 'Medium' | 'Hard'>('All'); // Translated filter options
 
   const jsonUrl = '/data/programming_challenges.json';
 
@@ -49,7 +49,8 @@ const ProblemsPage: React.FC = () => {
         }));
 
         const sortedChallenges = processedData.sort((a, b) => {
-            const difficulties = {'Fácil': 1, 'Medio': 2, 'Difícil': 3};
+            // Translated difficulty mapping for sorting
+            const difficulties = {'Easy': 1, 'Medium': 2, 'Hard': 3};
             const diffA = difficulties[a.difficulty];
             const diffB = difficulties[b.difficulty];
             if (diffA !== diffB) {
@@ -60,7 +61,7 @@ const ProblemsPage: React.FC = () => {
         setChallenges(sortedChallenges);
       } catch (error) {
         console.error("Error fetching challenges:", error);
-        setErrorChallenges("Error al cargar los problemas. Asegúrate de que el archivo JSON exista y sea accesible.");
+        setErrorChallenges("Error loading problems. Ensure the JSON file exists and is accessible."); // Translated error message
       } finally {
         setLoadingChallenges(false);
       }
@@ -70,7 +71,7 @@ const ProblemsPage: React.FC = () => {
   }, [jsonUrl]);
 
   const filteredChallenges = challenges.filter(challenge =>
-    filterDifficulty === 'Todos' || challenge.difficulty === filterDifficulty
+    filterDifficulty === 'All' || challenge.difficulty === filterDifficulty
   );
 
   const handleSelectChallenge = (challenge: Challenge) => {
@@ -87,7 +88,8 @@ const ProblemsPage: React.FC = () => {
   };
 
   const handleRevealSolution = () => {
-    const confirmed = window.confirm('¿Estás seguro de que quieres ver la solución? Esto no te otorgará puntos.');
+    // Translated confirmation message
+    const confirmed = window.confirm('Are you sure you want to view the solution? This will not grant you points.');
     if (confirmed) {
       setShowSolution(true);
     }
@@ -99,38 +101,38 @@ const ProblemsPage: React.FC = () => {
       case 'solutionPython': return challenge.solutionPython;
       case 'solutionJava': return challenge.solutionJava;
       case 'solutionCpp': return challenge.solutionCpp;
-      default: return 'Solución no disponible para este lenguaje.';
+      default: return 'Solution not available for this language.'; // Translated default message
     }
   };
 
   return (
     <div className="flex flex-col items-center p-8 min-h-[calc(100vh-64px)] text-white">
-      {/* Título y descripción movidos fuera del contenedor principal */}
+      {/* Title and description moved outside the main container */}
       <h1 className="text-5xl font-extrabold mb-4 text-vibrant-teal text-center drop-shadow-md">
-        Problemas de Programación
+        Programming Problems
       </h1>
       <p className="text-gray-200 mb-8 text-center text-lg max-w-3xl mx-auto">
-        Pon a prueba tus habilidades de programación y lógica con nuestra colección de desafíos.
+        Test your programming and logic skills with our collection of challenges.
       </p>
 
-      {/* Contenedor principal de problemas: más ancho y con fondo difuminado */}
+      {/* Main problems container: wider and with blurred background */}
       <div className="bg-transparent backdrop-blur-md p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 w-full max-w-7xl"> {/* Wider: max-w-7xl, transparent/blurred background */}
         {loadingChallenges ? (
           <div className="text-center py-20">
-            <p className="text-xl text-gray-300">Cargando problemas...</p>
+            <p className="text-xl text-gray-300">Loading problems...</p>
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vibrant-teal mx-auto mt-5"></div>
           </div>
         ) : errorChallenges ? (
           <div className="text-center py-20 text-red-400 text-xl">
             <p>{errorChallenges}</p>
-            <p className="text-sm text-gray-500 mt-2">Verifica la URL del archivo JSON y su contenido.</p>
+            <p className="text-sm text-gray-500 mt-2">Check the JSON file URL and its content.</p>
           </div>
         ) : !selectedChallenge ? (
           // Challenge List View
           <div className="flex-1">
             {/* Difficulty Filter */}
             <div className="mb-6 flex justify-center space-x-4 flex-wrap gap-2">
-              {['Todos', 'Fácil', 'Medio', 'Difícil'].map(difficulty => (
+              {['All', 'Easy', 'Medium', 'Hard'].map(difficulty => ( // Translated filter options
                 <button
                   key={difficulty}
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -159,19 +161,19 @@ const ProblemsPage: React.FC = () => {
                       <div className="flex justify-between items-center text-sm">
                       <span
                           className={`px-3 py-1 rounded-full font-bold
-                              ${challenge.difficulty === 'Fácil' ? 'bg-green-600/30 text-green-300' : ''}
-                              ${challenge.difficulty === 'Medio' ? 'bg-yellow-600/30 text-yellow-300' : ''}
-                              ${challenge.difficulty === 'Difícil' ? 'bg-red-600/30 text-red-300' : ''}`
+                              ${challenge.difficulty === 'Easy' ? 'bg-green-600/30 text-green-300' : ''}
+                              ${challenge.difficulty === 'Medium' ? 'bg-yellow-600/30 text-yellow-300' : ''}
+                              ${challenge.difficulty === 'Hard' ? 'bg-red-600/30 text-red-300' : ''}` // Translated classes
                           }
                       >
                           {challenge.difficulty}
                       </span>
-                      <span className="text-gray-400">{challenge.score} Puntos</span>
+                      <span className="text-gray-400">{challenge.score} Points</span> {/* Translated "Puntos" */}
                       </div>
                   </div>
                   ))
               ) : (
-                  <p className="text-center text-gray-400 text-lg col-span-full mt-10">No hay problemas disponibles para esta dificultad.</p>
+                  <p className="text-center text-gray-400 text-lg col-span-full mt-10">No problems available for this difficulty.</p> // Translated message
               )}
             </div>
           </div>
@@ -187,24 +189,24 @@ const ProblemsPage: React.FC = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256" fill="currentColor">
                   <path d="M165.66,200.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
                 </svg>
-                <span className="ml-2">Volver a los Problemas</span>
+                <span className="ml-2">Back to Problems</span> {/* Translated button text */}
               </button>
               <h4 className="text-3xl font-bold mb-4 text-white">{selectedChallenge.title}</h4>
               <span
                 className={`px-4 py-1 rounded-full font-bold text-sm mb-4 inline-block
-                  ${selectedChallenge.difficulty === 'Fácil' ? 'bg-green-600/30 text-green-300' : ''}
-                  ${selectedChallenge.difficulty === 'Medio' ? 'bg-yellow-600/30 text-yellow-300' : ''}
-                  ${selectedChallenge.difficulty === 'Difícil' ? 'bg-red-600/30 text-red-300' : ''}`
+                  ${selectedChallenge.difficulty === 'Easy' ? 'bg-green-600/30 text-green-300' : ''}
+                  ${selectedChallenge.difficulty === 'Medium' ? 'bg-yellow-600/30 text-yellow-300' : ''}
+                  ${selectedChallenge.difficulty === 'Hard' ? 'bg-red-600/30 text-red-300' : ''}`
                 }
               >
-                {selectedChallenge.difficulty} ({selectedChallenge.score} Puntos)
+                {selectedChallenge.difficulty} ({selectedChallenge.score} Points) {/* Translated "Puntos" */}
               </span>
 
               <div className="overflow-y-auto pr-2 flex-1">
-                  <h5 className="text-xl font-semibold mt-6 mb-2 text-vibrant-teal">Descripción del Problema:</h5>
+                  <h5 className="text-xl font-semibold mt-6 mb-2 text-vibrant-teal">Problem Description:</h5> {/* Translated heading */}
                   <p className="text-gray-300 mb-4 text-base">{selectedChallenge.description}</p>
 
-                  <h5 className="text-xl font-semibold mt-6 mb-2 text-vibrant-teal">Ejemplos:</h5>
+                  <h5 className="text-xl font-semibold mt-6 mb-2 text-vibrant-teal">Examples:</h5> {/* Translated heading */}
                   {selectedChallenge.examples.map((example, index) => (
                   <div key={index} className="bg-gray-800/50 p-4 rounded-lg mb-3 text-sm border border-gray-600"> {/* Inner example box, slightly transparent */}
                       <p className="font-mono text-gray-300"><span className="text-gray-400">Input:</span> <code className="text-white bg-gray-900/50 px-1 rounded">{example.input}</code></p>
@@ -212,7 +214,7 @@ const ProblemsPage: React.FC = () => {
                   </div>
                   ))}
 
-                  <h5 className="text-xl font-semibold mt-6 mb-2 text-vibrant-teal">Pistas:</h5>
+                  <h5 className="text-xl font-semibold mt-6 mb-2 text-vibrant-teal">Hints:</h5> {/* Translated heading */}
                   {selectedChallenge.hints.map((hint, index) => (
                   <div key={index} className="mb-3">
                       {!revealedHints.includes(index) ? (
@@ -220,7 +222,7 @@ const ProblemsPage: React.FC = () => {
                           onClick={() => handleRevealHint(index)}
                           className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-sm transition-colors duration-200 shadow-md"
                       >
-                          Revelar Pista {index + 1}
+                          Reveal Hint {index + 1} {/* Translated button text */}
                       </button>
                       ) : (
                       <p className="text-gray-300 text-base border-l-4 border-blue-500 pl-3 py-1">{hint}</p>
@@ -232,11 +234,11 @@ const ProblemsPage: React.FC = () => {
 
             {/* Right Panel: Code Area & Solution */}
             <div className="bg-transparent backdrop-blur-sm p-6 rounded-lg shadow-md border border-gray-700 flex flex-col"> {/* Transparent/blurred background */}
-              <h5 className="text-xl font-semibold mb-4 text-vibrant-teal">Tu Área de Código:</h5>
+              <h5 className="text-xl font-semibold mb-4 text-vibrant-teal">Your Code Area:</h5> {/* Translated heading */}
               <div className="flex-1 bg-gray-800/50 rounded-lg p-4 text-gray-300 font-mono text-sm overflow-auto mb-4 border border-gray-600"> {/* Inner code area, slightly transparent */}
-                <p className="text-gray-400">// Escribe tu código aquí</p>
-                <p className="text-gray-400">// Por ahora, esto es un placeholder.</p>
-                <p className="text-gray-400">// En el futuro, aquí habrá un editor de código funcional.</p>
+                <p className="text-gray-400">// Write your code here</p> {/* Translated comment */}
+                <p className="text-gray-400">// For now, this is a placeholder.</p> {/* Translated comment */}
+                <p className="text-gray-400">// In the future, there will be a functional code editor here.</p> {/* Translated comment */}
               </div>
 
               {/* Language Selector for Solution */}
@@ -276,11 +278,11 @@ const ProblemsPage: React.FC = () => {
                 onClick={handleRevealSolution}
                 className="mt-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors duration-200 shadow-md"
               >
-                Revelar Solución Oficial (No Otorga Puntos)
+                Reveal Official Solution (No Points Granted) {/* Translated button text */}
               </button>
               {showSolution && selectedChallenge && (
                 <div className="mt-4 bg-gray-900/50 p-4 rounded-lg overflow-auto text-sm border border-gray-700"> {/* Solution box, slightly transparent */}
-                  <h6 className="text-lg font-semibold text-vibrant-teal mb-2">Solución Oficial ({selectedLanguage.replace('solution', '')}):</h6>
+                  <h6 className="text-lg font-semibold text-vibrant-teal mb-2">Official Solution ({selectedLanguage.replace('solution', '')}):</h6> {/* Translated heading */}
                   <pre className="text-green-300 whitespace-pre-wrap p-2 bg-black/50 rounded-md">{getSolutionCode(selectedChallenge, selectedLanguage)}</pre>
                 </div>
               )}

@@ -14,7 +14,7 @@ const PomodoroAppPage: React.FC = () => {
   // Audio ref for the timer end sound
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Configuración de tiempos (en minutos)
+  // Time settings (in minutes)
   const timerSettings = {
     focus: 25,
     shortBreak: 5,
@@ -91,10 +91,10 @@ const PomodoroAppPage: React.FC = () => {
       {/* Main container with transparent/blurred background and wider max-width */}
       <div className="bg-transparent backdrop-blur-md p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 text-white text-center w-full max-w-7xl"> {/* Wider: max-w-7xl, transparent/blurred background */}
         <h3 className="text-4xl font-extrabold mb-8 text-vibrant-teal drop-shadow-md">
-          Aplicación de Estudio con Técnica Pomodoro Gamificada
+          Pomodoro Timer
         </h3>
         <p className="text-gray-200 mb-8 text-lg max-w-2xl mx-auto">
-          Mejora tu concentración y productividad con este temporizador Pomodoro. Acumula Pomodoros completados para tus metas.
+          Improve your focus and productivity with this Pomodoro timer. Accumulate completed Pomodoros for your goals.
         </p>
 
         {/* Timer Display */}
@@ -102,8 +102,8 @@ const PomodoroAppPage: React.FC = () => {
           <div className="text-9xl font-mono font-bold text-white drop-shadow-lg mb-4 leading-none">
             {formatTime(minutes)}:{formatTime(seconds)}
           </div>
-          <p className="text-gray-400 text-2xl mb-2">Modo actual: <span className="font-semibold text-vibrant-teal">{mode === 'focus' ? 'Enfoque' : mode === 'shortBreak' ? 'Descanso Corto' : 'Descanso Largo'}</span></p>
-          <p className="text-gray-400 text-2xl">Pomodoros Completados: <span className="font-semibold text-bright-orange">{pomodorosCompleted}</span></p>
+          <p className="text-gray-400 text-2xl mb-2">Current Mode: <span className="font-semibold text-vibrant-teal">{mode === 'focus' ? 'Focus' : mode === 'shortBreak' ? 'Short Break' : 'Long Break'}</span></p>
+          <p className="text-gray-400 text-2xl">Pomodoros Completed: <span className="font-semibold text-bright-orange">{pomodorosCompleted}</span></p>
         </div>
 
         {/* Control Buttons */}
@@ -116,13 +116,13 @@ const PomodoroAppPage: React.FC = () => {
                 : 'bg-vibrant-teal hover:bg-[#00FFC6]/90 text-white'}`
             }
           >
-            {isActive ? 'Pausar' : 'Iniciar'}
+            {isActive ? 'Pause' : 'Start'}
           </button>
           <button
             onClick={resetTimer}
             className="py-4 px-10 rounded-full text-2xl font-bold bg-gray-600 hover:bg-gray-700 text-white transition-all duration-300 shadow-lg hover:scale-[1.03]"
           >
-            Reiniciar
+            Reset
           </button>
         </div>
 
@@ -134,7 +134,7 @@ const PomodoroAppPage: React.FC = () => {
               ${mode === 'focus' ? 'bg-vibrant-teal text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`
             }
           >
-            Enfoque ({timerSettings.focus}min)
+            Focus ({timerSettings.focus}min)
           </button>
           <button
             onClick={() => switchMode('shortBreak')}
@@ -142,7 +142,7 @@ const PomodoroAppPage: React.FC = () => {
               ${mode === 'shortBreak' ? 'bg-bright-orange text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`
             }
           >
-            Descanso Corto ({timerSettings.shortBreak}min)
+            Short Break ({timerSettings.shortBreak}min)
           </button>
           <button
             onClick={() => switchMode('longBreak')}
@@ -150,10 +150,9 @@ const PomodoroAppPage: React.FC = () => {
               ${mode === 'longBreak' ? 'bg-accent-purple text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`
             }
           >
-            Descanso Largo ({timerSettings.longBreak}min)
+            Long Break ({timerSettings.longBreak}min)
           </button>
         </div>
-        {/* Removed the footnote text as requested */}
       </div>
     </div>
   );
