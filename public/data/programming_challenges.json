@@ -1,0 +1,755 @@
+[
+  {
+    "id": "F1",
+    "title": "Suma de Dos Números",
+    "description": "Crea una función que reciba dos enteros `a` y `b`, y devuelva su suma.",
+    "examples": [
+      {"input": "a = 5, b = 3", "output": "8"},
+      {"input": "a = 10, b = -2", "output": "8"}
+    ],
+    "hints": [
+      "Usa el operador de suma estándar de tu lenguaje."
+    ],
+    "solutionJs": "function sum(a, b) {\n  return a + b;\n}",
+    "solutionPython": "def sum_two_numbers(a, b):\n    return a + b",
+    "solutionJava": "class Solution {\n    public int sum(int a, int b) {\n        return a + b;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int sum(int a, int b) {\n        return a + b;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F2",
+    "title": "Restar Dos Números",
+    "description": "Escribe una función que reciba dos enteros `a` y `b`, y devuelva su diferencia (`a - b`).",
+    "examples": [
+      {"input": "a = 10, b = 4", "output": "6"},
+      {"input": "a = 7, b = 10", "output": "-3"}
+    ],
+    "hints": [
+      "Utiliza el operador de resta."
+    ],
+    "solutionJs": "function subtract(a, b) {\n  return a - b;\n}",
+    "solutionPython": "def subtract_two_numbers(a, b):\n    return a - b",
+    "solutionJava": "class Solution {\n    public int subtract(int a, int b) {\n        return a - b;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int subtract(int a, int b) {\n        return a - b;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F3",
+    "title": "Multiplicar Dos Números",
+    "description": "Implementa una función que reciba dos enteros `a` y `b`, y devuelva su producto.",
+    "examples": [
+      {"input": "a = 5, b = 3", "output": "15"},
+      {"input": "a = -4, b = 2", "output": "-8"}
+    ],
+    "hints": [
+      "Usa el operador de multiplicación."
+    ],
+    "solutionJs": "function multiply(a, b) {\n  return a * b;\n}",
+    "solutionPython": "def multiply_two_numbers(a, b):\n    return a * b",
+    "solutionJava": "class Solution {\n    public int multiply(int a, int b) {\n        return a * b;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int multiply(int a, int b) {\n        return a * b;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F4",
+    "title": "Dividir Dos Números Enteros",
+    "description": "Crea una función que reciba dos enteros `dividendo` y `divisor`, y devuelva el cociente de la división entera. Asume que el divisor nunca será cero.",
+    "examples": [
+      {"input": "dividendo = 10, divisor = 3", "output": "3"},
+      {"input": "dividendo = 7, divisor = 2", "output": "3"}
+    ],
+    "hints": [
+      "Utiliza la división entera de tu lenguaje. Algunos lenguajes tienen un operador específico para esto (`//` en Python) o simplemente la división normal (`/`) para enteros."
+    ],
+    "solutionJs": "function divide(dividend, divisor) {\n  return Math.floor(dividend / divisor); // Para división entera\n}",
+    "solutionPython": "def divide_two_numbers(dividend, divisor):\n    return dividend // divisor",
+    "solutionJava": "class Solution {\n    public int divide(int dividend, int divisor) {\n        return dividend / divisor;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int divide(int dividend, int divisor) {\n        return dividend / divisor;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F5",
+    "title": "Invertir una Cadena",
+    "description": "Escribe una función que tome una cadena como entrada y devuelva la cadena invertida.",
+    "examples": [
+      {"input": "\"hello\"", "output": "\"olleh\""},
+      {"input": "\"OpenAI\"", "output": "\"IAnepO\""}
+    ],
+    "hints": [
+      "Puedes convertir la cadena en un array de caracteres, invertirlo y luego unirlo de nuevo.",
+      "Considera usar los métodos `split()`, `reverse()` y `join()` de JavaScript o el slicing en Python."
+    ],
+    "solutionJs": "function reverseString(str) {\n  return str.split('').reverse().join('');\n}",
+    "solutionPython": "def reverse_string(s):\n    return s[::-1]",
+    "solutionJava": "class Solution {\n    public String reverseString(String s) {\n        return new StringBuilder(s).reverse().toString();\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    std::string reverseString(std::string s) {\n        std::reverse(s.begin(), s.end());\n        return s;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F6",
+    "title": "Longitud de una Cadena",
+    "description": "Escribe una función que reciba una cadena y devuelva su longitud.",
+    "examples": [
+      {"input": "\"programming\"", "output": "11"},
+      {"input": "\"\"", "output": "0"},
+      {"input": "\"hola mundo\"", "output": "10"}
+    ],
+    "hints": [
+      "La mayoría de los lenguajes de programación tienen una propiedad o método integrado para obtener la longitud de una cadena (e.g., `.length` en JS/Java, `len()` en Python, `.size()` en C++)."
+    ],
+    "solutionJs": "function getStringLength(str) {\n  return str.length;\n}",
+    "solutionPython": "def get_string_length(s):\n    return len(s)",
+    "solutionJava": "class Solution {\n    public int getStringLength(String s) {\n        return s.length();\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int getStringLength(std::string s) {\n        return s.length();\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F7",
+    "title": "Convertir a Mayúsculas",
+    "description": "Crea una función que tome una cadena y devuelva la misma cadena con todos sus caracteres convertidos a mayúsculas.",
+    "examples": [
+      {"input": "\"hello world\"", "output": "\"HELLO WORLD\""},
+      {"input": "\"AbC\"", "output": "\"ABC\""}
+    ],
+    "hints": [
+      "Busca el método de tu lenguaje para convertir cadenas a mayúsculas (e.g., `.toUpperCase()` en JS/Java, `.upper()` en Python)."
+    ],
+    "solutionJs": "function toUpperCase(str) {\n  return str.toUpperCase();\n}",
+    "solutionPython": "def to_upper_case(s):\n    return s.upper()",
+    "solutionJava": "class Solution {\n    public String toUpperCase(String s) {\n        return s.toUpperCase();\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    std::string toUpperCase(std::string s) {\n        for (char &c : s) {\n            c = toupper(c);\n        }\n        return s;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F8",
+    "title": "Convertir a Minúsculas",
+    "description": "Escribe una función que tome una cadena y devuelva la misma cadena con todos sus caracteres convertidos a minúsculas.",
+    "examples": [
+      {"input": "\"HELLO WORLD\"", "output": "\"hello world\""},
+      {"input": "\"AbC\"", "output": "\"abc\""}
+    ],
+    "hints": [
+      "Similar al problema de mayúsculas, busca el método de tu lenguaje para convertir cadenas a minúsculas."
+    ],
+    "solutionJs": "function toLowerCase(str) {\n  return str.toLowerCase();\n}",
+    "solutionPython": "def to_lower_case(s):\n    return s.lower()",
+    "solutionJava": "class Solution {\n    public String toLowerCase(String s) {\n        return s.toLowerCase();\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    std::string toLowerCase(std::string s) {\n        for (char &c : s) {\n            c = tolower(c);\n        }\n        return s;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F9",
+    "title": "Contar Carácter Específico",
+    "description": "Dada una cadena `str` y un carácter `char`, devuelve el número de veces que `char` aparece en `str` (sin distinguir mayúsculas de minúsculas).",
+    "examples": [
+      {"input": "str = \"Hello World\", char = 'l'", "output": "3"},
+      {"input": "str = \"Programming\", char = 'm'", "output": "2"},
+      {"input": "str = \"Banana\", char = 'a'", "output": "3"}
+    ],
+    "hints": [
+      "Puedes iterar sobre la cadena y comparar cada carácter. Recuerda convertir ambos a la misma caja para ignorar mayúsculas/minúsculas."
+    ],
+    "solutionJs": "function countChar(str, char) {\n  let count = 0;\n  const lowerStr = str.toLowerCase();\n  const lowerChar = char.toLowerCase();\n  for (let i = 0; i < lowerStr.length; i++) {\n    if (lowerStr[i] === lowerChar) {\n      count++;\n    }\n  }\n  return count;\n}",
+    "solutionPython": "def count_char(s, char):\n    return s.lower().count(char.lower())",
+    "solutionJava": "class Solution {\n    public int countChar(String str, char c) {\n        int count = 0;\n        char lowerC = Character.toLowerCase(c);\n        for (char ch : str.toLowerCase().toCharArray()) {\n            if (ch == lowerC) {\n                count++;\n            }\n        }\n        return count;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int countChar(std::string str, char c) {\n        int count = 0;\n        char lowerC = tolower(c);\n        for (char ch : str) {\n            if (tolower(ch) == lowerC) {\n                count++;\n            }\n        }\n        return count;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F10",
+    "title": "Concatenar Cadenas",
+    "description": "Escribe una función que reciba dos cadenas `str1` y `str2`, y devuelva una nueva cadena que sea la concatenación de ambas.",
+    "examples": [
+      {"input": "str1 = \"Hello\", str2 = \" World\"", "output": "\"Hello World\""},
+      {"input": "str1 = \"\", str2 = \"Test\"", "output": "\"Test\""}
+    ],
+    "hints": [
+      "Usa el operador de concatenación (`+` en la mayoría de los lenguajes)."
+    ],
+    "solutionJs": "function concatenateStrings(str1, str2) {\n  return str1 + str2;\n}",
+    "solutionPython": "def concatenate_strings(str1, str2):\n    return str1 + str2",
+    "solutionJava": "class Solution {\n    public String concatenateStrings(String str1, String str2) {\n        return str1 + str2;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    std::string concatenateStrings(std::string str1, std::string str2) {\n        return str1 + str2;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F11",
+    "title": "Encontrar el Máximo en un Array",
+    "description": "Escribe una función que encuentre el número más grande en un array de números enteros dado.",
+    "examples": [
+      {"input": "arr = [1, 5, 2, 8, 3]", "output": "8"},
+      {"input": "arr = [-10, -2, -5]", "output": "-2"}
+    ],
+    "hints": [
+      "Puedes inicializar una variable `max` con el primer elemento del array y luego iterar para comparar.",
+      "Algunos lenguajes tienen funciones `max()` incorporadas."
+    ],
+    "solutionJs": "function findMax(arr) {\n  if (arr.length === 0) return undefined; // O lanza un error\n  let max = arr[0];\n  for (let i = 1; i < arr.length; i++) {\n    if (arr[i] > max) {\n      max = arr[i];\n    }\n  }\n  return max;\n}",
+    "solutionPython": "def find_max(arr):\n    if not arr:\n        return None # O lanzar una excepción\n    return max(arr)",
+    "solutionJava": "class Solution {\n    public int findMax(int[] arr) {\n        if (arr == null || arr.length == 0) {\n            throw new IllegalArgumentException(\"Array no puede estar vacío o ser nulo\");\n        }\n        int max = arr[0];\n        for (int i = 1; i < arr.length; i++) {\n            if (arr[i] > max) {\n                max = arr[i];\n            }\n        }\n        return max;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int findMax(std::vector<int>& arr) {\n        if (arr.empty()) {\n            // Depende de los requisitos, podrías lanzar una excepción o devolver un valor especial\n            return -1; // Ejemplo simplificado, maneja esto según las especificaciones\n        }\n        int max_val = arr[0];\n        for (int i = 1; i < arr.size(); ++i) {\n            if (arr[i] > max_val) {\n                max_val = arr[i];\n            }\n        }\n        return max_val;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F12",
+    "title": "Encontrar el Mínimo en un Array",
+    "description": "Escribe una función que encuentre el número más pequeño en un array de números enteros dado.",
+    "examples": [
+      {"input": "arr = [1, 5, 2, 8, 3]", "output": "1"},
+      {"input": "arr = [-10, -2, -5]", "output": "-10"}
+    ],
+    "hints": [
+      "Similar a encontrar el máximo, inicializa una variable `min` con el primer elemento y compara."
+    ],
+    "solutionJs": "function findMin(arr) {\n  if (arr.length === 0) return undefined;\n  let min = arr[0];\n  for (let i = 1; i < arr.length; i++) {\n    if (arr[i] < min) {\n      min = arr[i];\n    }\n  }\n  return min;\n}",
+    "solutionPython": "def find_min(arr):\n    if not arr:\n        return None\n    return min(arr)",
+    "solutionJava": "class Solution {\n    public int findMin(int[] arr) {\n        if (arr == null || arr.length == 0) {\n            throw new IllegalArgumentException(\"Array no puede estar vacío o ser nulo\");\n        }\n        int min = arr[0];\n        for (int i = 1; i < arr.length; i++) {\n            if (arr[i] < min) {\n                min = arr[i];\n            }\n        }\n        return min;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int findMin(std::vector<int>& arr) {\n        if (arr.empty()) {\n            return -1; \n        }\n        int min_val = arr[0];\n        for (int i = 1; i < arr.size(); ++i) {\n            if (arr[i] < min_val) {\n                min_val = arr[i];\n            }\n        }\n        return min_val;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F13",
+    "title": "Suma de Elementos de un Array",
+    "description": "Dada una matriz de enteros, devuelve la suma de todos sus elementos.",
+    "examples": [
+      {"input": "arr = [1, 2, 3]", "output": "6"},
+      {"input": "arr = [10, -2, 5]", "output": "13"},
+      {"input": "arr = []", "output": "0"}
+    ],
+    "hints": [
+      "Puedes usar un bucle para iterar sobre cada elemento y sumarlo a un total acumulado.",
+      "En JavaScript, el método `reduce()` es muy útil para esto."
+    ],
+    "solutionJs": "function sumArray(arr) {\n  return arr.reduce((sum, current) => sum + current, 0);\n}",
+    "solutionPython": "def sum_array(arr):\n    return sum(arr)",
+    "solutionJava": "class Solution {\n    public int sumArray(int[] arr) {\n        int sum = 0;\n        for (int num : arr) {\n            sum += num;\n        }\n        return sum;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int sumArray(std::vector<int>& arr) {\n        int sum = 0;\n        for (int num : arr) {\n            sum += num;\n        }\n        return sum;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F14",
+    "title": "Promedio de un Array",
+    "description": "Calcula el promedio (media aritmética) de los números en un array dado. Devuelve 0 si el array está vacío.",
+    "examples": [
+      {"input": "arr = [1, 2, 3, 4, 5]", "output": "3"},
+      {"input": "arr = [10, 20, 30]", "output": "20"},
+      {"input": "arr = []", "output": "0"}
+    ],
+    "hints": [
+      "Primero suma todos los elementos, luego divide por la cantidad de elementos. Maneja el caso de array vacío para evitar errores de división por cero."
+    ],
+    "solutionJs": "function calculateAverage(arr) {\n  if (arr.length === 0) return 0;\n  const sum = arr.reduce((acc, curr) => acc + curr, 0);\n  return sum / arr.length;\n}",
+    "solutionPython": "def calculate_average(arr):\n    if not arr:\n        return 0\n    return sum(arr) / len(arr)",
+    "solutionJava": "class Solution {\n    public double calculateAverage(int[] arr) {\n        if (arr == null || arr.length == 0) {\n            return 0.0;\n        }\n        long sum = 0;\n        for (int num : arr) {\n            sum += num;\n        }\n        return (double) sum / arr.length;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    double calculateAverage(std::vector<int>& arr) {\n        if (arr.empty()) {\n            return 0.0;\n        }\n        long long sum = 0;\n        for (int num : arr) {\n            sum += num;\n        }\n        return static_cast<double>(sum) / arr.size();\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F15",
+    "title": "Verificar si un Número es Par",
+    "description": "Escribe una función que determine si un número entero dado es par.",
+    "examples": [
+      {"input": "num = 4", "output": "true"},
+      {"input": "num = 7", "output": "false"},
+      {"input": "num = 0", "output": "true"}
+    ],
+    "hints": [
+      "Usa el operador de módulo (`%`). Un número es par si su módulo 2 es 0."
+    ],
+    "solutionJs": "function isEven(num) {\n  return num % 2 === 0;\n}",
+    "solutionPython": "def is_even(num):\n    return num % 2 == 0",
+    "solutionJava": "class Solution {\n    public boolean isEven(int num) {\n        return num % 2 == 0;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    bool isEven(int num) {\n        return num % 2 == 0;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F16",
+    "title": "Verificar si un Número es Impar",
+    "description": "Escribe una función que determine si un número entero dado es impar.",
+    "examples": [
+      {"input": "num = 4", "output": "false"},
+      {"input": "num = 7", "output": "true"},
+      {"input": "num = 0", "output": "false"}
+    ],
+    "hints": [
+      "Usa el operador de módulo (`%`). Un número es impar si su módulo 2 no es 0."
+    ],
+    "solutionJs": "function isOdd(num) {\n  return num % 2 !== 0;\n}",
+    "solutionPython": "def is_odd(num):\n    return num % 2 != 0",
+    "solutionJava": "class Solution {\n    public boolean isOdd(int num) {\n        return num % 2 != 0;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    bool isOdd(int num) {\n        return num % 2 != 0;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F17",
+    "title": "Verificar si un Número es Positivo",
+    "description": "Crea una función que determine si un número entero dado es positivo.",
+    "examples": [
+      {"input": "num = 5", "output": "true"},
+      {"input": "num = -3", "output": "false"},
+      {"input": "num = 0", "output": "false"}
+    ],
+    "hints": [
+      "Un número es positivo si es mayor que cero."
+    ],
+    "solutionJs": "function isPositive(num) {\n  return num > 0;\n}",
+    "solutionPython": "def is_positive(num):\n    return num > 0",
+    "solutionJava": "class Solution {\n    public boolean isPositive(int num) {\n        return num > 0;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    bool isPositive(int num) {\n        return num > 0;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F18",
+    "title": "Verificar si un Número es Negativo",
+    "description": "Crea una función que determine si un número entero dado es negativo.",
+    "examples": [
+      {"input": "num = 5", "output": "false"},
+      {"input": "num = -3", "output": "true"},
+      {"input": "num = 0", "output": "false"}
+    ],
+    "hints": [
+      "Un número es negativo si es menor que cero."
+    ],
+    "solutionJs": "function isNegative(num) {\n  return num < 0;\n}",
+    "solutionPython": "def is_negative(num):\n    return num < 0",
+    "solutionJava": "class Solution {\n    public boolean isNegative(int num) {\n        return num < 0;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    bool isNegative(int num) {\n        return num < 0;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F19",
+    "title": "Es Cero",
+    "description": "Escribe una función que determine si un número entero dado es exactamente cero.",
+    "examples": [
+      {"input": "num = 5", "output": "false"},
+      {"input": "num = -3", "output": "false"},
+      {"input": "num = 0", "output": "true"}
+    ],
+    "hints": [
+      "Usa el operador de igualdad (`===` o `==`)."
+    ],
+    "solutionJs": "function isZero(num) {\n  return num === 0;\n}",
+    "solutionPython": "def is_zero(num):\n    return num == 0",
+    "solutionJava": "class Solution {\n    public boolean isZero(int num) {\n        return num == 0;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    bool isZero(int num) {\n        return num == 0;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F20",
+    "title": "Factorial de un Número",
+    "description": "Escribe una función que calcule el factorial de un número entero no negativo `n`. El factorial de `n` es el producto de todos los enteros positivos menores o iguales a `n`. (0! = 1)",
+    "examples": [
+      {"input": "n = 3", "output": "6 (3 * 2 * 1)"},
+      {"input": "n = 5", "output": "120 (5 * 4 * 3 * 2 * 1)"},
+      {"input": "n = 0", "output": "1"}
+    ],
+    "hints": [
+      "Puedes resolverlo iterativamente usando un bucle `for` o `while`.",
+      "También puedes usar recursividad, donde `factorial(n) = n * factorial(n-1)` y la condición base es `factorial(0) = 1`."
+    ],
+    "solutionJs": "function factorial(n) {\n  if (n === 0) return 1;\n  let result = 1;\n  for (let i = 1; i <= n; i++) {\n    result *= i;\n  }\n  return result;\n}",
+    "solutionPython": "def factorial(n):\n    if n == 0:\n        return 1\n    result = 1\n    for i in range(1, n + 1):\n        result *= i\n    return result",
+    "solutionJava": "class Solution {\n    public long factorial(int n) {\n        if (n == 0) return 1;\n        long result = 1;\n        for (int i = 1; i <= n; i++) {\n            result *= i;\n        }\n        return result;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    long long factorial(int n) {\n        if (n == 0) return 1;\n        long long result = 1;\n        for (int i = 1; i <= n; ++i) {\n            result *= i;\n        }\n        return result;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F21",
+    "title": "Generar Secuencia Fibonacci",
+    "description": "Escribe una función que genere los primeros `n` números de la secuencia Fibonacci. La secuencia comienza con 0 y 1.",
+    "examples": [
+      {"input": "n = 0", "output": "[]"},
+      {"input": "n = 1", "output": "[0]"},
+      {"input": "n = 5", "output": "[0, 1, 1, 2, 3]"}
+    ],
+    "hints": [
+      "Inicializa los dos primeros números (0 y 1). Luego, en un bucle, calcula el siguiente número como la suma de los dos anteriores."
+    ],
+    "solutionJs": "function generateFibonacciSequence(n) {\n  if (n <= 0) return [];\n  if (n === 1) return [0];\n  let fib = [0, 1];\n  for (let i = 2; i < n; i++) {\n    fib.push(fib[i - 1] + fib[i - 2]);\n  }\n  return fib;\n}",
+    "solutionPython": "def generate_fibonacci_sequence(n):\n    if n <= 0: return []\n    if n == 1: return [0]\n    fib = [0, 1]\n    for i in range(2, n):\n        fib.append(fib[i - 1] + fib[i - 2])\n    return fib",
+    "solutionJava": "class Solution {\n    public List<Integer> generateFibonacciSequence(int n) {\n        List<Integer> fib = new ArrayList<>();\n        if (n <= 0) return fib;\n        if (n == 1) {\n            fib.add(0);\n            return fib;\n        }\n        fib.add(0);\n        fib.add(1);\n        for (int i = 2; i < n; i++) {\n            fib.add(fib.get(i - 1) + fib.get(i - 2));\n        }\n        return fib;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    std::vector<int> generateFibonacciSequence(int n) {\n        std::vector<int> fib;\n        if (n <= 0) return fib;\n        if (n == 1) {\n            fib.push_back(0);\n            return fib;\n        }\n        fib.push_back(0);\n        fib.push_back(1);\n        for (int i = 2; i < n; ++i) {\n            fib.push_back(fib[i - 1] + fib[i - 2]);\n        }\n        return fib;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 15
+  },
+  {
+    "id": "F22",
+    "title": "Verificar Año Bisiesto",
+    "description": "Escribe una función que determine si un año dado es un año bisiesto. Un año es bisiesto si es divisible por 4, excepto aquellos divisibles por 100 pero no por 400.",
+    "examples": [
+      {"input": "year = 2000", "output": "true"},
+      {"input": "year = 2004", "output": "true"},
+      {"input": "year = 1900", "output": "false"},
+      {"input": "year = 2023", "output": "false"}
+    ],
+    "hints": [
+      "Usa el operador de módulo (`%`) para las verificaciones de divisibilidad. Aplica las tres condiciones en orden lógico."
+    ],
+    "solutionJs": "function isLeapYear(year) {\n  return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);\n}",
+    "solutionPython": "def is_leap_year(year):\n    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)",
+    "solutionJava": "class Solution {\n    public boolean isLeapYear(int year) {\n        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    bool isLeapYear(int year) {\n        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F23",
+    "title": "Calcular Área de un Rectángulo",
+    "description": "Escribe una función que tome el `ancho` y la `altura` de un rectángulo y devuelva su área.",
+    "examples": [
+      {"input": "ancho = 5, altura = 4", "output": "20"},
+      {"input": "ancho = 10, altura = 0", "output": "0"}
+    ],
+    "hints": [
+      "El área de un rectángulo se calcula multiplicando su ancho por su altura."
+    ],
+    "solutionJs": "function rectangleArea(width, height) {\n  return width * height;\n}",
+    "solutionPython": "def rectangle_area(width, height):\n    return width * height",
+    "solutionJava": "class Solution {\n    public int rectangleArea(int width, int height) {\n        return width * height;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int rectangleArea(int width, int height) {\n        return width * height;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F24",
+    "title": "Calcular Perímetro de un Rectángulo",
+    "description": "Escribe una función que tome el `ancho` y la `altura` de un rectángulo y devuelva su perímetro.",
+    "examples": [
+      {"input": "ancho = 5, altura = 4", "output": "18"},
+      {"input": "ancho = 10, altura = 0", "output": "20"}
+    ],
+    "hints": [
+      "El perímetro de un rectángulo se calcula como `2 * (ancho + altura)`."
+    ],
+    "solutionJs": "function rectanglePerimeter(width, height) {\n  return 2 * (width + height);\n}",
+    "solutionPython": "def rectangle_perimeter(width, height):\n    return 2 * (width + height)",
+    "solutionJava": "class Solution {\n    public int rectanglePerimeter(int width, int height) {\n        return 2 * (width + height);\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int rectanglePerimeter(int width, int height) {\n        return 2 * (width + height);\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F25",
+    "title": "Área de un Círculo",
+    "description": "Escribe una función que calcule el área de un círculo dado su `radio`. Usa `Math.PI` o su equivalente para el valor de Pi. La fórmula es $A = \\pi r^2$.",
+    "examples": [
+      {"input": "radio = 1", "output": "3.14159..."},
+      {"input": "radio = 5", "output": "78.5398..."}
+    ],
+    "hints": [
+      "Asegúrate de manejar el tipo de datos flotante/doble para el resultado."
+    ],
+    "solutionJs": "function circleArea(radius) {\n  return Math.PI * radius * radius;\n}",
+    "solutionPython": "import math\ndef circle_area(radius):\n    return math.pi * (radius ** 2)",
+    "solutionJava": "class Solution {\n    public double circleArea(double radius) {\n        return Math.PI * radius * radius;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    double circleArea(double radius) {\n        return M_PI * radius * radius;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F26",
+    "title": "Perímetro de un Círculo (Circunferencia)",
+    "description": "Escribe una función que calcule el perímetro (circunferencia) de un círculo dado su `radio`. Usa `Math.PI` o su equivalente para el valor de Pi. La fórmula es $C = 2 \\pi r$.",
+    "examples": [
+      {"input": "radio = 1", "output": "6.28318..."},
+      {"input": "radio = 5", "output": "31.4159..."}
+    ],
+    "hints": [
+      "Asegúrate de usar el valor de Pi y multiplicar correctamente."
+    ],
+    "solutionJs": "function circlePerimeter(radius) {\n  return 2 * Math.PI * radius;\n}",
+    "solutionPython": "import math\ndef circle_perimeter(radius):\n    return 2 * math.pi * radius",
+    "solutionJava": "class Solution {\n    public double circlePerimeter(double radius) {\n        return 2 * Math.PI * radius;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    double circlePerimeter(double radius) {\n        return 2 * M_PI * radius;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F27",
+    "title": "Temperatura: Celsius a Fahrenheit",
+    "description": "Escribe una función que convierta una temperatura de grados Celsius a Fahrenheit. La fórmula es $F = C \\times \\frac{9}{5} + 32$.",
+    "examples": [
+      {"input": "celsius = 0", "output": "32"},
+      {"input": "celsius = 25", "output": "77"},
+      {"input": "celsius = 100", "output": "212"}
+    ],
+    "hints": [
+      "Asegúrate de manejar la aritmética de punto flotante correctamente."
+    ],
+    "solutionJs": "function celsiusToFahrenheit(celsius) {\n  return (celsius * 9/5) + 32;\n}",
+    "solutionPython": "def celsius_to_fahrenheit(celsius):\n    return (celsius * 9/5) + 32",
+    "solutionJava": "class Solution {\n    public double celsiusToFahrenheit(double celsius) {\n        return (celsius * 9.0/5.0) + 32;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    double celsiusToFahrenheit(double celsius) {\n        return (celsius * 9.0/5.0) + 32.0;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F28",
+    "title": "Temperatura: Fahrenheit a Celsius",
+    "description": "Escribe una función que convierta una temperatura de grados Fahrenheit a Celsius. La fórmula es $C = (F - 32) \\times \\frac{5}{9}$.",
+    "examples": [
+      {"input": "fahrenheit = 32", "output": "0"},
+      {"input": "fahrenheit = 77", "output": "25"},
+      {"input": "fahrenheit = 212", "output": "100"}
+    ],
+    "hints": [
+      "Sigue el orden de las operaciones. Resta 32 primero, luego multiplica por 5/9."
+    ],
+    "solutionJs": "function fahrenheitToCelsius(fahrenheit) {\n  return (fahrenheit - 32) * 5/9;\n}",
+    "solutionPython": "def fahrenheit_to_celsius(fahrenheit):\n    return (fahrenheit - 32) * 5/9",
+    "solutionJava": "class Solution {\n    public double fahrenheitToCelsius(double fahrenheit) {\n        return (fahrenheit - 32) * 5.0/9.0;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    double fahrenheitToCelsius(double fahrenheit) {\n        return (fahrenheit - 32.0) * 5.0/9.0;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F29",
+    "title": "Verificar Contenido de Array",
+    "description": "Dada una matriz `arr` y un `elemento`, escribe una función que devuelva `true` si `elemento` está presente en `arr`, y `false` en caso contrario.",
+    "examples": [
+      {"input": "arr = [1,2,3], elemento = 2", "output": "true"},
+      {"input": "arr = ['a','b'], elemento = 'c'", "output": "false"}
+    ],
+    "hints": [
+      "Puedes iterar sobre el array y comparar cada elemento. Muchos lenguajes tienen un método `includes()` o `contains()`."
+    ],
+    "solutionJs": "function arrayContainsElement(arr, element) {\n  return arr.includes(element);\n}",
+    "solutionPython": "def array_contains_element(arr, element):\n    return element in arr",
+    "solutionJava": "class Solution {\n    public boolean arrayContainsElement(int[] arr, int element) {\n        for (int num : arr) {\n            if (num == element) return true;\n        }\n        return false;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    bool arrayContainsElement(const std::vector<int>& arr, int element) {\n        for (int num : arr) {\n            if (num == element) return true;\n        }\n        return false;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F30",
+    "title": "Eliminar Duplicados Simples",
+    "description": "Dada una matriz de números enteros, devuelve una nueva matriz con todos los elementos duplicados eliminados. El orden de los elementos restantes no importa.",
+    "examples": [
+      {"input": "arr = [1,1,2,2,3,4,4]", "output": "[1,2,3,4] (el orden puede variar)"},
+      {"input": "arr = [5,5,5]", "output": "[5]"}
+    ],
+    "hints": [
+      "Puedes usar un `Set` (conjunto) para almacenar elementos únicos de forma eficiente, ya que los conjuntos no permiten duplicados.",
+      "Convierte el array a un conjunto y luego de nuevo a un array."
+    ],
+    "solutionJs": "function removeDuplicates(arr) {\n  return [...new Set(arr)];\n}",
+    "solutionPython": "def remove_duplicates(arr):\n    return list(set(arr))",
+    "solutionJava": "class Solution {\n    public int[] removeDuplicates(int[] arr) {\n        Set<Integer> uniqueElements = new HashSet<>();\n        for (int num : arr) {\n            uniqueElements.add(num);\n        }\n        int[] result = new int[uniqueElements.size()];\n        int i = 0;\n        for (int num : uniqueElements) {\n            result[i++] = num;\n        }\n        return result;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    std::vector<int> removeDuplicates(std::vector<int>& arr) {\n        std::unordered_set<int> uniqueElements(arr.begin(), arr.end());\n        std::vector<int> result(uniqueElements.begin(), uniqueElements.end());\n        return result;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 15
+  },
+  {
+    "id": "F31",
+    "title": "Contar Palabras en una Cadena",
+    "description": "Dada una cadena de texto, cuenta el número de palabras en ella. Considera que las palabras están separadas por uno o más espacios. Los espacios iniciales o finales no deben contar.",
+    "examples": [
+      {"input": "\"Hola mundo\"", "output": "2"},
+      {"input": "\"Este es  un   ejemplo\"", "output": "4"},
+      {"input": "\"  solo una  \"", "output": "2"},
+      {"input": "\"\"", "output": "0"}
+    ],
+    "hints": [
+      "Primero, recorta los espacios en blanco al principio y al final de la cadena. Luego, divide la cadena por uno o más espacios. Si la cadena resultante está vacía después del recorte, el recuento de palabras es 0."
+    ],
+    "solutionJs": "function countWords(str) {\n  const trimmedStr = str.trim();\n  if (trimmedStr === '') return 0;\n  const words = trimmedStr.split(/\\s+/);\n  return words.length;\n}",
+    "solutionPython": "def count_words(s):\n    words = s.strip().split()\n    return len(words)",
+    "solutionJava": "class Solution {\n    public int countWords(String s) {\n        if (s == null || s.trim().isEmpty()) {\n            return 0;\n        }\n        String[] words = s.trim().split(\"\\\\s+\");\n        return words.length;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int countWords(const std::string& s) {\n        std::string trimmed_s;\n        // Remove leading/trailing spaces\n        size_t first = s.find_first_not_of(' ');\n        size_t last = s.find_last_not_of(' ');\n        if (std::string::npos == first) {\n            return 0;\n        }\n        trimmed_s = s.substr(first, (last - first + 1));\n\n        std::stringstream ss(trimmed_s);\n        std::string word;\n        int count = 0;\n        while (ss >> word) {\n            count++;\n        }\n        return count;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 15
+  },
+  {
+    "id": "F32",
+    "title": "Recuento de Números Pares en Array",
+    "description": "Dada una matriz de números enteros, devuelve el recuento de cuántos números son pares.",
+    "examples": [
+      {"input": "arr = [1,2,3,4,5,6]", "output": "3"},
+      {"input": "arr = [7,9,11,13]", "output": "0"},
+      {"input": "arr = [2,4,6]", "output": "3"}
+    ],
+    "hints": [
+      "Itera sobre el array y usa el operador de módulo para verificar la paridad."
+    ],
+    "solutionJs": "function countEvenNumbers(arr) {\n  let count = 0;\n  for (let num of arr) {\n    if (num % 2 === 0) {\n      count++;\n    }\n  }\n  return count;\n}",
+    "solutionPython": "def count_even_numbers(arr):\n    count = 0\n    for num in arr:\n        if num % 2 == 0:\n            count += 1\n    return count",
+    "solutionJava": "class Solution {\n    public int countEvenNumbers(int[] arr) {\n        int count = 0;\n        for (int num : arr) {\n            if (num % 2 == 0) {\n                count++;\n            }\n        }\n        return count;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int countEvenNumbers(const std::vector<int>& arr) {\n        int count = 0;\n        for (int num : arr) {\n            if (num % 2 == 0) {\n                count++;\n            }\n        }\n        return count;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F33",
+    "title": "Recuento de Números Impares en Array",
+    "description": "Dada una matriz de números enteros, devuelve el recuento de cuántos números son impares.",
+    "examples": [
+      {"input": "arr = [1,2,3,4,5,6]", "output": "3"},
+      {"input": "arr = [2,4,6,8]", "output": "0"},
+      {"input": "arr = [1,3,5]", "output": "3"}
+    ],
+    "hints": [
+      "Itera sobre el array y usa el operador de módulo para verificar la imparidad."
+    ],
+    "solutionJs": "function countOddNumbers(arr) {\n  let count = 0;\n  for (let num of arr) {\n    if (num % 2 !== 0) {\n      count++;\n    }\n  }\n  return count;\n}",
+    "solutionPython": "def count_odd_numbers(arr):\n    count = 0\n    for num in arr:\n        if num % 2 != 0:\n            count += 1\n    return count",
+    "solutionJava": "class Solution {\n    public int countOddNumbers(int[] arr) {\n        int count = 0;\n        for (int num : arr) {\n            if (num % 2 != 0) {\n                count++;\n            }\n        }\n        return count;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int countOddNumbers(const std::vector<int>& arr) {\n        int count = 0;\n        for (int num : arr) {\n            if (num % 2 != 0) {\n                count++;\n            }\n        }\n        return count;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F34",
+    "title": "Suma de Números Pares",
+    "description": "Dada una matriz de números enteros, devuelve la suma de todos los números pares en ella.",
+    "examples": [
+      {"input": "arr = [1,2,3,4,5,6]", "output": "12 (2+4+6)"},
+      {"input": "arr = [7,9,11]", "output": "0"},
+      {"input": "arr = [2,4,0]", "output": "6"}
+    ],
+    "hints": [
+      "Itera, verifica la paridad y acumula la suma si es par."
+    ],
+    "solutionJs": "function sumEvenNumbers(arr) {\n  let sum = 0;\n  for (let num of arr) {\n    if (num % 2 === 0) {\n      sum += num;\n    }\n  }\n  return sum;\n}",
+    "solutionPython": "def sum_even_numbers(arr):\n    return sum(num for num in arr if num % 2 == 0)",
+    "solutionJava": "class Solution {\n    public int sumEvenNumbers(int[] arr) {\n        int sum = 0;\n        for (int num : arr) {\n            if (num % 2 == 0) {\n                sum += num;\n            }\n        }\n        return sum;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int sumEvenNumbers(const std::vector<int>& arr) {\n        int sum = 0;\n        for (int num : arr) {\n            if (num % 2 == 0) {\n                sum += num;\n            }\n        }\n        return sum;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F35",
+    "title": "Suma de Números Impares",
+    "description": "Dada una matriz de números enteros, devuelve la suma de todos los números impares en ella.",
+    "examples": [
+      {"input": "arr = [1,2,3,4,5,6]", "output": "9 (1+3+5)"},
+      {"input": "arr = [2,4,6]", "output": "0"},
+      {"input": "arr = [1,3,5,0]", "output": "9"}
+    ],
+    "hints": [
+      "Itera, verifica la imparidad y acumula la suma si es impar."
+    ],
+    "solutionJs": "function sumOddNumbers(arr) {\n  let sum = 0;\n  for (let num of arr) {\n    if (num % 2 !== 0) {\n      sum += num;\n    }\n  }\n  return sum;\n}",
+    "solutionPython": "def sum_odd_numbers(arr):\n    return sum(num for num in arr if num % 2 != 0)",
+    "solutionJava": "class Solution {\n    public int sumOddNumbers(int[] arr) {\n        int sum = 0;\n        for (int num : arr) {\n            if (num % 2 != 0) {\n                sum += num;\n            }\n        }\n        return sum;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int sumOddNumbers(const std::vector<int>& arr) {\n        int sum = 0;\n        for (int num : arr) {\n            if (num % 2 != 0) {\n                sum += num;\n            }\n        }\n        return sum;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F36",
+    "title": "Encontrar el Último Elemento de un Array",
+    "description": "Dada una matriz, devuelve su último elemento. Si el array está vacío, devuelve `undefined` o `null` (o lanza un error según la especificación de tu lenguaje).",
+    "examples": [
+      {"input": "arr = [1, 2, 3]", "output": "3"},
+      {"input": "arr = [\"a\", \"b\"]", "output": "\"b\""},
+      {"input": "arr = []", "output": "undefined (o null)"}
+    ],
+    "hints": [
+      "Los arrays suelen ser indexados desde 0. El último elemento estará en el índice `longitud - 1`."
+    ],
+    "solutionJs": "function getLastElement(arr) {\n  if (arr.length === 0) return undefined;\n  return arr[arr.length - 1];\n}",
+    "solutionPython": "def get_last_element(arr):\n    if not arr: return None\n    return arr[-1]",
+    "solutionJava": "class Solution {\n    public Integer getLastElement(int[] arr) {\n        if (arr == null || arr.length == 0) return null;\n        return arr[arr.length - 1];\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int getLastElement(const std::vector<int>& arr) {\n        if (arr.empty()) {\n            // Depende de la especificación, podrías lanzar una excepción\n            return -1; // Valor sentinel\n        }\n        return arr.back();\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 5
+  },
+  {
+    "id": "F37",
+    "title": "Invertir Array",
+    "description": "Dada una matriz, devuelve una nueva matriz que es la inversa de la original.",
+    "examples": [
+      {"input": "arr = [1, 2, 3]", "output": "[3, 2, 1]"},
+      {"input": "arr = [\"a\", \"b\", \"c\"]", "output": "[\"c\", \"b\", \"a\"]"}
+    ],
+    "hints": [
+      "Puedes usar un bucle para copiar los elementos en orden inverso a una nueva matriz, o buscar un método `reverse()` incorporado."
+    ],
+    "solutionJs": "function reverseArray(arr) {\n  return [...arr].reverse(); // Crea una copia para no modificar el original\n}",
+    "solutionPython": "def reverse_array(arr):\n    return arr[::-1]",
+    "solutionJava": "class Solution {\n    public int[] reverseArray(int[] arr) {\n        int[] reversed = new int[arr.length];\n        for (int i = 0; i < arr.length; i++) {\n            reversed[i] = arr[arr.length - 1 - i];\n        }\n        return reversed;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    std::vector<int> reverseArray(std::vector<int>& arr) {\n        std::vector<int> reversed = arr;\n        std::reverse(reversed.begin(), reversed.end());\n        return reversed;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F38",
+    "title": "Encontrar el Índice de un Elemento",
+    "description": "Dada una matriz `arr` y un `elemento`, devuelve el índice de la primera aparición de `elemento` en `arr`. Si el elemento no está presente, devuelve -1.",
+    "examples": [
+      {"input": "arr = [1, 5, 2, 8, 3], elemento = 2", "output": "2"},
+      {"input": "arr = ['a', 'b', 'c'], elemento = 'd'", "output": "-1"}
+    ],
+    "hints": [
+      "Puedes iterar sobre el array y comparar cada elemento con el objetivo.",
+      "Muchos lenguajes tienen un método `indexOf()` o similar."
+    ],
+    "solutionJs": "function findElementIndex(arr, element) {\n  return arr.indexOf(element);\n}",
+    "solutionPython": "def find_element_index(arr, element):\n    try:\n        return arr.index(element)\n    except ValueError:\n        return -1",
+    "solutionJava": "class Solution {\n    public int findElementIndex(int[] arr, int element) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == element) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int findElementIndex(const std::vector<int>& arr, int element) {\n        for (int i = 0; i < arr.size(); ++i) {\n            if (arr[i] == element) {\n                return i;\n            }\n        }\n        return -1;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 10
+  },
+  {
+    "id": "F39",
+    "title": "Verificar si es un Palíndromo (Número)",
+    "description": "Dado un número entero `x`, devuelve `true` si `x` es un palíndromo entero. Un entero es un palíndromo cuando se lee igual hacia adelante que hacia atrás. Por ejemplo, 121 es un palíndromo, mientras que 123 no lo es.",
+    "examples": [
+      {"input": "x = 121", "output": "true"},
+      {"input": "x = -121", "output": "false"},
+      {"input": "x = 10", "output": "false"}
+    ],
+    "hints": [
+      "Los números negativos nunca son palíndromos.",
+      "Puedes convertir el número a una cadena para invertirlo y compararlo.",
+      "Alternativamente, puedes revertir la mitad del número sin convertirlo a cadena."
+    ],
+    "solutionJs": "function isPalindromeNumber(x) {\n  if (x < 0) return false;\n  const s = x.toString();\n  return s === s.split('').reverse().join('');\n}",
+    "solutionPython": "def is_palindrome_number(x):\n    if x < 0: return False\n    s = str(x)\n    return s == s[::-1]",
+    "solutionJava": "class Solution {\n    public boolean isPalindromeNumber(int x) {\n        if (x < 0) return false;\n        String s = String.valueOf(x);\n        StringBuilder reversed = new StringBuilder(s);\n        reversed.reverse();\n        return s.equals(reversed.toString());\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    bool isPalindromeNumber(int x) {\n        if (x < 0) return false;\n        std::string s = std::to_string(x);\n        std::string reversed_s = s;\n        std::reverse(reversed_s.begin(), reversed_s.end());\n        return s == reversed_s;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 15
+  },
+  {
+    "id": "F40",
+    "title": "Encontrar el Carácter Más Repetido",
+    "description": "Dada una cadena, devuelve el carácter que aparece con mayor frecuencia en la cadena.",
+    "examples": [
+      {"input": "\"abccba\"", "output": "\"c\""},
+      {"input": "\"aabbbcccccdd\"", "output": "\"c\""},
+      {"input": "\"a\"", "output": "\"a\""}
+    ],
+    "hints": [
+      "Puedes usar un objeto (mapa/tabla hash) para almacenar las frecuencias de cada carácter.",
+      "Luego, itera sobre el objeto para encontrar el carácter con la frecuencia más alta."
+    ],
+    "solutionJs": "function maxChar(str) {\n  if (str.length === 0) return '';\n  const charMap = {};\n  let maxCount = 0;\n  let maxChar = '';\n\n  for (let char of str) {\n    charMap[char] = charMap[char] + 1 || 1;\n  }\n\n  for (let char in charMap) {\n    if (charMap[char] > maxCount) {\n      maxCount = charMap[char];\n      maxChar = char;\n    }\n  }\n  return maxChar;\n}",
+    "solutionPython": "from collections import Counter\ndef max_char(s):\n    if not s: return ''\n    char_counts = Counter(s)\n    return max(char_counts, key=char_counts.get)",
+    "solutionJava": "class Solution {\n    public char maxChar(String s) {\n        if (s == null || s.isEmpty()) {\n            // O lanzar una excepción, dependiendo del requisito\n            return '\\0'; // Retorna un carácter nulo o similar\n        }\n        Map<Character, Integer> charCounts = new HashMap<>();\n        for (char c : s.toCharArray()) {\n            charCounts.put(c, charCounts.getOrDefault(c, 0) + 1);\n        }\n\n        int maxCount = 0;\n        char maxChar = ' ';\n        for (Map.Entry<Character, Integer> entry : charCounts.entrySet()) {\n            if (entry.getValue() > maxCount) {\n                maxCount = entry.getValue();\n                maxChar = entry.getKey();\n            }\n        }\n        return maxChar;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    char maxChar(const std::string& s) {\n        if (s.empty()) {\n            return '\\0'; // O lanzar una excepción\n        }\n        std::unordered_map<char, int> charCounts;\n        for (char c : s) {\n            charCounts[c]++;\n        }\n\n        int maxCount = 0;\n        char maxChar = ' ';\n        for (auto const& [key, val] : charCounts) {\n            if (val > maxCount) {\n                maxCount = val;\n                maxChar = key;\n            }\n        }\n        return maxChar;\n    }\n};",
+    "difficulty": "Fácil",
+    "score": 15
+  }
+]

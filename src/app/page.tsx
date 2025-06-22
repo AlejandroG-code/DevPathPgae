@@ -1,103 +1,127 @@
-import Image from "next/image";
+// src/app/page.tsx
 
-export default function Home() {
+'use client';
+
+import React from 'react'; // Ya no necesitamos useEffect ni useRef para el canvas
+
+import { useRouter } from 'next/navigation';
+
+const LandingPage: React.FC = () => {
+  const router = useRouter();
+
+  const handleStartJourney = () => {
+    router.push('/dashboard');
+  };
+
+  const handleGetStarted = () => {
+    router.push('/dashboard');
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    // Contenedor principal con el nuevo color de fondo ligeramente más claro
+    <div className="min-h-screen relative text-gray-100 font-sans antialiased bg-[#161622] overflow-hidden">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      {/* --- CAPAS DE FONDO CSS --- */}
+      <div className="absolute inset-0 -z-20 overflow-hidden">
+        {/* Textura de grano sutil */}
+        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 pointer-events-none"></div>
+
+        {/* Luces que vienen de ambos lados */}
+        {/* Luz izquierda (Violeta) */}
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] bg-radial-gradient-to-tr from-violet-700/50 via-transparent to-transparent blur-[250px] opacity-70 animate-pulse-light transform -translate-x-1/2"></div>
+        {/* Luz derecha (Teal) */}
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-radial-gradient-to-tl from-teal-500/50 via-transparent to-transparent blur-[250px] opacity-70 animate-pulse-light transform translate-x-1/2"></div>
+
+        {/* Partículas de puntitos que aparecen (estrellas dinámicas) */}
+        {[...Array(150)].map((_, i) => ( // Mayor cantidad de puntos
+          <div
+            key={i}
+            className="absolute rounded-full bg-white animate-dot-pulse"
+            style={{
+              width: `${Math.random() * 1.5 + 0.5}px`, // Tamaño pequeño
+              height: `${Math.random() * 1.5 + 0.5}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              opacity: `${0.1 + Math.random() * 0.4}`, // Opacidad variable
+              animationDelay: `${Math.random() * 8}s`, // Retraso aleatorio
+              animationDuration: `${4 + Math.random() * 6}s`, // Duración aleatoria
+            }}
+          />
+        ))}
+
+        {/* Estrellas estáticas (como la versión anterior) */}
+        <div className="absolute inset-0 bg-[radial-gradient(white_1px,transparent_1px)] [background-size:20px_20px] opacity-10"></div>
+      </div>
+
+
+      {/* --- HERO SECTION --- */}
+      <section className="relative h-screen flex items-center justify-center text-center px-6 z-10">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-[0_2px_10px_#00ffc6aa]">
+            Unlock Your <span className="text-[#00FFC6]">Dev Potential</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Your personal hub for coding challenges, learning roadmaps, and powerful development tools.
+          </p>
+          <button
+            onClick={handleStartJourney}
+            className="bg-[#FF6B00] hover:bg-[#ff832f] text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transition-transform duration-300 hover:scale-105"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            Start Your Journey
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* --- FEATURES SECTION --- */}
+      <section className="py-20 px-6 z-10 relative">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-12 text-gray-100">What DevPath Offers</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {[
+              ['🧠', 'Daily Code Challenges', 'Sharpen your problem-solving skills with a wide array of coding exercises.'],
+              ['🗺️', 'Guided Learning Roadmaps', 'Follow structured paths to master technologies and become job-ready.'],
+              ['⏱️', 'Gamified Pomodoro Timer', 'Boost focus with an interactive timer that makes study fun.'],
+              ['🧩', 'Logic & Puzzle Games', 'Engaging puzzles to enhance critical thinking.'],
+              ['🛠️', 'Developer Utility Tools', 'Access handy dev tools like cost estimators and password generators.']
+            ].map(([icon, title, desc]) => (
+              <div key={title} className="bg-[#24243a]/70 backdrop-blur-sm p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group border border-transparent hover:border-[#00FFC6]">
+                <div className="text-[#00FFC6] text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {icon}
+                </div>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-100">{title}</h3>
+                <p className="text-gray-300">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- CALL TO ACTION SECTION --- */}
+      <section className="py-20 px-4 bg-gradient-to-r from-[#00FFC6] to-[#FF6B00] text-center text-black z-10 relative">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4">Ready to Elevate Your Skills?</h2>
+          <p className="text-lg mb-8">Join DevPath today and start building the future you envision.</p>
+          <button
+            onClick={handleGetStarted}
+            className="bg-black hover:bg-[#1e1e2e] text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg transition-transform duration-300 hover:scale-105"
+          >
+            Get Started Now
+          </button>
+        </div>
+      </section>
+
+      {/* --- FOOTER SECTION --- */}
+      <footer className="py-8 px-4 bg-[#1a1a27] text-gray-400 text-center text-sm z-10 relative">
+        <div className="max-w-6xl mx-auto">
+          <p>&copy; {new Date().getFullYear()} DevPath. All rights reserved.</p>
+          <div className="mt-4 space-x-4">
+            <a href="#" className="hover:text-[#00FFC6] transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-[#00FFC6] transition-colors">Terms of Service</a>
+          </div>
+        </div>
       </footer>
     </div>
   );
-}
+};
+
+export default LandingPage;

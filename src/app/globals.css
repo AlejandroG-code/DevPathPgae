@@ -24,3 +24,40 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+@keyframes twinkle {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.1; }
+}
+
+@keyframes meteor {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(300px) translateY(300px);
+    opacity: 0;
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 5s infinite;
+}
+
+.animate-meteor {
+  animation: meteor 8s linear infinite;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
