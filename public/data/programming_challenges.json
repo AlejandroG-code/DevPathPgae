@@ -751,5 +751,960 @@
     "solutionCpp": "class Solution {\npublic:\n    char maxChar(const std::string& s) {\n        if (s.empty()) {\n            return '\\0'; // O lanzar una excepción\n        }\n        std::unordered_map<char, int> charCounts;\n        for (char c : s) {\n            charCounts[c]++;\n        }\n\n        int maxCount = 0;\n        char maxChar = ' ';\n        for (auto const& [key, val] : charCounts) {\n            if (val > maxCount) {\n                maxCount = val;\n                maxChar = key;\n            }\n        }\n        return maxChar;\n    }\n};",
     "difficulty": "Fácil",
     "score": 15
+  },
+  {
+    "id": "M01",
+    "title": "Problema Medio 1: Invertir Array",
+    "description": "Dada una matriz de enteros, inviértela en su lugar. No crees una nueva matriz.",
+    "examples": [
+      {"input": "arr = [1, 2, 3, 4, 5]", "output": "[5, 4, 3, 2, 1]"},
+      {"input": "arr = [10]", "output": "[10]"}
+    ],
+    "hints": [
+      "Puedes usar dos punteros, uno al principio y otro al final, e intercambiar elementos.",
+      "Avanza los punteros hacia el centro del array hasta que se crucen."
+    ],
+    "solutionJs": "function reverseArrayInPlace(arr) {\n  let start = 0;\n  let end = arr.length - 1;\n  while (start < end) {\n    [arr[start], arr[end]] = [arr[end], arr[start]];\n    start++;\n    end--;\n  }\n  return arr;\n}",
+    "solutionPython": "def reverse_array_in_place(arr):\n    left, right = 0, len(arr) - 1\n    while left < right:\n        arr[left], arr[right] = arr[right], arr[left]\n        left += 1\n        right -= 1\n    return arr",
+    "solutionJava": "class Solution {\n    public void reverseArrayInPlace(int[] arr) {\n        int start = 0;\n        int end = arr.length - 1;\n        while (start < end) {\n            int temp = arr[start];\n            arr[start] = arr[end];\n            arr[end] = temp;\n            start++;\n            end--;\n        }\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    void reverseArrayInPlace(std::vector<int>& arr) {\n        int start = 0;\n        int end = arr.size() - 1;\n        while (start < end) {\n            std::swap(arr[start], arr[end]);\n            start++;\n            end--;\n        }\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M02",
+    "title": "Problema Medio 2: Palíndromo de Cadena",
+    "description": "Dada una cadena, determina si es un palíndromo, ignorando mayúsculas/minúsculas y caracteres no alfanuméricos.",
+    "examples": [
+      {"input": "cadena = \"A man, a plan, a canal: Panama\"", "output": "true"},
+      {"input": "cadena = \"race a car\"", "output": "false"}
+    ],
+    "hints": [
+      "Normaliza la cadena: conviértela a minúsculas y elimina los caracteres no alfanuméricos.",
+      "Puedes usar dos punteros (uno al principio y otro al final) y compararlos."
+    ],
+    "solutionJs": "function isPalindrome(s) {\n  const normalized = s.toLowerCase().replace(/[^a-z0-9]/g, '');\n  return normalized === normalized.split('').reverse().join('');\n}",
+    "solutionPython": "import re\ndef is_palindrome(s):\n    normalized = re.sub(r'[^a-zA-Z0-9]', '', s).lower()\n    return normalized == normalized[::-1]",
+    "solutionJava": "class Solution {\n    public boolean isPalindrome(String s) {\n        StringBuilder sb = new StringBuilder();\n        for (char c : s.toCharArray()) {\n            if (Character.isLetterOrDigit(c)) {\n                sb.append(Character.toLowerCase(c));\n            }\n        }\n        String normalized = sb.toString();\n        String reversed = new StringBuilder(normalized).reverse().toString();\n        return normalized.equals(reversed);\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <algorithm>\n#include <cctype>\n\nclass Solution {\npublic:\n    bool isPalindrome(std::string s) {\n        std::string cleaned_s;\n        for (char c : s) {\n            if (std::isalnum(c)) {\n                cleaned_s += std::tolower(c);\n            }\n        }\n        std::string reversed_s = cleaned_s;\n        std::reverse(reversed_s.begin(), reversed_s.end());\n        return cleaned_s == reversed_s;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M03",
+    "title": "Problema Medio 3: Contar Vocales",
+    "description": "Dada una cadena, devuelve el número de vocales (`a, e, i, o, u`) en ella. Ignora mayúsculas y minúsculas.",
+    "examples": [
+      {"input": "cadena = \"Hello World\"", "output": "3"},
+      {"input": "cadena = \"AEIOU\"", "output": "5"}
+    ],
+    "hints": [
+      "Puedes convertir la cadena a minúsculas para simplificar la comparación.",
+      "Itera sobre la cadena y verifica si cada caracter es una vocal."
+    ],
+    "solutionJs": "function countVowels(str) {\n  const vowels = 'aeiou';\n  let count = 0;\n  for (let char of str.toLowerCase()) {\n    if (vowels.includes(char)) {\n      count++;\n    }\n  }\n  return count;\n}",
+    "solutionPython": "def count_vowels(s):\n    vowels = \"aeiou\"\n    count = 0\n    for char in s.lower():\n        if char in vowels:\n            count += 1\n    return count",
+    "solutionJava": "class Solution {\n    public int countVowels(String str) {\n        int count = 0;\n        String vowels = \"aeiouAEIOU\";\n        for (char c : str.toCharArray()) {\n            if (vowels.indexOf(c) != -1) {\n                count++;\n            }\n        }\n        return count;\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <cctype>\n\nclass Solution {\npublic:\n    int countVowels(const std::string& str) {\n        int count = 0;\n        std::string vowels = \"aeiouAEIOU\";\n        for (char c : str) {\n            if (vowels.find(c) != std::string::npos) {\n                count++;\n            }\n        }\n        return count;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M04",
+    "title": "Problema Medio 4: Encontrar Mayor Elemento en Array",
+    "description": "Dada una matriz de números, encuentra y devuelve el elemento más grande.",
+    "examples": [
+      {"input": "arr = [3, 1, 4, 1, 5, 9, 2]", "output": "9"},
+      {"input": "arr = [-10, -5, -1]", "output": "-1"}
+    ],
+    "hints": [
+      "Inicializa una variable con el primer elemento del array o con un valor muy pequeño.",
+      "Itera sobre el array y actualiza la variable si encuentras un número más grande."
+    ],
+    "solutionJs": "function findLargestElement(arr) {\n  if (arr.length === 0) return undefined; // Or throw error\n  let max = arr[0];\n  for (let i = 1; i < arr.length; i++) {\n    if (arr[i] > max) {\n      max = arr[i];\n    }\n  }\n  return max;\n}",
+    "solutionPython": "def find_largest_element(arr):\n    if not arr: return None\n    max_val = arr[0]\n    for num in arr:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "solutionJava": "class Solution {\n    public int findLargestElement(int[] arr) {\n        if (arr == null || arr.length == 0) {\n            throw new IllegalArgumentException(\"Array cannot be empty or null\");\n        }\n        int max = arr[0];\n        for (int i = 1; i < arr.length; i++) {\n            if (arr[i] > max) {\n                max = arr[i];\n            }\n        }\n        return max;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int findLargestElement(const std::vector<int>& arr) {\n        if (arr.empty()) {\n            // Handle empty array case, e.g., throw exception or return a special value\n            return 0; // Or throw std::runtime_error(\"Array is empty\");\n        }\n        return *std::max_element(arr.begin(), arr.end());\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M05",
+    "title": "Problema Medio 5: Eliminar Duplicados de Array",
+    "description": "Dada una matriz de enteros, elimina los elementos duplicados de la matriz en su lugar y devuelve la nueva longitud de la matriz sin duplicados. El orden de los elementos restantes puede cambiar.",
+    "examples": [
+      {"input": "arr = [1, 1, 2]", "output": "2 (arr debería ser [1, 2] o similar)"},
+      {"input": "arr = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]", "output": "5 (arr debería ser [0, 1, 2, 3, 4] o similar)"}
+    ],
+    "hints": [
+      "Si el orden no importa, puedes usar un conjunto (Set) para almacenar elementos únicos.",
+      "Para hacerlo en su lugar, puedes usar dos punteros: uno para la posición de escritura y otro para la posición de lectura."
+    ],
+    "solutionJs": "function removeDuplicates(arr) {\n  if (arr.length === 0) return 0;\n  let i = 0; // pointer for unique elements\n  for (let j = 1; j < arr.length; j++) {\n    if (arr[j] !== arr[i]) {\n      i++;\n      arr[i] = arr[j];\n    }\n  }\n  return i + 1;\n}",
+    "solutionPython": "def remove_duplicates(arr):\n    if not arr: return 0\n    seen = set()\n    new_arr = []\n    for x in arr:\n        if x not in seen:\n            seen.add(x)\n            new_arr.append(x)\n    arr[:] = new_arr # Modify in-place\n    return len(arr)",
+    "solutionJava": "class Solution {\n    public int removeDuplicates(int[] nums) {\n        if (nums.length == 0) return 0;\n        int i = 0;\n        for (int j = 1; j < nums.length; j++) {\n            if (nums[j] != nums[i]) {\n                i++;\n                nums[i] = nums[j];\n            }\n        }\n        return i + 1;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int removeDuplicates(std::vector<int>& nums) {\n        if (nums.empty()) return 0;\n        int i = 0;\n        for (int j = 1; j < nums.size(); ++j) {\n            if (nums[j] != nums[i]) {\n                i++;\n                nums[i] = nums[j];\n            }\n        }\n        return i + 1;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M06",
+    "title": "Problema Medio 6: Suma de Números Primos",
+    "description": "Dada un entero `n`, devuelve la suma de todos los números primos hasta `n` (inclusive).",
+    "examples": [
+      {"input": "n = 10", "output": "17 (2 + 3 + 5 + 7)"},
+      {"input": "n = 2", "output": "2"}
+    ],
+    "hints": [
+      "Necesitas una función auxiliar para verificar si un número es primo.",
+      "Puedes usar la criba de Eratóstenes para números grandes si el rendimiento es una preocupación, pero un enfoque simple de prueba de divisibilidad es suficiente para n pequeños."
+    ],
+    "solutionJs": "function sumPrimes(n) {\n  let sum = 0;\n  for (let i = 2; i <= n; i++) {\n    if (isPrime(i)) {\n      sum += i;\n    }\n  }\n  return sum;\n}\n\nfunction isPrime(num) {\n  if (num <= 1) return false;\n  for (let i = 2; i <= Math.sqrt(num); i++) {\n    if (num % i === 0) {\n      return false;\n    }\n  }\n  return true;\n}",
+    "solutionPython": "def is_prime(num):\n    if num <= 1: return False\n    for i in range(2, int(num**0.5) + 1):\n        if num % i == 0:\n            return False\n    return True\n\ndef sum_primes(n):\n    total = 0\n    for i in range(2, n + 1):\n        if is_prime(i):\n            total += i\n    return total",
+    "solutionJava": "class Solution {\n    public int sumPrimes(int n) {\n        int sum = 0;\n        for (int i = 2; i <= n; i++) {\n            if (isPrime(i)) {\n                sum += i;\n            }\n        }\n        return sum;\n    }\n\n    private boolean isPrime(int num) {\n        if (num <= 1) return false;\n        for (int i = 2; i * i <= num; i++) {\n            if (num % i == 0) {\n                return false;\n            }\n        }\n        return true;\n    }\n}",
+    "solutionCpp": "#include <cmath>\n\nclass Solution {\npublic:\n    bool isPrime(int num) {\n        if (num <= 1) return false;\n        for (int i = 2; i * i <= num; ++i) {\n            if (num % i == 0) {\n                return false;\n            }\n        }\n        return true;\n    }\n\n    int sumPrimes(int n) {\n        int sum = 0;\n        for (int i = 2; i <= n; ++i) {\n            if (isPrime(i)) {\n                sum += i;\n            }\n        }\n        return sum;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M07",
+    "title": "Problema Medio 7: Factorial de un Número",
+    "description": "Calcula el factorial de un número entero no negativo `n`. El factorial de 0 es 1.",
+    "examples": [
+      {"input": "n = 5", "output": "120 (5 * 4 * 3 * 2 * 1)"},
+      {"input": "n = 0", "output": "1"}
+    ],
+    "hints": [
+      "Puedes usar un bucle `for` o `while` que multiplique los números desde 1 hasta `n`.",
+      "Considera el caso base para `n = 0`."
+    ],
+    "solutionJs": "function factorial(n) {\n  if (n === 0) return 1;\n  let result = 1;\n  for (let i = 1; i <= n; i++) {\n    result *= i;\n  }\n  return result;\n}",
+    "solutionPython": "def factorial(n):\n    if n == 0: return 1\n    res = 1\n    for i in range(1, n + 1):\n        res *= i\n    return res",
+    "solutionJava": "class Solution {\n    public long factorial(int n) {\n        if (n == 0) return 1;\n        long result = 1;\n        for (int i = 1; i <= n; i++) {\n            result *= i;\n        }\n        return result;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    long long factorial(int n) {\n        if (n == 0) return 1;\n        long long result = 1;\n        for (int i = 1; i <= n; ++i) {\n            result *= i;\n        }\n        return result;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M08",
+    "title": "Problema Medio 8: Encontrar el n-ésimo Número de Fibonacci",
+    "description": "Calcula el n-ésimo número de Fibonacci. La secuencia comienza con F(0) = 0 y F(1) = 1.",
+    "examples": [
+      {"input": "n = 0", "output": "0"},
+      {"input": "n = 1", "output": "1"},
+      {"input": "n = 10", "output": "55"}
+    ],
+    "hints": [
+      "Puedes usar un enfoque iterativo para evitar la recursión ineficiente.",
+      "Mantén un registro de los dos números de Fibonacci anteriores."
+    ],
+    "solutionJs": "function fibonacci(n) {\n  if (n <= 1) return n;\n  let a = 0, b = 1, temp;\n  for (let i = 2; i <= n; i++) {\n    temp = a + b;\n    a = b;\n    b = temp;\n  }\n  return b;\n}",
+    "solutionPython": "def fibonacci(n):\n    if n <= 1: return n\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+    "solutionJava": "class Solution {\n    public int fibonacci(int n) {\n        if (n <= 1) return n;\n        int a = 0, b = 1, temp;\n        for (int i = 2; i <= n; i++) {\n            temp = a + b;\n            a = b;\n            b = temp;\n        }\n        return b;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int fibonacci(int n) {\n        if (n <= 1) return n;\n        int a = 0, b = 1, temp;\n        for (int i = 2; i <= n; ++i) {\n            temp = a + b;\n            a = b;\n            b = temp;\n        }\n        return b;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M09",
+    "title": "Problema Medio 9: Validar Paréntesis",
+    "description": "Dada una cadena `s` que contiene solo los caracteres '(', ')', '{', '}', '[' y ']', determina si la cadena de entrada es válida. Una cadena de entrada es válida si: 1. Los paréntesis de apertura deben cerrarse con el mismo tipo de paréntesis. 2. Los paréntesis de apertura deben cerrarse en el orden correcto. 3. Cada paréntesis de cierre tiene un paréntesis de apertura correspondiente del mismo tipo.",
+    "examples": [
+      {"input": "s = \"()\"", "output": "true"},
+      {"input": "s = \"()[]{}\"", "output": "true"},
+      {"input": "s = \"(]\"", "output": "false"}
+    ],
+    "hints": [
+      "Usa una pila (stack) para seguir el rastro de los paréntesis de apertura.",
+      "Cuando encuentres un paréntesis de cierre, verifica si la cima de la pila es el paréntesis de apertura correspondiente."
+    ],
+    "solutionJs": "function isValid(s) {\n  const stack = [];\n  const map = {\n    '(': ')',\n    '[': ']',\n    '{': '}'\n  };\n\n  for (let char of s) {\n    if (map[char]) {\n      stack.push(char);\n    } else {\n      if (stack.length === 0) return false;\n      const lastOpen = stack.pop();\n      if (map[lastOpen] !== char) {\n        return false;\n      }\n    }\n  }\n  return stack.length === 0;\n}",
+    "solutionPython": "def is_valid(s):\n    stack = []\n    mapping = {\"(\": \")\", \"{\": \"}\", \"[\": \"]\"}\n    for char in s:\n        if char in mapping:\n            stack.append(char)\n        else:\n            if not stack: return False\n            last_open = stack.pop()\n            if mapping[last_open] != char:\n                return False\n    return not stack",
+    "solutionJava": "import java.util.Stack;\nimport java.util.HashMap;\n\nclass Solution {\n    public boolean isValid(String s) {\n        Stack<Character> stack = new Stack<>();\n        HashMap<Character, Character> map = new HashMap<>();\n        map.put('(', ')');\n        map.put('{', '}');\n        map.put('[', ']');\n\n        for (char c : s.toCharArray()) {\n            if (map.containsKey(c)) {\n                stack.push(c);\n            } else {\n                if (stack.isEmpty()) return false;\n                char lastOpen = stack.pop();\n                if (map.get(lastOpen) != c) {\n                    return false;\n                }\n            }\n        }\n        return stack.isEmpty();\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <stack>\n#include <map>\n\nclass Solution {\npublic:\n    bool isValid(std::string s) {\n        std::stack<char> st;\n        std::map<char, char> mapping;\n        mapping['('] = ')';\n        mapping['{'] = '}';\n        mapping['['] = ']';\n\n        for (char c : s) {\n            if (mapping.count(c)) { // It's an opening bracket\n                st.push(c);\n            } else { // It's a closing bracket\n                if (st.empty()) return false;\n                char lastOpen = st.top();\n                st.pop();\n                if (mapping[lastOpen] != c) {\n                    return false;\n                }\n            }\n        }\n        return st.empty();\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M10",
+    "title": "Problema Medio 10: Combinaciones de Suma",
+    "description": "Dada una lista de números y un número objetivo `target`, encuentra si hay dos números en la lista que sumen el `target`. Devuelve `true` si existen, `false` en caso contrario.",
+    "examples": [
+      {"input": "nums = [2, 7, 11, 15], target = 9", "output": "true (2+7=9)"},
+      {"input": "nums = [3, 5, 8], target = 10", "output": "false"}
+    ],
+    "hints": [
+      "Puedes usar un conjunto (Set) para almacenar los números que ya has visto.",
+      "Para cada número, calcula el 'complemento' necesario para alcanzar el objetivo y verifica si ese complemento ya está en tu conjunto."
+    ],
+    "solutionJs": "function hasTwoSum(nums, target) {\n  const seen = new Set();\n  for (let num of nums) {\n    const complement = target - num;\n    if (seen.has(complement)) {\n      return true;\n    }\n    seen.add(num);\n  }\n  return false;\n}",
+    "solutionPython": "def has_two_sum(nums, target):\n    seen = set()\n    for num in nums:\n        complement = target - num\n        if complement in seen:\n            return True\n        seen.add(num)\n    return False",
+    "solutionJava": "import java.util.HashSet;\nimport java.util.Set;\n\nclass Solution {\n    public boolean hasTwoSum(int[] nums, int target) {\n        Set<Integer> seen = new HashSet<>();\n        for (int num : nums) {\n            int complement = target - num;\n            if (seen.contains(complement)) {\n                return true;\n            }\n            seen.add(num);\n        }\n        return false;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <unordered_set>\n\nclass Solution {\npublic:\n    bool hasTwoSum(const std::vector<int>& nums, int target) {\n        std::unordered_set<int> seen;\n        for (int num : nums) {\n            int complement = target - num;\n            if (seen.count(complement)) {\n                return true;\n            }\n            seen.insert(num);\n        }\n        return false;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M11",
+    "title": "Problema Medio 11: Mover Ceros al Final",
+    "description": "Dada una matriz de enteros, mueve todos los ceros al final de ella, manteniendo el orden relativo de los elementos no nulos.",
+    "examples": [
+      {"input": "nums = [0, 1, 0, 3, 12]", "output": "[1, 3, 12, 0, 0]"},
+      {"input": "nums = [0, 0, 1]", "output": "[1, 0, 0]"}
+    ],
+    "hints": [
+      "Usa un puntero para rastrear la posición donde se debe colocar el siguiente elemento no nulo.",
+      "Itera por el array. Si encuentras un elemento no nulo, muévelo a la posición del puntero y avanza el puntero."
+    ],
+    "solutionJs": "function moveZeros(nums) {\n  let nonZeroPtr = 0;\n  for (let i = 0; i < nums.length; i++) {\n    if (nums[i] !== 0) {\n      nums[nonZeroPtr] = nums[i];\n      nonZeroPtr++;\n    }\n  }\n  for (let i = nonZeroPtr; i < nums.length; i++) {\n    nums[i] = 0;\n  }\n  return nums;\n}",
+    "solutionPython": "def move_zeros(nums):\n    non_zero_ptr = 0\n    for i in range(len(nums)):\n        if nums[i] != 0:\n            nums[non_zero_ptr] = nums[i]\n            non_zero_ptr += 1\n    for i in range(non_zero_ptr, len(nums)):\n        nums[i] = 0\n    return nums",
+    "solutionJava": "class Solution {\n    public void moveZeros(int[] nums) {\n        int nonZeroPtr = 0;\n        for (int i = 0; i < nums.length; i++) {\n            if (nums[i] != 0) {\n                nums[nonZeroPtr] = nums[i];\n                nonZeroPtr++;\n            }\n        }\n        for (int i = nonZeroPtr; i < nums.length; i++) {\n            nums[i] = 0;\n        }\n    }\n}",
+    "solutionCpp": "#include <vector>\n\nclass Solution {\npublic:\n    void moveZeros(std::vector<int>& nums) {\n        int nonZeroPtr = 0;\n        for (int i = 0; i < nums.size(); ++i) {\n            if (nums[i] != 0) {\n                nums[nonZeroPtr] = nums[i];\n                nonZeroPtr++;\n            }\n        }\n        for (int i = nonZeroPtr; i < nums.size(); ++i) {\n            nums[i] = 0;\n        }\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M12",
+    "title": "Problema Medio 12: Longitud de la Última Palabra",
+    "description": "Dada una cadena `s` que consta de palabras y espacios, devuelve la longitud de la última palabra en la cadena. Una palabra se define como una secuencia máxima de caracteres que no son espacios.",
+    "examples": [
+      {"input": "s = \"Hello World\"", "output": "5"},
+      {"input": "s = \"   fly me   to   the moon  \"", "output": "4"}
+    ],
+    "hints": [
+      "Puedes dividir la cadena por espacios para obtener un array de palabras.",
+      "Considera el caso de cadenas con espacios al principio o al final."
+    ],
+    "solutionJs": "function lengthOfLastWord(s) {\n  const words = s.trim().split(' ');\n  return words[words.length - 1].length;\n}",
+    "solutionPython": "def length_of_last_word(s):\n    words = s.strip().split(' ')\n    if not words: return 0\n    return len(words[-1])",
+    "solutionJava": "class Solution {\n    public int lengthOfLastWord(String s) {\n        String trimmed = s.trim();\n        int lastSpaceIndex = trimmed.lastIndexOf(' ');\n        if (lastSpaceIndex == -1) {\n            return trimmed.length();\n        } else {\n            return trimmed.length() - (lastSpaceIndex + 1);\n        }\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int lengthOfLastWord(std::string s) {\n        // Trim trailing spaces\n        int right = s.length() - 1;\n        while (right >= 0 && s[right] == ' ') {\n            right--;\n        }\n        if (right < 0) return 0; // All spaces or empty string\n\n        int left = right;\n        while (left >= 0 && s[left] != ' ') {\n            left--;\n        }\n        return right - left;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M13",
+    "title": "Problema Medio 13: Rotar Array",
+    "description": "Dada una matriz `nums`, rotar la matriz hacia la derecha por `k` pasos, donde `k` es un número no negativo.",
+    "examples": [
+      {"input": "nums = [1, 2, 3, 4, 5, 6, 7], k = 3", "output": "[5, 6, 7, 1, 2, 3, 4]"},
+      {"input": "nums = [-1, -100, 3, 99], k = 2", "output": "[3, 99, -1, -100]"}
+    ],
+    "hints": [
+      "Puedes usar un array temporal para almacenar los elementos que se moverán.",
+      "Otro enfoque es usar la inversión de sub-arrays."
+    ],
+    "solutionJs": "function rotate(nums, k) {\n  k %= nums.length;\n  const n = nums.length;\n  const temp = nums.slice(n - k).concat(nums.slice(0, n - k));\n  for (let i = 0; i < n; i++) {\n    nums[i] = temp[i];\n  }\n  return nums; // For testing, nums is modified in-place\n}",
+    "solutionPython": "def rotate(nums, k):\n    n = len(nums)\n    k %= n\n    nums[:] = nums[n-k:] + nums[:n-k]\n    return nums",
+    "solutionJava": "class Solution {\n    public void rotate(int[] nums, int k) {\n        k %= nums.length;\n        reverse(nums, 0, nums.length - 1);\n        reverse(nums, 0, k - 1);\n        reverse(nums, k, nums.length - 1);\n    }\n\n    private void reverse(int[] nums, int start, int end) {\n        while (start < end) {\n            int temp = nums[start];\n            nums[start] = nums[end];\n            nums[end] = temp;\n            start++;\n            end--;\n        }\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    void rotate(std::vector<int>& nums, int k) {\n        k %= nums.size();\n        std::reverse(nums.begin(), nums.end());\n        std::reverse(nums.begin(), nums.begin() + k);\n        std::reverse(nums.begin() + k, nums.end());\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M14",
+    "title": "Problema Medio 14: Subarray Contiguo Máximo",
+    "description": "Dado un array de enteros `nums`, encuentra el subarray contiguo (que contenga al menos un número) que tiene la mayor suma y devuelve su suma.",
+    "examples": [
+      {"input": "nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]", "output": "6 (porque [4, -1, 2, 1] tiene la suma máxima)"},
+      {"input": "nums = [1]", "output": "1"}
+    ],
+    "hints": [
+      "Este es un problema clásico que se puede resolver con el algoritmo de Kadane.",
+      "Mantén un registro de la suma actual y la suma máxima encontrada hasta ahora."
+    ],
+    "solutionJs": "function maxSubArray(nums) {\n  let maxSoFar = nums[0];\n  let currentMax = nums[0];\n  for (let i = 1; i < nums.length; i++) {\n    currentMax = Math.max(nums[i], currentMax + nums[i]);\n    maxSoFar = Math.max(maxSoFar, currentMax);\n  }\n  return maxSoFar;\n}",
+    "solutionPython": "def max_sub_array(nums):\n    max_so_far = nums[0]\n    current_max = nums[0]\n    for i in range(1, len(nums)):\n        current_max = max(nums[i], current_max + nums[i])\n        max_so_far = max(max_so_far, current_max)\n    return max_so_far",
+    "solutionJava": "class Solution {\n    public int maxSubArray(int[] nums) {\n        int maxSoFar = nums[0];\n        int currentMax = nums[0];\n        for (int i = 1; i < nums.length; i++) {\n            currentMax = Math.max(nums[i], currentMax + nums[i]);\n            maxSoFar = Math.max(maxSoFar, currentMax);\n        }\n        return maxSoFar;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int maxSubArray(const std::vector<int>& nums) {\n        if (nums.empty()) return 0; // Or throw an error\n        int maxSoFar = nums[0];\n        int currentMax = nums[0];\n        for (size_t i = 1; i < nums.size(); ++i) {\n            currentMax = std::max(nums[i], currentMax + nums[i]);\n            maxSoFar = std::max(maxSoFar, currentMax);\n        }\n        return maxSoFar;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M15",
+    "title": "Problema Medio 15: Anagrama Válido",
+    "description": "Dadas dos cadenas `s` y `t`, devuelve `true` si `t` es un anagrama de `s`, y `false` en caso contrario. Un anagrama es una palabra o frase formada reorganizando las letras de una palabra o frase diferente, típicamente usando todas las letras originales exactamente una vez.",
+    "examples": [
+      {"input": "s = \"anagram\", t = \"nagaram\"", "output": "true"},
+      {"input": "s = \"rat\", t = \"car\"", "output": "false"}
+    ],
+    "hints": [
+      "Las cadenas deben tener la misma longitud.",
+      "Puedes usar un mapa de hash (diccionario) para contar la frecuencia de cada caracter en ambas cadenas."
+    ],
+    "solutionJs": "function isAnagram(s, t) {\n  if (s.length !== t.length) return false;\n  const charCount = {};\n  for (let char of s) {\n    charCount[char] = (charCount[char] || 0) + 1;\n  }\n  for (let char of t) {\n    if (!charCount[char]) {\n      return false;\n    }\n    charCount[char]--;\n  }\n  return true;\n}",
+    "solutionPython": "from collections import Counter\ndef is_anagram(s, t):\n    if len(s) != len(t): return False\n    return Counter(s) == Counter(t)",
+    "solutionJava": "import java.util.HashMap;\nimport java.util.Map;\n\nclass Solution {\n    public boolean isAnagram(String s, String t) {\n        if (s.length() != t.length()) return false;\n        Map<Character, Integer> charCount = new HashMap<>();\n        for (char c : s.toCharArray()) {\n            charCount.put(c, charCount.getOrDefault(c, 0) + 1);\n        }\n        for (char c : t.toCharArray()) {\n            if (!charCount.containsKey(c) || charCount.get(c) == 0) {\n                return false;\n            }\n            charCount.put(c, charCount.get(c) - 1);\n        }\n        return true;\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    bool isAnagram(std::string s, std::string t) {\n        if (s.length() != t.length()) return false;\n        std::vector<int> charCount(26, 0);\n        for (char c : s) {\n            charCount[c - 'a']++;\n        }\n        for (char c : t) {\n            charCount[c - 'a']--;\n            if (charCount[c - 'a'] < 0) {\n                return false;\n            }\n        }\n        return true;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M16",
+    "title": "Problema Medio 16: Intersección de Dos Arrays",
+    "description": "Dados dos arrays de enteros `nums1` y `nums2`, devuelve un array de su intersección. Cada elemento en el resultado debe aparecer tantas veces como aparezca en ambos arrays y puedes devolver el resultado en cualquier orden.",
+    "examples": [
+      {"input": "nums1 = [1, 2, 2, 1], nums2 = [2, 2]", "output": "[2, 2]"},
+      {"input": "nums1 = [4, 9, 5], nums2 = [9, 4, 9, 8, 4]", "output": "[4, 9] (o [9, 4])"}
+    ],
+    "hints": [
+      "Puedes usar un mapa de hash para contar las frecuencias de los elementos en `nums1`.",
+      "Luego, itera sobre `nums2` y agrega elementos a tu resultado si están en el mapa y su cuenta es mayor que cero."
+    ],
+    "solutionJs": "function intersect(nums1, nums2) {\n  const freqMap = {};\n  for (let num of nums1) {\n    freqMap[num] = (freqMap[num] || 0) + 1;\n  }\n\n  const result = [];\n  for (let num of nums2) {\n    if (freqMap[num] > 0) {\n      result.push(num);\n      freqMap[num]--;\n    }\n  }\n  return result;\n}",
+    "solutionPython": "from collections import Counter\ndef intersect(nums1, nums2):\n    counts1 = Counter(nums1)\n    counts2 = Counter(nums2)\n    result = []\n    for num in counts1:\n        if num in counts2:\n            result.extend([num] * min(counts1[num], counts2[num]))\n    return result",
+    "solutionJava": "import java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\nclass Solution {\n    public int[] intersect(int[] nums1, int[] nums2) {\n        Map<Integer, Integer> freqMap = new HashMap<>();\n        for (int num : nums1) {\n            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);\n        }\n\n        List<Integer> resultList = new ArrayList<>();\n        for (int num : nums2) {\n            if (freqMap.containsKey(num) && freqMap.get(num) > 0) {\n                resultList.add(num);\n                freqMap.put(num, freqMap.get(num) - 1);\n            }\n        }\n\n        int[] result = new int[resultList.size()];\n        for (int i = 0; i < resultList.size(); i++) {\n            result[i] = resultList.get(i);\n        }\n        return result;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <map>\n#include <algorithm>\n\nclass Solution {\npublic:\n    std::vector<int> intersect(std::vector<int>& nums1, std::vector<int>& nums2) {\n        std::map<int, int> freqMap;\n        for (int num : nums1) {\n            freqMap[num]++;\n        }\n\n        std::vector<int> result;\n        for (int num : nums2) {\n            if (freqMap.count(num) && freqMap[num] > 0) {\n                result.push_back(num);\n                freqMap[num]--;\n            }\n        }\n        return result;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M17",
+    "title": "Problema Medio 17: Único Número",
+    "description": "Dado un array no vacío de enteros `nums`, cada elemento aparece dos veces excepto uno. Encuentra ese único.",
+    "examples": [
+      {"input": "nums = [2, 2, 1]", "output": "1"},
+      {"input": "nums = [4, 1, 2, 1, 2]", "output": "4"}
+    ],
+    "hints": [
+      "Puedes usar la propiedad XOR: `a ^ a = 0` y `a ^ 0 = a`.",
+      "XOR de todos los elementos dará como resultado el número único."
+    ],
+    "solutionJs": "function singleNumber(nums) {\n  let result = 0;\n  for (let num of nums) {\n    result ^= num;\n  }\n  return result;\n}",
+    "solutionPython": "def single_number(nums):\n    res = 0\n    for num in nums:\n        res ^= num\n    return res",
+    "solutionJava": "class Solution {\n    public int singleNumber(int[] nums) {\n        int result = 0;\n        for (int num : nums) {\n            result ^= num;\n        }\n        return result;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <numeric>\n\nclass Solution {\npublic:\n    int singleNumber(std::vector<int>& nums) {\n        int result = 0;\n        for (int num : nums) {\n            result ^= num;\n        }\n        return result;\n        // Or using accumulate from <numeric>\n        // return std::accumulate(nums.begin(), nums.end(), 0, std::bit_xor<int>());\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M18",
+    "title": "Problema Medio 18: Escalera (Climbing Stairs)",
+    "description": "Tienes que subir `n` escalones. Cada vez puedes subir 1 o 2 escalones. ¿De cuántas maneras distintas puedes subir a la cima?",
+    "examples": [
+      {"input": "n = 2", "output": "2 (1+1, 2)"},
+      {"input": "n = 3", "output": "3 (1+1+1, 1+2, 2+1)"}
+    ],
+    "hints": [
+      "Este es un problema clásico de programación dinámica.",
+      "Nota que el número de maneras de llegar al escalón `i` es la suma de las maneras de llegar al escalón `i-1` y al escalón `i-2`."
+    ],
+    "solutionJs": "function climbStairs(n) {\n  if (n <= 2) return n;\n  let dp = new Array(n + 1);\n  dp[1] = 1;\n  dp[2] = 2;\n  for (let i = 3; i <= n; i++) {\n    dp[i] = dp[i - 1] + dp[i - 2];\n  }\n  return dp[n];\n}",
+    "solutionPython": "def climb_stairs(n):\n    if n <= 2: return n\n    dp = [0] * (n + 1)\n    dp[1] = 1\n    dp[2] = 2\n    for i in range(3, n + 1):\n        dp[i] = dp[i - 1] + dp[i - 2]\n    return dp[n]",
+    "solutionJava": "class Solution {\n    public int climbStairs(int n) {\n        if (n <= 2) return n;\n        int[] dp = new int[n + 1];\n        dp[1] = 1;\n        dp[2] = 2;\n        for (int i = 3; i <= n; i++) {\n            dp[i] = dp[i - 1] + dp[i - 2];\n        }\n        return dp[n];\n    }\n}",
+    "solutionCpp": "#include <vector>\n\nclass Solution {\npublic:\n    int climbStairs(int n) {\n        if (n <= 2) return n;\n        std::vector<int> dp(n + 1);\n        dp[1] = 1;\n        dp[2] = 2;\n        for (int i = 3; i <= n; ++i) {\n            dp[i] = dp[i - 1] + dp[i - 2];\n        }\n        return dp[n];\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M19",
+    "title": "Problema Medio 19: Merge Sorted Arrays",
+    "description": "Dados dos arrays de enteros `nums1` y `nums2`, ordenados en orden no decreciente, y dos enteros `m` y `n`, que representan el número de elementos en `nums1` y `nums2` respectivamente. Fusiona `nums1` y `nums2` en un solo array ordenado (no decreciente). La matriz final no debe ser devuelta por la función, sino que debe almacenarse dentro de la matriz `nums1`. Para acomodar esto, `nums1` tiene una longitud de `m + n`, donde los primeros `m` elementos denotan los elementos que deben fusionarse y los últimos `n` elementos son `0` y deben ignorarse. `nums2` tiene una longitud de `n`.",
+    "examples": [
+      {"input": "nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3", "output": "[1,2,2,3,5,6]"},
+      {"input": "nums1 = [1], m = 1, nums2 = [], n = 0", "output": "[1]"}
+    ],
+    "hints": [
+      "Comienza a fusionar desde el final de los arrays para evitar sobrescribir elementos importantes.",
+      "Usa tres punteros: uno para el final de `nums1` (destino), uno para el final de los elementos válidos de `nums1` y otro para el final de `nums2`."
+    ],
+    "solutionJs": "function merge(nums1, m, nums2, n) {\n  let p1 = m - 1; // Pointer for nums1's real elements\n  let p2 = n - 1; // Pointer for nums2\n  let p = m + n - 1; // Pointer for the merged array (end of nums1)\n\n  while (p1 >= 0 && p2 >= 0) {\n    if (nums1[p1] > nums2[p2]) {\n      nums1[p] = nums1[p1];\n      p1--;\n    } else {\n      nums1[p] = nums2[p2];\n      p2--;\n    }\n    p--;\n  }\n\n  // If there are remaining elements in nums2, copy them\n  while (p2 >= 0) {\n    nums1[p] = nums2[p2];\n    p2--;\n    p--;\n  }\n  return nums1; // For testing, nums1 is modified in-place\n}",
+    "solutionPython": "def merge(nums1, m, nums2, n):\n    p1 = m - 1\n    p2 = n - 1\n    p = m + n - 1\n\n    while p1 >= 0 and p2 >= 0:\n        if nums1[p1] > nums2[p2]:\n            nums1[p] = nums1[p1]\n            p1 -= 1\n        else:\n            nums1[p] = nums2[p2]\n            p2 -= 1\n        p -= 1\n    \n    while p2 >= 0:\n        nums1[p] = nums2[p2]\n        p2 -= 1\n        p -= 1",
+    "solutionJava": "class Solution {\n    public void merge(int[] nums1, int m, int[] nums2, int n) {\n        int p1 = m - 1; // Pointer for nums1's real elements\n        int p2 = n - 1; // Pointer for nums2\n        int p = m + n - 1; // Pointer for the merged array (end of nums1)\n\n        while (p1 >= 0 && p2 >= 0) {\n            if (nums1[p1] > nums2[p2]) {\n                nums1[p] = nums1[p1];\n                p1--;\n            } else {\n                nums1[p] = nums2[p2];\n                p2--;\n            }\n            p--;\n        }\n\n        while (p2 >= 0) {\n            nums1[p] = nums2[p2];\n            p2--;\n            p--;\n        }\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n) {\n        int p1 = m - 1; // Pointer for nums1's real elements\n        int p2 = n - 1; // Pointer for nums2\n        int p = m + n - 1; // Pointer for the merged array (end of nums1)\n\n        while (p1 >= 0 && p2 >= 0) {\n            if (nums1[p1] > nums2[p2]) {\n                nums1[p] = nums1[p1];\n                p1--;\n            } else {\n                nums1[p] = nums2[p2];\n                p2--;\n            }\n            p--;\n        }\n\n        while (p2 >= 0) {\n            nums1[p] = nums2[p2];\n            p2--;\n            p--;\n        }\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M20",
+    "title": "Problema Medio 20: Contar Frecuencia de Caracteres",
+    "description": "Dada una cadena, devuelve un objeto/mapa que contenga la frecuencia de cada caracter en la cadena.",
+    "examples": [
+      {"input": "cadena = \"hello\"", "output": "{'h': 1, 'e': 1, 'l': 2, 'o': 1}"},
+      {"input": "cadena = \"programming\"", "output": "{'p': 1, 'r': 2, 'o': 1, 'g': 2, 'a': 1, 'm': 2, 'i': 1, 'n': 1}"}
+    ],
+    "hints": [
+      "Puedes inicializar un objeto o mapa vacío.",
+      "Itera sobre la cadena y para cada caracter, incrementa su contador en el objeto/mapa."
+    ],
+    "solutionJs": "function charFrequency(str) {\n  const freq = {};\n  for (let char of str) {\n    freq[char] = (freq[char] || 0) + 1;\n  }\n  return freq;\n}",
+    "solutionPython": "from collections import Counter\ndef char_frequency(s):\n    return Counter(s)",
+    "solutionJava": "import java.util.HashMap;\nimport java.util.Map;\n\nclass Solution {\n    public Map<Character, Integer> charFrequency(String str) {\n        Map<Character, Integer> freq = new HashMap<>();\n        for (char c : str.toCharArray()) {\n            freq.put(c, freq.getOrDefault(c, 0) + 1);\n        }\n        return freq;\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <map>\n\nclass Solution {\npublic:\n    std::map<char, int> charFrequency(const std::string& str) {\n        std::map<char, int> freq;\n        for (char c : str) {\n            freq[c]++;\n        }\n        return freq;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M21",
+    "title": "Problema Medio 21: Eliminar Elemento",
+    "description": "Dado un array `nums` y un valor `val`, elimina todas las ocurrencias de `val` en `nums` en su lugar. El orden de los elementos puede cambiarse. Devuelve el número de elementos que no son iguales a `val`.",
+    "examples": [
+      {"input": "nums = [3, 2, 2, 3], val = 3", "output": "2 (nums = [2, 2, _, _])"},
+      {"input": "nums = [0, 1, 2, 2, 3, 0, 4, 2], val = 2", "output": "5 (nums = [0, 1, 3, 0, 4, _, _, _])"}
+    ],
+    "hints": [
+      "Puedes usar dos punteros, uno para iterar y otro para la posición de escritura."
+    ],
+    "solutionJs": "function removeElement(nums, val) {\n  let k = 0; // Pointer for elements not equal to val\n  for (let i = 0; i < nums.length; i++) {\n    if (nums[i] !== val) {\n      nums[k] = nums[i];\n      k++;\n    }\n  }\n  return k;\n}",
+    "solutionPython": "def remove_element(nums, val):\n    k = 0\n    for i in range(len(nums)):\n        if nums[i] != val:\n            nums[k] = nums[i]\n            k += 1\n    return k",
+    "solutionJava": "class Solution {\n    public int removeElement(int[] nums, int val) {\n        int k = 0;\n        for (int i = 0; i < nums.length; i++) {\n            if (nums[i] != val) {\n                nums[k] = nums[i];\n                k++;\n            }\n        }\n        return k;\n    }\n}",
+    "solutionCpp": "#include <vector>\n\nclass Solution {\npublic:\n    int removeElement(std::vector<int>& nums, int val) {\n        int k = 0;\n        for (int i = 0; i < nums.size(); ++i) {\n            if (nums[i] != val) {\n                nums[k] = nums[i];\n                k++;\n            }\n        }\n        return k;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M22",
+    "title": "Problema Medio 22: Buscar Insertar Posición",
+    "description": "Dado un array ordenado de enteros distintos y un valor objetivo, devuelve el índice si se encuentra el objetivo. Si no, devuelve el índice donde se insertaría si se mantuviera el orden.",
+    "examples": [
+      {"input": "nums = [1, 3, 5, 6], target = 5", "output": "2"},
+      {"input": "nums = [1, 3, 5, 6], target = 2", "output": "1"},
+      {"input": "nums = [1, 3, 5, 6], target = 7", "output": "4"}
+    ],
+    "hints": [
+      "Este problema puede resolverse usando búsqueda binaria.",
+      "Si el objetivo no se encuentra, el bucle de búsqueda binaria terminará con el puntero 'low' en la posición de inserción correcta."
+    ],
+    "solutionJs": "function searchInsert(nums, target) {\n  let low = 0;\n  let high = nums.length - 1;\n\n  while (low <= high) {\n    let mid = Math.floor((low + high) / 2);\n    if (nums[mid] === target) {\n      return mid;\n    } else if (nums[mid] < target) {\n      low = mid + 1;\n    } else {\n      high = mid - 1;\n    }\n  }\n  return low;\n}",
+    "solutionPython": "def search_insert(nums, target):\n    left, right = 0, len(nums) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if nums[mid] == target:\n            return mid\n        elif nums[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return left",
+    "solutionJava": "class Solution {\n    public int searchInsert(int[] nums, int target) {\n        int low = 0;\n        int high = nums.length - 1;\n\n        while (low <= high) {\n            int mid = low + (high - low) / 2;\n            if (nums[mid] == target) {\n                return mid;\n            } else if (nums[mid] < target) {\n                low = mid + 1;\n            } else {\n                high = mid - 1;\n            }\n        }\n        return low;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int searchInsert(const std::vector<int>& nums, int target) {\n        int low = 0;\n        int high = nums.size() - 1;\n\n        while (low <= high) {\n            int mid = low + (high - low) / 2;\n            if (nums[mid] == target) {\n                return mid;\n            } else if (nums[mid] < target) {\n                low = mid + 1;\n            } else {\n                high = mid - 1;\n            }\n        }\n        return low;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M23",
+    "title": "Problema Medio 23: Suma de Números del 1 al N",
+    "description": "Calcula la suma de todos los números enteros positivos desde 1 hasta `n` (inclusive).",
+    "examples": [
+      {"input": "n = 5", "output": "15 (1 + 2 + 3 + 4 + 5)"},
+      {"input": "n = 1", "output": "1"}
+    ],
+    "hints": [
+      "Puedes usar un bucle for.",
+      "También hay una fórmula matemática para esto: `n * (n + 1) / 2`."
+    ],
+    "solutionJs": "function sumUpToN(n) {\n  let sum = 0;\n  for (let i = 1; i <= n; i++) {\n    sum += i;\n  }\n  return sum; // Or return n * (n + 1) / 2;\n}",
+    "solutionPython": "def sum_up_to_n(n):\n    return n * (n + 1) // 2",
+    "solutionJava": "class Solution {\n    public int sumUpToN(int n) {\n        return n * (n + 1) / 2;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int sumUpToN(int n) {\n        return n * (n + 1) / 2;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M24",
+    "title": "Problema Medio 24: Verificar si un Número es Potencia de Dos",
+    "description": "Dada un entero `n`, devuelve `true` si es una potencia de dos. De lo contrario, devuelve `false`. Un entero `n` es una potencia de dos si existe un entero `x` tal que `n == 2^x`.",
+    "examples": [
+      {"input": "n = 1", "output": "true (2^0)"},
+      {"input": "n = 16", "output": "true (2^4)"},
+      {"input": "n = 3", "output": "false"}
+    ],
+    "hints": [
+      "Las potencias de dos tienen una propiedad de bits única: solo un bit está establecido en 1.",
+      "Puedes usar la operación `n & (n - 1)`."
+    ],
+    "solutionJs": "function isPowerOfTwo(n) {\n  return n > 0 && (n & (n - 1)) === 0;\n}",
+    "solutionPython": "def is_power_of_two(n):\n    return n > 0 and (n & (n - 1)) == 0",
+    "solutionJava": "class Solution {\n    public boolean isPowerOfTwo(int n) {\n        return n > 0 && (n & (n - 1)) == 0;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    bool isPowerOfTwo(int n) {\n        return n > 0 && (n & (n - 1)) == 0;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M25",
+    "title": "Problema Medio 25: Revertir Dígitos de un Entero",
+    "description": "Dada un entero `x`, devuelve `x` con sus dígitos invertidos. Si invertir `x` hace que el valor exceda el rango de enteros con signo de 32 bits `[-2^31, 2^31 - 1]`, devuelve 0.",
+    "examples": [
+      {"input": "x = 123", "output": "321"},
+      {"input": "x = -123", "output": "-321"},
+      {"input": "x = 120", "output": "21"}
+    ],
+    "hints": [
+      "Puedes extraer el último dígito usando el operador módulo (`%`).",
+      "Para construir el número invertido, multiplica el resultado actual por 10 y suma el nuevo dígito.",
+      "Ten en cuenta los desbordamientos."
+    ],
+    "solutionJs": "function reverseInteger(x) {\n  let sign = x < 0 ? -1 : 1;\n  let num = Math.abs(x);\n  let reversed = 0;\n\n  const MAX_INT = 2147483647;\n  const MIN_INT = -2147483648;\n\n  while (num > 0) {\n    let digit = num % 10;\n    num = Math.floor(num / 10);\n\n    if (reversed > Math.floor(MAX_INT / 10) || (reversed === Math.floor(MAX_INT / 10) && digit > 7)) return 0;\n    if (reversed < Math.ceil(MIN_INT / 10) || (reversed === Math.ceil(MIN_INT / 10) && digit < -8)) return 0; // For negative overflow\n\n    reversed = reversed * 10 + digit;\n  }\n\n  const finalResult = reversed * sign;\n  if (finalResult > MAX_INT || finalResult < MIN_INT) {\n    return 0;\n  }\n\n  return finalResult;\n}",
+    "solutionPython": "def reverse_integer(x):\n    sign = -1 if x < 0 else 1\n    num = abs(x)\n    reversed_num = 0\n    \n    INT_MAX = 2**31 - 1\n    INT_MIN = -2**31\n\n    while num > 0:\n        digit = num % 10\n        num //= 10\n\n        if reversed_num > INT_MAX // 10 or (reversed_num == INT_MAX // 10 and digit > 7):\n            return 0\n        if reversed_num < INT_MIN // 10 or (reversed_num == INT_MIN // 10 and digit < -8):\n            return 0\n\n        reversed_num = reversed_num * 10 + digit\n\n    final_result = reversed_num * sign\n    if final_result > INT_MAX or final_result < INT_MIN:\n        return 0\n\n    return final_result",
+    "solutionJava": "class Solution {\n    public int reverse(int x) {\n        long reversed = 0;\n        while (x != 0) {\n            int digit = x % 10;\n            reversed = reversed * 10 + digit;\n            x /= 10;\n            if (reversed > Integer.MAX_VALUE || reversed < Integer.MIN_VALUE) {\n                return 0;\n            }\n        }\n        return (int) reversed;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int reverse(int x) {\n        long long reversed = 0;\n        while (x != 0) {\n            int digit = x % 10;\n            reversed = reversed * 10 + digit;\n            x /= 10;\n            if (reversed > INT_MAX || reversed < INT_MIN) {\n                return 0;\n            }\n        }\n        return (int) reversed;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M26",
+    "title": "Problema Medio 26: Raíz Cuadrada (sqrt(x))",
+    "description": "Dada un entero no negativo `x`, calcula y devuelve la raíz cuadrada entera de `x`. Dado que el valor de retorno es un entero, los decimales se truncan y solo se devuelve la parte entera.",
+    "examples": [
+      {"input": "x = 4", "output": "2"},
+      {"input": "x = 8", "output": "2 (porque sqrt(8) = 2.828... y se trunca a 2)"}
+    ],
+    "hints": [
+      "Puedes usar búsqueda binaria para encontrar la raíz cuadrada.",
+      "El rango de búsqueda será de 0 a `x` (o `x/2` para optimizar)."
+    ],
+    "solutionJs": "function mySqrt(x) {\n  if (x < 2) return x;\n  let low = 1;\n  let high = x;\n  let ans = 0;\n  while (low <= high) {\n    let mid = Math.floor(low + (high - low) / 2);\n    if (mid * mid === x) {\n      return mid;\n    } else if (mid * mid < x) {\n      ans = mid;\n      low = mid + 1;\n    } else {\n      high = mid - 1;\n    }\n  }\n  return ans;\n}",
+    "solutionPython": "def my_sqrt(x):\n    if x < 2: return x\n    left, right = 1, x // 2\n    ans = 0\n    while left <= right:\n        mid = (left + right) // 2\n        if mid * mid == x:\n            return mid\n        elif mid * mid < x:\n            ans = mid\n            left = mid + 1\n        else:\n            right = mid - 1\n    return ans",
+    "solutionJava": "class Solution {\n    public int mySqrt(int x) {\n        if (x < 2) return x;\n        int low = 1;\n        int high = x / 2;\n        int ans = 0;\n\n        while (low <= high) {\n            int mid = low + (high - low) / 2;\n            if ((long)mid * mid == x) {\n                return mid;\n            } else if ((long)mid * mid < x) {\n                ans = mid;\n                low = mid + 1;\n            } else {\n                high = mid - 1;\n            }\n        }\n        return ans;\n    }\n}",
+    "solutionCpp": "class Solution {\npublic:\n    int mySqrt(int x) {\n        if (x < 2) return x;\n        int low = 1;\n        int high = x / 2;\n        int ans = 0;\n\n        while (low <= high) {\n            int mid = low + (high - low) / 2;\n            // Use long to prevent overflow for mid*mid\n            if ((long long)mid * mid == x) {\n                return mid;\n            } else if ((long long)mid * mid < x) {\n                ans = mid;\n                low = mid + 1;\n            } else {\n                high = mid - 1;\n            }\n        }\n        return ans;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M27",
+    "title": "Problema Medio 27: Duplicados en Array",
+    "description": "Dado un array de enteros `nums` de longitud `n` donde todos los enteros están en el rango `[1, n]` y cada entero aparece una o dos veces, devuelve un array de todos los enteros que aparecen dos veces.",
+    "examples": [
+      {"input": "nums = [4, 3, 2, 7, 8, 2, 3, 1]", "output": "[2, 3]"},
+      {"input": "nums = [1, 1, 2]", "output": "[1]"}
+    ],
+    "hints": [
+      "Puedes usar un mapa de hash para contar la frecuencia de cada número.",
+      "Otro enfoque es modificar el array en su lugar usando el signo de los números para marcar los visitados."
+    ],
+    "solutionJs": "function findDuplicates(nums) {\n  const duplicates = [];\n  const seen = new Set();\n  for (let num of nums) {\n    if (seen.has(num)) {\n      duplicates.push(num);\n    } else {\n      seen.add(num);\n    }\n  }\n  return duplicates;\n}",
+    "solutionPython": "def find_duplicates(nums):\n    duplicates = []\n    seen = set()\n    for num in nums:\n        if num in seen:\n            duplicates.append(num)\n        else:\n            seen.add(num)\n    return duplicates",
+    "solutionJava": "import java.util.ArrayList;\nimport java.util.HashSet;\nimport java.util.List;\nimport java.util.Set;\n\nclass Solution {\n    public List<Integer> findDuplicates(int[] nums) {\n        List<Integer> duplicates = new ArrayList<>();\n        Set<Integer> seen = new HashSet<>();\n        for (int num : nums) {\n            if (seen.contains(num)) {\n                duplicates.add(num);\n            } else {\n                seen.add(num);\n            }\n        }\n        return duplicates;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <unordered_set>\n#include <algorithm>\n\nclass Solution {\npublic:\n    std::vector<int> findDuplicates(std::vector<int>& nums) {\n        std::vector<int> duplicates;\n        std::unordered_set<int> seen;\n        for (int num : nums) {\n            if (seen.count(num)) {\n                duplicates.push_back(num);\n            } else {\n                seen.insert(num);\n            }\n        }\n        return duplicates;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M28",
+    "title": "Problema Medio 28: Suma de Números Pares",
+    "description": "Dada una matriz de enteros `nums`, devuelve la suma de todos los números pares en la matriz.",
+    "examples": [
+      {"input": "nums = [1, 2, 3, 4, 5, 6]", "output": "12 (2 + 4 + 6)"},
+      {"input": "nums = [1, 3, 5]", "output": "0"}
+    ],
+    "hints": [
+      "Itera sobre el array y usa el operador módulo (`%`) para verificar si un número es par."
+    ],
+    "solutionJs": "function sumEvenNumbers(nums) {\n  let sum = 0;\n  for (let num of nums) {\n    if (num % 2 === 0) {\n      sum += num;\n    }\n  }\n  return sum;\n}",
+    "solutionPython": "def sum_even_numbers(nums):\n    total = 0\n    for num in nums:\n        if num % 2 == 0:\n            total += num\n    return total",
+    "solutionJava": "class Solution {\n    public int sumEvenNumbers(int[] nums) {\n        int sum = 0;\n        for (int num : nums) {\n            if (num % 2 == 0) {\n                sum += num;\n            }\n        }\n        return sum;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <numeric>\n\nclass Solution {\npublic:\n    int sumEvenNumbers(const std::vector<int>& nums) {\n        int sum = 0;\n        for (int num : nums) {\n            if (num % 2 == 0) {\n                sum += num;\n            }\n        }\n        return sum;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M29",
+    "title": "Problema Medio 29: Invertir Palabras en una Cadena",
+    "description": "Dada una frase, invierte el orden de las palabras en la frase. Las palabras están separadas por un solo espacio.",
+    "examples": [
+      {"input": "frase = \"hello world\"", "output": "\"world hello\""},
+      {"input": "frase = \"a good example\"", "output": "\"example good a\""}
+    ],
+    "hints": [
+      "Divide la cadena en palabras.",
+      "Invierte el array de palabras y únelo de nuevo con espacios."
+    ],
+    "solutionJs": "function reverseWords(s) {\n  return s.split(' ').reverse().join(' ');\n}",
+    "solutionPython": "def reverse_words(s):\n    return ' '.join(s.split(' ')[::-1])",
+    "solutionJava": "class Solution {\n    public String reverseWords(String s) {\n        String[] words = s.split(\" \");\n        StringBuilder reversedSentence = new StringBuilder();\n        for (int i = words.length - 1; i >= 0; i--) {\n            reversedSentence.append(words[i]);\n            if (i > 0) {\n                reversedSentence.append(\" \");\n            }\n        }\n        return reversedSentence.toString();\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <vector>\n#include <sstream>\n#include <algorithm>\n\nclass Solution {\npublic:\n    std::string reverseWords(std::string s) {\n        std::stringstream ss(s);\n        std::string word;\n        std::vector<std::string> words;\n\n        while (ss >> word) {\n            words.push_back(word);\n        }\n\n        std::reverse(words.begin(), words.end());\n\n        std::string result = \"\";\n        for (size_t i = 0; i < words.size(); ++i) {\n            result += words[i];\n            if (i < words.size() - 1) {\n                result += \" \";\n            }\n        }\n        return result;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "M30",
+    "title": "Problema Medio 30: Convertir Número Romano a Entero",
+    "description": "Dado una cadena que representa un número romano, conviértela a un entero.",
+    "examples": [
+      {"input": "s = \"III\"", "output": "3"},
+      {"input": "s = \"LVIII\"", "output": "58 (L = 50, V = 5, III = 3)"},
+      {"input": "s = \"MCMXCIV\"", "output": "1994 (M = 1000, CM = 900, XC = 90, IV = 4)"}
+    ],
+    "hints": [
+      "Usa un mapa para almacenar los valores de los caracteres romanos.",
+      "Itera la cadena de derecha a izquierda. Si el valor actual es menor que el valor del siguiente caracter, réstalo; de lo contrario, súmalo."
+    ],
+    "solutionJs": "function romanToInt(s) {\n  const romanMap = {\n    'I': 1,\n    'V': 5,\n    'X': 10,\n    'L': 50,\n    'C': 100,\n    'D': 500,\n    'M': 1000\n  };\n\n  let total = 0;\n  let prevValue = 0;\n\n  for (let i = s.length - 1; i >= 0; i--) {\n    const currentValue = romanMap[s[i]];\n    if (currentValue < prevValue) {\n      total -= currentValue;\n    } else {\n      total += currentValue;\n    }\n    prevValue = currentValue;\n  }\n  return total;\n}",
+    "solutionPython": "def roman_to_int(s):\n    roman_map = {\n        'I': 1, 'V': 5, 'X': 10, 'L': 50,\n        'C': 100, 'D': 500, 'M': 1000\n    }\n    total = 0\n    prev_value = 0\n\n    for char in reversed(s):\n        current_value = roman_map[char]\n        if current_value < prev_value:\n            total -= current_value\n        else:\n            total += current_value\n        prev_value = current_value\n    return total",
+    "solutionJava": "import java.util.HashMap;\nimport java.util.Map;\n\nclass Solution {\n    public int romanToInt(String s) {\n        Map<Character, Integer> romanMap = new HashMap<>();\n        romanMap.put('I', 1);\n        romanMap.put('V', 5);\n        romanMap.put('X', 10);\n        romanMap.put('L', 50);\n        romanMap.put('C', 100);\n        romanMap.put('D', 500);\n        romanMap.put('M', 1000);\n\n        int total = 0;\n        int prevValue = 0;\n\n        for (int i = s.length() - 1; i >= 0; i--) {\n            char c = s.charAt(i);\n            int currentValue = romanMap.get(c);\n\n            if (currentValue < prevValue) {\n                total -= currentValue;\n            } else {\n                total += currentValue;\n            }\n            prevValue = currentValue;\n        }\n        return total;\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <map>\n\nclass Solution {\npublic:\n    int romanToInt(std::string s) {\n        std::map<char, int> romanMap;\n        romanMap['I'] = 1;\n        romanMap['V'] = 5;\n        romanMap['X'] = 10;\n        romanMap['L'] = 50;\n        romanMap['C'] = 100;\n        romanMap['D'] = 500;\n        romanMap['M'] = 1000;\n\n        int total = 0;\n        int prevValue = 0;\n\n        for (int i = s.length() - 1; i >= 0; --i) {\n            int currentValue = romanMap[s[i]];\n            if (currentValue < prevValue) {\n                total -= currentValue;\n            } else {\n                total += currentValue;\n            }\n            prevValue = currentValue;\n        }\n        return total;\n    }\n};",
+    "difficulty": "Medio",
+    "score": 20
+  },
+  {
+    "id": "D01",
+    "title": "Problema Difícil 1: Suma de Dos Números en Lista Enlazada",
+    "description": "Se te dan dos listas enlazadas no vacías que representan dos enteros no negativos. Los dígitos se almacenan en orden inverso y cada uno de sus nodos contiene un solo dígito. Suma los dos números y devuelve la suma como una lista enlazada. Puedes asumir que los dos números no contienen ningún cero inicial, excepto el número 0 en sí.",
+    "examples": [
+      {"input": "l1 = [2,4,3], l2 = [5,6,4]", "output": "[7,0,8] (porque 342 + 465 = 807)"},
+      {"input": "l1 = [0], l2 = [0]", "output": "[0]"}
+    ],
+    "hints": [
+      "Recorre ambas listas enlazadas al mismo tiempo.",
+      "Usa una variable para almacenar el acarreo (carry) de la suma de dígitos."
+    ],
+    "solutionJs": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n * this.val = (val===undefined ? 0 : val)\n * this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} l1\n * @param {ListNode} l2\n * @return {ListNode}\n */\nfunction addTwoNumbers(l1, l2) {\n  let dummyHead = new ListNode(0);\n  let current = dummyHead;\n  let carry = 0;\n\n  while (l1 !== null || l2 !== null || carry !== 0) {\n    let val1 = (l1 !== null) ? l1.val : 0;\n    let val2 = (l2 !== null) ? l2.val : 0;\n\n    let sum = val1 + val2 + carry;\n    carry = Math.floor(sum / 10);\n    current.next = new ListNode(sum % 10);\n    current = current.next;\n\n    if (l1 !== null) l1 = l1.next;\n    if (l2 !== null) l2 = l2.next;\n  }\n\n  return dummyHead.next;\n}",
+    "solutionPython": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\ndef add_two_numbers(l1, l2):\n    dummy_head = ListNode(0)\n    current = dummy_head\n    carry = 0\n\n    while l1 or l2 or carry:\n        val1 = l1.val if l1 else 0\n        val2 = l2.val if l2 else 0\n\n        total_sum = val1 + val2 + carry\n        carry = total_sum // 10\n        current.next = ListNode(total_sum % 10)\n        current = current.next\n\n        l1 = l1.next if l1 else None\n        l2 = l2.next if l2 else None\n\n    return dummy_head.next",
+    "solutionJava": "/**\n * Definition for singly-linked list.\n * public class ListNode {\n * int val;\n * ListNode next;\n * ListNode() {}\n * ListNode(int val) { this.val = val; }\n * ListNode(int val, ListNode next) { this.val = val; this.next = next; }\n * }\n */\nclass Solution {\n    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {\n        ListNode dummyHead = new ListNode(0);\n        ListNode current = dummyHead;\n        int carry = 0;\n\n        while (l1 != null || l2 != null || carry != 0) {\n            int val1 = (l1 != null) ? l1.val : 0;\n            int val2 = (l2 != null) ? l2.val : 0;\n\n            int sum = val1 + val2 + carry;\n            carry = sum / 10;\n            current.next = new ListNode(sum % 10);\n            current = current.next;\n\n            if (l1 != null) l1 = l1.next;\n            if (l2 != null) l2 = l2.next;\n        }\n\n        return dummyHead.next;\n    }\n}",
+    "solutionCpp": "/**\n * Definition for singly-linked list.\n * struct ListNode {\n * int val;\n * ListNode *next;\n * ListNode() : val(0), next(nullptr) {}\n * ListNode(int x) : val(x), next(nullptr) {}\n * ListNode(int x, ListNode *next) : val(x), next(next) {}\n * };\n */\nclass Solution {\npublic:\n    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {\n        ListNode* dummyHead = new ListNode(0);\n        ListNode* current = dummyHead;\n        int carry = 0;\n\n        while (l1 != nullptr || l2 != nullptr || carry != 0) {\n            int val1 = (l1 != nullptr) ? l1->val : 0;\n            int val2 = (l2 != nullptr) ? l2->val : 0;\n\n            int sum = val1 + val2 + carry;\n            carry = sum / 10;\n            current->next = new ListNode(sum % 10);\n            current = current->next;\n\n            if (l1 != nullptr) l1 = l1->next;\n            if (l2 != nullptr) l2 = l2->next;\n        }\n\n        return dummyHead->next;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D02",
+    "title": "Problema Difícil 2: Mediana de Dos Arrays Ordenados",
+    "description": "Dados dos arrays ordenados `nums1` y `nums2` de tamaño `m` y `n` respectivamente, devuelve la mediana de los dos arrays ordenados combinados. El tiempo de ejecución de su algoritmo debería ser O(log (m+n)).",
+    "examples": [
+      {"input": "nums1 = [1,3], nums2 = [2]", "output": "2.0"},
+      {"input": "nums1 = [1,2], nums2 = [3,4]", "output": "2.5 ((2+3)/2)"}
+    ],
+    "hints": [
+      "Este es un problema clásico que se resuelve con búsqueda binaria, buscando la partición correcta.",
+      "El objetivo es encontrar la partición que divida los elementos combinados en dos mitades iguales."
+    ],
+    "solutionJs": "function findMedianSortedArrays(nums1, nums2) {\n  const merged = [...nums1, ...nums2].sort((a, b) => a - b);\n  const mid = Math.floor(merged.length / 2);\n\n  if (merged.length % 2 === 0) {\n    return (merged[mid - 1] + merged[mid]) / 2;\n  } else {\n    return merged[mid];\n  }\n}",
+    "solutionPython": "def find_median_sorted_arrays(nums1, nums2):\n    # This simple solution does not meet the O(log(m+n)) requirement but provides a correct result.\n    # The actual O(log(m+n)) solution involves binary search on partitions.\n    merged = sorted(nums1 + nums2)\n    n = len(merged)\n    if n % 2 == 0:\n        return (merged[n // 2 - 1] + merged[n // 2]) / 2\n    else:\n        return float(merged[n // 2])",
+    "solutionJava": "class Solution {\n    public double findMedianSortedArrays(int[] nums1, int[] nums2) {\n        // This simple solution does not meet the O(log(m+n)) requirement\n        // The actual O(log(m+n)) solution involves binary search on partitions.\n        int[] merged = new int[nums1.length + nums2.length];\n        System.arraycopy(nums1, 0, merged, 0, nums1.length);\n        System.arraycopy(nums2, 0, merged, nums1.length, nums2.length);\n        Arrays.sort(merged);\n\n        int n = merged.length;\n        if (n % 2 == 0) {\n            return (double) (merged[n / 2 - 1] + merged[n / 2]) / 2;\n        } else {\n            return (double) merged[n / 2];\n        }\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) {\n        // This simple solution does not meet the O(log(m+n)) requirement\n        // The actual O(log(m+n)) solution involves binary search on partitions.\n        std::vector<int> merged;\n        merged.reserve(nums1.size() + nums2.size());\n        merged.insert(merged.end(), nums1.begin(), nums1.end());\n        merged.insert(merged.end(), nums2.begin(), nums2.end());\n        std::sort(merged.begin(), merged.end());\n\n        int n = merged.size();\n        if (n % 2 == 0) {\n            return (static_cast<double>(merged[n / 2 - 1]) + merged[n / 2]) / 2.0;\n        } else {\n            return static_cast<double>(merged[n / 2]);\n        }\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D03",
+    "title": "Problema Difícil 3: Substring más Largo Sin Caracteres Repetidos",
+    "description": "Dada una cadena `s`, encuentra la longitud del substring más largo sin caracteres que se repitan.",
+    "examples": [
+      {"input": "s = \"abcabcbb\"", "output": "3 (porque \"abc\" es el substring más largo sin caracteres que se repitan)"},
+      {"input": "s = \"bbbbb\"", "output": "1 (porque \"b\")"}
+    ],
+    "hints": [
+      "Puedes usar una ventana deslizante con un conjunto (Set) o un mapa de hash para rastrear los caracteres en la ventana actual.",
+      "Cuando encuentres un caracter repetido, 'encoge' la ventana desde la izquierda hasta que el caracter repetido ya no esté en la ventana."
+    ],
+    "solutionJs": "function lengthOfLongestSubstring(s) {\n  let maxLength = 0;\n  let left = 0;\n  const charSet = new Set();\n\n  for (let right = 0; right < s.length; right++) {\n    while (charSet.has(s[right])) {\n      charSet.delete(s[left]);\n      left++;\n    }\n    charSet.add(s[right]);\n    maxLength = Math.max(maxLength, right - left + 1);\n  }\n  return maxLength;\n}",
+    "solutionPython": "def length_of_longest_substring(s):\n    max_length = 0\n    left = 0\n    char_set = set()\n\n    for right in range(len(s)):\n        while s[right] in char_set:\n            char_set.remove(s[left])\n            left += 1\n        char_set.add(s[right])\n        max_length = max(max_length, right - left + 1)\n    return max_length",
+    "solutionJava": "import java.util.HashSet;\nimport java.util.Set;\n\nclass Solution {\n    public int lengthOfLongestSubstring(String s) {\n        int maxLength = 0;\n        int left = 0;\n        Set<Character> charSet = new HashSet<>();\n\n        for (int right = 0; right < s.length(); right++) {\n            while (charSet.contains(s.charAt(right))) {\n                charSet.remove(s.charAt(left));\n                left++;\n            }\n            charSet.add(s.charAt(right));\n            maxLength = Math.max(maxLength, right - left + 1);\n        }\n        return maxLength;\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <unordered_set>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int lengthOfLongestSubstring(std::string s) {\n        int maxLength = 0;\n        int left = 0;\n        std::unordered_set<char> charSet;\n\n        for (int right = 0; right < s.length(); ++right) {\n            while (charSet.count(s[right])) {\n                charSet.erase(s[left]);\n                left++;\n            }\n            charSet.insert(s[right]);\n            maxLength = std::max(maxLength, right - left + 1);\n        }\n        return maxLength;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D04",
+    "title": "Problema Difícil 4: Longest Palindromic Substring",
+    "description": "Dada una cadena `s`, devuelve el substring palíndromo más largo en `s`.",
+    "examples": [
+      {"input": "s = \"babad\"", "output": "\"bab\" (o \"aba\")"},
+      {"input": "s = \"cbbd\"", "output": "\"bb\""}
+    ],
+    "hints": [
+      "Puedes expandirte desde el centro. Para cada caracter (y también entre caracteres), trata de expandirte para encontrar el palíndromo más largo posible.",
+      "Considera casos de palíndromos de longitud impar y par."
+    ],
+    "solutionJs": "function longestPalindrome(s) {\n  if (s.length < 1) return '';\n\n  let start = 0;\n  let end = 0;\n\n  function expandAroundCenter(left, right) {\n    while (left >= 0 && right < s.length && s[left] === s[right]) {\n      left--;\n      right++;\n    }\n    return right - left - 1;\n  }\n\n  for (let i = 0; i < s.length; i++) {\n    const len1 = expandAroundCenter(i, i); // Odd length palindrome\n    const len2 = expandAroundCenter(i, i + 1); // Even length palindrome\n    const len = Math.max(len1, len2);\n\n    if (len > (end - start + 1)) {\n      start = i - Math.floor((len - 1) / 2);\n      end = i + Math.floor(len / 2);\n    }\n  }\n  return s.substring(start, end + 1);\n}",
+    "solutionPython": "def longest_palindrome(s):\n    if not s: return \"\"\n\n    start, end = 0, 0\n\n    def expand_around_center(left, right):\n        while left >= 0 and right < len(s) and s[left] == s[right]:\n            left -= 1\n            right += 1\n        return right - left - 1\n\n    for i in range(len(s)):\n        len1 = expand_around_center(i, i)  # Odd length palindrome\n        len2 = expand_around_center(i, i + 1)  # Even length palindrome\n        current_len = max(len1, len2)\n\n        if current_len > (end - start + 1):\n            start = i - (current_len - 1) // 2\n            end = i + current_len // 2\n\n    return s[start : end + 1]",
+    "solutionJava": "class Solution {\n    public String longestPalindrome(String s) {\n        if (s == null || s.length() < 1) return \"\";\n        int start = 0, end = 0;\n\n        for (int i = 0; i < s.length(); i++) {\n            int len1 = expandAroundCenter(s, i, i);\n            int len2 = expandAroundCenter(s, i, i + 1);\n            int len = Math.max(len1, len2);\n            if (len > end - start + 1) {\n                start = i - (len - 1) / 2;\n                end = i + len / 2;\n            }\n        }\n        return s.substring(start, end + 1);\n    }\n\n    private int expandAroundCenter(String s, int left, int right) {\n        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {\n            left--;\n            right++;\n        }\n        return right - left - 1;\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <algorithm>\n\nclass Solution {\npublic:\n    std::string longestPalindrome(std::string s) {\n        if (s.empty()) return \"\";\n\n        int start = 0;\n        int maxLength = 1;\n\n        auto expandAroundCenter = [&](int left, int right) {\n            while (left >= 0 && right < s.length() && s[left] == s[right]) {\n                left--;\n                right++;\n            }\n            return right - left - 1;\n        };\n\n        for (int i = 0; i < s.length(); ++i) {\n            int len1 = expandAroundCenter(i, i);     // Odd length palindromes\n            int len2 = expandAroundCenter(i, i + 1); // Even length palindromes\n            int len = std::max(len1, len2);\n\n            if (len > maxLength) {\n                maxLength = len;\n                start = i - (len - 1) / 2;\n            }\n        }\n        return s.substr(start, maxLength);\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D05",
+    "title": "Problema Difícil 5: Invertir Nodos en Grupos de K",
+    "description": "Dada la cabecera de una lista enlazada, invierte los nodos de la lista en grupos de `k` y devuelve la cabecera de la lista modificada.",
+    "examples": [
+      {"input": "head = [1,2,3,4,5], k = 2", "output": "[2,1,4,3,5]"},
+      {"input": "head = [1,2,3,4,5], k = 3", "output": "[3,2,1,4,5]"}
+    ],
+    "hints": [
+      "Este problema a menudo se resuelve de forma recursiva o iterativa con punteros cuidadosamente gestionados.",
+      "Necesitas una función auxiliar para invertir una sublista de `k` nodos."
+    ],
+    "solutionJs": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n * this.val = (val===undefined ? 0 : val)\n * this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @param {number} k\n * @return {ListNode}\n */\nfunction reverseKGroup(head, k) {\n  if (!head || k === 1) return head;\n\n  let dummy = new ListNode(0);\n  dummy.next = head;\n\n  let prevGroupEnd = dummy;\n  let current = head;\n\n  while (current) {\n    let count = 0;\n    let groupStart = current;\n    // Check if there are k nodes left in the current group\n    while (current && count < k) {\n      current = current.next;\n      count++;\n    }\n\n    if (count === k) {\n      // Reverse the group\n      let reversedHead = reverseList(groupStart, k);\n      // Connect the previous group end to the new head of the reversed group\n      prevGroupEnd.next = reversedHead;\n      // Update prevGroupEnd to be the end of the reversed group (which was groupStart)\n      prevGroupEnd = groupStart;\n    } else {\n      // Less than k nodes, no need to reverse, just connect the remaining part\n      prevGroupEnd.next = groupStart;\n      break;\n    }\n  }\n\n  return dummy.next;\n}\n\nfunction reverseList(head, k) {\n  let prev = null;\n  let current = head;\n  let count = 0;\n  while (current && count < k) {\n    let nextTemp = current.next;\n    current.next = prev;\n    prev = current;\n    current = nextTemp;\n    count++;\n  }\n  // After reversing, 'head' is now the tail of the reversed group, and 'current' is the head of the next group.\n  // 'prev' is the new head of the reversed group.\n  head.next = current; // Connect the tail of the reversed group to the next group\n  return prev;\n}",
+    "solutionPython": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\n\ndef reverse_k_group(head, k):\n    if not head or k == 1: return head\n\n    dummy = ListNode(0)\n    dummy.next = head\n\n    prev_group_end = dummy\n    current = head\n\n    while current:\n        count = 0\n        group_start = current\n        # Check if there are k nodes left in the current group\n        temp = current\n        while temp and count < k:\n            temp = temp.next\n            count += 1\n        \n        if count == k:\n            # Reverse the group\n            prev = None\n            curr_reverse = group_start\n            for _ in range(k):\n                next_temp = curr_reverse.next\n                curr_reverse.next = prev\n                prev = curr_reverse\n                curr_reverse = next_temp\n            \n            # Connect the previous group end to the new head of the reversed group\n            prev_group_end.next = prev\n            # Update prev_group_end to be the end of the reversed group (which was group_start)\n            prev_group_end = group_start\n            # Move current to the head of the next group\n            current = curr_reverse\n        else:\n            # Less than k nodes, no need to reverse, just connect the remaining part\n            prev_group_end.next = group_start\n            break\n\n    return dummy.next",
+    "solutionJava": "/**\n * Definition for singly-linked list.\n * public class ListNode {\n * int val;\n * ListNode next;\n * ListNode() {}\n * ListNode(int val) { this.val = val; }\n * ListNode(int val, ListNode next) { this.val = val; this.next = next; }\n * }\n */\nclass Solution {\n    public ListNode reverseKGroup(ListNode head, int k) {\n        if (head == null || k == 1) return head;\n\n        ListNode dummy = new ListNode(0);\n        dummy.next = head;\n\n        ListNode prevGroupEnd = dummy;\n        ListNode current = head;\n\n        while (current != null) {\n            int count = 0;\n            ListNode groupStart = current;\n            ListNode temp = current;\n            // Check if there are k nodes left in the current group\n            while (temp != null && count < k) {\n                temp = temp.next;\n                count++;\n            }\n\n            if (count == k) {\n                // Reverse the group\n                ListNode prev = null;\n                ListNode currReverse = groupStart;\n                for (int i = 0; i < k; i++) {\n                    ListNode nextTemp = currReverse.next;\n                    currReverse.next = prev;\n                    prev = currReverse;\n                    currReverse = nextTemp;\n                }\n                \n                // Connect the previous group end to the new head of the reversed group\n                prevGroupEnd.next = prev;\n                // Update prevGroupEnd to be the end of the reversed group (which was groupStart)\n                prevGroupEnd = groupStart;\n                // Move current to the head of the next group\n                current = currReverse;\n            } else {\n                // Less than k nodes, no need to reverse, just connect the remaining part\n                prevGroupEnd.next = groupStart;\n                break;\n            }\n        }\n\n        return dummy.next;\n    }\n}",
+    "solutionCpp": "/**\n * Definition for singly-linked list.\n * struct ListNode {\n * int val;\n * ListNode *next;\n * ListNode() : val(0), next(nullptr) {}\n * ListNode(int x) : val(x), next(nullptr) {}\n * ListNode(int x, ListNode *next) : val(x), next(next) {}\n * };\n */\nclass Solution {\npublic:\n    ListNode* reverseKGroup(ListNode* head, int k) {\n        if (!head || k == 1) return head;\n\n        ListNode* dummy = new ListNode(0);\n        dummy->next = head;\n\n        ListNode* prevGroupEnd = dummy;\n        ListNode* current = head;\n\n        while (current) {\n            int count = 0;\n            ListNode* groupStart = current;\n            ListNode* temp = current;\n            // Check if there are k nodes left in the current group\n            while (temp && count < k) {\n                temp = temp->next;\n                count++;\n            }\n\n            if (count == k) {\n                // Reverse the group\n                ListNode* prev = nullptr;\n                ListNode* currReverse = groupStart;\n                for (int i = 0; i < k; ++i) {\n                    ListNode* nextTemp = currReverse->next;\n                    currReverse->next = prev;\n                    prev = currReverse;\n                    currReverse = nextTemp;\n                }\n                \n                // Connect the previous group end to the new head of the reversed group\n                prevGroupEnd->next = prev;\n                // Update prevGroupEnd to be the end of the reversed group (which was groupStart)\n                prevGroupEnd = groupStart;\n                // Move current to the head of the next group\n                current = currReverse;\n            } else {\n                // Less than k nodes, no need to reverse, just connect the remaining part\n                prevGroupEnd->next = groupStart;\n                break;\n            }\n        }\n\n        return dummy->next;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D06",
+    "title": "Problema Difícil 6: Merge k Sorted Lists",
+    "description": "Se te da un array de `k` listas enlazadas, cada una de ellas ordenada en orden ascendente. Fusiona todas las listas en una única lista enlazada ordenada y devuelve la lista fusionada.",
+    "examples": [
+      {"input": "lists = [[1,4,5],[1,3,4],[2,6]]", "output": "[1,1,2,3,4,4,5,6]"},
+      {"input": "lists = []", "output": "[]"}
+    ],
+    "hints": [
+      "Puedes fusionar dos listas a la vez repetidamente.",
+      "Un montículo de mínimos (min-heap) o una cola de prioridad pueden ser muy útiles para optimizar el proceso de selección del siguiente nodo más pequeño."
+    ],
+    "solutionJs": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n * this.val = (val===undefined ? 0 : val)\n * this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode[]} lists\n * @return {ListNode}\n */\nfunction mergeKLists(lists) {\n  if (!lists || lists.length === 0) return null;\n  if (lists.length === 1) return lists[0];\n\n  function mergeTwoLists(l1, l2) {\n    if (!l1) return l2;\n    if (!l2) return l1;\n\n    let head;\n    if (l1.val <= l2.val) {\n      head = l1;\n      l1 = l1.next;\n    } else {\n      head = l2;\n      l2 = l2.next;\n    }\n    let current = head;\n\n    while (l1 && l2) {\n      if (l1.val <= l2.val) {\n        current.next = l1;\n        l1 = l1.next;\n      } else {\n        current.next = l2;\n        l2 = l2.next;\n      }\n      current = current.next;\n    }\n\n    if (l1) {\n      current.next = l1;\n    } else if (l2) {\n      current.next = l2;\n    }\n    return head;\n  }\n\n  let mergedList = lists[0];\n  for (let i = 1; i < lists.length; i++) {\n    mergedList = mergeTwoLists(mergedList, lists[i]);\n  }\n  return mergedList;\n}",
+    "solutionPython": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nimport heapq\n\ndef merge_k_lists(lists):\n    dummy = ListNode(0)\n    current = dummy\n    \n    min_heap = []\n    \n    for i, l in enumerate(lists):\n        if l:\n            heapq.heappush(min_heap, (l.val, i, l)) # (value, original_list_index, node_object)\n            \n    while min_heap:\n        val, original_list_index, node = heapq.heappop(min_heap)\n        current.next = node\n        current = current.next\n        \n        if node.next:\n            heapq.heappush(min_heap, (node.next.val, original_list_index, node.next))\n            \n    return dummy.next",
+    "solutionJava": "/**\n * Definition for singly-linked list.\n * public class ListNode {\n * int val;\n * ListNode next;\n * ListNode() {}\n * ListNode(int val) { this.val = val; }\n * ListNode(int val, ListNode next) { this.val = val; this.next = next; }\n * }\n */\nimport java.util.PriorityQueue;\n\nclass Solution {\n    public ListNode mergeKLists(ListNode[] lists) {\n        if (lists == null || lists.length == 0) return null;\n\n        PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a, b) -> a.val - b.val);\n\n        for (ListNode node : lists) {\n            if (node != null) {\n                minHeap.add(node);\n            }\n        }\n\n        ListNode dummyHead = new ListNode(0);\n        ListNode current = dummyHead;\n\n        while (!minHeap.isEmpty()) {\n            ListNode smallest = minHeap.poll();\n            current.next = smallest;\n            current = current.next;\n            if (smallest.next != null) {\n                minHeap.add(smallest.next);\n            }\n        }\n\n        return dummyHead.next;\n    }\n}",
+    "solutionCpp": "/**\n * Definition for singly-linked list.\n * struct ListNode {\n * int val;\n * ListNode *next;\n * ListNode() : val(0), next(nullptr) {}\n * ListNode(int x) : val(x), next(nullptr) {}\n * ListNode(int x, ListNode *next) : val(x), next(next) {}\n * };\n */\n#include <vector>\n#include <queue>\n\n// Custom comparator for min-heap\nstruct CompareListNode {\n    bool operator()(ListNode* l1, ListNode* l2) {\n        return l1->val > l2->val;\n    }\n};\n\nclass Solution {\npublic:\n    ListNode* mergeKLists(std::vector<ListNode*>& lists) {\n        if (lists.empty()) return nullptr;\n\n        std::priority_queue<ListNode*, std::vector<ListNode*>, CompareListNode> minHeap;\n\n        for (ListNode* node : lists) {\n            if (node) {\n                minHeap.push(node);\n            }\n        }\n\n        ListNode* dummyHead = new ListNode(0);\n        ListNode* current = dummyHead;\n\n        while (!minHeap.empty()) {\n            ListNode* smallest = minHeap.top();\n            minHeap.pop();\n            current->next = smallest;\n            current = current->next;\n            if (smallest->next) {\n                minHeap.push(smallest->next);\n            }\n        }\n\n        return dummyHead->next;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D07",
+    "title": "Problema Difícil 7: Longest Valid Parentheses",
+    "description": "Dada una cadena que contiene solo los caracteres '(' y ')', encuentra la longitud del substring de paréntesis válidos (bien formados) más largo.",
+    "examples": [
+      {"input": "s = \"(()\"", "output": "2 (porque \"()\" es el substring válido más largo)"},
+      {"input": "s = \")()()\"", "output": "4 (porque \"()()\" es el substring válido más largo)"}
+    ],
+    "hints": [
+      "Puedes usar una pila para rastrear los índices de los paréntesis de apertura.",
+      "También puedes recorrer la cadena dos veces, una de izquierda a derecha y otra de derecha a izquierda, para manejar todos los casos."
+    ],
+    "solutionJs": "function longestValidParentheses(s) {\n  let maxLen = 0;\n  const stack = [-1]; // Initialize stack with -1 to handle first valid pair\n\n  for (let i = 0; i < s.length; i++) {\n    if (s[i] === '(') {\n      stack.push(i);\n    } else {\n      stack.pop();\n      if (stack.length === 0) {\n        stack.push(i);\n      } else {\n        maxLen = Math.max(maxLen, i - stack[stack.length - 1]);\n      }\n    }\n  }\n  return maxLen;\n}",
+    "solutionPython": "def longest_valid_parentheses(s):\n    max_len = 0\n    stack = [-1]  # Initialize stack with -1 to handle first valid pair\n\n    for i in range(len(s)):\n        if s[i] == '(':  # If it's an opening parenthesis, push its index\n            stack.append(i)\n        else:  # If it's a closing parenthesis\n            stack.pop()  # Pop the last opening parenthesis\n            if not stack:  # If stack becomes empty, means no matching open parenthesis\n                stack.append(i)  # Push current index as a new base\n            else:\n                max_len = max(max_len, i - stack[-1])  # Calculate length of valid substring\n\n    return max_len",
+    "solutionJava": "import java.util.Stack;\n\nclass Solution {\n    public int longestValidParentheses(String s) {\n        int maxLen = 0;\n        Stack<Integer> stack = new Stack<>();\n        stack.push(-1); // Initialize stack with -1 to handle first valid pair\n\n        for (int i = 0; i < s.length(); i++) {\n            if (s.charAt(i) == '(') {\n                stack.push(i);\n            } else {\n                stack.pop();\n                if (stack.isEmpty()) {\n                    stack.push(i);\n                } else {\n                    maxLen = Math.max(maxLen, i - stack.peek());\n                }\n            }\n        }\n        return maxLen;\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <stack>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int longestValidParentheses(std::string s) {\n        int maxLen = 0;\n        std::stack<int> st;\n        st.push(-1); // Initialize stack with -1 to handle first valid pair\n\n        for (int i = 0; i < s.length(); ++i) {\n            if (s[i] == '(') {\n                st.push(i);\n            } else {\n                st.pop();\n                if (st.empty()) {\n                    st.push(i);\n                } else {\n                    maxLen = std::max(maxLen, i - st.top());\n                }\n            }\n        }\n        return maxLen;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D08",
+    "title": "Problema Difícil 8: Suma de Tres Números",
+    "description": "Dado un array `nums` de `n` enteros, ¿existen elementos `a`, `b`, `c` en `nums` tales que `a + b + c = 0`? Encuentra todos los tripletes únicos en el array que den una suma de cero. La solución no debe contener tripletes duplicados.",
+    "examples": [
+      {"input": "nums = [-1, 0, 1, 2, -1, -4]", "output": "[[-1, -1, 2], [-1, 0, 1]]"},
+      {"input": "nums = [0, 1, 1]", "output": "[]"}
+    ],
+    "hints": [
+      "Ordena el array primero. Esto te permite usar un enfoque de dos punteros de manera eficiente y manejar duplicados.",
+      "Itera con un puntero `i`. Para los otros dos números, usa dos punteros (`left` y `right`) que se muevan hacia adentro desde los extremos del sub-array restante."
+    ],
+    "solutionJs": "function threeSum(nums) {\n  nums.sort((a, b) => a - b);\n  const result = [];\n\n  for (let i = 0; i < nums.length - 2; i++) {\n    if (i > 0 && nums[i] === nums[i - 1]) continue; // Skip duplicates for the first number\n\n    let left = i + 1;\n    let right = nums.length - 1;\n\n    while (left < right) {\n      const sum = nums[i] + nums[left] + nums[right];\n\n      if (sum === 0) {\n        result.push([nums[i], nums[left], nums[right]]);\n\n        while (left < right && nums[left] === nums[left + 1]) left++; // Skip duplicates for the second number\n        while (left < right && nums[right] === nums[right - 1]) right--; // Skip duplicates for the third number\n\n        left++;\n        right--;\n      } else if (sum < 0) {\n        left++;\n      } else {\n        right--;\n      }\n    }\n  }\n  return result;\n}",
+    "solutionPython": "def three_sum(nums):\n    nums.sort()\n    result = []\n\n    for i in range(len(nums) - 2):\n        if i > 0 and nums[i] == nums[i - 1]:\n            continue  # Skip duplicates for the first number\n\n        left, right = i + 1, len(nums) - 1\n\n        while left < right:\n            current_sum = nums[i] + nums[left] + nums[right]\n\n            if current_sum == 0:\n                result.append([nums[i], nums[left], nums[right]])\n                while left < right and nums[left] == nums[left + 1]:\n                    left += 1  # Skip duplicates for the second number\n                while left < right and nums[right] == nums[right - 1]:\n                    right -= 1  # Skip duplicates for the third number\n                left += 1\n                right -= 1\n            elif current_sum < 0:\n                left += 1\n            else:\n                right -= 1\n\n    return result",
+    "solutionJava": "import java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.List;\n\nclass Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        Arrays.sort(nums);\n        List<List<Integer>> result = new ArrayList<>();\n\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) {\n                continue; // Skip duplicates for the first number\n            }\n\n            int left = i + 1;\n            int right = nums.length - 1;\n\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n\n                if (sum == 0) {\n                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));\n\n                    while (left < right && nums[left] == nums[left + 1]) left++; // Skip duplicates for the second number\n                    while (left < right && nums[right] == nums[right - 1]) right--; // Skip duplicates for the third number\n\n                    left++;\n                    right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return result;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {\n        std::sort(nums.begin(), nums.end());\n        std::vector<std::vector<int>> result;\n\n        for (int i = 0; i < nums.size(); ++i) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue; // Skip duplicates for the first number\n\n            int left = i + 1;\n            int right = nums.size() - 1;\n\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n\n                if (sum == 0) {\n                    result.push_back({nums[i], nums[left], nums[right]});\n\n                    while (left < right && nums[left] == nums[left + 1]) left++; // Skip duplicates for the second number\n                    while (left < right && nums[right] == nums[right - 1]) right--; // Skip duplicates for the third number\n\n                    left++;\n                    right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return result;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D09",
+    "title": "Problema Difícil 9: Contar Palíndromos Substrings",
+    "description": "Dada una cadena `s`, devuelve el número de substrings palíndromos en ella. Un substring es una secuencia contigua de caracteres dentro de una cadena.",
+    "examples": [
+      {"input": "s = \"abc\"", "output": "3 (\"a\", \"b\", \"c\")"},
+      {"input": "s = \"aaa\"", "output": "6 (\"a\", \"a\", \"a\", \"aa\", \"aa\", \"aaa\")"}
+    ],
+    "hints": [
+      "Puedes usar la técnica de 'expandir desde el centro' para encontrar todos los palíndromos.",
+      "Para cada caracter, considera que es el centro de un palíndromo de longitud impar y también considera que está entre dos caracteres iguales como el centro de un palíndromo de longitud par."
+    ],
+    "solutionJs": "function countSubstrings(s) {\n  let count = 0;\n\n  function expandAroundCenter(left, right) {\n    while (left >= 0 && right < s.length && s[left] === s[right]) {\n      count++;\n      left--;\n      right++;\n    }\n  }\n\n  for (let i = 0; i < s.length; i++) {\n    expandAroundCenter(i, i);     // Odd length palindromes (e.g., 'a', 'aba')\n    expandAroundCenter(i, i + 1); // Even length palindromes (e.g., 'aa', 'abba')\n  }\n  return count;\n}",
+    "solutionPython": "def count_substrings(s):\n    count = 0\n\n    def expand_around_center(left, right):\n        nonlocal count\n        while left >= 0 and right < len(s) and s[left] == s[right]:\n            count += 1\n            left -= 1\n            right += 1\n\n    for i in range(len(s)):\n        expand_around_center(i, i)      # Odd length palindromes\n        expand_around_center(i, i + 1)  # Even length palindromes\n\n    return count",
+    "solutionJava": "class Solution {\n    int count = 0;\n\n    public int countSubstrings(String s) {\n        for (int i = 0; i < s.length(); i++) {\n            expandAroundCenter(s, i, i);     // Odd length palindromes\n            expandAroundCenter(s, i, i + 1); // Even length palindromes\n        }\n        return count;\n    }\n\n    private void expandAroundCenter(String s, int left, int right) {\n        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {\n            count++;\n            left--;\n            right++;\n        }\n    }\n}",
+    "solutionCpp": "#include <string>\n\nclass Solution {\npublic:\n    int count = 0;\n\n    void expandAroundCenter(const std::string& s, int left, int right) {\n        while (left >= 0 && right < s.length() && s[left] == s[right]) {\n            count++;\n            left--;\n            right++;\n        }\n    }\n\n    int countSubstrings(std::string s) {\n        for (int i = 0; i < s.length(); ++i) {\n            expandAroundCenter(s, i, i);     // Odd length palindromes\n            expandAroundCenter(s, i, i + 1); // Even length palindromes\n        }\n        return count;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D10",
+    "title": "Problema Difícil 10: Regular Expression Matching",
+    "description": "Dados una cadena de entrada `s` y un patrón `p`, implementa el soporte para la coincidencia de expresiones regulares con '.' y '*'.\n\n'.' Coincide con cualquier caracter individual.\n'*' Coincide con cero o más de los elementos anteriores.\n\nLa coincidencia debe cubrir toda la cadena de entrada (no parcial).",
+    "examples": [
+      {"input": "s = \"aa\", p = \"a\"", "output": "false"},
+      {"input": "s = \"aa\", p = \"a*\"", "output": "true"},
+      {"input": "s = \"ab\", p = \".*\"", "output": "true"}
+    ],
+    "hints": [
+      "Este problema se resuelve típicamente con programación dinámica.",
+      "Define `dp[i][j]` como `true` si `s[0...i-1]` coincide con `p[0...j-1]`. Luego construye la tabla `dp`."
+    ],
+    "solutionJs": "/**\n * @param {string} s\n * @param {string} p\n * @return {boolean}\n */\nfunction isMatch(s, p) {\n  const dp = Array(s.length + 1).fill(false).map(() => Array(p.length + 1).fill(false));\n  dp[0][0] = true;\n\n  // Handle patterns like a*, a*b*, a*b*c*\n  for (let j = 1; j <= p.length; j++) {\n    if (p[j - 1] === '*') {\n      dp[0][j] = dp[0][j - 2];\n    }\n  }\n\n  for (let i = 1; i <= s.length; i++) {\n    for (let j = 1; j <= p.length; j++) {\n      if (p[j - 1] === s[i - 1] || p[j - 1] === '.') {\n        dp[i][j] = dp[i - 1][j - 1];\n      } else if (p[j - 1] === '*') {\n        dp[i][j] = dp[i][j - 2]; // Zero occurrences of preceding element\n        if (p[j - 2] === s[i - 1] || p[j - 2] === '.') {\n          dp[i][j] = dp[i][j] || dp[i - 1][j]; // One or more occurrences\n        }\n      }\n    }\n  }\n  return dp[s.length][p.length];\n}",
+    "solutionPython": "def is_match(s, p):\n    # Dynamic Programming\n    dp = [[False] * (len(p) + 1) for _ in range(len(s) + 1)]\n    dp[0][0] = True\n\n    # Handle patterns like a*, a*b*, a*b*c*\n    for j in range(1, len(p) + 1):\n        if p[j - 1] == '*':\n            dp[0][j] = dp[0][j - 2]\n\n    for i in range(1, len(s) + 1):\n        for j in range(1, len(p) + 1):\n            if p[j - 1] == s[i - 1] or p[j - 1] == '.':\n                dp[i][j] = dp[i - 1][j - 1]\n            elif p[j - 1] == '*':\n                dp[i][j] = dp[i][j - 2]  # Zero occurrences of preceding element\n                if p[j - 2] == s[i - 1] or p[j - 2] == '.':\n                    dp[i][j] = dp[i][j] or dp[i - 1][j]  # One or more occurrences\n    return dp[len(s)][len(p)]",
+    "solutionJava": "class Solution {\n    public boolean isMatch(String s, String p) {\n        boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];\n        dp[0][0] = true;\n\n        // Handle patterns like a*, a*b*, a*b*c*\n        for (int j = 1; j <= p.length(); j++) {\n            if (p.charAt(j - 1) == '*') {\n                dp[0][j] = dp[0][j - 2];\n            }\n        }\n\n        for (int i = 1; i <= s.length(); i++) {\n            for (int j = 1; j <= p.length(); j++) {\n                if (p.charAt(j - 1) == s.charAt(i - 1) || p.charAt(j - 1) == '.') {\n                    dp[i][j] = dp[i - 1][j - 1];\n                } else if (p.charAt(j - 1) == '*') {\n                    dp[i][j] = dp[i][j - 2]; // Zero occurrences of preceding element\n                    if (p.charAt(j - 2) == s.charAt(i - 1) || p.charAt(j - 2) == '.') {\n                        dp[i][j] = dp[i][j] || dp[i - 1][j]; // One or more occurrences\n                    }\n                }\n            }\n        }\n        return dp[s.length()][p.length()];\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <vector>\n\nclass Solution {\npublic:\n    bool isMatch(std::string s, std::string p) {\n        std::vector<std::vector<bool>> dp(s.length() + 1, std::vector<bool>(p.length() + 1, false));\n        dp[0][0] = true;\n\n        // Handle patterns like a*, a*b*, a*b*c*\n        for (int j = 1; j <= p.length(); ++j) {\n            if (p[j - 1] == '*') {\n                dp[0][j] = dp[0][j - 2];\n            }\n        }\n\n        for (int i = 1; i <= s.length(); ++i) {\n            for (int j = 1; j <= p.length(); ++j) {\n                if (p[j - 1] == s[i - 1] || p[j - 1] == '.') {\n                    dp[i][j] = dp[i - 1][j - 1];\n                } else if (p[j - 1] == '*') {\n                    dp[i][j] = dp[i][j - 2]; // Zero occurrences of preceding element\n                    if (p[j - 2] == s[i - 1] || p[j - 2] == '.') {\n                        dp[i][j] = dp[i][j] || dp[i - 1][j]; // One or more occurrences\n                    }\n                }\n            }\n        }\n        return dp[s.length()][p.length()];\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D11",
+    "title": "Problema Difícil 11: Largest Rectangle in Histogram",
+    "description": "Dada un array de enteros `heights` que representan la altura de un histograma, encuentra el área del rectángulo más grande en el histograma.",
+    "examples": [
+      {"input": "heights = [2,1,5,6,2,3]", "output": "10"},
+      {"input": "heights = [2,4]", "output": "4"}
+    ],
+    "hints": [
+      "Puedes usar una pila para mantener los índices de las barras en orden ascendente de altura.",
+      "Cuando encuentres una barra más pequeña, calcula las áreas para las barras en la pila que son más altas que la barra actual."
+    ],
+    "solutionJs": "function largestRectangleArea(heights) {\n  let maxArea = 0;\n  const stack = []; // Stores indices\n\n  for (let i = 0; i <= heights.length; i++) {\n    const h = (i === heights.length) ? 0 : heights[i];\n    while (stack.length > 0 && h < heights[stack[stack.length - 1]]) {\n      const height = heights[stack.pop()];\n      const width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;\n      maxArea = Math.max(maxArea, height * width);\n    }\n    stack.push(i);\n  }\n  return maxArea;\n}",
+    "solutionPython": "def largest_rectangle_area(heights):\n    max_area = 0\n    stack = []  # Stores indices\n\n    for i in range(len(heights) + 1):\n        h = heights[i] if i < len(heights) else 0\n        while stack and h < heights[stack[-1]]:\n            height = heights[stack.pop()]\n            width = i if not stack else i - stack[-1] - 1\n            max_area = max(max_area, height * width)\n        stack.append(i)\n    return max_area",
+    "solutionJava": "import java.util.Stack;\n\nclass Solution {\n    public int largestRectangleArea(int[] heights) {\n        int maxArea = 0;\n        Stack<Integer> stack = new Stack<>(); // Stores indices\n\n        for (int i = 0; i <= heights.length; i++) {\n            int h = (i == heights.length) ? 0 : heights[i];\n            while (!stack.isEmpty() && h < heights[stack.peek()]) {\n                int height = heights[stack.pop()];\n                int width = stack.isEmpty() ? i : i - stack.peek() - 1;\n                maxArea = Math.max(maxArea, height * width);\n            }\n            stack.push(i);\n        }\n        return maxArea;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <stack>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int largestRectangleArea(std::vector<int>& heights) {\n        int maxArea = 0;\n        std::stack<int> st; // Stores indices\n\n        for (int i = 0; i <= heights.size(); ++i) {\n            int h = (i == heights.size()) ? 0 : heights[i];\n            while (!st.empty() && h < heights[st.top()]) {\n                int height = heights[st.top()];\n                st.pop();\n                int width = st.empty() ? i : i - st.top() - 1;\n                maxArea = std::max(maxArea, height * width);\n            }\n            st.push(i);\n        }\n        return maxArea;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D12",
+    "title": "Problema Difícil 12: N-Queens",
+    "description": "El problema de las N-reinas es colocar N reinas en un tablero de ajedrez de N×N de tal manera que ninguna de ellas se amenace mutuamente. Dada un entero `n`, devuelve todas las soluciones distintas para el problema de las N-reinas.",
+    "examples": [
+      {"input": "n = 4", "output": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]"},
+      {"input": "n = 1", "output": "[[\"Q\"]]"}
+    ],
+    "hints": [
+      "Este es un problema clásico de backtracking.",
+      "Necesitas verificar las columnas, las diagonales principales y las diagonales secundarias para las amenazas."
+    ],
+    "solutionJs": "function solveNQueens(n) {\n  const result = [];\n  const board = Array(n).fill(0).map(() => Array(n).fill('.'));\n\n  function isValid(row, col) {\n    // Check column\n    for (let i = 0; i < row; i++) {\n      if (board[i][col] === 'Q') return false;\n    }\n    // Check upper left diagonal\n    for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {\n      if (board[i][j] === 'Q') return false;\n    }\n    // Check upper right diagonal\n    for (let i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {\n      if (board[i][j] === 'Q') return false;\n    }\n    return true;\n  }\n\n  function backtrack(row) {\n    if (row === n) {\n      result.push(board.map(r => r.join('')));\n      return;\n    }\n\n    for (let col = 0; col < n; col++) {\n      if (isValid(row, col)) {\n        board[row][col] = 'Q';\n        backtrack(row + 1);\n        board[row][col] = '.'; // Backtrack\n      }\n    }\n  }\n\n  backtrack(0);\n  return result;\n}",
+    "solutionPython": "def solve_n_queens(n):\n    result = []\n    board = [['.' for _ in range(n)] for _ in range(n)]\n\n    def is_valid(row, col):\n        # Check column\n        for i in range(row):\n            if board[i][col] == 'Q':\n                return False\n        # Check upper left diagonal\n        i, j = row - 1, col - 1\n        while i >= 0 and j >= 0:\n            if board[i][j] == 'Q':\n                return False\n            i -= 1\n            j -= 1\n        # Check upper right diagonal\n        i, j = row - 1, col + 1\n        while i >= 0 and j < n:\n            if board[i][j] == 'Q':\n                return False\n            i -= 1\n            j += 1\n        return True\n\n    def backtrack(row):\n        if row == n:\n            result.append([\"\".join(row) for row in board])\n            return\n\n        for col in range(n):\n            if is_valid(row, col):\n                board[row][col] = 'Q'\n                backtrack(row + 1)\n                board[row][col] = '.'  # Backtrack\n\n    backtrack(0)\n    return result",
+    "solutionJava": "import java.util.ArrayList;\nimport java.util.List;\n\nclass Solution {\n    public List<List<String>> solveNQueens(int n) {\n        List<List<String>> result = new ArrayList<>();\n        char[][] board = new char[n][n];\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++) {\n                board[i][j] = '.';\n            }\n        }\n\n        backtrack(board, 0, n, result);\n        return result;\n    }\n\n    private void backtrack(char[][] board, int row, int n, List<List<String>> result) {\n        if (row == n) {\n            List<String> currentSolution = new ArrayList<>();\n            for (int i = 0; i < n; i++) {\n                currentSolution.add(String.valueOf(board[i]));\n            }\n            result.add(currentSolution);\n            return;\n        }\n\n        for (int col = 0; col < n; col++) {\n            if (isValid(board, row, col, n)) {\n                board[row][col] = 'Q';\n                backtrack(board, row + 1, n, result);\n                board[row][col] = '.'; // Backtrack\n            }\n        }\n    }\n\n    private boolean isValid(char[][] board, int row, int col, int n) {\n        // Check column\n        for (int i = 0; i < row; i++) {\n            if (board[i][col] == 'Q') return false;\n        }\n        // Check upper left diagonal\n        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {\n            if (board[i][j] == 'Q') return false;\n        }\n        // Check upper right diagonal\n        for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {\n            if (board[i][j] == 'Q') return false;\n        }\n        return true;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <string>\n\nclass Solution {\npublic:\n    std::vector<std::vector<std::string>> solveNQueens(int n) {\n        std::vector<std::vector<std::string>> result;\n        std::vector<std::string> board(n, std::string(n, '.'));\n        \n        solve(0, n, board, result);\n        return result;\n    }\n\nprivate:\n    bool isValid(int row, int col, int n, const std::vector<std::string>& board) {\n        // Check column\n        for (int i = 0; i < row; ++i) {\n            if (board[i][col] == 'Q') return false;\n        }\n        // Check upper left diagonal\n        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; --i, --j) {\n            if (board[i][j] == 'Q') return false;\n        }\n        // Check upper right diagonal\n        for (int i = row - 1, j = col + 1; i >= 0 && j < n; --i, ++j) {\n            if (board[i][j] == 'Q') return false;\n        }\n        return true;\n    }\n\n    void solve(int row, int n, std::vector<std::string>& board, std::vector<std::vector<std::string>>& result) {\n        if (row == n) {\n            result.push_back(board);\n            return;\n        }\n\n        for (int col = 0; col < n; ++col) {\n            if (isValid(row, col, n, board)) {\n                board[row][col] = 'Q';\n                solve(row + 1, n, board, result);\n                board[row][col] = '.'; // Backtrack\n            }\n        }\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D13",
+    "title": "Problema Difícil 13: Sudoku Solver",
+    "description": "Escribe un programa para resolver un rompecabezas de Sudoku. Dada una cuadrícula de Sudoku de 9x9, en la que algunas celdas están llenas y otras vacías (representadas por '.'), resuelve el Sudoku llenando las celdas vacías de modo que el tablero final sea un Sudoku válido.",
+    "examples": [
+      {"input": "board = [[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]", "output": "[[5,3,4,6,7,8,9,1,2],[6,7,2,1,9,5,3,4,8],[1,9,8,3,4,2,5,6,7],[8,5,9,7,6,1,4,2,3],[4,2,6,8,5,3,7,9,1],[7,1,3,9,2,4,8,5,6],[9,6,1,5,3,7,2,8,4],[2,8,7,4,1,9,6,3,5],[3,4,5,2,8,6,1,7,9]] (solución válida)"}
+    ],
+    "hints": [
+      "Este es un problema clásico de backtracking. Intenta colocar un número en una celda vacía y, si es válido, continúa recursivamente.",
+      "Si un intento lleva a un punto muerto (no se puede colocar un número válido), deshaz el último movimiento y prueba otro número (backtracking)."
+    ],
+    "solutionJs": "/**\n * @param {character[][]} board\n * @return {void} Do not return anything, modify board in-place instead.\n */\nfunction solveSudoku(board) {\n  function isValid(row, col, char) {\n    for (let i = 0; i < 9; i++) {\n      if (board[row][i] === char) return false;\n      if (board[i][col] === char) return false;\n      if (board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + (i % 3)] === char) return false;\n    }\n    return true;\n  }\n\n  function backtrack() {\n    for (let r = 0; r < 9; r++) {\n      for (let c = 0; c < 9; c++) {\n        if (board[r][c] === '.') {\n          for (let num = 1; num <= 9; num++) {\n            const charNum = String(num);\n            if (isValid(r, c, charNum)) {\n              board[r][c] = charNum;\n              if (backtrack()) {\n                return true;\n              } else {\n                board[r][c] = '.'; // Backtrack\n              }\n            }\n          }\n          return false; // No valid number for this cell\n        }\n      }\n    }\n    return true; // All cells filled\n  }\n\n  backtrack();\n}",
+    "solutionPython": "def solve_sudoku(board):\n    def is_valid(r, c, val):\n        # Check row\n        for col in range(9):\n            if board[r][col] == val: return False\n        # Check column\n        for row in range(9):\n            if board[row][c] == val: return False\n        # Check 3x3 box\n        start_row, start_col = 3 * (r // 3), 3 * (c // 3)\n        for i in range(3):\n            for j in range(3):\n                if board[start_row + i][start_col + j] == val: return False\n        return True\n\n    def backtrack():\n        for r in range(9):\n            for c in range(9):\n                if board[r][c] == '.':\n                    for num in range(1, 10):\n                        char_num = str(num)\n                        if is_valid(r, c, char_num):\n                            board[r][c] = char_num\n                            if backtrack():\n                                return True\n                            else:\n                                board[r][c] = '.' # Backtrack\n                    return False # No valid number for this cell\n        return True # All cells filled\n\n    backtrack()",
+    "solutionJava": "class Solution {\n    public void solveSudoku(char[][] board) {\n        solve(board);\n    }\n\n    private boolean solve(char[][] board) {\n        for (int r = 0; r < 9; r++) {\n            for (int c = 0; c < 9; c++) {\n                if (board[r][c] == '.') {\n                    for (char num = '1'; num <= '9'; num++) {\n                        if (isValid(board, r, c, num)) {\n                            board[r][c] = num;\n                            if (solve(board)) {\n                                return true;\n                            } else {\n                                board[r][c] = '.'; // Backtrack\n                            }\n                        }\n                    }\n                    return false; // No valid number for this cell\n                }\n            }\n        }\n        return true; // All cells filled\n    }\n\n    private boolean isValid(char[][] board, int row, int col, char num) {\n        // Check row\n        for (int i = 0; i < 9; i++) {\n            if (board[row][i] == num) return false;\n        }\n        // Check column\n        for (int i = 0; i < 9; i++) {\n            if (board[i][col] == num) return false;\n        }\n        // Check 3x3 box\n        int startRow = 3 * (row / 3);\n        int startCol = 3 * (col / 3);\n        for (int i = 0; i < 3; i++) {\n            for (int j = 0; j < 3; j++) {\n                if (board[startRow + i][startCol + j] == num) return false;\n            }\n        }\n        return true;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <string>\n\nclass Solution {\npublic:\n    void solveSudoku(std::vector<std::vector<char>>& board) {\n        solve(board);\n    }\n\nprivate:\n    bool solve(std::vector<std::vector<char>>& board) {\n        for (int r = 0; r < 9; ++r) {\n            for (int c = 0; c < 9; ++c) {\n                if (board[r][c] == '.') {\n                    for (char num = '1'; num <= '9'; ++num) {\n                        if (isValid(board, r, c, num)) {\n                            board[r][c] = num;\n                            if (solve(board)) {\n                                return true;\n                            } else {\n                                board[r][c] = '.'; // Backtrack\n                            }\n                        }\n                    }\n                    return false; // No valid number for this cell\n                }\n            }\n        }\n        return true; // All cells filled\n    }\n\n    bool isValid(const std::vector<std::vector<char>>& board, int row, int col, char num) {\n        // Check row\n        for (int i = 0; i < 9; ++i) {\n            if (board[row][i] == num) return false;\n        }\n        // Check column\n        for (int i = 0; i < 9; ++i) {\n            if (board[i][col] == num) return false;\n        }\n        // Check 3x3 box\n        int startRow = 3 * (row / 3);\n        int startCol = 3 * (col / 3);\n        for (int i = 0; i < 3; ++i) {\n            for (int j = 0; j < 3; ++j) {\n                if (board[startRow + i][startCol + j] == num) return false;\n            }\n        }\n        return true;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D14",
+    "title": "Problema Difícil 14: Trap Rain Water",
+    "description": "Dados `n` enteros no negativos que representan un mapa de elevación donde el ancho de cada barra es 1, calcula cuánta agua puede atrapar después de llover.",
+    "examples": [
+      {"input": "heights = [0,1,0,2,1,0,1,3,2,1,2,1]", "output": "6"},
+      {"input": "heights = [4,2,0,3,2,5]", "output": "9"}
+    ],
+    "hints": [
+      "Para cada barra, la cantidad de agua que puede atrapar depende de la altura máxima de las barras a su izquierda y a su derecha.",
+      "Puedes precalcular los máximos a la izquierda y a la derecha para cada posición, o usar un enfoque de dos punteros."
+    ],
+    "solutionJs": "function trap(heights) {\n  if (heights.length === 0) return 0;\n\n  let left = 0;\n  let right = heights.length - 1;\n  let leftMax = 0;\n  let rightMax = 0;\n  let waterTrapped = 0;\n\n  while (left < right) {\n    if (heights[left] < heights[right]) {\n      if (heights[left] >= leftMax) {\n        leftMax = heights[left];\n      } else {\n        waterTrapped += leftMax - heights[left];\n      }\n      left++;\n    } else {\n      if (heights[right] >= rightMax) {\n        rightMax = heights[right];\n      } else {\n        waterTrapped += rightMax - heights[right];\n      }\n      right--;\n    }\n  }\n  return waterTrapped;\n}",
+    "solutionPython": "def trap(heights):\n    if not heights: return 0\n\n    left, right = 0, len(heights) - 1\n    left_max, right_max = 0, 0\n    water_trapped = 0\n\n    while left < right:\n        if heights[left] < heights[right]:\n            if heights[left] >= left_max:\n                left_max = heights[left]\n            else:\n                water_trapped += left_max - heights[left]\n            left += 1\n        else:\n            if heights[right] >= right_max:\n                right_max = heights[right]\n            else:\n                water_trapped += right_max - heights[right]\n            right -= 1\n    return water_trapped",
+    "solutionJava": "class Solution {\n    public int trap(int[] heights) {\n        if (heights == null || heights.length == 0) return 0;\n\n        int left = 0;\n        int right = heights.length - 1;\n        int leftMax = 0;\n        int rightMax = 0;\n        int waterTrapped = 0;\n\n        while (left < right) {\n            if (heights[left] < heights[right]) {\n                if (heights[left] >= leftMax) {\n                    leftMax = heights[left];\n                } else {\n                    waterTrapped += leftMax - heights[left];\n                }\n                left++;\n            } else {\n                if (heights[right] >= rightMax) {\n                    rightMax = heights[right];\n                } else {\n                    waterTrapped += rightMax - heights[right];\n                }\n                right--;\n            }\n        }\n        return waterTrapped;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int trap(std::vector<int>& heights) {\n        if (heights.empty()) return 0;\n\n        int left = 0;\n        int right = heights.size() - 1;\n        int leftMax = 0;\n        int rightMax = 0;\n        int waterTrapped = 0;\n\n        while (left < right) {\n            if (heights[left] < heights[right]) {\n                if (heights[left] >= leftMax) {\n                    leftMax = heights[left];\n                } else {\n                    waterTrapped += leftMax - heights[left];\n                }\n                left++;\n            } else {\n                if (heights[right] >= rightMax) {\n                    rightMax = heights[right];\n                } else {\n                    waterTrapped += rightMax - heights[right];\n                }\n                right--;\n            }\n        }\n        return waterTrapped;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D15",
+    "title": "Problema Difícil 15: Serialize and Deserialize Binary Tree",
+    "description": "El diseño de un algoritmo para serializar y deserializar un árbol binario. No hay restricciones sobre cómo puede ser su serialización/deserialización. Solo necesita asegurarse de que un árbol binario se pueda serializar en una cadena y que esta cadena se pueda deserializar en el árbol binario original.",
+    "examples": [
+      {"input": "root = [1,2,3,null,null,4,5]", "output": "[1,2,3,null,null,4,5]"},
+      {"input": "root = []", "output": "[]"}
+    ],
+    "hints": [
+      "Puedes usar un recorrido de preorden o nivel para serializar el árbol, utilizando un marcador especial para los nodos nulos.",
+      "Para la deserialización, recrea el árbol utilizando el mismo orden de recorrido."
+    ],
+    "solutionJs": "/**\n * Definition for a binary tree node.\n * function TreeNode(val) {\n * this.val = val;\n * this.left = this.right = null;\n * }\n */\n\n/**\n * Encodes a tree to a single string.\n *\n * @param {TreeNode} root\n * @return {string}\n */\nvar serialize = function(root) {\n  if (!root) return 'N';\n  let res = [];\n\n  function dfs(node) {\n    if (!node) {\n      res.push('N');\n      return;\n    }\n    res.push(node.val);\n    dfs(node.left);\n    dfs(node.right);\n  }\n  dfs(root);\n  return res.join(',');\n};\n\n/**\n * Decodes your encoded data to tree.\n *\n * @param {string} data\n * @return {TreeNode}\n */\nvar deserialize = function(data) {\n  const nodes = data.split(',');\n  let i = 0;\n\n  function dfs() {\n    if (nodes[i] === 'N') {\n      i++;\n      return null;\n    }\n    const node = new TreeNode(parseInt(nodes[i]));\n    i++;\n    node.left = dfs();\n    node.right = dfs();\n    return node;\n  }\n  return dfs();\n};",
+    "solutionPython": "# Definition for a binary tree node.\n# class TreeNode(object):\n#     def __init__(self, x):\n#         self.val = x\n#         self.left = None\n#         self.right = None\n\nclass Codec:\n\n    def serialize(self, root):\n        \"\"\"\n        Encodes a tree to a single string.\n        :type root: TreeNode\n        :rtype: str\n        \"\"\"\n        if not root: return \"N\"\n        \n        res = []\n        def dfs(node):\n            if not node:\n                res.append(\"N\")\n                return\n            res.append(str(node.val))\n            dfs(node.left)\n            dfs(node.right)\n        \n        dfs(root)\n        return \",\".join(res)\n\n    def deserialize(self, data):\n        \"\"\"\n        Decodes your encoded data to tree.\n        :type data: str\n        :rtype: TreeNode\n        \"\"\"\n        nodes = data.split(',')\n        self.i = 0\n\n        def dfs():\n            if nodes[self.i] == 'N':\n                self.i += 1\n                return None\n            \n            node = TreeNode(int(nodes[self.i]))\n            self.i += 1\n            node.left = dfs()\n            node.right = dfs()\n            return node\n        \n        return dfs()",
+    "solutionJava": "/**\n * Definition for a binary tree node.\n * public class TreeNode {\n * int val;\n * TreeNode left;\n * TreeNode right;\n * TreeNode(int x) { val = x; }\n * }\n */\npublic class Codec {\n\n    // Encodes a tree to a single string.\n    public String serialize(TreeNode root) {\n        if (root == null) {\n            return \"N\";\n        }\n        StringBuilder sb = new StringBuilder();\n        serializeDFS(root, sb);\n        return sb.toString();\n    }\n\n    private void serializeDFS(TreeNode node, StringBuilder sb) {\n        if (node == null) {\n            sb.append(\"N,\");\n            return;\n        }\n        sb.append(node.val).append(\",\");\n        serializeDFS(node.left, sb);\n        serializeDFS(node.right, sb);\n    }\n\n    // Decodes your encoded data to tree.\n    public TreeNode deserialize(String data) {\n        String[] nodes = data.split(\",\");\n        Queue<String> queue = new LinkedList<>(Arrays.asList(nodes));\n        return deserializeDFS(queue);\n    }\n\n    private TreeNode deserializeDFS(Queue<String> queue) {\n        String val = queue.poll();\n        if (val.equals(\"N\")) {\n            return null;\n        }\n        TreeNode node = new TreeNode(Integer.parseInt(val));\n        node.left = deserializeDFS(queue);\n        node.right = deserializeDFS(queue);\n        return node;\n    }\n}",
+    "solutionCpp": "/**\n * Definition for a binary tree node.\n * struct TreeNode {\n * int val;\n * TreeNode *left;\n * TreeNode *right;\n * TreeNode(int x) : val(x), left(NULL), right(NULL) {}\n * };\n */\n#include <string>\n#include <queue>\n#include <sstream>\n\nclass Codec {\npublic:\n\n    // Encodes a tree to a single string.\n    std::string serialize(TreeNode* root) {\n        if (!root) return \"N\";\n        std::string s = std::to_string(root->val);\n        s += \",\" + serialize(root->left);\n        s += \",\" + serialize(root->right);\n        return s;\n    }\n\n    // Decodes your encoded data to tree.\n    TreeNode* deserialize(std::string data) {\n        std::stringstream ss(data);\n        std::string token;\n        std::queue<std::string> q;\n\n        while (std::getline(ss, token, ',')) {\n            q.push(token);\n        }\n        return deserializeDFS(q);\n    }\n\n    TreeNode* deserializeDFS(std::queue<std::string>& q) {\n        std::string val = q.front();\n        q.pop();\n        if (val == \"N\") {\n            return nullptr;\n        }\n        TreeNode* node = new TreeNode(std::stoi(val));\n        node->left = deserializeDFS(q);\n        node->right = deserializeDFS(q);\n        return node;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D16",
+    "title": "Problema Difícil 16: Minimum Window Substring",
+    "description": "Dadas dos cadenas `s` y `t` de longitud `m` y `n` respectivamente, devuelve la ventana de substring más pequeña en `s` tal que cada caracter en `t` (incluidos los duplicados) se incluya en la ventana. Si no existe una ventana de ese tipo, devuelve la cadena vacía `\"\"`.",
+    "examples": [
+      {"input": "s = \"ADOBECODEBANC\", t = \"ABC\"", "output": "\"BANC\""},
+      {"input": "s = \"a\", t = \"a\"", "output": "\"a\""}
+    ],
+    "hints": [
+      "Usa una ventana deslizante y un mapa de hash para rastrear los caracteres requeridos en `t` y los caracteres que tienes en tu ventana actual.",
+      "Cuando tu ventana cumple con la condición (contiene todos los caracteres de `t` con las frecuencias correctas), intenta 'encogerla' desde la izquierda para encontrar el substring más pequeño."
+    ],
+    "solutionJs": "function minWindow(s, t) {\n  if (t.length === 0) return \"\";\n\n  const tMap = {};\n  for (let char of t) {\n    tMap[char] = (tMap[char] || 0) + 1;\n  }\n\n  let windowStart = 0;\n  let matched = 0;\n  let minLength = Infinity;\n  let substringStart = 0;\n\n  for (let windowEnd = 0; windowEnd < s.length; windowEnd++) {\n    let rightChar = s[windowEnd];\n    if (tMap[rightChar] !== undefined) {\n      tMap[rightChar]--;\n      if (tMap[rightChar] >= 0) {\n        matched++;\n      }\n    }\n\n    while (matched === t.length) {\n      if (windowEnd - windowStart + 1 < minLength) {\n        minLength = windowEnd - windowStart + 1;\n        substringStart = windowStart;\n      }\n\n      let leftChar = s[windowStart];\n      windowStart++;\n      if (tMap[leftChar] !== undefined) {\n        if (tMap[leftChar] === 0) {\n          matched--;\n        }\n        tMap[leftChar]++;\n      }\n    }\n  }\n\n  if (minLength === Infinity) {\n    return \"\";\n  }\n\n  return s.substring(substringStart, substringStart + minLength);\n}",
+    "solutionPython": "from collections import Counter\n\ndef min_window(s, t):\n    if not t: return \"\"\n\n    t_counts = Counter(t)\n    window_counts = Counter()\n    \n    window_start = 0\n    matched = 0\n    min_length = float('inf')\n    substring_start = 0\n\n    for window_end in range(len(s)):\n        char = s[window_end]\n        window_counts[char] += 1\n        \n        if char in t_counts and window_counts[char] <= t_counts[char]:\n            matched += 1\n\n        while matched == len(t):\n            current_length = window_end - window_start + 1\n            if current_length < min_length:\n                min_length = current_length\n                substring_start = window_start\n            \n            char_left = s[window_start]\n            window_start += 1\n            window_counts[char_left] -= 1\n\n            if char_left in t_counts and window_counts[char_left] < t_counts[char_left]:\n                matched -= 1\n    \n    if min_length == float('inf'):\n        return \"\"\n    \n    return s[substring_start : substring_start + min_length]",
+    "solutionJava": "import java.util.HashMap;\nimport java.util.Map;\n\nclass Solution {\n    public String minWindow(String s, String t) {\n        if (t.isEmpty()) return \"\";\n\n        Map<Character, Integer> tMap = new HashMap<>();\n        for (char c : t.toCharArray()) {\n            tMap.put(c, tMap.getOrDefault(c, 0) + 1);\n        }\n\n        int windowStart = 0;\n        int matched = 0;\n        int minLength = Integer.MAX_VALUE;\n        int substringStart = 0;\n\n        for (int windowEnd = 0; windowEnd < s.length(); windowEnd++) {\n            char rightChar = s.charAt(windowEnd);\n            if (tMap.containsKey(rightChar)) {\n                tMap.put(rightChar, tMap.get(rightChar) - 1);\n                if (tMap.get(rightChar) >= 0) { // Character needed, and we have it (or more)\n                    matched++;\n                }\n            }\n\n            while (matched == t.length()) {\n                if (windowEnd - windowStart + 1 < minLength) {\n                    minLength = windowEnd - windowStart + 1;\n                    substringStart = windowStart;\n                }\n\n                char leftChar = s.charAt(windowStart);\n                windowStart++;\n                if (tMap.containsKey(leftChar)) {\n                    if (tMap.get(leftChar) == 0) { // This character was crucial for matching\n                        matched--;\n                    }\n                    tMap.put(leftChar, tMap.get(leftChar) + 1);\n                }\n            }\n        }\n\n        if (minLength == Integer.MAX_VALUE) {\n            return \"\";\n        }\n\n        return s.substring(substringStart, substringStart + minLength);\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <vector>\n#include <map>\n#include <limits>\n\nclass Solution {\npublic:\n    std::string minWindow(std::string s, std::string t) {\n        if (t.empty()) return \"\";\n\n        std::map<char, int> tMap;\n        for (char c : t) {\n            tMap[c]++;\n        }\n\n        int windowStart = 0;\n        int matched = 0;\n        int minLength = std::numeric_limits<int>::max();\n        int substringStart = 0;\n\n        for (int windowEnd = 0; windowEnd < s.length(); ++windowEnd) {\n            char rightChar = s[windowEnd];\n            if (tMap.count(rightChar)) {\n                tMap[rightChar]--;\n                if (tMap[rightChar] >= 0) {\n                    matched++;\n                }\n            }\n\n            while (matched == t.length()) {\n                if (windowEnd - windowStart + 1 < minLength) {\n                    minLength = windowEnd - windowStart + 1;\n                    substringStart = windowStart;\n                }\n\n                char leftChar = s[windowStart];\n                windowStart++;\n                if (tMap.count(leftChar)) {\n                    if (tMap[leftChar] == 0) {\n                        matched--;\n                    }\n                    tMap[leftChar]++;\n                }\n            }\n        }\n\n        if (minLength == std::numeric_limits<int>::max()) {\n            return \"\";\n        }\n\n        return s.substr(substringStart, minLength);\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D17",
+    "title": "Problema Difícil 17: Longest Consecutive Sequence",
+    "description": "Dada un array de enteros `nums` no ordenado, devuelve la longitud de la secuencia de elementos consecutivos más larga.",
+    "examples": [
+      {"input": "nums = [100,4,200,1,3,2]", "output": "4 (porque la secuencia más larga es [1, 2, 3, 4])"},
+      {"input": "nums = [0,3,7,2,5,8,4,6,0,1]", "output": "9"}
+    ],
+    "hints": [
+      "Puedes usar un `HashSet` para almacenar todos los números para una búsqueda eficiente.",
+      "Luego, itera sobre los números y, para cada número, verifica si es el inicio de una secuencia (es decir, si `num - 1` no está en el conjunto). Si lo es, construye la secuencia y cuenta su longitud."
+    ],
+    "solutionJs": "function longestConsecutive(nums) {\n  if (nums.length === 0) return 0;\n\n  const numSet = new Set(nums);\n  let longestStreak = 0;\n\n  for (let num of numSet) {\n    // Check if current num is the start of a sequence\n    if (!numSet.has(num - 1)) {\n      let currentNum = num;\n      let currentStreak = 1;\n\n      while (numSet.has(currentNum + 1)) {\n        currentNum++;\n        currentStreak++;\n      }\n      longestStreak = Math.max(longestStreak, currentStreak);\n    }\n  }\n  return longestStreak;\n}",
+    "solutionPython": "def longest_consecutive(nums):\n    if not nums: return 0\n\n    num_set = set(nums)\n    longest_streak = 0\n\n    for num in num_set:\n        # Check if current num is the start of a sequence\n        if (num - 1) not in num_set:\n            current_num = num\n            current_streak = 1\n\n            while (current_num + 1) in num_set:\n                current_num += 1\n                current_streak += 1\n            \n            longest_streak = max(longest_streak, current_streak)\n            \n    return longest_streak",
+    "solutionJava": "import java.util.HashSet;\nimport java.util.Set;\n\nclass Solution {\n    public int longestConsecutive(int[] nums) {\n        if (nums == null || nums.length == 0) return 0;\n\n        Set<Integer> numSet = new HashSet<>();\n        for (int num : nums) {\n            numSet.add(num);\n        }\n\n        int longestStreak = 0;\n\n        for (int num : numSet) {\n            // Check if current num is the start of a sequence\n            if (!numSet.contains(num - 1)) {\n                int currentNum = num;\n                int currentStreak = 1;\n\n                while (numSet.contains(currentNum + 1)) {\n                    currentNum++;\n                    currentStreak++;\n                }\n                longestStreak = Math.max(longestStreak, currentStreak);\n            }\n        }\n        return longestStreak;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <unordered_set>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int longestConsecutive(std::vector<int>& nums) {\n        if (nums.empty()) return 0;\n\n        std::unordered_set<int> numSet(nums.begin(), nums.end());\n        int longestStreak = 0;\n\n        for (int num : numSet) {\n            // Check if current num is the start of a sequence\n            if (numSet.find(num - 1) == numSet.end()) {\n                int currentNum = num;\n                int currentStreak = 1;\n\n                while (numSet.count(currentNum + 1)) {\n                    currentNum++;\n                    currentStreak++;\n                }\n                longestStreak = std::max(longestStreak, currentStreak);\n            }\n        }\n        return longestStreak;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D18",
+    "title": "Problema Difícil 18: Word Break",
+    "description": "Dada una cadena `s` y un diccionario de cadenas `wordDict` que contiene una lista de palabras, devuelve `true` si `s` se puede segmentar en una secuencia separada por espacios de una o más palabras del diccionario.",
+    "examples": [
+      {"input": "s = \"leetcode\", wordDict = [\"leet\",\"code\"]", "output": "true"},
+      {"input": "s = \"applepenapple\", wordDict = [\"apple\",\"pen\"]", "output": "true"}
+    ],
+    "hints": [
+      "Este problema se puede resolver con programación dinámica o backtracking con memoización.",
+      "Define `dp[i]` como `true` si `s[0...i-1]` se puede segmentar."
+    ],
+    "solutionJs": "function wordBreak(s, wordDict) {\n  const dp = Array(s.length + 1).fill(false);\n  dp[0] = true;\n\n  const wordSet = new Set(wordDict);\n\n  for (let i = 1; i <= s.length; i++) {\n    for (let j = 0; j < i; j++) {\n      if (dp[j] && wordSet.has(s.substring(j, i))) {\n        dp[i] = true;\n        break;\n      }\n    }\n  }\n  return dp[s.length];\n}",
+    "solutionPython": "def word_break(s, word_dict):\n    dp = [False] * (len(s) + 1)\n    dp[0] = True\n    word_set = set(word_dict)\n\n    for i in range(1, len(s) + 1):\n        for j in range(i):\n            if dp[j] and s[j:i] in word_set:\n                dp[i] = True\n                break\n    return dp[len(s)]",
+    "solutionJava": "import java.util.List;\nimport java.util.HashSet;\nimport java.util.Set;\n\nclass Solution {\n    public boolean wordBreak(String s, List<String> wordDict) {\n        boolean[] dp = new boolean[s.length() + 1];\n        dp[0] = true;\n\n        Set<String> wordSet = new HashSet<>(wordDict);\n\n        for (int i = 1; i <= s.length(); i++) {\n            for (int j = 0; j < i; j++) {\n                if (dp[j] && wordSet.contains(s.substring(j, i))) {\n                    dp[i] = true;\n                    break;\n                }\n            }\n        }\n        return dp[s.length()];\n    }\n}",
+    "solutionCpp": "#include <string>\n#include <vector>\n#include <unordered_set>\n\nclass Solution {\npublic:\n    bool wordBreak(std::string s, std::vector<std::string>& wordDict) {\n        std::vector<bool> dp(s.length() + 1, false);\n        dp[0] = true;\n\n        std::unordered_set<std::string> wordSet(wordDict.begin(), wordDict.end());\n\n        for (int i = 1; i <= s.length(); ++i) {\n            for (int j = 0; j < i; ++j) {\n                if (dp[j] && wordSet.count(s.substr(j, i - j))) {\n                    dp[i] = true;\n                    break;\n                }\n            }\n        }\n        return dp[s.length()];\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D19",
+    "title": "Problema Difícil 19: Maximum Product Subarray",
+    "description": "Dado un array de enteros `nums`, encuentra el subarray contiguo dentro de un array (que contenga al menos un número) que tiene el producto más grande y devuelve el producto.",
+    "examples": [
+      {"input": "nums = [2,3,-2,4]", "output": "6 (porque [2,3] tiene el producto más grande)"},
+      {"input": "nums = [-2,0,-1]", "output": "0"}
+    ],
+    "hints": [
+      "Debido a los números negativos, necesitas rastrear tanto el producto máximo como el mínimo hasta el momento.",
+      "El producto mínimo actual podría convertirse en el producto máximo si lo multiplicas por otro número negativo."
+    ],
+    "solutionJs": "function maxProduct(nums) {\n  let maxSoFar = nums[0];\n  let minSoFar = nums[0];\n  let result = maxSoFar;\n\n  for (let i = 1; i < nums.length; i++) {\n    let curr = nums[i];\n    let tempMax = Math.max(curr, Math.max(maxSoFar * curr, minSoFar * curr));\n    minSoFar = Math.min(curr, Math.min(maxSoFar * curr, minSoFar * curr));\n\n    maxSoFar = tempMax;\n\n    result = Math.max(maxSoFar, result);\n  }\n  return result;\n}",
+    "solutionPython": "def max_product(nums):\n    if not nums: return 0\n\n    max_so_far = nums[0]\n    min_so_far = nums[0]\n    result = max_so_far\n\n    for i in range(1, len(nums)):\n        curr = nums[i]\n        temp_max = max(curr, max(max_so_far * curr, min_so_far * curr))\n        min_so_far = min(curr, min(max_so_far * curr, min_so_far * curr))\n\n        max_so_far = temp_max\n\n        result = max(max_so_far, result)\n\n    return result",
+    "solutionJava": "class Solution {\n    public int maxProduct(int[] nums) {\n        if (nums == null || nums.length == 0) return 0;\n\n        int maxSoFar = nums[0];\n        int minSoFar = nums[0];\n        int result = maxSoFar;\n\n        for (int i = 1; i < nums.length; i++) {\n            int curr = nums[i];\n            int tempMax = Math.max(curr, Math.max(maxSoFar * curr, minSoFar * curr));\n            minSoFar = Math.min(curr, Math.min(maxSoFar * curr, minSoFar * curr));\n\n            maxSoFar = tempMax;\n\n            result = Math.max(maxSoFar, result);\n        }\n        return result;\n    }\n}",
+    "solutionCpp": "#include <vector>\n#include <algorithm>\n\nclass Solution {\npublic:\n    int maxProduct(std::vector<int>& nums) {\n        if (nums.empty()) return 0;\n\n        int maxSoFar = nums[0];\n        int minSoFar = nums[0];\n        int result = maxSoFar;\n\n        for (size_t i = 1; i < nums.size(); ++i) {\n            int curr = nums[i];\n            // Store max_so_far before it's updated for the next iteration's min_so_far calculation\n            int tempMax = std::max({curr, maxSoFar * curr, minSoFar * curr});\n            minSoFar = std::min({curr, maxSoFar * curr, minSoFar * curr});\n\n            maxSoFar = tempMax;\n\n            result = std::max(maxSoFar, result);\n        }\n        return result;\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
+  },
+  {
+    "id": "D20",
+    "title": "Problema Difícil 20: K-th Smallest Element in a BST",
+    "description": "Dado el `root` de un árbol de búsqueda binario (BST) y un entero `k`, devuelve el k-ésimo valor más pequeño (indexado en 1) de todos los valores de los nodos en el árbol.",
+    "examples": [
+      {"input": "root = [3,1,4,null,2], k = 1", "output": "1"},
+      {"input": "root = [5,3,6,2,4,null,null,1], k = 3", "output": "3"}
+    ],
+    "hints": [
+      "Puedes usar un recorrido inorden (inorder traversal) del BST. Un recorrido inorden de un BST siempre devuelve los elementos en orden ascendente.",
+      "Mantén un contador y detén el recorrido cuando hayas visitado `k` elementos."
+    ],
+    "solutionJs": "/**\n * Definition for a binary tree node.\n * function TreeNode(val, left, right) {\n * this.val = (val===undefined ? 0 : val)\n * this.left = (left===undefined ? null : left)\n * this.right = (right===undefined ? null : right)\n * }\n */\n/**\n * @param {TreeNode} root\n * @param {number} k\n * @return {number}\n */\nvar kthSmallest = function(root, k) {\n  const stack = [];\n  let count = 0;\n  let current = root;\n\n  while (current || stack.length > 0) {\n    while (current) {\n      stack.push(current);\n      current = current.left;\n    }\n    current = stack.pop();\n    count++;\n    if (count === k) {\n      return current.val;\n    }\n    current = current.right;\n  }\n};\n",
+    "solutionPython": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\ndef kth_smallest(root, k):\n    stack = []\n    count = 0\n    current = root\n\n    while current or stack:\n        while current:\n            stack.append(current)\n            current = current.left\n        \n        current = stack.pop()\n        count += 1\n        if count == k:\n            return current.val\n        \n        current = current.right",
+    "solutionJava": "/**\n * Definition for a binary tree node.\n * public class TreeNode {\n * int val;\n * TreeNode left;\n * TreeNode right;\n * TreeNode() {}\n * TreeNode(int val) { this.val = val; }\n * TreeNode(int val, TreeNode left, TreeNode right) {\n * this.val = val;\n * this.left = left;\n * this.right = right;\n * }\n * }\n */\nimport java.util.Stack;\n\nclass Solution {\n    public int kthSmallest(TreeNode root, int k) {\n        Stack<TreeNode> stack = new Stack<>();\n        int count = 0;\n        TreeNode current = root;\n\n        while (current != null || !stack.isEmpty()) {\n            while (current != null) {\n                stack.push(current);\n                current = current.left;\n            }\n            current = stack.pop();\n            count++;\n            if (count == k) {\n                return current.val;\n            }\n            current = current.right;\n        }\n        return -1; // Should not reach here for a valid k\n    }\n}",
+    "solutionCpp": "/**\n * Definition for a binary tree node.\n * struct TreeNode {\n * int val;\n * TreeNode *left;\n * TreeNode *right;\n * TreeNode() : val(0), left(nullptr), right(nullptr) {}\n * TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}\n * TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}\n * };\n */\n#include <stack>\n\nclass Solution {\npublic:\n    int kthSmallest(TreeNode* root, int k) {\n        std::stack<TreeNode*> st;\n        int count = 0;\n        TreeNode* current = root;\n\n        while (current || !st.empty()) {\n            while (current) {\n                st.push(current);\n                current = current->left;\n            }\n            current = st.top();\n            st.pop();\n            count++;\n            if (count == k) {\n                return current->val;\n            }\n            current = current->right;\n        }\n        return -1; // Should not reach here for a valid k\n    }\n};",
+    "difficulty": "Difícil",
+    "score": 30
   }
 ]
