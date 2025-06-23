@@ -35,12 +35,13 @@ const Navbar: React.FC<NavbarProps> = ({ modules }) => {
     switch (module.id) {
       // Importante: Hemos eliminado el 'case "dashboard": return "Home";'
       // Ahora, si necesitas un nombre corto, lo defines para el ID de cada módulo.
-      case 'challenges': return 'problems'; // Renombra 'Challenges' a 'Problems' en la UI
-      case 'roadmaps': return 'roadmaps';    // Mantiene 'Roadmaps'
-      case 'games': return 'games';       // Renombra 'Puzzles' a 'Games'
-      case 'cost-calculator': return 'calculator'; // Renombra a 'Calculator'
-      case 'password-generator': return 'passwords'; // Renombra a 'Passwords'
-      case 'pomodoro-app': return 'pomodoro';    // Renombra a 'Pomodoro'
+      case 'learning': return 'Learning '; // Renombra a 'Learning Resources'
+      case 'challenges': return 'Problems'; // Renombra 'Challenges' a 'Problems' en la UI
+      case 'roadmaps': return 'Roadmaps';    // Mantiene 'Roadmaps'
+      case 'games': return 'Games';       // Renombra 'Puzzles' a 'Games'
+      case 'calculator': return 'Calculator'; // Renombra a 'Calculator'
+      case 'password': return 'Passwords'; // Renombra a 'Passwords'
+      case 'pomodoro': return 'Pomodoro';    // Renombra a 'Pomodoro'
       default: return module.name; // Para cualquier otro módulo, usa su nombre completo
     }
   };

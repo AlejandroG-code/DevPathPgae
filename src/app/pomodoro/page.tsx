@@ -99,7 +99,8 @@ const PomodoroAppPage: React.FC = () => {
 
         {/* Timer Display */}
         <div className="my-10 p-6 bg-transparent backdrop-blur-sm rounded-lg shadow-inner border border-gray-700"> {/* Transparent/blurred inner background */}
-          <div className="text-9xl font-mono font-bold text-white drop-shadow-lg mb-4 leading-none">
+          {/* MODIFIED: Responsive font sizing for the timer */}
+          <div className="text-7xl md:text-8xl lg:text-9xl font-mono font-bold text-white drop-shadow-lg mb-4 leading-none">
             {formatTime(minutes)}:{formatTime(seconds)}
           </div>
           <p className="text-gray-400 text-2xl mb-2">Current Mode: <span className="font-semibold text-vibrant-teal">{mode === 'focus' ? 'Focus' : mode === 'shortBreak' ? 'Short Break' : 'Long Break'}</span></p>

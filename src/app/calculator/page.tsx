@@ -232,7 +232,8 @@ const ProjectCalculatorPage: React.FC = () => {
         <div className="mt-12 p-8 bg-gradient-to-r from-vibrant-teal to-bright-orange text-black rounded-xl shadow-2xl text-center transform hover:scale-[1.01] transition-transform duration-300">
           <h4 className="text-3xl font-bold mb-3 text-white">Estimated Project Cost:</h4>
           <div className="flex items-center justify-center mb-4">
-            <p className="text-7xl font-extrabold text-white drop-shadow-lg leading-tight mr-4">
+            {/* MODIFIED: Responsive font sizing for the price */}
+            <p className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white drop-shadow-lg leading-tight mr-4">
               {currencySymbols[selectedCurrency]}{displayCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
             {/* Currency Selector */}

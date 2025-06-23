@@ -10,7 +10,7 @@ const LandingPage: React.FC = () => {
   const router = useRouter();
 
   // Function to navigate to the "Mi Aprendizaje" page (formerly Dashboard)
-  const handleStartLearning = () => router.push('/problems'); // Now goes to /dashboard
+  const handleStartLearning = () => router.push('/learning'); // Now goes to /dashboard
 
   // Function to navigate to the new "Information" index page
   const handleExploreInfo = () => router.push('/info'); // New route for information

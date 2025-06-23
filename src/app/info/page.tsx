@@ -5,25 +5,22 @@ import Link from 'next/link';
 
 const InfoIndexPage: React.FC = () => {
   const infoSections = [
-    { title: 'Características', href: '/info/features', description: 'Descubre todas las funcionalidades de DevPath.' },
-    { title: 'Precios', href: '/info/pricing', description: 'Planes y modelos de suscripción.' },
-    { title: 'Roadmap', href: '/info/roadmap', description: 'Mira lo que viene en el futuro de DevPath.' },
-    { title: 'Blog', href: '/info/blog', description: 'Artículos y noticias sobre desarrollo y aprendizaje.' },
-    { title: 'Documentación', href: '/info/documentation', description: 'Guías detalladas para usar DevPath.' },
-    { title: 'Comunidad', href: '/info/community', description: 'Conéctate con otros desarrolladores.' },
-    { title: 'Acerca de', href: '/info/about', description: 'Conoce la historia y misión de DevPath.' },
-    { title: 'Carreras', href: '/info/careers', description: 'Oportunidades para unirte a nuestro equipo.' },
-    { title: 'Contacto', href: '/info/contact', description: 'Ponte en contacto con nosotros.' },
+    { title: 'Features', href: '/info/features', description: 'Explore the powerful features that make DevPath unique.' },
+    { title: 'Pricing', href: '/info/pricing', description: 'View our flexible plans and subscription options.' },
+    { title: 'Roadmap', href: '/info/roadmap', description: 'See what\'s coming next for DevPath\'s future developments.' },
+    { title: 'Documentation', href: '/info/documentation', description: 'Find detailed guides and how-tos for using DevPath.' },
+    { title: 'Community', href: '/community', description: 'Connect with other developers and grow together.' },
+    { title: 'About Us', href: '/info/about', description: 'Learn about DevPath\'s story, mission, and vision.' },
   ];
 
   return (
     <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-64px)] text-white text-center">
       <div className="bg-transparent backdrop-blur-md p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 w-full max-w-5xl mx-auto">
         <h1 className="text-5xl font-extrabold mb-6 text-vibrant-teal drop-shadow-lg">
-          Más Información sobre DevPath
+          Explore DevPath
         </h1>
         <p className="text-gray-200 text-lg mb-12 max-w-prose mx-auto">
-          Aquí puedes encontrar todo lo que necesitas saber sobre nuestra plataforma, desde sus funcionalidades hasta cómo puedes unirte a nuestro equipo.
+          This hub provides comprehensive information about our platform, from its core features to opportunities to join our team.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
