@@ -1,0 +1,642 @@
+[
+  {
+    "id": "easy-1",
+    "title": "Sum Two Numbers",
+    "description": "Write a function that takes two numbers as input and returns their sum.",
+    "examples": [
+      { "input": "2, 3", "output": "5" },
+      { "input": "10, -5", "output": "5" }
+    ],
+    "hints": ["Use the '+' operator.", "Consider different types of numbers."],
+    "solutionJs": "function sum(a, b) {\n  return a + b;\n}",
+    "solutionPython": "def sum(a, b):\n  return a + b",
+    "solutionJava": "class Solution {\n  public int sum(int a, int b) {\n    return a + b;\n  }\n}",
+    "solutionCpp": "int sum(int a, int b) {\n  return a + b;\n}",
+    "difficulty": "Easy",
+    "score": 10
+  },
+  {
+    "id": "easy-2",
+    "title": "Is Even",
+    "description": "Write a function that checks if a given integer is even.",
+    "examples": [
+      { "input": "4", "output": "true" },
+      { "input": "7", "output": "false" }
+    ],
+    "hints": ["Use the modulo operator (%)."],
+    "solutionJs": "function isEven(num) {\n  return num % 2 === 0;\n}",
+    "solutionPython": "def is_even(num):\n  return num % 2 == 0",
+    "solutionJava": "class Solution {\n  public boolean isEven(int num) {\n    return num % 2 == 0;\n  }\n}",
+    "solutionCpp": "bool isEven(int num) {\n  return num % 2 == 0;\n}",
+    "difficulty": "Easy",
+    "score": 10
+  },
+  {
+    "id": "easy-3",
+    "title": "String Length",
+    "description": "Create a function that returns the length of a given string.",
+    "examples": [
+      { "input": "\"hello\"", "output": "5" },
+      { "input": "\"\"", "output": "0" }
+    ],
+    "hints": ["Strings have a 'length' property or method."],
+    "solutionJs": "function stringLength(str) {\n  return str.length;\n}",
+    "solutionPython": "def string_length(s):\n  return len(s)",
+    "solutionJava": "class Solution {\n  public int stringLength(String s) {\n    return s.length();\n  }\n}",
+    "solutionCpp": "int stringLength(std::string s) {\n  return s.length();\n}",
+    "difficulty": "Easy",
+    "score": 10
+  },
+  {
+    "id": "easy-4",
+    "title": "Concatenate Strings",
+    "description": "Write a function that concatenates two strings.",
+    "examples": [
+      { "input": "\"Hello\", \"World\"", "output": "\"HelloWorld\"" },
+      { "input": "\"One\", \"Two\"", "output": "\"OneTwo\"" }
+    ],
+    "hints": ["Use the '+' operator or a built-in concatenate function."],
+    "solutionJs": "function concatenateStrings(str1, str2) {\n  return str1 + str2;\n}",
+    "solutionPython": "def concatenate_strings(s1, s2):\n  return s1 + s2",
+    "solutionJava": "class Solution {\n  public String concatenateStrings(String s1, String s2) {\n    return s1 + s2;\n  }\n}",
+    "solutionCpp": "std::string concatenateStrings(std::string s1, std::string s2) {\n  return s1 + s2;\n}",
+    "difficulty": "Easy",
+    "score": 10
+  },
+  {
+    "id": "easy-5",
+    "title": "Max of Two",
+    "description": "Find the maximum of two given numbers.",
+    "examples": [
+      { "input": "5, 10", "output": "10" },
+      { "input": "7, 2", "output": "7" }
+    ],
+    "hints": ["Use an if-else statement or a ternary operator."],
+    "solutionJs": "function maxOfTwo(a, b) {\n  return Math.max(a, b);\n}",
+    "solutionPython": "def max_of_two(a, b):\n  return max(a, b)",
+    "solutionJava": "class Solution {\n  public int maxOfTwo(int a, int b) {\n    return Math.max(a, b);\n  }\n}",
+    "solutionCpp": "int maxOfTwo(int a, int b) {\n  return std::max(a, b);\n}",
+    "difficulty": "Easy",
+    "score": 10
+  },
+  {
+    "id": "easy-6",
+    "title": "Circle Area",
+    "description": "Calculate the area of a circle given its radius.",
+    "examples": [
+      { "input": "5", "output": "78.539..." }
+    ],
+    "hints": ["Area = π * r^2. Use Math.PI."],
+    "solutionJs": "function circleArea(radius) {\n  return Math.PI * radius * radius;\n}",
+    "solutionPython": "import math\ndef circle_area(radius):\n  return math.pi * radius**2",
+    "solutionJava": "class Solution {\n  public double circleArea(double radius) {\n    return Math.PI * radius * radius;\n  }\n}",
+    "solutionCpp": "double circleArea(double radius) {\n  return M_PI * radius * radius;\n}",
+    "difficulty": "Easy",
+    "score": 10
+  },
+  {
+    "id": "easy-7",
+    "title": "Factorial",
+    "description": "Compute the factorial of a non-negative integer.",
+    "examples": [
+      { "input": "4", "output": "24" },
+      { "input": "0", "output": "1" }
+    ],
+    "hints": ["Use a loop or recursion.", "Factorial of 0 is 1."],
+    "solutionJs": "function factorial(n) {\n  if (n === 0) return 1;\n  let result = 1;\n  for (let i = 1; i <= n; i++) {\n    result *= i;\n  }\n  return result;\n}",
+    "solutionPython": "def factorial(n):\n  if n == 0: return 1\n  res = 1\n  for i in range(1, n + 1):\n    res *= i\n  return res",
+    "solutionJava": "class Solution {\n  public int factorial(int n) {\n    if (n == 0) return 1;\n    int result = 1;\n    for (int i = 1; i <= n; i++) {\n      result *= i;\n    }\n    return result;\n  }\n}",
+    "solutionCpp": "int factorial(int n) {\n  if (n == 0) return 1;\n  int result = 1;\n  for (int i = 1; i <= n; i++) {\n    result *= i;\n  }\n  return result;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-8",
+    "title": "First Element of Array",
+    "description": "Return the first element of a given array.",
+    "examples": [
+      { "input": "[1, 2, 3]", "output": "1" },
+      { "input": "[\"a\", \"b\"]", "output": "\"a\"" }
+    ],
+    "hints": ["Arrays are 0-indexed."],
+    "solutionJs": "function getFirstElement(arr) {\n  return arr[0];\n}",
+    "solutionPython": "def get_first_element(arr):\n  return arr[0]",
+    "solutionJava": "class Solution {\n  public <T> T getFirstElement(T[] arr) {\n    return arr[0];\n  }\n}",
+    "solutionCpp": "template <typename T>\nT getFirstElement(const std::vector<T>& arr) {\n  return arr[0];\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-9",
+    "title": "Last Element of Array",
+    "description": "Return the last element of a given array.",
+    "examples": [
+      { "input": "[1, 2, 3]", "output": "3" },
+      { "input": "[\"x\", \"y\"]", "output": "\"y\"" }
+    ],
+    "hints": ["Arrays are 0-indexed. Use 'length' property."],
+    "solutionJs": "function getLastElement(arr) {\n  return arr[arr.length - 1];\n}",
+    "solutionPython": "def get_last_element(arr):\n  return arr[-1]",
+    "solutionJava": "class Solution {\n  public <T> T getLastElement(T[] arr) {\n    return arr[arr.length - 1];\n  }\n}",
+    "solutionCpp": "template <typename T>\nT getLastElement(const std::vector<T>& arr) {\n  return arr[arr.size() - 1];\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-10",
+    "title": "Array Sum",
+    "description": "Calculate the sum of all numbers in an array.",
+    "examples": [
+      { "input": "[1, 2, 3]", "output": "6" },
+      { "input": "[10, -1, 5]", "output": "14" }
+    ],
+    "hints": ["Use a loop or the 'reduce' method."],
+    "solutionJs": "function arraySum(arr) {\n  return arr.reduce((acc, curr) => acc + curr, 0);\n}",
+    "solutionPython": "def array_sum(arr):\n  return sum(arr)",
+    "solutionJava": "class Solution {\n  public int arraySum(int[] arr) {\n    int sum = 0;\n    for (int num : arr) {\n      sum += num;\n    }\n    return sum;\n  }\n}",
+    "solutionCpp": "int arraySum(const std::vector<int>& arr) {\n  int sum = 0;\n  for (int num : arr) {\n    sum += num;\n  }\n  return sum;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-11",
+    "title": "Greater Than Zero",
+    "description": "Write a function that returns true if a number is greater than zero, false otherwise.",
+    "examples": [
+      { "input": "5", "output": "true" },
+      { "input": "-3", "output": "false" }
+    ],
+    "hints": ["Use a simple comparison operator."],
+    "solutionJs": "function greaterThanZero(num) {\n  return num > 0;\n}",
+    "solutionPython": "def greater_than_zero(num):\n  return num > 0",
+    "solutionJava": "class Solution {\n  public boolean greaterThanZero(int num) {\n    return num > 0;\n  }\n}",
+    "solutionCpp": "bool greaterThanZero(int num) {\n  return num > 0;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-12",
+    "title": "Reverse String",
+    "description": "Reverse a given string.",
+    "examples": [
+      { "input": "\"hello\"", "output": "\"olleh\"" },
+      { "input": "\"world\"", "output": "\"dlrow\"" }
+    ],
+    "hints": ["You can convert the string to an array, reverse it, then join back to a string."],
+    "solutionJs": "function reverseString(str) {\n  return str.split('').reverse().join('');\n}",
+    "solutionPython": "def reverse_string(s):\n  return s[::-1]",
+    "solutionJava": "class Solution {\n  public String reverseString(String s) {\n    return new StringBuilder(s).reverse().toString();\n  }\n}",
+    "solutionCpp": "std::string reverseString(std::string s) {\n  std::reverse(s.begin(), s.end());\n  return s;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-13",
+    "title": "Array Includes Element",
+    "description": "Check if an array contains a specific element.",
+    "examples": [
+      { "input": "[1, 2, 3], 2", "output": "true" },
+      { "input": "[\"apple\", \"banana\"], \"orange\"", "output": "false" }
+    ],
+    "hints": ["Use a loop or the 'includes' method."],
+    "solutionJs": "function arrayIncludesElement(arr, element) {\n  return arr.includes(element);\n}",
+    "solutionPython": "def array_includes_element(arr, element):\n  return element in arr",
+    "solutionJava": "class Solution {\n  public boolean arrayIncludesElement(int[] arr, int element) {\n    for (int x : arr) { if (x == element) return true; }\n    return false;\n  }\n}",
+    "solutionCpp": "bool arrayIncludesElement(const std::vector<int>& arr, int element) {\n  for (int x : arr) { if (x == element) return true; }\n  return false;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-14",
+    "title": "Sum of Digits",
+    "description": "Calculate the sum of digits of a given number.",
+    "examples": [
+      { "input": "123", "output": "6" },
+      { "input": "45", "output": "9" }
+    ],
+    "hints": ["Convert the number to a string to iterate through digits.", "Use modulo and division."],
+    "solutionJs": "function sumOfDigits(num) {\n  return String(num).split('').map(Number).reduce((a, b) => a + b, 0);\n}",
+    "solutionPython": "def sum_of_digits(num):\n  return sum(int(digit) for digit in str(num))",
+    "solutionJava": "class Solution {\n  public int sumOfDigits(int num) {\n    int sum = 0;\n    while (num > 0) {\n      sum += num % 10;\n      num /= 10;\n    }\n    return sum;\n  }\n}",
+    "solutionCpp": "int sumOfDigits(int num) {\n  int sum = 0;\n  while (num > 0) {\n    sum += num % 10;\n    num /= 10;\n  }\n  return sum;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-15",
+    "title": "Square Number",
+    "description": "Return the square of a given number.",
+    "examples": [
+      { "input": "4", "output": "16" },
+      { "input": "7", "output": "49" }
+    ],
+    "hints": ["Multiply the number by itself."],
+    "solutionJs": "function squareNumber(num) {\n  return num * num;\n}",
+    "solutionPython": "def square_number(num):\n  return num * num",
+    "solutionJava": "class Solution {\n  public int squareNumber(int num) {\n    return num * num;\n  }\n}",
+    "solutionCpp": "int squareNumber(int num) {\n  return num * num;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-16",
+    "title": "Absolute Value",
+    "description": "Find the absolute value of a number.",
+    "examples": [
+      { "input": "-5", "output": "5" },
+      { "input": "10", "output": "10" }
+    ],
+    "hints": ["Use Math.abs() or conditional statements."],
+    "solutionJs": "function absoluteValue(num) {\n  return Math.abs(num);\n}",
+    "solutionPython": "def absolute_value(num):\n  return abs(num)",
+    "solutionJava": "class Solution {\n  public int absoluteValue(int num) {\n    return Math.abs(num);\n  }\n}",
+    "solutionCpp": "int absoluteValue(int num) {\n  return std::abs(num);\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-17",
+    "title": "Count Vowels",
+    "description": "Count the number of vowels (a, e, i, o, u) in a string.",
+    "examples": [
+      { "input": "\"hello\"", "output": "2" },
+      { "input": "\"rhythm\"", "output": "0" }
+    ],
+    "hints": ["Iterate through the string and check each character."],
+    "solutionJs": "function countVowels(str) {\n  const vowels = 'aeiouAEIOU';\n  let count = 0;\n  for (let char of str) {\n    if (vowels.includes(char)) {\n      count++;\n    }\n  }\n  return count;\n}",
+    "solutionPython": "def count_vowels(s):\n  vowels = 'aeiouAEIOU'\n  count = 0\n  for char in s:\n    if char in vowels:\n      count += 1\n  return count",
+    "solutionJava": "class Solution {\n  public int countVowels(String s) {\n    int count = 0;\n    String vowels = \"aeiouAEIOU\";\n    for (char c : s.toCharArray()) {\n      if (vowels.indexOf(c) != -1) {\n        count++;\n      }\n    }\n    return count;\n  }\n}",
+    "solutionCpp": "int countVowels(std::string s) {\n  int count = 0;\n  std::string vowels = \"aeiouAEIOU\";\n  for (char c : s) {\n    if (vowels.find(c) != std::string::npos) {\n      count++;\n    }\n  }\n  return count;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-18",
+    "title": "Power of Two",
+    "description": "Check if a given positive integer is a power of two.",
+    "examples": [
+      { "input": "8", "output": "true" },
+      { "input": "6", "output": "false" }
+    ],
+    "hints": ["A number is a power of two if it has only one '1' in its binary representation (for positive numbers)."],
+    "solutionJs": "function isPowerOfTwo(n) {\n  return n > 0 && (n & (n - 1)) === 0;\n}",
+    "solutionPython": "def is_power_of_two(n):\n  return n > 0 and (n & (n - 1)) == 0",
+    "solutionJava": "class Solution {\n  public boolean isPowerOfTwo(int n) {\n    return n > 0 && (n & (n - 1)) == 0;\n  }\n}",
+    "solutionCpp": "bool isPowerOfTwo(int n) {\n  return n > 0 && (n & (n - 1)) == 0;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-19",
+    "title": "Find Minimum in Array",
+    "description": "Find the smallest number in a given array of numbers.",
+    "examples": [
+      { "input": "[3, 1, 4, 1, 5, 9]", "output": "1" },
+      { "input": "[10, 5, 20]", "output": "5" }
+    ],
+    "hints": ["Iterate through the array and keep track of the minimum value found so far."],
+    "solutionJs": "function findMinInArray(arr) {\n  return Math.min(...arr);\n}",
+    "solutionPython": "def find_min_in_array(arr):\n  return min(arr)",
+    "solutionJava": "class Solution {\n  public int findMinInArray(int[] arr) {\n    int min = arr[0];\n    for (int i = 1; i < arr.length; i++) {\n      if (arr[i] < min) {\n        min = arr[i];\n      }\n    }\n    return min;\n  }\n}",
+    "solutionCpp": "int findMinInArray(const std::vector<int>& arr) {\n  int min = arr[0];\n  for (int num : arr) {\n    if (num < min) {\n      min = num;\n    }\n  }\n  return min;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-20",
+    "title": "Find Maximum in Array",
+    "description": "Find the largest number in a given array of numbers.",
+    "examples": [
+      { "input": "[3, 1, 4, 1, 5, 9]", "output": "9" },
+      { "input": "[10, 5, 20]", "output": "20" }
+    ],
+    "hints": ["Iterate through the array and keep track of the maximum value found so far."],
+    "solutionJs": "function findMaxInArray(arr) {\n  return Math.max(...arr);\n}",
+    "solutionPython": "def find_max_in_array(arr):\n  return max(arr)",
+    "solutionJava": "class Solution {\n  public int findMaxInArray(int[] arr) {\n    int max = arr[0];\n    for (int i = 1; i < arr.length; i++) {\n      if (arr[i] > max) {\n        max = arr[i];\n      }\n    }\n    return max;\n  }\n}",
+    "solutionCpp": "int findMaxInArray(const std::vector<int>& arr) {\n  int max = arr[0];\n  for (int num : arr) {\n    if (num > max) {\n      max = num;\n    }\n  }\n  return max;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-21",
+    "title": "Capitalize First Letter",
+    "description": "Capitalize the first letter of a given string.",
+    "examples": [
+      { "input": "\"hello\"", "output": "\"Hello\"" },
+      { "input": "\"world\"", "output": "\"World\"" }
+    ],
+    "hints": ["Access the first character, convert it to uppercase, and concatenate with the rest of the string."],
+    "solutionJs": "function capitalizeFirstLetter(str) {\n  if (str.length === 0) return '';\n  return str.charAt(0).toUpperCase() + str.slice(1);\n}",
+    "solutionPython": "def capitalize_first_letter(s):\n  if not s: return ''\n  return s[0].upper() + s[1:]",
+    "solutionJava": "class Solution {\n  public String capitalizeFirstLetter(String s) {\n    if (s == null || s.isEmpty()) return s;\n    return Character.toUpperCase(s.charAt(0)) + s.substring(1);\n  }\n}",
+    "solutionCpp": "std::string capitalizeFirstLetter(std::string s) {\n  if (s.empty()) return s;\n  s[0] = std::toupper(s[0]);\n  return s;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-22",
+    "title": "Remove Spaces",
+    "description": "Remove all spaces from a string.",
+    "examples": [
+      { "input": "\"hello world\"", "output": "\"helloworld\"" },
+      { "input": "\"   test   \"", "output": "\"test\"" }
+    ],
+    "hints": ["Use a string replacement method or iterate and build a new string."],
+    "solutionJs": "function removeSpaces(str) {\n  return str.replace(/ /g, '');\n}",
+    "solutionPython": "def remove_spaces(s):\n  return s.replace(' ', '')",
+    "solutionJava": "class Solution {\n  public String removeSpaces(String s) {\n    return s.replaceAll(\" \", \"\");\n  }\n}",
+    "solutionCpp": "std::string removeSpaces(std::string s) {\n  s.erase(std::remove(s.begin(), s.end(), ' '), s.end());\n  return s;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-23",
+    "title": "Array Average",
+    "description": "Calculate the average of numbers in an array.",
+    "examples": [
+      { "input": "[1, 2, 3]", "output": "2" },
+      { "input": "[10, 20, 30]", "output": "20" }
+    ],
+    "hints": ["Sum all elements and divide by the number of elements."],
+    "solutionJs": "function arrayAverage(arr) {\n  if (arr.length === 0) return 0;\n  const sum = arr.reduce((acc, curr) => acc + curr, 0);\n  return sum / arr.length;\n}",
+    "solutionPython": "def array_average(arr):\n  if not arr: return 0\n  return sum(arr) / len(arr)",
+    "solutionJava": "class Solution {\n  public double arrayAverage(int[] arr) {\n    if (arr.length == 0) return 0.0;\n    int sum = 0;\n    for (int num : arr) {\n      sum += num;\n    }\n    return (double) sum / arr.length;\n  }\n}",
+    "solutionCpp": "double arrayAverage(const std::vector<int>& arr) {\n  if (arr.empty()) return 0.0;\n  double sum = 0;\n  for (int num : arr) {\n    sum += num;\n  }\n  return sum / arr.size();\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-24",
+    "title": "Celsius to Fahrenheit",
+    "description": "Convert temperature from Celsius to Fahrenheit.",
+    "examples": [
+      { "input": "0", "output": "32" },
+      { "input": "25", "output": "77" }
+    ],
+    "hints": ["Formula: (Celsius * 9/5) + 32."],
+    "solutionJs": "function celsiusToFahrenheit(celsius) {\n  return (celsius * 9/5) + 32;\n}",
+    "solutionPython": "def celsius_to_fahrenheit(celsius):\n  return (celsius * 9/5) + 32",
+    "solutionJava": "class Solution {\n  public double celsiusToFahrenheit(double celsius) {\n    return (celsius * 9.0/5.0) + 32;\n  }\n}",
+    "solutionCpp": "double celsiusToFahrenheit(double celsius) {\n  return (celsius * 9.0/5.0) + 32;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-25",
+    "title": "Fahrenheit to Celsius",
+    "description": "Convert temperature from Fahrenheit to Celsius.",
+    "examples": [
+      { "input": "32", "output": "0" },
+      { "input": "77", "output": "25" }
+    ],
+    "hints": ["Formula: (Fahrenheit - 32) * 5/9."],
+    "solutionJs": "function fahrenheitToCelsius(fahrenheit) {\n  return (fahrenheit - 32) * 5/9;\n}",
+    "solutionPython": "def fahrenheit_to_celsius(fahrenheit):\n  return (fahrenheit - 32) * 5/9",
+    "solutionJava": "class Solution {\n  public double fahrenheitToCelsius(double fahrenheit) {\n    return (fahrenheit - 32) * 5.0/9.0;\n  }\n}",
+    "solutionCpp": "double fahrenheitToCelsius(double fahrenheit) {\n  return (fahrenheit - 32) * 5.0/9.0;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-26",
+    "title": "Area of Rectangle",
+    "description": "Calculate the area of a rectangle given its width and height.",
+    "examples": [
+      { "input": "5, 10", "output": "50" },
+      { "input": "3, 7", "output": "21" }
+    ],
+    "hints": ["Area = width * height."],
+    "solutionJs": "function rectangleArea(width, height) {\n  return width * height;\n}",
+    "solutionPython": "def rectangle_area(width, height):\n  return width * height",
+    "solutionJava": "class Solution {\n  public int rectangleArea(int width, int height) {\n    return width * height;\n  }\n}",
+    "solutionCpp": "int rectangleArea(int width, int height) {\n  return width * height;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-27",
+    "title": "Perimeter of Rectangle",
+    "description": "Calculate the perimeter of a rectangle given its width and height.",
+    "examples": [
+      { "input": "5, 10", "output": "30" },
+      { "input": "3, 7", "output": "20" }
+    ],
+    "hints": ["Perimeter = 2 * (width + height)."],
+    "solutionJs": "function rectanglePerimeter(width, height) {\n  return 2 * (width + height);\n}",
+    "solutionPython": "def rectangle_perimeter(width, height):\n  return 2 * (width + height)",
+    "solutionJava": "class Solution {\n  public int rectanglePerimeter(int width, int height) {\n    return 2 * (width + height);\n  }\n}",
+    "solutionCpp": "int rectanglePerimeter(int width, int height) {\n  return 2 * (width + height);\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-28",
+    "title": "Check Palindrome (Number)",
+    "description": "Check if a given integer is a palindrome (reads the same forwards and backwards).",
+    "examples": [
+      { "input": "121", "output": "true" },
+      { "input": "123", "output": "false" }
+    ],
+    "hints": ["Convert the number to a string to easily reverse and compare."],
+    "solutionJs": "function isPalindromeNumber(num) {\n  const s = String(num);\n  return s === s.split('').reverse().join('');\n}",
+    "solutionPython": "def is_palindrome_number(num):\n  s = str(num)\n  return s == s[::-1]",
+    "solutionJava": "class Solution {\n  public boolean isPalindromeNumber(int num) {\n    String s = String.valueOf(num);\n    return new StringBuilder(s).reverse().toString().equals(s);\n  }\n}",
+    "solutionCpp": "bool isPalindromeNumber(int num) {\n  std::string s = std::to_string(num);\n  std::string reversed_s = s;\n  std::reverse(reversed_s.begin(), reversed_s.end());\n  return s == reversed_s;\n}",
+    "difficulty": "Easy",
+    "score": 15
+  },
+  {
+    "id": "easy-29",
+    "title": "Array Contains Only True",
+    "description": "Check if all elements in a boolean array are true.",
+    "examples": [
+      { "input": "[true, true, true]", "output": "true" },
+      { "input": "[true, false, true]", "output": "false" }
+    ],
+    "hints": ["Iterate and return false if any element is false. If the loop completes, all are true."],
+    "solutionJs": "function arrayContainsOnlyTrue(arr) {\n  return arr.every(Boolean);\n}",
+    "solutionPython": "def array_contains_only_true(arr):\n  return all(arr)",
+    "solutionJava": "class Solution {\n  public boolean arrayContainsOnlyTrue(boolean[] arr) {\n    for (boolean b : arr) {\n      if (!b) return false;\n    }\n    return true;\n  }\n}",
+    "solutionCpp": "bool arrayContainsOnlyTrue(const std::vector<bool>& arr) {\n  for (bool b : arr) {\n    if (!b) return false;\n  }\n  return true;\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-30",
+    "title": "Round to Nearest Integer",
+    "description": "Round a floating-point number to the nearest integer.",
+    "examples": [
+      { "input": "3.7", "output": "4" },
+      { "input": "3.2", "output": "3" }
+    ],
+    "hints": ["Use Math.round() or similar built-in functions."],
+    "solutionJs": "function roundToNearestInteger(num) {\n  return Math.round(num);\n}",
+    "solutionPython": "def round_to_nearest_integer(num):\n  return round(num)",
+    "solutionJava": "class Solution {\n  public int roundToNearestInteger(double num) {\n    return (int) Math.round(num);\n  }\n}",
+    "solutionCpp": "int roundToNearestInteger(double num) {\n  return static_cast<int>(std::round(num));\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-31",
+    "title": "Is String Empty",
+    "description": "Check if a given string is empty.",
+    "examples": [
+      { "input": "\"\"", "output": "true" },
+      { "input": "\"abc\"", "output": "false" }
+    ],
+    "hints": ["Check its length."],
+    "solutionJs": "function isStringEmpty(str) {\n  return str.length === 0;\n}",
+    "solutionPython": "def is_string_empty(s):\n  return not s",
+    "solutionJava": "class Solution {\n  public boolean isStringEmpty(String s) {\n    return s.isEmpty();\n  }\n}",
+    "solutionCpp": "bool isStringEmpty(const std::string& s) {\n  return s.empty();\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-32",
+    "title": "Get Middle Character",
+    "description": "Return the middle character of a string. If the length is even, return the two middle characters.",
+    "examples": [
+      { "input": "\"test\"", "output": "\"es\"" },
+      { "input": "\"testing\"", "output": "\"t\"" }
+    ],
+    "hints": ["Calculate the middle index/indices. Use substring/slice."],
+    "solutionJs": "function getMiddleCharacter(s) {\n  const mid = Math.floor(s.length / 2);\n  return s.length % 2 === 1 ? s.charAt(mid) : s.slice(mid - 1, mid + 1);\n}",
+    "solutionPython": "def get_middle_character(s):\n  mid = len(s) // 2\n  return s[mid] if len(s) % 2 == 1 else s[mid - 1:mid + 1]",
+    "solutionJava": "class Solution {\n  public String getMiddleCharacter(String s) {\n    int mid = s.length() / 2;\n    return s.length() % 2 == 1 ? String.valueOf(s.charAt(mid)) : s.substring(mid - 1, mid + 1);\n  }\n}",
+    "solutionCpp": "std::string getMiddleCharacter(const std::string& s) {\n  int mid = s.length() / 2;\n  return (s.length() % 2 == 1) ? std::string(1, s[mid]) : s.substr(mid - 1, 2);\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-33",
+    "title": "Repeat String",
+    "description": "Repeat a given string a specified number of times.",
+    "examples": [
+      { "input": "\"abc\", 3", "output": "\"abcabcabc\"" },
+      { "input": "\"hello\", 1", "output": "\"hello\"" }
+    ],
+    "hints": ["Use a loop or a built-in repeat method."],
+    "solutionJs": "function repeatString(str, times) {\n  return str.repeat(times);\n}",
+    "solutionPython": "def repeat_string(s, times):\n  return s * times",
+    "solutionJava": "class Solution {\n  public String repeatString(String s, int times) {\n    StringBuilder sb = new StringBuilder();\n    for (int i = 0; i < times; i++) {\n      sb.append(s);\n    }\n    return sb.toString();\n  }\n}",
+    "solutionCpp": "std::string repeatString(const std::string& s, int times) {\n  std::string result = \"\";\n  for (int i = 0; i < times; i++) {\n    result += s;\n  }\n  return result;\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-34",
+    "title": "Check if Integer",
+    "description": "Check if a given value is an integer.",
+    "examples": [
+      { "input": "5", "output": "true" },
+      { "input": "3.14", "output": "false" },
+      { "input": "\"hello\"", "output": "false" }
+    ],
+    "hints": ["Use a built-in function like `Number.isInteger()`."],
+    "solutionJs": "function isInteger(value) {\n  return Number.isInteger(value);\n}",
+    "solutionPython": "def is_integer(value):\n  return isinstance(value, int)",
+    "solutionJava": "class Solution {\n  public boolean isInteger(double value) {\n    return value == Math.floor(value);\n  }\n}",
+    "solutionCpp": "bool isInteger(double value) {\n  return value == std::floor(value);\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-35",
+    "title": "Array Filter Evens",
+    "description": "Given an array of numbers, return a new array containing only the even numbers.",
+    "examples": [
+      { "input": "[1, 2, 3, 4, 5]", "output": "[2, 4]" },
+      { "input": "[10, 15, 20]", "output": "[10, 20]" }
+    ],
+    "hints": ["Use the modulo operator (%) and a loop or `filter` method."],
+    "solutionJs": "function filterEvens(arr) {\n  return arr.filter(num => num % 2 === 0);\n}",
+    "solutionPython": "def filter_evens(arr):\n  return [num for num in arr if num % 2 == 0]",
+    "solutionJava": "import java.util.ArrayList;\nimport java.util.List;\nclass Solution {\n  public List<Integer> filterEvens(int[] arr) {\n    List<Integer> evens = new ArrayList<>();\n    for (int num : arr) {\n      if (num % 2 == 0) {\n        evens.add(num);\n      }\n    }\n    return evens;\n  }\n}",
+    "solutionCpp": "std::vector<int> filterEvens(const std::vector<int>& arr) {\n  std::vector<int> evens;\n  for (int num : arr) {\n    if (num % 2 == 0) {\n      evens.push_back(num);\n    }\n  }\n  return evens;\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-36",
+    "title": "String to Uppercase",
+    "description": "Convert a given string to uppercase.",
+    "examples": [
+      { "input": "\"hello\"", "output": "\"HELLO\"" },
+      { "input": "\"World\"", "output": "\"WORLD\"" }
+    ],
+    "hints": ["Use a built-in method like `toUpperCase()`."],
+    "solutionJs": "function toUppercase(str) {\n  return str.toUpperCase();\n}",
+    "solutionPython": "def to_uppercase(s):\n  return s.upper()",
+    "solutionJava": "class Solution {\n  public String toUppercase(String s) {\n    return s.toUpperCase();\n  }\n}",
+    "solutionCpp": "std::string toUppercase(std::string s) {\n  std::transform(s.begin(), s.end(), s.begin(), ::toupper);\n  return s;\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-37",
+    "title": "String to Lowercase",
+    "description": "Convert a given string to lowercase.",
+    "examples": [
+      { "input": "\"HELLO\"", "output": "\"hello\"" },
+      { "input": "\"World\"", "output": "\"world\"" }
+    ],
+    "hints": ["Use a built-in method like `toLowerCase()`."],
+    "solutionJs": "function toLowercase(str) {\n  return str.toLowerCase();\n}",
+    "solutionPython": "def to_lowercase(s):\n  return s.lower()",
+    "solutionJava": "class Solution {\n  public String toLowercase(String s) {\n    return s.toLowerCase();\n  }\n}",
+    "solutionCpp": "std::string toLowercase(std::string s) {\n  std::transform(s.begin(), s.end(), s.begin(), ::tolower);\n  return s;\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-38",
+    "title": "Array includes Negative",
+    "description": "Check if an array of numbers contains any negative numbers.",
+    "examples": [
+      { "input": "[1, 2, -3]", "output": "true" },
+      { "input": "[1, 2, 3]", "output": "false" }
+    ],
+    "hints": ["Iterate through the array and check each number."],
+    "solutionJs": "function arrayIncludesNegative(arr) {\n  return arr.some(num => num < 0);\n}",
+    "solutionPython": "def array_includes_negative(arr):\n  return any(num < 0 for num in arr)",
+    "solutionJava": "class Solution {\n  public boolean arrayIncludesNegative(int[] arr) {\n    for (int num : arr) {\n      if (num < 0) return true;\n    }\n    return false;\n  }\n}",
+    "solutionCpp": "bool arrayIncludesNegative(const std::vector<int>& arr) {\n  for (int num : arr) {\n    if (num < 0) return true;\n  }\n  return false;\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-39",
+    "title": "Convert String to Number",
+    "description": "Convert a string representation of a number to an actual number.",
+    "examples": [
+      { "input": "\"123\"", "output": "123" },
+      { "input": "\"45.67\"", "output": "45.67" }
+    ],
+    "hints": ["Use `parseInt()`, `parseFloat()`, or the `+` unary operator."],
+    "solutionJs": "function stringToNumber(str) {\n  return Number(str);\n}",
+    "solutionPython": "def string_to_number(s):\n  return int(s) if s.find('.') == -1 else float(s)",
+    "solutionJava": "class Solution {\n  public double stringToNumber(String s) {\n    return Double.parseDouble(s);\n  }\n}",
+    "solutionCpp": "double stringToNumber(const std::string& s) {\n  return std::stod(s);\n}",
+    "difficulty": "Easy",
+    "score": 20
+  },
+  {
+    "id": "easy-40",
+    "title": "Count Occurrences of Char",
+    "description": "Count how many times a specific character appears in a string.",
+    "examples": [
+      { "input": "\"hello\", 'l'", "output": "2" },
+      { "input": "\"banana\", 'a'", "output": "3" }
+    ],
+    "hints": ["Iterate through the string and compare each character."],
+    "solutionJs": "function countCharOccurrences(str, char) {\n  let count = 0;\n  for (let i = 0; i < str.length; i++) {\n    if (str[i] === char) {\n      count++;\n    }\n  }\n  return count;\n}",
+    "solutionPython": "def count_char_occurrences(s, char):\n  return s.count(char)",
+    "solutionJava": "class Solution {\n  public int countCharOccurrences(String s, char c) {\n    int count = 0;\n    for (char ch : s.toCharArray()) {\n      if (ch == c) {\n        count++;\n      }\n    }\n    return count;\n  }\n}",
+    "solutionCpp": "int countCharOccurrences(const std::string& s, char c) {\n  int count = 0;\n  for (char ch : s) {\n    if (ch == c) {\n      count++;\n    }\n  }\n  return count;\n}",
+    "difficulty": "Easy",
+    "score": 20
+  }
+]
