@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react'; // ¡Agregamos ReactNode aquí!
 
 interface Star {
   top: string;
@@ -12,7 +12,13 @@ interface Star {
   animationDuration: string;
 }
 
-const BackgroundNeumorphic: React.FC = () => {
+// Definimos las props para el componente, incluyendo 'children'
+interface BackgroundNeumorphicProps {
+  children: ReactNode; // Esto permite que el componente acepte contenido anidado
+}
+
+// Cambiamos React.FC a React.FC<BackgroundNeumorphicProps> y desestructuramos 'children'
+const BackgroundNeumorphic: React.FC<BackgroundNeumorphicProps> = ({ children }) => {
   const [stars, setStars] = useState<Star[]>([]);
   const [hasMounted, setHasMounted] = useState(false);
 
@@ -79,6 +85,11 @@ const BackgroundNeumorphic: React.FC = () => {
             }}
           />
         ))}
+
+      {/* Contenido principal de la página (children) sobre el fondo */}
+      <div className="relative z-10 w-full min-h-screen">
+        {children} {/* Aquí se renderiza el contenido que envuelve al BackgroundNeumorphic */}
+      </div>
     </div>
   );
 };

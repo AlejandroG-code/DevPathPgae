@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 // src/app/layout.tsx
 
 import type { Metadata } from 'next';
@@ -16,17 +17,6 @@ export const metadata: Metadata = {
 
 // Define the modules here once, to be passed to the Navbar and Dashboard
 const modules = [
-  {
-    id: 'dashboard',
-    name: 'Dashboard',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256" fill="currentColor">
-        <path d="M220,136a4,4,0,0,1-4,4H204V208a4,4,0,0,1-4,4H152a4,4,0,0,1-4-4V160a4,4,0,0,0-4-4H108a4,4,0,0,0-4,4v48a4,4,0,0,1-4,4H56a4,4,0,0,1-4-4V140H36a4,4,0,0,1-4-4,4,4,0,0,1,1.52-3.12l88-75.43a4,4,0,0,1,5,0l88,75.43A4,4,0,0,1,220,136Z"></path>
-      </svg>
-    ),
-    route: '/dashboard', // Using 'route' here, which is correct
-    description: 'Your central hub for all DevPath tools and features.',
-  },
   {
     id: 'challenges',
     name: 'Problemas de Programación',
@@ -51,14 +41,14 @@ const modules = [
   },
   {
     id: 'puzzles',
-    name: 'Mini-Juego de Lógica/Puzzles',
+    name: 'games',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256" fill="currentColor">
         <path d="M224,128a96,96,0,0,0-96-96,8,8,0,0,0-8,8v40a8,8,0,0,1-8,8,16,16,0,0,0-16,16v80a8,8,0,0,1-8,8,96,96,0,0,0,0,0,8,8,0,0,0,8,8v-40a8,8,0,0,1,8-8,16,16,0,0,0,16-16V64a8,8,0,0,1,8-8,96.11,96.11,0,0,0,96,96A96.11,96.11,0,0,0,224,128Z"></path>
       </svg>
     ),
     description: 'Componente interactivo para ejercitar el pensamiento crítico y la resolución de problemas.',
-    route: '/puzzles',
+    route: '/games',
   },
   {
     id: 'cost-calculator',
@@ -105,7 +95,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {/* Background is rendered once for the entire app */}
-        <BackgroundNeumorphic />
+        <BackgroundNeumorphic children={undefined} />
 
         {/* Navbar is rendered once and passed the modules data */}
         <Navbar modules={modules} />
