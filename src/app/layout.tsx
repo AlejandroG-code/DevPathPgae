@@ -95,7 +95,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {/* Background is rendered once for the entire app */}
-        <BackgroundNeumorphic children={undefined} />
+        <BackgroundNeumorphic />
 
         {/* Navbar is rendered once and passed the modules data */}
         <Navbar modules={modules} />
