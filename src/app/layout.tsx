@@ -1,6 +1,7 @@
 /* eslint-disable react/no-children-prop */
 // src/app/layout.tsx
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css'; // Your global CSS with Tailwind directives
@@ -106,6 +107,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* Background is rendered once for the entire app */}
         <BackgroundNeumorphic />
+        <Analytics /> {/* Vercel Analytics for tracking user interactions */}
 
         {/* Navbar is rendered once and passed the modules data */}
         <Navbar modules={modules} />
