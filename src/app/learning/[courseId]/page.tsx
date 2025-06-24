@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/app/learning/[courseId]/page.tsx
 // ESTE ES UN SERVER COMPONENT - IMPORTANTE: NO TIENE 'use client'
 
@@ -42,37 +43,41 @@ const allLessonsData: { [key: string]: LearningLesson[] } = {
 // Importa el Client Component que contiene la UI interactiva
 import CourseDetailClient from '../../_components/learning/CourseDetailClient';
 
+// CORRECCIÓN CLAVE: Interfaz para los props del Server Component de la página.
+// Incluimos 'searchParams' aunque no lo usemos, para satisfacer la interfaz interna de Next.js PageProps.
 interface CoursePageProps {
-  params: {
-    courseId: string;
-  };
-}
-
-export default async function CourseDetailPage({ params }: CoursePageProps) {
-  const courseId = params.courseId;
-
-  // 1. Buscar la metadata del curso
-  const courseMeta = (coursesMetadata as CourseMetadata[]).find(
-    (c) => c.id === courseId
-  );
-
-  if (!courseMeta) {
-    notFound();
+    params: {
+      courseId: string;
+    };
+    searchParams?: { [key: string]: string | string[] | undefined }; // Añadir esto para la compatibilidad con PageProps
   }
-
-  // 2. Obtener las lecciones del mapeo pre-cargado
-  const lessons: LearningLesson[] | undefined = allLessonsData[courseId];
-
-  if (!lessons) {
-    console.error(`Lessons data not found for course ID: ${courseId}. Check allLessonsData mapping.`);
-    notFound(); // Si las lecciones no se encuentran en el mapeo, también es un 404
+  
+  export default async function CourseDetailPage({ params, searchParams }: CoursePageProps) {
+    const courseId = params.courseId; 
+  
+    // 1. Buscar la metadata del curso
+    const courseMeta = (coursesMetadata as CourseMetadata[]).find(
+      (c) => c.id === courseId
+    );
+  
+    if (!courseMeta) {
+      notFound();
+    }
+  
+    // 2. Obtener las lecciones del mapeo pre-cargado
+    const lessons: LearningLesson[] | undefined = allLessonsData[courseId];
+  
+    if (!lessons) {
+      console.error(`Lessons data not found for course ID: ${courseId}. Check allLessonsData mapping.`);
+      notFound();
+    }
+  
+    // 3. Ensamblar el objeto de curso completo
+    const fullCourse: LearningCourse = {
+      ...courseMeta,
+      lessons: lessons,
+    };
+  
+    return <CourseDetailClient course={fullCourse} />;
   }
-
-  // 3. Ensamblar el objeto de curso completo
-  const fullCourse: LearningCourse = {
-    ...courseMeta,
-    lessons: lessons,
-  };
-
-  return <CourseDetailClient course={fullCourse} />;
-}
+  
