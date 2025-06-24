@@ -44,9 +44,13 @@ const allLessonsData: { [key: string]: LearningLesson[] } = {
 // Importa el Client Component que contiene la UI interactiva
 import CourseDetailClient from '../../_components/learning/CourseDetailClient';
 
+interface PageProps {
+    params: { courseId: string };
+    searchParams?: { [key: string]: string | string[] | undefined };
+  }
 // CORRECCIÓN CLAVE: Eliminamos la interfaz CoursePageProps y tipamos directamente en la función
-export default async function CourseDetailPage({ params }: { params: { courseId: string } }) {
-  const courseId = params.courseId; 
+export default async function CourseDetailPage({ params }: PageProps) {
+    const courseId = params.courseId;  
 
   // 1. Buscar la metadata del curso
   const courseMeta = (coursesMetadata as CourseMetadata[]).find(
