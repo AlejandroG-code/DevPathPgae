@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 // tailwind.config.ts
 import type { Config } from 'tailwindcss';
 
@@ -63,11 +64,15 @@ theme: {
     'pulse-medium': 'pulse-slow 4s ease-in-out infinite',
 
   },
+  
     },
   },
   
+  
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'), // <-- Añade esto
+  ],
   
 
 };

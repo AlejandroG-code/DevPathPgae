@@ -1,0 +1,15 @@
+[
+    {
+      "id": "cpp-intro",
+      "title": "Introduction to C++",
+      "description": "Learn what C++ is, its history, and its applications.",
+      "content": "C++ is a powerful, high-performance, and versatile programming language developed by Bjarne Stroustrup as an extension of the C language. It supports object-oriented programming (OOP), generic programming, and imperative programming.\n\n### Key Features:\n\n* **Performance:** Close to hardware, ideal for system programming, games.\n* **Object-Oriented:** Supports classes, objects, inheritance, polymorphism, encapsulation.\n* **Standard Library:** Rich set of functions for various tasks.\n* **Compatibility:** Highly compatible with C.\n\n### First Program:\n\nA simple 'Hello, World!' program in C++ looks like this:\n\n```cpp\n#include <iostream>\n\nint main() {\n    std::cout << \"Hello, C++!\" << std::endl;\n    return 0;\n}\n```\n\n* `#include <iostream>`: Includes the input/output stream library.\n* `int main()`: The main function where program execution begins.\n* `std::cout`: Used to output text.\n* `std::endl`: Inserts a new line character and flushes the output buffer.\n* `return 0;`: Indicates successful program execution."
+    },
+    {
+      "id": "cpp-variables-datatypes",
+      "title": "Variables and Data Types in C++",
+      "description": "Understand how to declare variables and use different data types.",
+      "content": "Variables are containers for storing data values. In C++, you must declare the variable's type before you can use it.\n\n### Common Data Types:\n\n* `int`: Stores integers (whole numbers).\n* `double`: Stores floating-point numbers (numbers with decimals).\n* `char`: Stores single characters.\n* `string`: Stores text (requires `#include <string>`).\n* `bool`: Stores boolean values (true or false).\n\n### Declaration and Assignment:\n\n```cpp\n#include <iostream>\n#include <string>\n\nint main() {\n    int age = 30; // Integer variable\n    double price = 99.99; // Double variable\n    char initial = 'J'; // Character variable\n    std::string name = \"John Doe\"; // String variable\n    bool is_student = true; // Boolean variable\n\n    std::cout << \"Name: \" << name << std::endl;\n    std::cout << \"Age: \" << age << std::endl;\n    std::cout << \"Price: \" << price << std::endl;\n    std::cout << \"Initial: \" << initial << std::endl;\n    std::cout << \"Is Student: \" << is_student << std::endl;\n\n    return 0;\n}\n```\n\nC++ is a strongly typed language, meaning the type of a variable is checked at compile-time."
+    }
+  ]
+  

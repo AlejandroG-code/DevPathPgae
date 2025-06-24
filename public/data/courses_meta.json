@@ -1,0 +1,80 @@
+[
+    {
+      "id": "python-basics",
+      "title": "Python Basics",
+      "description": "Start your programming journey with Python, a versatile and easy-to-learn language.",
+      "icon": "🐍",
+      "lessonsPath": "lessons/python-basics-lessons.json"
+    },
+    {
+      "id": "html-css-basics",
+      "title": "HTML & CSS Basics",
+      "description": "Master the foundational languages for building and styling web pages.",
+      "icon": "🌐",
+      "lessonsPath": "lessons/html-css-lessons.json"
+    },
+    {
+      "id": "javascript-fundamentals",
+      "title": "JavaScript Fundamentals",
+      "description": "Learn the core concepts of JavaScript, the programming language for the web.",
+      "icon": "JS",
+      "lessonsPath": "lessons/javascript-fundamentals-lessons.json"
+    },
+    {
+      "id": "java-basics",
+      "title": "Java Basics",
+      "description": "Dive into Java, a powerful and widely used language for enterprise and Android development.",
+      "icon": "☕",
+      "lessonsPath": "lessons/java-basics-lessons.json"
+    },
+    {
+      "id": "c-basics",
+      "title": "C Programming Basics",
+      "description": "Understand the fundamentals of C, a foundational language for system programming.",
+      "icon": "🖥️",
+      "lessonsPath": "lessons/c-basics-lessons.json"
+    },
+    {
+      "id": "cpp-basics",
+      "title": "C++ Fundamentals",
+      "description": "Explore C++, a high-performance language for game development, systems, and more.",
+      "icon": "🚀",
+      "lessonsPath": "lessons/cpp-basics-lessons.json"
+    },
+    {
+      "id": "csharp-basics",
+      "title": "C# Essentials",
+      "description": "Learn C#, Microsoft's versatile language for .NET applications and game development (Unity).",
+      "icon": "♯",
+      "lessonsPath": "lessons/csharp-basics-lessons.json"
+    },
+    {
+      "id": "data-structures-algorithms",
+      "title": "Data Structures & Algorithms",
+      "description": "Understand fundamental data structures and algorithms to write efficient code.",
+      "icon": "⚙️",
+      "lessonsPath": "lessons/dsa-lessons.json"
+    },
+    {
+      "id": "sql-databases",
+      "title": "SQL & Databases",
+      "description": "Master SQL for managing and querying relational databases.",
+      "icon": "🗄️",
+      "lessonsPath": "lessons/sql-lessons.json"
+    },
+    {
+      "id": "git-github",
+      "title": "Git & GitHub Essentials",
+      "description": "Learn version control with Git and collaborative development with GitHub.",
+      "icon": "🐙",
+      "lessonsPath": "lessons/git-github-lessons.json"
+    },
+    {
+      "id": "web-basics",
+      "title": "Web Development Basics",
+      "description": "Fundamental concepts of how the web works, browsers, and HTTP.",
+      "icon": "✨",
+      "lessonsPath": "lessons/web-basics-lessons.json"
+    }
+  ]
+  

@@ -1,0 +1,15 @@
+[
+    {
+      "id": "how-web-works",
+      "title": "How the Web Works: HTTP and URLs",
+      "description": "Understand the foundational concepts of web communication: HTTP and URLs.",
+      "content": "The World Wide Web operates on a client-server model, primarily using the **HTTP (Hypertext Transfer Protocol)**. When you type a URL into your browser, you (the client) are sending an HTTP request to a web server. The server then processes this request and sends back an HTTP response, typically containing the web page content.\n\n### URLs (Uniform Resource Locators):\n\nA URL is the address of a given unique resource on the Web. It provides a way to locate a resource and retrieve it.\n\n* **Protocol:** `https://` (secure HTTP)\n* **Domain Name:** `www.example.com`\n* **Path:** `/path/to/resource`\n* **Query Parameters:** `?key=value`\n* **Fragment:** `#section`\n\n### HTTP Request Methods:\n\n* **GET:** Request data from a specified resource.\n* **POST:** Submits data to be processed to a specified resource.\n* **PUT:** Updates a specified resource.\n* **DELETE:** Deletes a specified resource.\n\nThis fundamental understanding is key to building any web application."
+    },
+    {
+      "id": "browsers-rendering",
+      "title": "Web Browsers and Rendering Engines",
+      "description": "Learn about web browsers and how they display web pages.",
+      "content": "Web browsers (like Chrome, Firefox, Safari, Edge) are software applications for retrieving, presenting, and traversing information resources on the World Wide Web. They are essentially interpreters of web code.\n\n### How Browsers Render a Page:\n\n1.  **Parsing:** The browser reads the HTML to build a **DOM (Document Object Model)** tree and the CSS to build a **CSSOM (CSS Object Model)** tree.\n2.  **Render Tree Construction:** The DOM and CSSOM are combined to form a **Render Tree**, which contains only the visible elements and their computed styles.\n3.  **Layout (Reflow):** The browser calculates the position and size of each object in the render tree.\n4.  **Painting:** The browser draws the elements onto the screen.\n\nThis process is handled by the browser's **rendering engine** (e.g., Blink for Chrome, Gecko for Firefox). Understanding this pipeline helps developers optimize web page performance."
+    }
+  ]
+  

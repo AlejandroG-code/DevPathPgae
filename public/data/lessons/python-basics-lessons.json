@@ -1,0 +1,44 @@
+[
+    {
+      "id": "python-intro",
+      "title": "Introduction to Python",
+      "description": "Learn what Python is, its history, and why it's so popular.",
+      "content": "Python is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant indentation. It's often used for web development, data analysis, artificial intelligence, scientific computing, and more.\n\n### Why Python?\n\n* **Simple Syntax:** Easy to learn and read.\n* **Versatile:** Used in many different domains.\n* **Large Community:** Lots of resources and support.\n* **Extensive Libraries:** Powerful tools for various tasks.\n\n```python\nprint(\"Hello, Python!\")\n# This is a simple print statement in Python\n```",
+      "codeExamples": [
+        {
+          "lang": "python",
+          "code": "name = \"DevPath\"\nprint(f\"Welcome to {name}!\")",
+          "description": "A basic Python script."
+        }
+      ]
+    },
+    {
+      "id": "python-variables",
+      "title": "Variables and Data Types in Python",
+      "description": "Understand how to store data using variables and different data types.",
+      "content": "Variables are containers for storing data values. Python has no command for declaring a variable. A variable is created the moment you first assign a value to it.\n\n### Common Data Types:\n\n* **Text Type:** `str` (string)\n* **Numeric Types:** `int` (integer), `float` (floating point), `complex`\n* **Sequence Types:** `list`, `tuple`, `range`\n* **Mapping Type:** `dict` (dictionary)\n* **Set Types:** `set`, `frozenset`\n* **Boolean Type:** `bool`\n\n### Example:\n\n```python\n# String\nname = \"Alice\"\n\n# Integer\nage = 30\n\n# Float\nprice = 19.99\n\n# Boolean\nis_student = True\n\nprint(f\"Name: {name}, Age: {age}, Price: {price}, Is Student: {is_student}\")\n```",
+      "codeExamples": []
+    },
+    {
+      "id": "python-operators",
+      "title": "Operators in Python",
+      "description": "Learn about arithmetic, assignment, comparison, logical, and other operators.",
+      "content": "Operators are used to perform operations on variables and values.\n\n### Types of Operators:\n\n* **Arithmetic operators:** `+`, `-`, `*`, `/`, `%`, `**`, `//`\n* **Assignment operators:** `=`, `+=`, `-=`, etc.\n* **Comparison operators:** `==`, `!=`, `>`, `<`, `>=`, `<=`\n* **Logical operators:** `and`, `or`, `not`\n\n```python\nx = 10\ny = 3\n\nprint(x + y)  # Addition\nprint(x > y)  # Comparison\nprint(x > 5 and y < 5) # Logical AND\n```",
+      "codeExamples": []
+    },
+    {
+      "id": "python-conditionals",
+      "title": "Conditional Statements (if/elif/else)",
+      "description": "Control the flow of your program using conditional logic.",
+      "content": "Conditional statements allow you to execute different blocks of code based on certain conditions.\n\n```python\nage = 20\n\nif age >= 18:\n    print(\"You are an adult.\")\nelif age >= 13:\n    print(\"You are a teenager.\")\nelse:\n    print(\"You are a child.\")\n```",
+      "codeExamples": []
+    },
+    {
+      "id": "python-loops",
+      "title": "Loops (for/while)",
+      "description": "Automate repetitive tasks with loops in Python.",
+      "content": "Loops are used to iterate over a sequence (like a list, tuple, dictionary, set, or string) or execute a block of code repeatedly.\n\n### For Loop:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfor x in fruits:\n  print(x)\n```\n\n### While Loop:\n\n```python\ni = 1\nwhile i < 6:\n  print(i)\n  i += 1\n```",
+      "codeExamples": []
+    }
+  ]
+      

@@ -1,0 +1,37 @@
+[
+    {
+      "id": "c-intro",
+      "title": "Introduction to C Programming",
+      "description": "Get started with C, a powerful and fundamental programming language.",
+      "content": "C is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, while a static type system prevents unintended operations. By design, C provides constructs that map efficiently to typical machine instructions, and therefore it has found lasting use in applications previously coded in assembly language, including operating systems, as well as various application software for computer architectures that range from supercomputers to embedded systems.\n\n### Why C?\n\n* **Performance:** Close to hardware, very fast.\n* **Foundation:** Many modern languages are based on C/C++.\n* **System Programming:** Ideal for operating systems, embedded systems.\n\n```c\n#include <stdio.h>\n\nint main() {\n    printf(\"Hello, C!\\n\");\n    return 0;\n}\n```",
+      "codeExamples": []
+    },
+    {
+      "id": "c-variables",
+      "title": "Variables and Data Types in C",
+      "description": "Understand how to declare and use variables with C's basic data types.",
+      "content": "A variable is a name given to a storage area that our programs can manipulate. Each variable in C has a specific type, which determines the size and layout of the variable's memory; the range of values that can be stored within that memory; and the set of operations that can be applied to the variable.\n\n### Data Types:\n\n* **Basic Types:** `int`, `char`, `float`, `double`\n* **Derived Types:** Arrays, pointers, structures, unions\n* **Enumeration Type:** `enum`\n\n### Example:\n\n```c\n#include <stdio.h>\n\nint main() {\n    int age = 25;          // Integer\n    char initial = 'A';   // Character\n    float height = 5.9;   // Float\n    double salary = 50000.50; // Double\n\n    printf(\"Age: %d, Initial: %c, Height: %.1f, Salary: %.2f\\n\", age, initial, height, salary);\n    return 0;\n}\n```",
+      "codeExamples": []
+    },
+    {
+      "id": "c-operators",
+      "title": "Operators in C",
+      "description": "Learn about arithmetic, relational, logical, and bitwise operators in C.",
+      "content": "Operators are symbols that tell the compiler to perform specific mathematical or logical manipulations. C provides a rich set of built-in operators to manipulate variables and values.\n\n### Types of Operators:\n\n* **Arithmetic Operators:** `+`, `-`, `*`, `/`, `%`\n* **Relational Operators:** `==`, `!=`, `>`, `<`, `>=`, `<=`\n* **Logical Operators:** `&&`, `||`, `!`\n* **Bitwise Operators:** `&`, `|`, `^`, `~`, `<<`, `>>`\n* **Assignment Operators:** `=`, `+=`, `-=`, `*=`, `/=`, `%=`\n\n### Example:\n\n```c\n#include <stdio.h>\n\nint main() {\n    int a = 10;\n    int b = 5;\n\n    printf(\"Addition: %d\\n\", a + b); // Addition\n    printf(\"Subtraction: %d\\n\", a - b); // Subtraction\n    printf(\"Multiplication: %d\\n\", a * b); // Multiplication\n    printf(\"Division: %d\\n\", a / b); // Division\n    printf(\"Modulus: %d\\n\", a % b); // Modulus\n\n    if (a > b) {\n        printf(\"%d is greater than %d\\n\", a, b);\n    }\n\n    return 0;\n}\n```",
+      "codeExamples": []
+    },
+    {
+      "id": "c-conditionals",
+      "title": "Conditional Statements (if/else)",
+      "description": "Control the flow of your program using conditional logic in C.",
+      "content": "Conditional statements allow you to execute different blocks of code based on certain conditions. C provides several types of conditional statements, including `if`, `else if`, and `else`.\n\n### Example:\n\n```c\n#include <stdio.h>\n\nint main() {\n    int age = 20;\n\n    if (age >= 18) {\n        printf(\"You are an adult.\\n\");\n    } else if (age >= 13) {\n        printf(\"You are a teenager.\\n\");\n    } else {\n        printf(\"You are a child.\\n\");\n    }\n\n    return 0;\n}\n```",
+      "codeExamples": []
+    },
+    {
+      "id": "c-loops",
+      "title": "Loops (for/while)",
+      "description": "Automate repetitive tasks with loops in C.",
+      "content": "Loops are used to execute a block of code repeatedly until a specified condition is met. C provides several types of loops, including `for`, `while`, and `do while`.\n\n### For Loop:\n\n```c\n#include <stdio.h>\n\nint main() {\n    for (int i = 0; i < 5; i++) {\n        printf(\"Iteration %d\\n\", i);\n    }\n\n    return 0;\n}\n```\n\n### While Loop:\n\n```c\n#include <stdio.h>\n\nint main() {\n    int i = 0;\n    while (i < 5) {\n        printf(\"Iteration %d\\n\", i);\n        i++;\n    }\n\n    return 0;\n}\n```",
+      "codeExamples": []
+    }
+]
