@@ -2,14 +2,14 @@
 // ESTE ES UN SERVER COMPONENT - IMPORTANTE: NO TIENE 'use client'
 
 import { notFound } from 'next/navigation';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import PageProps from 'next/types';
-// Importa interfaces necesarias. Mantén el alias si está configurado.
 import { CourseMetadata, LearningCourse, LearningLesson } from '@/types/learning'; 
-
-// Importa el JSON principal de metadata de cursos
-// Asegúrate de que courses_meta.json esté en src/data/
 import coursesMetadata from '../../../../public/data/courses_meta.json';
+
+type CoursePageProps = {
+    params: {
+      courseId: string;
+    };
+  };
 
 // Importa *TODOS* los JSON de lecciones directamente al principio del Server Component.
 // ¡ACCEDEMOS A '' PARA ASEGURAR QUE ES EL ARRAY!
@@ -43,14 +43,9 @@ const allLessonsData: { [key: string]: LearningLesson[] } = {
 
 // Importa el Client Component que contiene la UI interactiva
 import CourseDetailClient from '../../_components/learning/CourseDetailClient';
-
-interface PageProps {
-    params: { courseId: string };
-    searchParams?: { [key: string]: string | string[] | undefined };
-  }
 // CORRECCIÓN CLAVE: Eliminamos la interfaz CoursePageProps y tipamos directamente en la función
-export default async function CourseDetailPage({ params }: PageProps) {
-    const courseId = params.courseId;  
+export default async function CourseDetailPage(props: CoursePageProps) {
+    const { courseId } = props.params;
 
   // 1. Buscar la metadata del curso
   const courseMeta = (coursesMetadata as CourseMetadata[]).find(
