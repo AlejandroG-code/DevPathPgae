@@ -43,7 +43,8 @@ const allLessonsData: { [key: string]: LearningLesson[] } = {
 import CourseDetailClient from '../../_components/learning/CourseDetailClient';
 
 // CORRECCIÓN CLAVE: Eliminamos la interfaz CoursePageProps y tipamos directamente en la función
-export default async function CourseDetailPage({ params }: { params: { courseId: string } }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function CourseDetailPage({ params }: { params: { courseId: string }; searchParams?: any }) {
   const courseId = params.courseId; 
 
   // 1. Buscar la metadata del curso
