@@ -1,121 +1,92 @@
-/* eslint-disable @next/next/no-async-client-component */
-// src/app/learning/[courseId]/page.tsx
-'use client'; // Still a Client Component
+    /* eslint-disable react/jsx-no-undef */
+    // src/app/learning/[courseId]/page.tsx
+    // ESTE ES UN SERVER COMPONENT - IMPORTANTE: NO TIENE 'use client'
 
-import React from 'react';
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+    import { notFound } from 'next/navigation';
+    // Importa interfaces necesarias. Mantén el alias si está configurado.
+    import type { CourseMetadata, LearningCourse, LearningLesson } from '@/types/learning'; 
 
-// Ensure this path is correct for your `courses_meta.json`
-import coursesMetadata from '../../../../public/data/courses_meta.json';
+    // Importa el JSON principal de metadata de cursos
+    // Usando rutas relativas a public/data/
+    import coursesMetadata from '../../../../public/data/courses_meta.json'; 
 
-// Ensure these types are correctly defined and exported in src/types/learning.ts
-import type { CourseMetadata, LessonMetadata } from '@/types/learning';
+    // Importa *TODOS* los JSON de lecciones directamente al principio del Server Component.
+    // ¡ACCEDEMOS A 'as LearningLesson[]' PARA ASEGURAR QUE ES EL ARRAY!
+    import pythonBasicsLessons from '../../../../public/data/lessons/python-basics-lessons.json';
+    import htmlCssLessons from '../../../../public/data/lessons/html-css-lessons.json';
+    import javascriptFundamentalsLessons from '../../../../public/data/lessons/javascript-fundamentals-lessons.json';
+    import javaBasicsLessons from '../../../../public/data/lessons/java-basics-lessons.json';
+    import cBasicsLessons from '../../../../public/data/lessons/c-basics-lessons.json';
+    import cppBasicsLessons from '../../../../public/data/lessons/cpp-basics-lessons.json';
+    import csharpBasicsLessons from '../../../../public/data/lessons/csharp-basics-lessons.json';
+    import dsaLessons from '../../../../public/data/lessons/dsa-lessons.json';
+    import sqlLessons from '../../../../public/data/lessons/sql-lessons.json';
+    import gitGithubLessons from '../../../../public/data/lessons/git-github-lessons.json';
+    import webBasicsLessons from '../../../../public/data/lessons/web-basics-lessons.json';
 
-// --- IMPORTANT: READ THIS COMMENT ---
-// This approach uses 'any' to bypass a persistent and unusual TypeScript error
-// in the Vercel build environment where 'params' is incorrectly expected as a Promise.
-// In a standard Next.js Client Component, 'params' should be a direct object: { courseId: string; }.
-// This is a TEMPORARY WORKAROUND to get the build to pass.
-// The underlying issue is likely an environment/caching problem on Vercel's side.
-// --- END IMPORTANT COMMENT ---
+    // Importa el Client Component que contiene la UI interactiva
+    import CourseDetailClient from '@/app/_components/learning/CourseDetailClient'; 
 
-export default async function CourseDetailPage({ params }: { params: never }) {
-  // We still use await, as the error implied params might be a Promise,
-  // and 'any' allows us to cover both scenarios without type errors.
-  const resolvedParams = await params;
-  const { courseId } = resolvedParams;
+    // Mapeo de IDs de curso a sus respectivos arrays de lecciones importados
+    // Asegúrate de que las claves aquí ('python', 'c', etc.) coincidan exactamente con los 'id' de tus cursos en courses_meta.json
+    const allLessonsData: { [key: string]: LearningLesson[] } = {
+      'c': cBasicsLessons as LearningLesson[], 
+      'cpp': cppBasicsLessons as LearningLesson[], 
+      'python': pythonBasicsLessons as LearningLesson[], 
+      'java': javaBasicsLessons as LearningLesson[], 
+      'html-css-basics': htmlCssLessons as LearningLesson[],
+      'javascript-fundamentals': javascriptFundamentalsLessons as LearningLesson[],
+      'csharp-basics': csharpBasicsLessons as LearningLesson[],
+      'data-structures-algorithms': dsaLessons as LearningLesson[],
+      'sql-databases': sqlLessons as LearningLesson[],
+      'git-github': gitGithubLessons as LearningLesson[],
+      'web-basics': webBasicsLessons as LearningLesson[],
+    };
 
-  // 1. Busca la metadata del curso
-  const course: CourseMetadata | undefined = coursesMetadata.find(
-    (c: CourseMetadata) => c.id === courseId
-  );
+    // generateStaticParams es crucial para que Next.js sepa qué rutas pre-renderizar
+    export async function generateStaticParams() {
+      return (coursesMetadata as CourseMetadata[]).map((course) => ({
+        courseId: course.id,
+      }));
+    }
 
-  // 2. Si el curso no se encuentra, activar 404
-  if (!course) {
-    console.error(`Course data not found for ID: ${courseId}.`);
-    notFound();
-  }
+    // Interfaz para los props del Server Component de la página.
+    // ¡params se define como una PROMESA!
+    interface CourseDetailPageProps {
+      params: Promise<{ 
+        courseId: string;
+      }>;
+    }
 
-  // 3. Obtener lecciones (asegurando que sea un array vacío si no hay)
-  const lessons: LessonMetadata[] = course.lessons || [];
+    export default async function CourseDetailPage({ params }: CourseDetailPageProps) {
+      // Hacemos 'await' de 'params' para obtener el objeto resuelto con 'courseId'.
+      const resolvedParams = await params;
+      const courseId = resolvedParams.courseId; 
 
-  // 4. Advertencia si no hay lecciones (solo para desarrollo)
-  if (lessons.length === 0) {
-    console.warn(`No lessons found for course ID: ${courseId}. Course object:`, course);
-  }
+      // 1. Buscar la metadata del curso
+      const courseMeta = (coursesMetadata as CourseMetadata[]).find(
+        (c) => c.id === courseId
+      );
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white p-4 sm:p-8">
-      <div className="bg-transparent backdrop-blur-md p-6 md:p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 w-full max-w-7xl mx-auto">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl sm:text-5xl font-extrabold mb-4 text-vibrant-teal text-center drop-shadow-md"
-        >
-          {course.title}
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-gray-300 text-lg mb-8 text-center"
-        >
-          {course.description}
-        </motion.p>
+      if (!courseMeta) {
+        notFound(); 
+      }
 
-        {lessons.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {lessons.map((lesson, index) => (
-              <motion.div
-                key={lesson.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 * index }}
-                whileHover={{ scale: 1.03, boxShadow: "0 8px 16px rgba(0,255,255,0.1)" }}
-                className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 flex flex-col justify-between h-full
-                           hover:bg-gray-700/50 hover:border-accent-purple transition-all duration-300 transform cursor-pointer shadow-lg"
-              >
-                <Link href={`/learning/${courseId}/${lesson.id}`} className="block h-full">
-                  <div>
-                    <h2 className="text-xl font-bold mb-2 text-white text-center">{lesson.title}</h2>
-                  </div>
-                  <div className="mt-4 text-center">
-                    <button className="inline-flex items-center px-4 py-2 rounded-full text-md font-semibold text-white
-                                       bg-vibrant-teal/80 hover:bg-vibrant-teal transition-all duration-300 shadow-md">
-                      Go to Lesson
-                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center text-gray-400 text-lg mt-10">
-            No lessons available for this course yet. Please check back later!
-          </div>
-        )}
+      // 2. Obtener las lecciones del mapeo pre-cargado
+      const lessons: LearningLesson[] | undefined = allLessonsData[courseId];
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-12 text-center"
-        >
-          <Link href="/learning" className="inline-flex items-center text-lg text-vibrant-teal hover:underline">
-            <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Back to All Courses
-          </Link>
-        </motion.div>
-      </div>
-    </div>
-  );
-}
+      if (!lessons) {
+        console.error(`Lessons data not found for course ID: ${courseId}. Check allLessonsData mapping.`);
+        notFound(); 
+      }
 
+      // 3. Ensamblar el objeto de curso completo
+      const fullCourse: LearningCourse = {
+        ...courseMeta,
+        lessons: lessons,
+      };
+
+      // 4. Pasar el curso completo al Client Component para que renderice la UI interactiva
+      return <CourseDetailClient course={fullCourse} />;
+    }
+    
