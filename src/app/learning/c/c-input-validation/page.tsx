@@ -140,7 +140,7 @@ int main() {
 Input validation is a fundamental security and robustness practice. Always assume user input is hostile and validate it thoroughly before use.
 `;
 
-export default function CInputValidationPage({ params }: LessonPageProps) {
+export default function CInputValidationPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {
