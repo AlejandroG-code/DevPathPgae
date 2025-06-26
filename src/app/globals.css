@@ -88,3 +88,7 @@ canvas {
 .animate-pulse {
   animation: pulse var(--duration) ease-in-out infinite;
 }
+
+/* --- No Syntax Highlighting Styles Here (PrismJS handles styling dynamically) --- */
+/* All custom syntax highlighting styles for .syntax-highlighter-custom have been removed. */
+/* PrismJS will load its own theme CSS from the CDN. */

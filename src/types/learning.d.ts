@@ -19,6 +19,8 @@ export interface CodeExample {
   
   // Interfaz para la metadata general de un curso (sin las lecciones completas)
   export interface CourseMetadata {
+    lessons: never[];
+    homePagePath: string;
     id: string; // ID único del curso (ej. "python-basics")
     title: string; // Título del curso (ej. "Python Basics")
     description: string; // Breve descripción del curso

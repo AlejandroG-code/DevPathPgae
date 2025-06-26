@@ -21,18 +21,59 @@
       "lessonsPath": "lessons/javascript-fundamentals-lessons.json"
     },
     {
-      "id": "java-basics",
-      "title": "Java Basics",
-      "description": "Dive into Java, a powerful and widely used language for enterprise and Android development.",
-      "icon": "☕",
-      "lessonsPath": "lessons/java-basics-lessons.json"
-    },
-    {
-      "id": "c-basics",
-      "title": "C Programming Basics",
-      "description": "Understand the fundamentals of C, a foundational language for system programming.",
+      "id": "c",
+      "title": "Learn C Programming",
+      "description": "Master the fundamentals of C programming language, from basics to advanced concepts.",
       "icon": "🖥️",
-      "lessonsPath": "lessons/c-basics-lessons.json"
+      "homePagePath": "/learning/c/c-home",
+      "lessons": [
+        { "id": "c-home", "title": "C Introduction" },
+        { "id": "c-get-started", "title": "C Get Started" },
+        { "id": "c-syntax", "title": "C Syntax" },
+        { "id": "c-output", "title": "C Output" },
+        { "id": "c-comments", "title": "C Comments" },
+        { "id": "c-variables", "title": "C Variables" },
+        { "id": "c-data-types", "title": "C Data Types" },
+        { "id": "c-constants", "title": "C Constants" },
+        { "id": "c-operators", "title": "C Operators" },
+        { "id": "c-booleans", "title": "C Booleans" },
+        { "id": "c-if-else", "title": "C If...Else" },
+        { "id": "c-switch", "title": "C Switch" },
+        { "id": "c-while-loop", "title": "C While Loop" },
+        { "id": "c-for-loop", "title": "C For Loop" },
+        { "id": "c-break-continue", "title": "C Break/Continue" },
+        { "id": "c-arrays", "title": "C Arrays" },
+        { "id": "c-strings", "title": "C Strings" },
+        { "id": "c-memory-address", "title": "C Memory Address" },
+        { "id": "c-pointers", "title": "C Pointers" },
+        { "id": "c-functions", "title": "C Functions" },
+        { "id": "c-function-parameters", "title": "C Function Parameters" },
+        { "id": "c-scope", "title": "C Scope" },
+        { "id": "c-function-declaration", "title": "C Function Declaration" },
+        { "id": "c-recursion", "title": "C Recursion" },
+        { "id": "c-math-functions", "title": "C Math Functions" },
+        { "id": "c-files", "title": "C Files" },
+        { "id": "c-create-files", "title": "C Create Files" },
+        { "id": "c-write-to-files", "title": "C Write To Files" },
+        { "id": "c-read-files", "title": "C Read Files" },
+        { "id": "c-structures", "title": "C Structures" },
+        { "id": "c-unions", "title": "C Unions" },
+        { "id": "c-enums", "title": "C Enums" },
+        { "id": "c-memory-management", "title": "C Memory Management" },
+        { "id": "c-errors", "title": "C Errors" },
+        { "id": "c-debugging", "title": "C Debugging" },
+        { "id": "c-error-handling", "title": "C Error Handling" },
+        { "id": "c-input-validation", "title": "C Input Validation" },
+        { "id": "c-macros", "title": "C Macros" },
+        { "id": "c-projects", "title": "C Projects" },
+        { "id": "c-reference", "title": "C Reference" },
+        { "id": "c-keywords", "title": "C Keywords" },
+        { "id": "c-stdio-h", "title": "C &lt;stdio.h&gt;" },
+        { "id": "c-stdlib-h", "title": "C &lt;stdlib.h&gt;" },
+        { "id": "c-string-h", "title": "C &lt;string.h&gt;" },
+        { "id": "c-math-h", "title": "C &lt;math.h&gt;" },
+        { "id": "c-ctype-h", "title": "C &lt;ctype.h&gt;" }
+      ]
     },
     {
       "id": "cpp-basics",
@@ -75,6 +116,69 @@
       "description": "Fundamental concepts of how the web works, browsers, and HTTP.",
       "icon": "✨",
       "lessonsPath": "lessons/web-basics-lessons.json"
+    },
+    {
+      "id": "Arduino",
+      "title": "Arduino Programming",
+      "description": "Get started with Arduino, a platform for building electronics projects.",
+      "icon": "🛠️",
+      "lessonsPath": "lessons/arduino-lessons.json"
+    },
+    {
+      "id": "robotics-fundamentals",
+      "title": "Robotics Fundamentals",
+      "description": "Learn the basics of robotics, including sensors, actuators, and control systems.",
+      "icon": "🤖",
+      "lessonsPath": "lessons/robotics-fundamentals-lessons.json"
+    },
+    {
+      "id": "embedded-systems",
+      "title": "Embedded Systems Programming",
+      "description": "Dive into embedded systems programming with C/C++ on microcontrollers.",
+      "icon": "💻",
+      "lessonsPath": "lessons/embedded-systems-lessons.json"
+    },
+    {
+      "id": "web-design",
+      "title": "Web Design Principles",
+      "description": "Learn the principles of web design, including UX/UI and responsive design.",
+      "icon": "🎨",
+      "lessonsPath": "lessons/web-design-lessons.json"
+    },
+    {
+      "id": "mobile-development",
+      "title": "Mobile App Development",
+      "description": "Create mobile applications using frameworks like React Native or Flutter.",
+      "icon": "📱",
+      "lessonsPath": "lessons/mobile-development-lessons.json"
+    },
+    {
+      "id": "game-development",
+      "title": "Game Development",
+      "description": "Learn the basics of game development using Unity or Unreal Engine.",
+      "icon": "🎮",
+      "lessonsPath": "lessons/game-development-lessons.json"
+    },
+    {
+      "id": "machine-learning",
+      "title": "Machine Learning Basics",
+      "description": "Introduction to machine learning concepts and algorithms.",
+      "icon": "🤖",
+      "lessonsPath": "lessons/machine-learning-lessons.json"
+    },
+    {
+      "id": "data-science",
+      "title": "Data Science Fundamentals",
+      "description": "Explore data analysis, visualization, and statistical concepts.",
+      "icon": "📊",
+      "lessonsPath": "lessons/data-science-lessons.json"
+    },
+    {
+      "id": "iot",
+      "title": "Internet of Things (IoT)",
+      "description": "Explore IoT concepts, devices, and applications.",
+      "icon": "🌐",
+      "lessonsPath": "lessons/iot-lessons.json"
     }
   ]
   

@@ -46,7 +46,6 @@ const BackgroundNeumorphic: React.FC<BackgroundNeumorphicProps> = () => {
     // 'pointer-events-none' es crucial para que no capture clics.
     <div className="fixed inset-0 -z-20 overflow-hidden pointer-events-none">
       {/* Textura y cuadrícula */}
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.04]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
       <div className="absolute inset-0 bg-gradient-to-br from-[#1e1e2e] to-[#121212] opacity-90" />
 
@@ -57,22 +56,6 @@ const BackgroundNeumorphic: React.FC<BackgroundNeumorphicProps> = () => {
       <div className="absolute w-[300px] h-[300px] bg-[#FF1493]/20 rounded-full blur-[200px] animate-pulse-medium bottom-[25%] left-[20%]" />
       <div className="absolute w-[250px] h-[250px] bg-[#8A2BE2]/20 rounded-full blur-[200px] animate-float-medium top-[50%] left-[25%]" />
       <div className="absolute w-[450px] h-[450px] bg-[#32CD32]/20 rounded-full blur-[250px] animate-float-fast bottom-[20%] right-[15%]" />
-
-      {/* Fondos espaciales en capas */}
-      <div className="absolute inset-0 z-[-1]">
-        <div className="absolute inset-0 bg-[url('/stars.png')] bg-cover bg-center opacity-20" />
-        <div className="absolute inset-0 bg-[url('/animated-stars.gif')] bg-cover bg-center opacity-10" />
-        <div className="absolute inset-0 bg-[url('/twinkling-stars.gif')] bg-cover bg-center opacity-15" />
-        <div className="absolute inset-0 bg-[url('/shining-stars.png')] bg-cover bg-center opacity-25" />
-        <div className="absolute inset-0 bg-[url('/flashing-stars.gif')] bg-cover bg-center opacity-30" />
-        <div className="absolute inset-0 bg-[url('/nebula-stars.png')] bg-cover bg-center opacity-20" />
-        <div className="absolute inset-0 bg-[url('/galaxy-stars.png')] bg-cover bg-center opacity-25" />
-        <div className="absolute inset-0 bg-[url('/aurora-stars.png')] bg-cover bg-center opacity-30" />
-        <div className="absolute inset-0 bg-[url('/comet-stars.png')] bg-cover bg-center opacity-35" />
-        <div className="absolute inset-0 bg-[url('/constellation-stars.png')] bg-cover bg-center opacity-20" />
-        <div className="absolute inset-0 bg-[url('/meteor-stars.png')] bg-cover bg-center opacity-25" />
-      </div>
-
       {/* Estrellas individuales solo si está montado (cliente) */}
       {hasMounted &&
         stars.map((star, i) => (
