@@ -126,7 +126,7 @@ int main() {
 Enums are a valuable feature in C for defining a set of related constant values, improving code clarity, and reducing the likelihood of errors caused by using raw integer values.
 `;
 
-export default function CEnumsPage({ params }: LessonPageProps) {
+export default function CEnumsPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

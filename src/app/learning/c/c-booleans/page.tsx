@@ -88,7 +88,7 @@ Booleans are fundamental for controlling the flow of your program, especially in
 `;
 
 
-export default function CBooleansPage({ params }: LessonPageProps) {
+export default function CBooleansPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

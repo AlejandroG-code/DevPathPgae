@@ -113,7 +113,7 @@ int main() {
 In general, for defining numeric or string constants, const is often preferred due to its type safety and adherence to scope rules, making code easier to debug and maintain. However, #define remains a powerful tool, especially for global configuration values or when creating macros.
 `;
 
-export default function CConstantsPage({ params }: LessonPageProps) {
+export default function CConstantsPage() {
   // Obtenemos courseId y lessonId de params aquí para usarlos en useEffect si es necesario
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 

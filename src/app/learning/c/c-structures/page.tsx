@@ -192,7 +192,7 @@ int main() {
 Structures are a powerful way to represent complex real-world entities in C programs, grouping related data into a single, manageable unit.
 `;
 
-export default function CStructuresPage({ params }: LessonPageProps) {
+export default function CStructuresPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

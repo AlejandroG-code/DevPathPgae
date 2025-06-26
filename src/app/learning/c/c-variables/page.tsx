@@ -120,7 +120,7 @@ If you want to prevent others (or yourself) from overwriting existing variable v
 Understanding variables and data types is fundamental to writing any meaningful C program, as they allow you to store and manipulate information.
 `;
 
-export default function CVariablesPage({ params }: LessonPageProps) {
+export default function CVariablesPage() {
   // Obtenemos courseId y lessonId de params aquí para usarlos en useEffect si es necesario
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 

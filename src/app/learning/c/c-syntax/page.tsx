@@ -97,7 +97,7 @@ void greet(char* name) { // Example of another function
 Mastering C syntax is the first step towards writing functional and error-free C programs. Always pay close attention to semicolons, curly braces, and case-sensitivity.
 `;
 
-export default function CSyntaxPage({ params }: LessonPageProps) {
+export default function CSyntaxPage() {
   // Obtenemos courseId y lessonId de params aquí para usarlos en useEffect si es necesario
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 

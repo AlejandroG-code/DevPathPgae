@@ -122,7 +122,7 @@ int main() {
 Using conditional statements effectively is crucial for creating programs that can respond dynamically to different inputs and scenarios.
 `;
 
-export default function CIfElsePage({ params }: LessonPageProps) {
+export default function CIfElsePage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

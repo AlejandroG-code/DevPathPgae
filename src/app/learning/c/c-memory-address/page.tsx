@@ -88,7 +88,7 @@ int main() {
 Understanding memory addresses is the stepping stone to mastering pointers, which unlock a significant portion of C's power and flexibility.
 `;
 
-export default function CMemoryAddressPage({ params }: LessonPageProps) {
+export default function CMemoryAddressPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

@@ -136,7 +136,7 @@ This "fall-through" behavior can sometimes be used intentionally for specific lo
 The switch statement is a powerful tool for handling multiple choices in a clean and efficient way in your C programs.
 `;
 
-export default function CSwitchPage({ params }: LessonPageProps) {
+export default function CSwitchPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

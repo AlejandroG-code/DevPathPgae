@@ -144,7 +144,7 @@ Hello, C!
 Congratulations! You've set up your development environment and successfully compiled and run your first C program. You are now ready to dive deeper into the language.
 `;
 
-export default function CGetStartedPage({ params }: LessonPageProps) {
+export default function CGetStartedPage() {
   useEffect(() => {
     // 1. Load PrismJS Okaidia theme CSS
     const link = document.createElement('link');

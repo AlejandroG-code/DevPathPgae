@@ -113,7 +113,7 @@ When taking multiple inputs, ensure that the format specifiers in scanf() match 
 User input is a fundamental concept that allows your programs to be interactive and adapt to runtime data provided by the user.
 `;
 
-export default function CUserInputPage({ params }: LessonPageProps) {
+export default function CUserInputPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

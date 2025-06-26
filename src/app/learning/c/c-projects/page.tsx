@@ -169,7 +169,7 @@ To use this 'Makefile', save it as 'Makefile' (no extension) in your project roo
 Understanding project structure and compilation flow is essential for building and managing real-world C applications.
 `;
 
-export default function CProjectsPage({ params }: LessonPageProps) {
+export default function CProjectsPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

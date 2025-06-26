@@ -115,7 +115,7 @@ int main() {
 The while and do...while loops are essential for repetitive tasks in C programming, allowing you to execute code blocks efficiently based on conditions.
 `;
 
-export default function CWhileLoopPage({ params }: LessonPageProps) {
+export default function CWhileLoopPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

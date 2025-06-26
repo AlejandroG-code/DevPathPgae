@@ -106,7 +106,7 @@ If 'sayGoodbye()' was defined *before* 'main()', the declaration would not be st
 Functions are the building blocks of modular C programs, enabling you to write organized, reusable, and maintainable code.
 `;
 
-export default function CFunctionsPage({ params }: LessonPageProps) {
+export default function CFunctionsPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

@@ -150,7 +150,7 @@ This pattern is often called a **tagged union** or **variant record**, providing
 Unions provide a low-level way to manage memory by allowing multiple members to share the same storage space. Use them carefully, keeping in mind that only one member's value is valid at any given time.
 `;
 
-export default function CUnionsPage({ params }: LessonPageProps) {
+export default function CUnionsPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

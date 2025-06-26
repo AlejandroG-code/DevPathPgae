@@ -104,7 +104,7 @@ My age is 25, my height is 1.750000 meters, and my initial is J.
 Notice that the float ;1.75; is printed as ;1.750000;. C's ;printf()' by default shows a certain precision for floating-point numbers. We'll learn how to control this later.
 `;
 
-export default function COutputPage({ params }: LessonPageProps) {
+export default function COutputPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

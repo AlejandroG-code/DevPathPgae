@@ -118,7 +118,7 @@ On some systems (like Windows with MinGW/GCC), it might be linked automatically.
 The math functions in C are indispensable for scientific, engineering, and graphical applications, allowing you to perform complex calculations efficiently.
 `;
 
-export default function CMathFunctionsPage({ params }: LessonPageProps) {
+export default function CMathFunctionsPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

@@ -116,7 +116,7 @@ This basic 'Hello World' program demonstrates the fundamental structure of a C p
 `;
 
 // Componente principal de la página de la lección C Home.
-export default function CHomePage({ params }: LessonPageProps) {
+export default function CHomePage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   // useEffect para cargar dinámicamente los estilos y scripts de PrismJS.

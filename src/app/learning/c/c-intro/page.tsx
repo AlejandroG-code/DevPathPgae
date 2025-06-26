@@ -114,7 +114,7 @@ This program demonstrates the basic structure of any C program: the inclusion of
 In the following lessons, we will explore each of these components in detail.
 `;
 
-export default function CIntroPage({ params }: LessonPageProps) {
+export default function CIntroPage() {
   // Obtenemos courseId y lessonId de params aquí para usarlos en useEffect si es necesario
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 

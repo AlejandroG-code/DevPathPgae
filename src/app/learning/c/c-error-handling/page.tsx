@@ -145,7 +145,7 @@ Printing error messages to 'stderr' (standard error stream) using 'fprintf(stder
 Effective error handling is crucial for writing robust and reliable C programs that can gracefully manage unexpected situations.
 `;
 
-export default function CErrorHandlingPage({ params }: LessonPageProps) {
+export default function CErrorHandlingPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

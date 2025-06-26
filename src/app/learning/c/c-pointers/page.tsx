@@ -121,7 +121,7 @@ int main() {
 Pointers are a fundamental concept in C, offering direct control over memory, which is essential for advanced programming tasks.
 `;
 
-export default function CPointersPage({ params }: LessonPageProps) {
+export default function CPointersPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

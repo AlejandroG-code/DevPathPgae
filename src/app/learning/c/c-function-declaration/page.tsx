@@ -99,7 +99,7 @@ Even in this case, many programmers still include prototypes for consistency and
 Function prototypes are a fundamental aspect of C programming, ensuring proper function usage and enabling modular program design.
 `;
 
-export default function CFunctionDeclarationPage({ params }: LessonPageProps) {
+export default function CFunctionDeclarationPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

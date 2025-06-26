@@ -180,7 +180,7 @@ Used to combine or negate conditional statements.
 Understanding C operators is fundamental for writing expressions and controlling program flow.
 `;
 
-export default function COperatorsPage({ params }: LessonPageProps) {
+export default function COperatorsPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

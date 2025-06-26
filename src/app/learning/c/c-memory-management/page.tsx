@@ -131,7 +131,7 @@ Always pair 'malloc()' (or 'calloc()', 'realloc()') with a corresponding 'free()
 Memory management is one of C's most powerful but also most challenging aspects. Proper dynamic memory allocation and deallocation are essential for writing robust and efficient C applications.
 `;
 
-export default function CMemoryManagementPage({ params }: LessonPageProps) {
+export default function CMemoryManagementPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

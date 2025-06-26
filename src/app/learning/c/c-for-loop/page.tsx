@@ -124,7 +124,7 @@ Nested loops are commonly used when working with 2D arrays (matrices) or when yo
 The for loop is a powerful and efficient construct for iterative tasks in C programming, especially when the number of iterations is known.
 `;
 
-export default function CForLoopPage({ params }: LessonPageProps) {
+export default function CForLoopPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

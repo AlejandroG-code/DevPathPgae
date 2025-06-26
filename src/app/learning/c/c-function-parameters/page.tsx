@@ -108,7 +108,7 @@ int main() {
 Functions with parameters are essential for writing modular, flexible, and powerful C programs that can process and manipulate diverse data.
 `;
 
-export default function CFunctionParametersPage({ params }: LessonPageProps) {
+export default function CFunctionParametersPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

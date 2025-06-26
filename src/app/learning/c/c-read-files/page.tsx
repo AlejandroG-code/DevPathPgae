@@ -184,7 +184,7 @@ End of file reached.
 Reading files is a critical skill for developing C applications that interact with persistent storage. Always remember to open files in the correct mode and close them when you are done.
 `;
 
-export default function CReadFilesPage({ params }: LessonPageProps) {
+export default function CReadFilesPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

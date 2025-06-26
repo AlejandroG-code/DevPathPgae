@@ -107,7 +107,7 @@ For simple problems like factorial, an iterative (loop-based) solution is often 
 Understanding recursion is crucial for advanced algorithm design and data structures.
 `;
 
-export default function CRecursionPage({ params }: LessonPageProps) {
+export default function CRecursionPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

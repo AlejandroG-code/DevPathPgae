@@ -138,7 +138,7 @@ Continue loop finished.
 break and continue provide fine-grained control over loop execution, allowing you to handle specific conditions that require exiting or skipping iterations.
 `;
 
-export default function CBreakContinuePage({ params }: LessonPageProps) {
+export default function CBreakContinuePage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

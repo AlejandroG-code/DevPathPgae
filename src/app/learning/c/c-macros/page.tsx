@@ -143,7 +143,7 @@ int main() {
 Macros offer powerful text substitution capabilities, but they require careful handling, especially function-like macros, to avoid common pitfalls. They are essential for low-level optimizations and conditional compilation.
 `;
 
-export default function CMacrosPage({ params }: LessonPageProps) {
+export default function CMacrosPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

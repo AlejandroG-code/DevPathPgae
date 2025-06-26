@@ -93,7 +93,7 @@ int main() {
 * **Be concise and clear:** Write comments that are easy to understand and to the point.
 `;
 
-export default function CCommentsPage({ params }: LessonPageProps) {
+export default function CCommentsPage() {
   useEffect(() => {
     const link = document.createElement('link');
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';

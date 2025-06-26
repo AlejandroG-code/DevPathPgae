@@ -109,7 +109,7 @@ int main() {
 Understanding variable scope is critical for preventing naming conflicts and ensuring that variables are used correctly and securely within your C programs.
 `;
 
-export default function CScopePage({ params }: LessonPageProps) {
+export default function CScopePage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

@@ -198,7 +198,7 @@ int main() {
 When performing file write operations, always remember to check if 'fopen()' returned 'NULL' for error handling, and crucially, always call 'fclose()' when you are done to ensure data is saved and resources are released.
 `;
 
-export default function CWriteToFilesPage({ params }: LessonPageProps) {
+export default function CWriteToFilesPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

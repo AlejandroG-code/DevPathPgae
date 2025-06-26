@@ -143,7 +143,7 @@ The program runs fine, but the output '2' is logically incorrect for a "sum" ope
 Understanding these different types of errors is the first step towards effective debugging and writing more reliable C programs.
 `;
 
-export default function CErrorsPage({ params }: LessonPageProps) {
+export default function CErrorsPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

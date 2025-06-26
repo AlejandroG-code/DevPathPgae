@@ -126,7 +126,7 @@ The 'errno' variable and 'strerror()' function (from '<errno.h>') provide more d
 Creating files is the first step in enabling your C programs to interact with the file system for data storage and retrieval.
 `;
 
-export default function CCreateFilesPage({ params }: LessonPageProps) {
+export default function CCreateFilesPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {

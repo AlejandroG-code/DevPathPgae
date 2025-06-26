@@ -116,7 +116,7 @@ The '%zu' format specifier is used with 'printf()' for 'sizeof's' return value, 
 Understanding data types is fundamental as it directly impacts how memory is used and how operations are performed in your C programs.
 `;
 
-export default function CDataTypesPage({ params }: LessonPageProps) {
+export default function CDataTypesPage() {
   // Obtenemos courseId y lessonId de params aquí para usarlos en useEffect si es necesario
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 

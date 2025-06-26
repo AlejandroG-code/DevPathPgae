@@ -99,7 +99,7 @@ int main() {
 
 **Note on 'fgets()':** 'fgets()' includes the newline character ('\\n') if the user presses Enter before the buffer is full. You often need to remove this newline manually.`;
 
-export default function CStringsPage({ params }: LessonPageProps) {
+export default function CStringsPage() {
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {
