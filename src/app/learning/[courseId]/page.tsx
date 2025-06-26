@@ -8,48 +8,43 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 // Importa la metadata de todos los cursos
-// La ruta es relativa desde 'src/app/learning/[courseId]/page.tsx'
+// Asegúrate de que esta ruta sea correcta desde 'src/app/learning/[courseId]/page.tsx'
+// Si courses_meta.json está en public/data, esta ruta está bien.
+// Si está en src/data, sería: import coursesMetadata from '../../../../data/courses_meta.json';
 import coursesMetadata from '../../../../public/data/courses_meta.json';
-import { CourseMetadata } from '@/types/learning'; // Asegúrate de que esta ruta sea correcta para tus tipos
 
-// Define LessonMetadata interface locally if not available in types
-interface LessonMetadata {
-  id: string;
-  title: string;
-  // Add other properties as needed based on your lesson structure
-}
+// Importa los tipos. Usamos 'type' para que sean solo imports de tipos.
+import type { CourseMetadata, LessonMetadata } from '@/types/learning';
 
-// Interfaz para las props de la página
+// Interfaz para las props que la página recibirá del router dinámico
 interface CourseDetailPageProps {
   params: {
-    courseId: string; // El ID del curso de la URL (e.g., 'c', 'cpp')
+    courseId: string; // El ID del curso capturado de la URL (e.g., 'c', 'cpp')
   };
+  // Si tuvieras search parameters en la URL (ej. ?tab=info), irían aquí:
+  // searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ params }) => {
   const { courseId } = params;
 
-  // Busca la metadata del curso específico usando el courseId de la URL
-  const course = coursesMetadata.find(
-    (c) => c.id === courseId
+  // 1. Busca la metadata del curso específico usando el courseId
+  const course: CourseMetadata | undefined = coursesMetadata.find(
+    (c: CourseMetadata) => c.id === courseId
   );
 
-  // Si no se encuentra el curso, muestra la página 404
+  // 2. Si el curso no se encuentra, activamos el notFound() de Next.js
   if (!course) {
     console.error(`Course data not found for ID: ${courseId}.`);
     notFound(); // Redirige a la página 404 de Next.js
   }
 
-  // Las lecciones para este curso están en la propiedad 'lessons' del objeto course
-  // Aseguramos que 'lessons' siempre sea un array, incluso si es undefined en el JSON
+  // 3. Obtenemos las lecciones del curso, asegurando que sea un array
   const lessons: LessonMetadata[] = course.lessons || [];
 
-  // Si el curso existe pero no tiene lecciones definidas (array vacío)
+  // 4. Advertencia si no hay lecciones (útil para el desarrollo)
   if (lessons.length === 0) {
     console.warn(`No lessons found for course ID: ${courseId}. Course object:`, course);
-    // Podrías mostrar un mensaje o un fallback si un curso no tiene lecciones,
-    // o redirigir a notFound() si se espera que todos los cursos tengan lecciones.
-    // Por ahora, solo un aviso para desarrollo.
   }
 
   return (
@@ -84,14 +79,10 @@ const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ params }) => {
                 className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 flex flex-col justify-between h-full
                            hover:bg-gray-700/50 hover:border-accent-purple transition-all duration-300 transform cursor-pointer shadow-lg"
               >
-                {/* Construye el enlace a la lección.
-                    La ruta es /learning/{courseId}/{lessonId}
-                    Ejemplo: /learning/c/c-introduction
-                */}
+                {/* Construye el enlace a la lección: /learning/{courseId}/{lessonId} */}
                 <Link href={`/learning/${courseId}/${lesson.id}`} className="block h-full">
                   <div>
                     <h2 className="text-xl font-bold mb-2 text-white text-center">{lesson.title}</h2>
-                    {/* Puedes añadir una descripción o un fragmento de la lección aquí si LessonMetadata lo incluyera */}
                     {/* <p className="text-gray-300 text-sm">{lesson.description}</p> */}
                   </div>
                   <div className="mt-4 text-center">
