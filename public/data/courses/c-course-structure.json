@@ -154,34 +154,6 @@
     {
       "id": "c-projects",
       "title": "C Projects"
-    },
-    {
-      "id": "c-reference",
-      "title": "C Reference"
-    },
-    {
-      "id": "c-keywords",
-      "title": "C Keywords"
-    },
-    {
-      "id": "c-stdio-h",
-      "title": "C <stdio.h>"
-    },
-    {
-      "id": "c-stdlib-h",
-      "title": "C <stdlib.h>"
-    },
-    {
-      "id": "c-string-h",
-      "title": "C <string.h>"
-    },
-    {
-      "id": "c-math-h",
-      "title": "C <math.h>"
-    },
-    {
-      "id": "c-ctype-h",
-      "title": "C <ctype.h>"
     }
   ]
   
