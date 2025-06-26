@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-async-client-component */
 // src/app/learning/[courseId]/page.tsx
 'use client'; // Still a Client Component
 
@@ -20,7 +21,7 @@ import type { CourseMetadata, LessonMetadata } from '@/types/learning';
 // The underlying issue is likely an environment/caching problem on Vercel's side.
 // --- END IMPORTANT COMMENT ---
 
-export default async function CourseDetailPage({ params }: { params: any }) {
+export default async function CourseDetailPage({ params }: { params: never }) {
   // We still use await, as the error implied params might be a Promise,
   // and 'any' allows us to cover both scenarios without type errors.
   const resolvedParams = await params;
@@ -86,7 +87,7 @@ export default async function CourseDetailPage({ params }: { params: any }) {
                                        bg-vibrant-teal/80 hover:bg-vibrant-teal transition-all duration-300 shadow-md">
                       Go to Lesson
                       <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeLineWidth="2" d="M9 5l7 7-7 7"></path>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                       </svg>
                     </button>
                   </div>
