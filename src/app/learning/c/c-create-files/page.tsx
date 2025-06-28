@@ -159,50 +159,47 @@ int main() {
 `;
 
 
-export default function CCreateFilesPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CCreateFilesPage({ params }: { params: Promise<{ courseId: string; lessonId: string; }> }) {
 
   useEffect(() => {
-    // Load Prism CSS
-    const link = document.createElement('link');
-    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
+    async function loadData() {
+      try {
+        
+        // Load Prism CSS
+        const link = document.createElement('link');
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
 
-    // Load Prism core JS
-    const scriptCore = document.createElement('script');
-    scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
-    scriptCore.async = true;
+        // Load Prism core JS
+        const scriptCore = document.createElement('script');
+        scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
+        scriptCore.async = true;
 
-    scriptCore.onload = () => {
-      // Load C language component after core is loaded
-      const scriptCLang = document.createElement('script');
-      scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
-      scriptCLang.async = true;
+        scriptCore.onload = () => {
+          // Load C language component after core is loaded
+          const scriptCLang = document.createElement('script');
+          scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
+          scriptCLang.async = true;
 
-      scriptCLang.onload = () => {
-        // Highlight all code blocks after C language component is loaded
-        if (window.Prism) {
-          window.Prism.highlightAll();
-        }
-      };
-      document.body.appendChild(scriptCLang);
-    };
-    document.body.appendChild(scriptCore);
-
-    // Cleanup function
-    return () => {
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
+          scriptCLang.onload = () => {
+            // Highlight all code blocks after C language component is loaded
+            if (window.Prism) {
+              window.Prism.highlightAll();
+            }
+          };
+          document.body.appendChild(scriptCLang);
+        };
+        document.body.appendChild(scriptCore);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
       }
-      if (document.body.contains(scriptCore)) {
-        document.body.removeChild(scriptCore);
-      }
-      const cLangScript = document.querySelector('script[src*="prism-c.min.js"]');
-      if (cLangScript && document.body.contains(cLangScript)) {
-        document.body.removeChild(cLangScript);
-      }
-    };
-  }, [LESSON_CONTENT]); // Re-run effect if lesson content changes
+    }
+    
+    loadData();
+  }, [params]);
 
   const components: Components = {
     // Custom renderers for markdown elements to apply Tailwind CSS
@@ -255,3 +252,8 @@ export default function CCreateFilesPage({ }: { params: { courseId: string; less
     </div>
   );
 }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function setLoading(arg0: boolean) {
+  throw new Error('Function not implemented.');
+}
+
