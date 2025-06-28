@@ -5,10 +5,9 @@
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import LessonSidebar from '@/app/_components/LessonSidebar'; // Adjust path if _components is not used
-import { useParams } from 'next/navigation'; // Needed for useEffect dependencies
 
-// Extend the Window interface to include the Prism property
+import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
+
 declare global {
   interface Window {
     Prism?: {
@@ -17,102 +16,157 @@ declare global {
   }
 }
 
-interface LessonPageProps {
-  params: {
-    courseId: string;
-    lessonId: string;
-  };
-}
 
 const LESSON_CONTENT = `
-## C Arrays
+# C Arrays
 
-An array is a data structure that stores a fixed-size sequential collection of elements of the same data type. It is used to store multiple values in a single variable, instead of declaring separate variables for each value.
+An array is a collection of data items of the **same data type** stored at contiguous memory locations. It's a fundamental data structure in C used to store a fixed-size sequence of elements.
 
-### Declaring and Initializing Arrays
+## Declaring an Array
 
-To declare an array, define the variable type, specify the name of the array followed by square brackets '[]', and specify the number of elements it will store:
+To declare an array, you specify the data type of the elements, followed by the array name, and then the size of the array in square brackets.
+
+**Syntax:**
 
 \`\`\`c
-type arrayName[arraySize];
+dataType arrayName[arraySize];
 \`\`\`
+
+-   'dataType': The type of data that the array will hold (e.g., 'int', 'char', 'float').
+-   'arrayName': The name of the array.
+-   'arraySize': The number of elements the array can store. This must be a constant integer expression.
 
 **Example:**
 
 \`\`\`c
-int myNumbers[5]; // Declares an integer array named myNumbers that can hold 5 elements
-\`\`\`
-
-You can also initialize an array when you declare it, by listing the values inside curly braces '{}\`:
-
-\`\`\`c
-int myNumbers[] = {10, 20, 30, 40, 50}; // Compiler determines size based on elements (5 elements)
-char myLetters[3] = {'A', 'B', 'C'}; // Explicit size, initialized with values
-\`\`\`
-
-### Accessing Array Elements
-
-Array elements are accessed using an index number. Array indexing starts from **0**.
-
-\`\`\`c
 #include <stdio.h>
 
 int main() {
-    int myNumbers[] = {10, 20, 30, 40, 50};
-    printf("%d\\n", myNumbers[0]); // Access the first element (index 0), Output: 10
-    printf("%d\\n", myNumbers[2]); // Access the third element (index 2), Output: 30
+    int numbers[5]; // Declares an integer array named 'numbers' that can hold 5 elements
+    char name[10]; // Declares a character array named 'name' that can hold 10 characters
+    float temperatures[7]; // Declares a float array for 7 temperatures
     return 0;
 }
 \`\`\`
 
-### Changing Array Elements
+## Initializing Arrays
 
-You can change the value of a specific element by referring to its index number:
+You can initialize an array during declaration.
+
+### 1. Initializing with all elements
 
 \`\`\`c
 #include <stdio.h>
 
 int main() {
-    int myNumbers[] = {10, 20, 30, 40, 50};
-    myNumbers[0] = 5; // Change the value of the first element to 5
-    printf("%d\\n", myNumbers[0]); // Output: 5
+    int numbers[5] = {10, 20, 30, 40, 50}; // Initialize all 5 elements
     return 0;
 }
 \`\`\`
 
-### Looping Through an Array
+### 2. Initializing without specifying size
 
-You can loop through array elements with the 'for' loop, and use the 'sizeof' operator to find the size of the array.
+If you initialize an array without specifying its size, the compiler will automatically determine the size based on the number of elements provided.
 
 \`\`\`c
 #include <stdio.h>
 
 int main() {
-    int myNumbers[] = {10, 20, 30, 40, 50};
+    int numbers[] = {10, 20, 30, 40, 50}; // Size automatically determined as 5
+    // sizeof(numbers) will be 5 * sizeof(int)
+    printf("Size of numbers array: %zu bytes\\n", sizeof(numbers));
+    return 0;
+}
+\`\`\`
+
+### 3. Initializing with fewer elements than size
+
+If you specify the size but provide fewer elements, the remaining elements will be initialized to 0 (for numeric types) or null characters (for character types).
+
+\`\`\`c
+#include <stdio.h>
+
+int main() {
+    int numbers[5] = {10, 20}; // numbers[0]=10, numbers[1]=20, numbers[2]=0, numbers[3]=0, numbers[4]=0
+    printf("numbers[2]: %d\\n", numbers[2]); // Output: 0
+    return 0;
+}
+\`\`\`
+
+## Accessing Array Elements
+
+Array elements are accessed using **indexes**. C arrays are **zero-indexed**, meaning the first element is at index 0, the second at index 1, and so on. For an array of size 'N', the valid indexes range from 0 to 'N-1'.
+
+**Syntax:**
+
+\`\`\`c
+arrayName[index]
+\`\`\`
+
+**Example: Accessing and modifying array elements**
+
+\`\`\`c
+#include <stdio.h>
+
+int main() {
+    int scores[4] = {100, 95, 88, 70};
+
+    // Accessing elements
+    printf("First score: %d\\n", scores[0]);  // Output: 100
+    printf("Third score: %d\\n", scores[2]); // Output: 88
+
+    // Modifying an element
+    scores[1] = 92; // Change the second element from 95 to 92
+    printf("Modified second score: %d\\n", scores[1]); // Output: 92
+
+    // Accessing an out-of-bounds index (DANGER!)
+    // printf("Out of bounds: %d\\n", scores[4]); // This can lead to undefined behavior
+                                                // as arraySize is 4, valid indices 0-3
+    return 0;
+}
+\`\`\`
+
+<div class="my-6 p-4 rounded-lg border-l-4 border-yellow-600 bg-yellow-900/[.2] shadow-md">
+    <p class="font-bold text-lg mb-2 text-yellow-400">Warning!</p>
+    <div class="text-base md:text-lg text-gray-200 leading-relaxed">
+        C does not perform automatic bounds checking for arrays. Accessing an index outside the declared range ('arraySize') results in **undefined behavior**, which can lead to crashes, incorrect results, or security vulnerabilities. It's the programmer's responsibility to ensure valid index access.
+    </div>
+</div>
+
+## Iterating Through Arrays
+
+Loops (especially 'for' loops) are commonly used to process all elements in an array.
+
+**Example: Printing all elements of an array**
+
+\`\`\`c
+#include <stdio.h>
+
+int main() {
+    int numbers[] = {5, 10, 15, 20, 25};
     int i;
 
-    // Calculate the number of elements: (size of array in bytes) / (size of one element in bytes)
-    int arraySize = sizeof(myNumbers) / sizeof(myNumbers[0]); 
+    // Calculate the number of elements: total size / size of one element
+    int numElements = sizeof(numbers) / sizeof(numbers[0]);
 
-    for (i = 0; i < arraySize; i++) {
-        printf("%d\\n", myNumbers[i]);
+    printf("Elements of the array:\\n");
+    for (i = 0; i < numElements; i++) {
+        printf("%d ", numbers[i]);
     }
-    // Output:
-    // 10
-    // 20
-    // 30
-    // 40
-    // 50
+    printf("\\n"); // Newline after printing all elements
+    // Output: 5 10 15 20 25
     return 0;
 }
 \`\`\`
 
-### Multidimensional Arrays
+## Multidimensional Arrays (2D Arrays)
 
-A multidimensional array is an array of arrays. They are commonly used to store data in a table-like format (rows and columns).
+Arrays can have more than one dimension. A two-dimensional array (or matrix) is essentially an array of arrays.
+
+**Declaring a 2D Array:**
 
 \`\`\`c
-type arrayName[rows][columns];
+dataType arrayName[rows][columns];
 \`\`\`
 
 **Example: 2D Array (Matrix)**
@@ -122,119 +176,123 @@ type arrayName[rows][columns];
 
 int main() {
     // Declares a 2x3 integer array (2 rows, 3 columns)
-    int matrix[2][3] = { {1, 2, 3}, {4, 5, 6} };
+    int matrix[2][3] = {
+        {1, 2, 3}, // Row 0
+        {4, 5, 6}  // Row 1
+    };
 
-    // Accessing elements: matrix[row_index][column_index]
-    printf("%d\\n", matrix[0][0]); // Output: 1
-    printf("%d\\n", matrix[1][2]); // Output: 6
+    // Accessing elements
+    printf("Element at [0][0]: %d\\n", matrix[0][0]); // Output: 1
+    printf("Element at [1][2]: %d\\n", matrix[1][2]); // Output: 6
 
-    // Loop through a 2D array
-    for (int i = 0; i < 2; i++) { // Loop through rows
-        for (int j = 0; j < 3; j++) { // Loop through columns
+    // Iterating through a 2D array
+    int i, j;
+    printf("Matrix elements:\\n");
+    for (i = 0; i < 2; i++) { // Loop through rows
+        for (j = 0; j < 3; j++) { // Loop through columns
             printf("%d ", matrix[i][j]);
         }
-        printf("\\n"); // New line after each row
+        printf("\\n"); // Newline after each row
     }
-    // Output:
-    // 1 2 3
-    // 4 5 6
-
+    /* Output:
+    1 2 3 
+    4 5 6 
+    */
     return 0;
 }
 \`\`\`
 
-Arrays are fundamental for storing and manipulating collections of data of the same type, and multidimensional arrays extend this capability for more complex data structures.
+<div class="my-6 p-4 rounded-lg border-l-4 border-green-600 bg-green-900/[.2] shadow-md">
+    <p class="font-bold text-lg mb-2 text-green-400">Tip</p>
+    <div class="text-base md:text-lg text-gray-200 leading-relaxed">
+        Arrays are fundamental for organizing and managing collections of similar data. Understanding single and multidimensional arrays is crucial for solving many programming problems in C.
+    </div>
+</div>
 `;
 
+
 export default function CArraysPage() {
-  const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {
-    // 1. Cargar el archivo CSS del tema de PrismJS (Okaidia).
     const link = document.createElement('link');
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
 
-    // 2. Cargar el script core de PrismJS.
     const scriptCore = document.createElement('script');
     scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
     scriptCore.async = true;
 
-    // 3. Cuando el script core se cargue, cargar el componente de lenguaje C.
     scriptCore.onload = () => {
       const scriptCLang = document.createElement('script');
       scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
       scriptCLang.async = true;
 
       scriptCLang.onload = () => {
-        // Asegurarse de que Prism esté disponible globalmente antes de intentar resaltado.
         if (window.Prism) {
-          window.Prism.highlightAll(); // Resalta todos los bloques de código en la página
+          window.Prism.highlightAll();
         }
       };
       document.body.appendChild(scriptCLang);
     };
     document.body.appendChild(scriptCore);
 
-    // Función de limpieza para eliminar el enlace CSS cuando el componente se desmonte.
     return () => {
       if (document.head.contains(link)) {
         document.head.removeChild(link);
       }
+      if (document.body.contains(scriptCore)) {
+        document.body.removeChild(scriptCore);
+      }
     };
-  }, [LESSON_CONTENT, courseId, lessonId]); // Dependencias para re-ejecutar si el contenido o la ruta cambian
+  }, [LESSON_CONTENT]);
+
+  const components: Components = {
+    code: ({ className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const lang = match ? match[1] : 'markup'; 
+      return (
+        <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
+          <code className={`language-${lang}`} {...props}>
+            {String(children).replace(/\n$/, '')}
+          </code>
+        </pre>
+      );
+    },
+    h1: ({ ...props }) => <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
+    h2: ({ ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
+    h3: ({ ...props }) => <h3 className="text-2xl md:text-3xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
+    p: ({ ...props }) => <p className="text-base md:text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
+    strong: ({ ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
+    a: ({ ...props }) => <a className="text-accent-purple hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+    ul: ({ ...props }) => <ul className="list-disc list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    ol: ({ ...props }) => <ol className="list-decimal list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    li: ({ ...props }) => <li className="mb-2" {...props} />,
+    blockquote: ({ ...props }) => <blockquote className="border-l-4 border-accent-purple pl-4 italic text-gray-400 my-4" {...props} />,
+    table: ({ ...props }) => <table className="w-full text-left border-collapse my-6 bg-gray-800 rounded-lg overflow-hidden" {...props} />,
+    thead: ({ ...props }) => <thead className="bg-gray-700" {...props} />,
+    th: ({ ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold text-sm" {...props} />,
+    tbody: ({ ...props }) => <tbody {...props} />,
+    td: ({ ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300 text-sm" {...props} />,
+  };
 
   return (
-    <div className="flex min-h-screen"> 
-      {/* Componente de la barra lateral de navegación. */}
-      <LessonSidebar /> 
-      
-      {/* Contenedor del contenido principal de la lección.
-          flex-1: Hace que ocupe todo el espacio horizontal restante.
-          ml-0: Sin margen izquierdo por defecto (para móvil).
-          md:ml-64: Añade un margen izquierdo de 64 unidades (16rem, ancho de la sidebar) en pantallas medianas y grandes.
-                    Esto empuja el contenido para que no quede debajo de la sidebar fija.
-      */}
-      <main className="flex-1 ml-0 md:ml-64"> 
-        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1 w-full max-w-full px-4 md:px-8 mx-auto">
+        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl w-full">
           <ReactMarkdown
-            rehypePlugins={[rehypeRaw]} // Necesario para que ReactMarkdown procese el HTML personalizado dentro del Markdown.
-            components={{
-              // Renderizado personalizado para bloques de código.
-              // Aplica clases de Tailwind para el contenedor <pre> y la clase 'language-XYZ' para PrismJS en <code>.
-              code: ({ inline, className, children, ...props }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => {
-                const match = /language-(\w+)/.exec(className || '');
-                const lang = match ? match[1] : 'markup'; // Extrae el lenguaje (e.g., 'c', 'bash') o usa 'markup' por defecto.
-
-                return !inline ? (
-                  <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
-                    <code className={`language-${lang}`} {...props}>
-                      {String(children).replace(/\n$/, '')}
-                    </code>
-                  </pre>
-                ) : (
-                  // Estilo para fragmentos de código en línea (e.g., `printf()`).
-                  <code className="bg-gray-700 text-vibrant-teal px-1 py-0.5 rounded-md text-xs" {...props}>
-                    {children}
-                  </code>
-                );
-              },
-              // Personaliza otros elementos de Markdown con clases de Tailwind CSS para mantener la estética.
-              h1: ({ node, ...props }) => <h1 className="text-4xl md:text-5xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
-              h2: ({ node, ...props }) => <h2 className="text-3xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
-              h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
-              p: ({ node, ...props }) => <p className="text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
-              strong: ({ node, ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
-              a: ({ node, ...props }) => <a className="text-accent-purple hover:underline" {...props} />,
-              table: ({ node, ...props }) => <table className="w-full text-left border-collapse my-6" {...props} />,
-              th: ({ node, ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold bg-gray-700" {...props} />,
-              td: ({ node, ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300" {...props} />,
-            }}
+            rehypePlugins={[rehypeRaw]}
+            components={components}
           >
             {LESSON_CONTENT}
           </ReactMarkdown>
         </div>
+        <LessonNavigationButtons
+          currentCourseId="c"
+          prevLesson="c-break-continue"
+          nextLesson="c-strings"
+          backToContentPath={`/learning/c`}
+        />
       </main>
     </div>
   );

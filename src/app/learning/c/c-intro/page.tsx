@@ -5,10 +5,10 @@
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import LessonSidebar from '@/app/_components/LessonSidebar'; // Asegúrate que la ruta de importación sea correcta
-import { useParams } from 'next/navigation'; // Necesario para obtener courseId/lessonId para useEffect y PrismJS
+import { useParams } from 'next/navigation';
 
-// Extend the Window interface to include the Prism property
+import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
+
 declare global {
   interface Window {
     Prism?: {
@@ -17,199 +17,198 @@ declare global {
   }
 }
 
-interface LessonPageProps {
+interface LessonMetadata {
+  id: string;
+  title: string;
+  description: string;
+}
+
+const LESSON_CONTENT = `
+# Introduction to C
+
+The C programming language is a powerful, general-purpose programming language developed in the early 1970s by Dennis Ritchie at Bell Labs. It was primarily designed to write the Unix operating system.
+
+## Key Characteristics of C
+
+<div class="bg-gradient-to-r from-gray-800 to-gray-700 border border-vibrant-teal/50 rounded-lg shadow-xl p-6 mb-6">
+    <h3 class="text-2xl font-bold text-vibrant-teal mb-3">Key Characteristics of C</h3>
+    <ul class="list-disc list-inside ml-4 text-gray-300 space-y-1">
+        <li><strong>Procedural Language:</strong> C is a procedural language, meaning it defines a series of well-defined steps and functions to perform a task.</li>
+        <li><strong>Mid-Level Language:</strong> C is often called a "mid-level" language because it combines features of both high-level languages (like readability) and low-level languages (like direct memory manipulation).</li>
+        <li><strong>Statically Typed:</strong> Variables must be declared with a specific data type before use, and their type cannot change during runtime.</li>
+        <li><strong>Memory Management:</strong> C provides direct memory access using pointers, giving the programmer fine-grained control over memory. This requires careful handling but allows for highly optimized code.</li>
+        <li><strong>Fast and Efficient:</strong> C programs compile directly to machine code, resulting in very fast execution speeds and efficient use of system resources.</li>
+        <li><strong>Portable:</strong> C code written on one system can often be compiled and run on different systems with minimal or no changes.</li>
+    </ul>
+</div>
+
+## Why C Remains Relevant
+
+Despite being developed decades ago, C remains incredibly important and widely used today:
+
+<div class="my-6 space-y-4">
+    <div class="bg-gray-800 rounded-lg shadow-lg border border-gray-700">
+        <details>
+            <summary class="w-full text-left p-4 flex justify-between items-center text-white font-semibold text-lg focus:outline-none cursor-pointer">
+                <span>Operating Systems and Embedded Systems</span>
+                <span class="transform transition-transform duration-300 details-toggle-icon">+</span>
+            </summary>
+            <div class="p-4 pt-0 text-gray-300 leading-relaxed border-t border-gray-700">
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Kernels of popular operating systems like Linux, Windows, and macOS are largely written in C (or C++). Additionally, microcontrollers, IoT devices, and firmware often rely on C due to its efficiency and low-level control.
+                </p>
+            </div>
+        </details>
+    </div>
+    <div class="bg-gray-800 rounded-lg shadow-lg border border-gray-700">
+        <details>
+            <summary class="w-full text-left p-4 flex justify-between items-center text-white font-semibold text-lg focus:outline-none cursor-pointer">
+                <span>Game Development and Databases</span>
+                <span class="transform transition-transform duration-300 details-toggle-icon">+</span>
+            </summary>
+            <div class="p-4 pt-0 text-gray-300 leading-relaxed border-t border-gray-700">
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Game engines and performance-critical parts of games often use C/C++. Database systems like MySQL and PostgreSQL are also implemented in C.
+                </p>
+            </div>
+        </details>
+    </div>
+    <div class="bg-gray-800 rounded-lg shadow-lg border border-gray-700">
+        <details>
+            <summary class="w-full text-left p-4 flex justify-between items-center text-white font-semibold text-lg focus:outline-none cursor-pointer">
+                <span>Compilers, Interpreters, and HPC</span>
+                <span class="transform transition-transform duration-300 details-toggle-icon">+</span>
+            </summary>
+            <div class="p-4 pt-0 text-gray-300 leading-relaxed border-t border-gray-700">
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    The compilers and interpreters for many other languages (e.g., Python, Ruby, JavaScript engines) are written in C. It is also vital in High-Performance Computing (HPC) for scientific simulations and numerical analysis.
+                </p>
+            </div>
+        </details>
+    </div>
+    <div class="bg-gray-800 rounded-lg shadow-lg border border-gray-700">
+        <details>
+            <summary class="w-full text-left p-4 flex justify-between items-center text-white font-semibold text-lg focus:outline-none cursor-pointer">
+                <span>Foundation for Learning</span>
+                <span class="transform transition-transform duration-300 details-toggle-icon">+</span>
+            </summary>
+            <div class="p-4 pt-0 text-gray-300 leading-relaxed border-t border-gray-700">
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Understanding C provides a fundamental grasp of computer architecture and how programs interact with hardware, which is invaluable for learning other programming languages.
+                </p>
+            </div>
+        </details>
+    </div>
+</div>
+
+## C Standard Library
+
+C comes with a rich standard library that provides functions for common tasks, such as:
+
+<ul class="list-disc list-inside ml-4 text-gray-300 mb-4 space-y-1">
+    <li><strong>Input/Output:</strong> \`printf()\`, \`scanf()\`, \`fopen()\`, \`fclose()\` (from \`&ltstdio.h&gt\`)</li>
+    <li><strong>String Manipulation:</strong> \`strlen()\`, \`strcpy()\`, \`strcat()\` (from \`&ltstring.h&gt\`)</li>
+    <li><strong>Memory Management:</strong> \`malloc()\`, \`calloc()\`, \`realloc()\`, \`free()\` (from \`&lttdlib.h&gt\`)</li>
+    <li><strong>Mathematical Operations:</strong> \`sqrt()\`, \`pow()\`, \`sin()\`, \`cos()\` (from \`&ltmath.h&gt\`)</li>
+</ul>
+
+<div class="my-6 p-4 rounded-lg border-l-4 border-green-600 bg-green-900/[.2] shadow-md">
+    <p class="font-bold text-lg mb-2 text-green-400">Tip</p>
+    <div class="text-gray-200 leading-relaxed">
+        C is a foundational language that empowers programmers with significant control over system resources, leading to highly efficient applications. Its principles form the basis for many modern programming paradigms.
+    </div>
+</div>
+`;
+
+interface CIntroPageProps {
   params: {
     courseId: string;
     lessonId: string;
   };
 }
 
-const LESSON_CONTENT = `
-## Introduction to C
-
-C is a general-purpose programming language, developed by Dennis Ritchie at Bell Labs between 1969 and 1973. It was primarily designed to implement the UNIX operating system.
-
-### Key Characteristics of C:
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md">
-    <p class="text-vibrant-teal font-semibold mb-1">Mid-level Language:</p>
-    <p class="text-gray-300">C combines features of high-level languages (easy for humans to understand) and low-level languages (direct access to memory and hardware).</p>
-  </div>
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md">
-    <p class="text-vibrant-teal font-semibold mb-1">Compiled Language:</p>
-    <p class="text-gray-300">C code must be compiled before it can be executed. A compiler translates the C source code into machine code.</p>
-  </div>
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md">
-    <p class="text-vibrant-teal font-semibold mb-1">Modularity:</p>
-    <p class="text-gray-300">Allows the division of programs into functions and modules, making code management and reuse easier.</p>
-  </div>
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md">
-    <p class="text-vibrant-teal font-semibold mb-1">Rich Library Set:</p>
-    <p class="text-gray-300">C comes with a set of standard libraries that provide predefined functions for common tasks.</p>
-  </div>
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md">
-    <p class="text-vibrant-teal font-semibold mb-1">Case-sensitive:</p>
-    <p class="text-gray-300">C distinguishes between uppercase and lowercase (e.g., \`variable\` and \`Variable\` are different).</p>
-  </div>
-</div>
-
-### How a C Program Works:
-
-The typical process for running a C program involves the following steps:
-
-<div class="grid grid-cols-1 gap-4 my-6">
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md flex items-start">
-    <span class="text-vibrant-teal text-xl font-bold mr-3">1.</span>
-    <div>
-      <p class="text-vibrant-teal font-semibold mb-1">Editing:</p>
-      <p class="text-gray-300">You write your source code in a text editor and save it with a \`.c\` extension (e.g., \`my_program.c\`).</p>
-    </div>
-  </div>
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md flex items-start">
-    <span class="text-vibrant-teal text-xl font-bold mr-3">2.</span>
-    <div>
-      <p class="text-vibrant-teal font-semibold mb-1">Compilation:</p>
-      <p class="text-gray-300">You use a C compiler (like GCC) to translate your code into an executable file. This process includes:
-        <ul class="list-disc list-outside ml-6 space-y-1 mt-2 text-gray-300 marker:text-gray-400">
-          <li class="pl-2"><strong>Preprocessing:</strong> Expands preprocessor directives (like \`#include\` and \`#define\`).</li>
-          <li class="pl-2"><strong>Compiling:</strong> Translates the preprocessed code into assembly code.</li>
-          <li class="pl-2"><strong>Assembling:</strong> Converts assembly code into machine code (object file \`.o\` or \`.obj\`).</li>
-          <li class="pl-2"><strong>Linking:</strong> Combines the object file with necessary libraries to create the final executable program.</li>
-        </ul>
-      </p>
-    </div>
-  </div>
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md flex items-start">
-    <span class="text-vibrant-teal text-xl font-bold mr-3">3.</span>
-    <div>
-      <p class="text-vibrant-teal font-semibold mb-1">Execution:</p>
-      <p class="text-gray-300">You run the executable file.</p>
-    </div>
-  </div>
-</div>
-
-\`\`\`bash
-# Example of compilation and execution with GCC
-# 1. Compile:
-gcc my_program.c -o my_program
-
-# 2. Execute:
-./my_program
-\`\`\`
-
-### The First Program: "Hello World"
-
-\`\`\`c
-#include <stdio.h>
-
-int main() {
-    printf("Hello, world!\\n"); // Prints "Hello, world!" followed by a newline
-    return 0; // Indicates that the program finished successfully
-}
-\`\`\`
-
-This program demonstrates the basic structure of any C program: the inclusion of a header (stdio.h), the main() function as the entry point, and a standard library function (printf()) to produce output.
-
-In the following lessons, we will explore each of these components in detail.
-`;
-
-export default function CIntroPage() {
-  // Obtenemos courseId y lessonId de params aquí para usarlos en useEffect si es necesario
-  const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
+export default function CIntroPage({ params }: { params: { courseId: string; lessonId: string } }) {
 
   useEffect(() => {
-    // 1. Cargar el archivo CSS del tema de PrismJS (Okaidia).
     const link = document.createElement('link');
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
 
-    // 2. Cargar el script core de PrismJS.
     const scriptCore = document.createElement('script');
     scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
     scriptCore.async = true;
 
-    // 3. Cuando el script core se cargue, cargar los componentes de lenguaje C y Bash.
     scriptCore.onload = () => {
       const scriptCLang = document.createElement('script');
       scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
       scriptCLang.async = true;
 
       scriptCLang.onload = () => {
-        const scriptBashLang = document.createElement('script'); // New: Load Bash language component
-        scriptBashLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js';
-        scriptBashLang.async = true;
-
-        scriptBashLang.onload = () => {
-          if (window.Prism) {
-            window.Prism.highlightAll(); // Resalta todos los bloques de código en la página
-          }
-        };
-        document.body.appendChild(scriptBashLang);
+        if (window.Prism) {
+          window.Prism.highlightAll();
+        }
       };
       document.body.appendChild(scriptCLang);
     };
     document.body.appendChild(scriptCore);
 
-    // Función de limpieza para eliminar el enlace CSS cuando el componente se desmonte.
     return () => {
       if (document.head.contains(link)) {
         document.head.removeChild(link);
       }
+      if (document.body.contains(scriptCore)) {
+        document.body.removeChild(scriptCore);
+      }
     };
-  }, [LESSON_CONTENT, courseId, lessonId]); // Se añadió Lesson_CONTENT y los params como dependencias para consistencia.
+  }, [LESSON_CONTENT]);
+
+  const components: Components = {
+    code: ({ className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const lang = match ? match[1] : 'markup'; 
+      return (
+        <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
+          <code className={`language-${lang}`} {...props}>
+            {String(children).replace(/\n$/, '')}
+          </code>
+        </pre>
+      );
+    },
+    h1: ({ ...props }) => <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
+    h2: ({ ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
+    h3: ({ ...props }) => <h3 className="text-2xl md:text-3xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
+    p: ({ ...props }) => <p className="text-base md:text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
+    strong: ({ ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
+    a: ({ ...props }) => <a className="text-accent-purple hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+    ul: ({ ...props }) => <ul className="list-disc list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    ol: ({ ...props }) => <ol className="list-decimal list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    li: ({ ...props }) => <li className="mb-2" {...props} />,
+    blockquote: ({ ...props }) => <blockquote className="border-l-4 border-accent-purple pl-4 italic text-gray-400 my-4" {...props} />,
+    table: ({ ...props }) => <table className="w-full text-left border-collapse my-6 bg-gray-800 rounded-lg overflow-hidden" {...props} />,
+    thead: ({ ...props }) => <thead className="bg-gray-700" {...props} />,
+    th: ({ ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold text-sm" {...props} />,
+    tbody: ({ ...props }) => <tbody {...props} />,
+    td: ({ ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300 text-sm" {...props} />,
+  };
 
   return (
-    <div className="flex min-h-screen"> 
-      {/* Componente de la barra lateral de navegación. */}
-      <LessonSidebar /> 
-      
-      {/* Contenedor del contenido principal de la lección.
-          flex-1: Hace que ocupe todo el espacio horizontal restante.
-          ml-0: Sin margen izquierdo por defecto (para móvil).
-          md:ml-64: Añade un margen izquierdo de 64 unidades (16rem, ancho de la sidebar) en pantallas medianas y grandes.
-                    Esto empuja el contenido para que no quede debajo de la sidebar fija.
-      */}
-      <main className="flex-1 ml-0 md:ml-64"> 
-        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1 w-full max-w-full px-4 md:px-8 mx-auto">
+        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl w-full">
           <ReactMarkdown
             rehypePlugins={[rehypeRaw]}
-            components={{
-              code: ({ inline, className, children, ...props }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => {
-                const match = /language-(\w+)/.exec(className || '');
-                const lang = match ? match[1] : 'markup'; 
-
-                return !inline ? (
-                  <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
-                    <code className={`language-${lang}`} {...props}>
-                      {String(children).replace(/\n$/, '')}
-                    </code>
-                  </pre>
-                ) : (
-                  <code className="bg-gray-700 text-vibrant-teal px-1 py-0.5 rounded-md text-xs" {...props}>
-                    {children}
-                  </code>
-                );
-              },
-              h1: ({ node, ...props }) => <h1 className="text-4xl md:text-5xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
-              h2: ({ node, ...props }) => <h2 className="text-3xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
-              h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
-              p: ({ node, ...props }) => <p className="text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
-              // For standard Markdown lists, we keep the styling as needed.
-              ul: ({ node, ...props }) => <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-gray-300 marker:text-vibrant-teal" {...props} />,
-              ol: ({ node, ...props }) => <ol className="list-decimal list-outside ml-6 space-y-2 mb-4 text-gray-300 marker:text-vibrant-teal" {...props} />,
-              li: ({ node, ...props }) => <li className="pl-2" {...props} />,
-              strong: ({ node, ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
-              a: ({ node, ...props }) => <a className="text-accent-purple hover:underline" {...props} />,
-              table: ({ node, ...props }) => <table className="w-full text-left border-collapse my-6" {...props} />,
-              th: ({ node, ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold bg-gray-700" {...props} />,
-              td: ({ node, ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300" {...props} />,
-            }}
+            components={components}
           >
             {LESSON_CONTENT}
           </ReactMarkdown>
         </div>
+        <LessonNavigationButtons
+          currentCourseId="c"
+          prevLesson="c-home"
+          nextLesson="c-get-started"
+          backToContentPath={`/learning/c`}
+        />
       </main>
     </div>
   );

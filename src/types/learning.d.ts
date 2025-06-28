@@ -1,29 +1,25 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
 // src/types/learning.ts
 
+// Interfaz para la metadata básica de cada lección (ID y Título)
+// Esta metadata la obtendremos de los archivos *-course-structure.json
 export interface LessonMetadata {
   id: string;
   title: string;
-  // Añade cualquier otra propiedad que tus JSON de lecciones puedan tener aquí
-  // Por ejemplo: path: string; content?: string; etc.
-  path?: string; // Si tienes una ruta específica para el contenido de la lección
+  // Puedes añadir más propiedades aquí si tus lecciones las tienen (ej. 'description', 'duration')
 }
 
-// LearningLesson es idéntica a LessonMetadata para este propósito,
-// pero se exporta explícitamente para coincidir con tus importaciones.
-export interface LearningLesson extends LessonMetadata {}
-
-
+// CourseMetadata ahora es más flexible
 export interface CourseMetadata {
   id: string;
   title: string;
   description: string;
   icon: string; 
   homePagePath?: string; 
-  lessons?: LessonMetadata[]; // lessons es opcional en la metadata inicial
+  lessonsPath: string; // Ruta al archivo JSON con la lista de lecciones (ej. "courses/c-course-structure.json")
+  mdxContentDir?: string; // Opcional: Ruta al directorio que contiene los archivos .mdx si el curso usa MDX (ej. "python")
 }
 
-// Interfaz completa para un curso una vez que las lecciones se han cargado
+// Interfaz para un curso completo, después de que se hayan cargado sus lecciones detalladas
 export interface LearningCourse extends CourseMetadata {
-  lessons: LearningLesson[]; // Aquí lessons es OBLIGATORIO porque ya se han cargado y asignado
+  lessons: LessonMetadata[]; // Aquí 'lessons' es OBLIGATORIO, ya que se habrá cargado desde el lessonsPath
 }

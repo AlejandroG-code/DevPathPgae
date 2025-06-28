@@ -5,10 +5,10 @@
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import LessonSidebar from '@/app/_components/LessonSidebar'; // Adjust path if _components is not used
-import { useParams } from 'next/navigation'; // Needed for useEffect dependencies
+import { useParams } from 'next/navigation';
 
-// Extend the Window interface to include the Prism property
+import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
+
 declare global {
   interface Window {
     Prism?: {
@@ -17,116 +17,185 @@ declare global {
   }
 }
 
-interface LessonPageProps {
+interface LessonMetadata {
+  id: string;
+  title: string;
+  description: string;
+}
+
+const LESSON_CONTENT = `
+# C Function Parameters
+
+Functions often need to receive data from the calling part of the program to perform their task. This data is passed through **parameters** (also known as formal parameters or arguments). Parameters act as placeholders inside the function for the values that will be passed into it when the function is called.
+
+## Passing Arguments
+
+In C, arguments are primarily passed to functions in two ways:
+
+1.  **Pass by Value (Call by Value)**: This is the default way to pass arguments. A copy of the actual value of the argument is passed to the function. Any modifications made to the parameter inside the function do not affect the original variable in the calling function.
+2.  **Pass by Reference (Call by Reference)**: The memory address of the variable is passed to the function using pointers. This allows the function to directly access and modify the original variable's value.
+
+## 1. Pass by Value (Default)
+
+When you pass arguments by value, a local copy of the argument's value is created within the function's scope.
+
+**Example:**
+
+\`\`\`c
+#include <stdio.h>
+
+// Function that takes an integer by value
+void increment(int num) {
+    printf("Inside function: Value of num before increment: %d\\n", num);
+    num++; // Increment the LOCAL copy of num
+    printf("Inside function: Value of num after increment: %d\\n", num);
+}
+
+int main() {
+    int myValue = 10;
+    printf("Outside function: Original myValue: %d\\n", myValue);
+
+    increment(myValue); // Pass the value of myValue
+
+    printf("Outside function: myValue after function call: %d\\n", myValue);
+    // myValue is still 10, because 'increment' worked on a copy.
+    return 0;
+}
+\`\`\`
+
+**Output:**
+
+\`\`\`
+Outside function: Original myValue: 10
+Inside function: Value of num before increment: 10
+Inside function: Value of num after increment: 11
+Outside function: myValue after function call: 10
+\`\`\`
+
+**When to use Pass by Value:**
+- When the function only needs to read the value of the variable.
+- When you want to protect the original variable from being modified by the function.
+
+## 2. Pass by Reference (Using Pointers)
+
+To allow a function to modify the original variable, you need to pass its memory address (a pointer) to the function. Inside the function, you use the dereference operator ('*') to access and modify the value at that address.
+
+**Example:**
+
+\`\`\`c
+#include <stdio.h>
+
+// Function that takes a pointer to an integer (address)
+void incrementByReference(int *numPtr) { // numPtr is a pointer to an int
+    printf("Inside function: Value at address %p before increment: %d\\n", numPtr, *numPtr);
+    (*numPtr)++; // Increment the VALUE at the address pointed to by numPtr
+    printf("Inside function: Value at address %p after increment: %d\\n", numPtr, *numPtr);
+}
+
+int main() {
+    int myValue = 10;
+    printf("Outside function: Original myValue: %d\\n", myValue);
+    printf("Outside function: Address of myValue: %p\\n", &myValue);
+
+    incrementByReference(&myValue); // Pass the ADDRESS of myValue
+
+    printf("Outside function: myValue after function call: %d\\n", myValue);
+    // myValue is now 11, because 'incrementByReference' modified the original.
+    return 0;
+}
+\`\`\`
+
+**Output (addresses will vary):**
+
+\`\`\`
+Outside function: Original myValue: 10
+Outside function: Address of myValue: 0x7ffee5a8e0dc
+Inside function: Value at address 0x7ffee5a8e0dc before increment: 10
+Inside function: Value at address 0x7ffee5a8e0dc after increment: 11
+Outside function: myValue after function call: 11
+\`\`\`
+
+**When to use Pass by Reference:**
+- When the function needs to modify the original variable in the calling function.
+- When passing large data structures (like arrays or structs) to avoid copying them, which can be inefficient.
+
+## Parameters for Arrays
+
+When you pass an array to a function, it is always passed by reference (more accurately, the base address of the array is passed). The function receives a pointer to the first element of the array.
+
+\`\`\`c
+#include <stdio.h>
+
+// Function to print array elements
+void printArray(int arr[], int size) { // Can also be written as 'int *arr'
+    printf("Elements in function: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\\n");
+    // You can modify array elements inside this function, and it will affect the original.
+    arr[0] = 99; // Modifies the original array
+}
+
+int main() {
+    int numbers[] = {10, 20, 30, 40, 50};
+    int n = sizeof(numbers) / sizeof(numbers[0]);
+
+    printf("Original array in main: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\\n");
+
+    printArray(numbers, n); // Pass the array (its base address) and its size
+
+    printf("Array in main after function call: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\\n"); // Output: 99 20 30 40 50
+    return 0;
+}
+\`\`\`
+
+<div class="my-6 p-4 rounded-lg border-l-4 border-green-600 bg-green-900/[.2] shadow-md">
+    <p class="font-bold text-lg mb-2 text-green-400">Tip</p>
+    <div class="text-base md:text-lg text-gray-200 leading-relaxed">
+        Understanding pass by value and pass by reference is crucial for controlling how data is shared and modified between different parts of your C program. Choose the method that aligns with whether your function needs to work on a copy or the original data.
+    </div>
+</div>
+`;
+
+interface CFunctionParametersPageProps {
   params: {
     courseId: string;
     lessonId: string;
   };
 }
 
-const LESSON_CONTENT = `
-## C Function Parameters
-
-Functions can receive data as inputs. These inputs are called **parameters** (or formal parameters) when defined in the function signature, and **arguments** (or actual parameters) when values are passed during the function call. Parameters allow functions to be more flexible and reusable, as they can operate on different data each time they are called.
-
-### Function with Parameters
-
-To define a function with parameters, you list the type and name for each parameter inside the parentheses during function declaration and definition.
-
-\`\`\`c
-returnType functionName(parameter1Type parameter1Name, parameter2Type parameter2Name, ...) {
-    // code using parameters
-}
-\`\`\`
-
-**Example: Function with a Single Parameter**
-
-\`\`\`c
-#include <stdio.h>
-
-// Function definition: greet
-void greet(char name[]) { // 'name' is a parameter (a character array for string)
-    printf("Hello, %s!\\n", name);
-}
-
-int main() {
-    // Call the function with an argument (a string literal)
-    greet("Alice"); 
-    greet("Bob");
-    // Output:
-    // Hello, Alice!
-    // Hello, Bob!
-    return 0;
-}
-\`\`\`
-
-### Function with Multiple Parameters
-
-You can define a function to accept multiple parameters by separating them with commas.
-
-\`\`\`c
-#include <stdio.h>
-
-// Function definition: addNumbers
-int addNumbers(int num1, int num2) { // num1 and num2 are integer parameters
-    return num1 + num2; // Returns the sum of the two numbers
-}
-
-int main() {
-    int sum1 = addNumbers(5, 7);    // Call with arguments 5 and 7
-    int sum2 = addNumbers(10, 20); // Call with arguments 10 and 20
-
-    printf("Sum 1: %d\\n", sum1); // Output: Sum 1: 12
-    printf("Sum 2: %d\\n", sum2); // Output: Sum 2: 30
-    return 0;
-}
-\`\`\`
-
-**Important Considerations:**
-
-* **Order Matters:** When calling a function, the arguments must be passed in the same order as the parameters are defined in the function.
-* **Data Type Matching:** The data type of the arguments passed during the function call should match the data type of the parameters defined in the function. C will perform implicit type conversions if possible, but it's best to be explicit to avoid unexpected behavior.
-* **Call by Value (Default):** In C, function parameters are typically passed by **call by value**. This means that a copy of the argument's value is passed to the function. Any modifications made to the parameter *inside the function* will not affect the original variable in the calling function.
-\`\`\`c
-#include <stdio.h>
-
-void modifyValue(int x) { // x is a copy of the argument
-    x = x * 2; // This only modifies the copy
-    printf("Inside function: x = %d\\n", x);
-}
-
-int main() {
-    int originalNum = 10;
-    printf("Before function call: originalNum = %d\\n", originalNum); // Output: 10
-    modifyValue(originalNum); // Pass the value 10
-    printf("After function call: originalNum = %d\\n", originalNum);  // Output: 10 (still)
-    return 0;
-}
-\`\`\`
-* **Call by Reference (Using Pointers):** To allow a function to modify the original variable, you need to use pointers. This is known as **call by reference**. We will cover this in detail in the Pointers section.
-
-Functions with parameters are essential for writing modular, flexible, and powerful C programs that can process and manipulate diverse data.
-`;
-
-export default function CFunctionParametersPage() {
-  const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
+export default function CFunctionParametersPage({ params }: { params: { courseId: string; lessonId: string } }) {
+  const { courseId, lessonId } = params;
 
   useEffect(() => {
+    // Load Prism CSS
     const link = document.createElement('link');
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
 
+    // Load Prism core JS
     const scriptCore = document.createElement('script');
     scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
     scriptCore.async = true;
 
     scriptCore.onload = () => {
+      // Load C language component after core is loaded
       const scriptCLang = document.createElement('script');
       scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
       scriptCLang.async = true;
 
       scriptCLang.onload = () => {
+        // Highlight all code blocks after C language component is loaded
         if (window.Prism) {
           window.Prism.highlightAll();
         }
@@ -135,52 +204,68 @@ export default function CFunctionParametersPage() {
     };
     document.body.appendChild(scriptCore);
 
+    // Cleanup function
     return () => {
       if (document.head.contains(link)) {
         document.head.removeChild(link);
       }
+      if (document.body.contains(scriptCore)) {
+        document.body.removeChild(scriptCore);
+      }
+      const cLangScript = document.querySelector('script[src*="prism-c.min.js"]');
+      if (cLangScript && document.body.contains(cLangScript)) {
+        document.body.removeChild(cLangScript);
+      }
     };
-  }, [LESSON_CONTENT, courseId, lessonId]);
+  }, [LESSON_CONTENT]); // Re-run effect if lesson content changes
+
+  const components: Components = {
+    // Custom renderers for markdown elements to apply Tailwind CSS
+    code: ({ className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const lang = match ? match[1] : 'markup'; 
+      return (
+        <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
+          <code className={`language-${lang}`} {...props}>
+            {String(children).replace(/\n$/, '')}
+          </code>
+        </pre>
+      );
+    },
+    h1: ({ ...props }) => <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
+    h2: ({ ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
+    h3: ({ ...props }) => <h3 className="text-2xl md:text-3xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
+    p: ({ ...props }) => <p className="text-base md:text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
+    strong: ({ ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
+    a: ({ ...props }) => <a className="text-accent-purple hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+    ul: ({ ...props }) => <ul className="list-disc list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    ol: ({ ...props }) => <ol className="list-decimal list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    li: ({ ...props }) => <li className="mb-2" {...props} />,
+    blockquote: ({ ...props }) => <blockquote className="border-l-4 border-accent-purple pl-4 italic text-gray-400 my-4" {...props} />,
+    table: ({ ...props }) => <table className="w-full text-left border-collapse my-6 bg-gray-800 rounded-lg overflow-hidden" {...props} />,
+    thead: ({ ...props }) => <thead className="bg-gray-700" {...props} />,
+    th: ({ ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold text-sm" {...props} />,
+    tbody: ({ ...props }) => <tbody {...props} />,
+    td: ({ ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300 text-sm" {...props} />,
+  };
 
   return (
-    <div className="flex min-h-screen"> 
-      <LessonSidebar /> 
-      
-      <main className="flex-1 ml-0 md:ml-64"> 
-        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1 w-full max-w-full px-4 md:px-8 mx-auto">
+        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl w-full">
           <ReactMarkdown
             rehypePlugins={[rehypeRaw]}
-            components={{
-              code: ({ inline, className, children, ...props }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => {
-                const match = /language-(\w+)/.exec(className || '');
-                const lang = match ? match[1] : 'markup'; 
-
-                return !inline ? (
-                  <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
-                    <code className={`language-${lang}`} {...props}>
-                      {String(children).replace(/\n$/, '')}
-                    </code>
-                  </pre>
-                ) : (
-                  <code className="bg-gray-700 text-vibrant-teal px-1 py-0.5 rounded-md text-xs" {...props}>
-                    {children}
-                  </code>
-                );
-              },
-              h1: ({ node, ...props }) => <h1 className="text-4xl md:text-5xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
-              h2: ({ node, ...props }) => <h2 className="text-3xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
-              h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
-              p: ({ node, ...props }) => <p className="text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
-              strong: ({ node, ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
-              a: ({ node, ...props }) => <a className="text-accent-purple hover:underline" {...props} />,
-              table: ({ node, ...props }) => <table className="w-full text-left border-collapse my-6" {...props} />,
-              th: ({ node, ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold bg-gray-700" {...props} />,
-              td: ({ node, ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300" {...props} />,
-            }}
+            components={components}
           >
             {LESSON_CONTENT}
           </ReactMarkdown>
         </div>
+        <LessonNavigationButtons
+          currentCourseId="c"
+          prevLesson="c-functions"
+          nextLesson="c-scope"
+          backToContentPath={`/learning/c`}
+        />
       </main>
     </div>
   );

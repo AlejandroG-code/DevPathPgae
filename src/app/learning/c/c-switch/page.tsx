@@ -5,10 +5,10 @@
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import LessonSidebar from '@/app/_components/LessonSidebar'; // Adjust path if _components is not used
-import { useParams } from 'next/navigation'; // Needed for useEffect dependencies
+import { useParams } from 'next/navigation';
 
-// Extend the Window interface to include the Prism property
+import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
+
 declare global {
   interface Window {
     Prism?: {
@@ -17,50 +17,59 @@ declare global {
   }
 }
 
-interface LessonPageProps {
-  params: {
-    courseId: string;
-    lessonId: string;
-  };
-}
 
 const LESSON_CONTENT = `
-## C Switch Statement
+# C Conditional Statements: 'switch'
 
-The switch statement is a control flow statement that allows you to choose one of many different code blocks to execute. It's an alternative to a long chain of if...else if...else statements when you have a single expression that needs to be compared against multiple constant values.
+The 'switch' statement is a multi-way branch statement that provides a more efficient and readable alternative to a long 'if-else if-else' ladder when you need to execute different code blocks based on the value of a single variable or expression.
 
-### Syntax
+## The 'switch' Statement
+
+The 'switch' statement evaluates an expression (which must evaluate to an integer type: 'int', 'char', 'short', 'long', 'enum'), and then executes the block of code associated with the matching 'case' label.
+
+**Syntax:**
 
 \`\`\`c
 switch (expression) {
     case value1:
-        // code to be executed if expression == value1
-        break; // Stops the execution of the switch block
+        // Code to be executed if expression == value1
+        break; // Optional
     case value2:
-        // code to be executed if expression == value2
-        break;
-    case value3:
-        // code to be executed if expression == value3
-        break;
+        // Code to be executed if expression == value2
+        break; // Optional
+    // ...
     default:
-        // code to be executed if expression doesn't match any case
-        // (optional)
-        break; 
+        // Code to be executed if expression doesn't match any case
+        break; // Optional
 }
 \`\`\`
 
-* **expression:** An integer or character expression whose value is compared against the case values.
-* **case valueX:** A constant value that the expression is compared against. If a match is found, the code block associated with that case is executed.
-* **break:** The break keyword is crucial. It terminates the switch statement, preventing "fall-through" to the next case. If break is omitted, execution will continue to the next case block (and subsequent ones) until a break is encountered or the switch block ends.
-* **default:** The default keyword is optional. It specifies a block of code to be executed if no case matches the expression's value. It acts like the final else in an if...else if...else chain.
+-   'expression': The integer expression or variable whose value will be compared.
+-   'case valueN': A 'case' label specifies a constant value to be compared with the 'expression'. 'valueN' must be a constant (literal, '#define' constant, or 'enum' member).
+-   'break;': The 'break' statement is crucial. It terminates the 'switch' statement, causing execution to jump to the statement immediately following the 'switch' block. If 'break' is omitted, execution "falls through" to the next 'case' block, executing its code as well.
+-   'default:': The 'default' label is optional. Its code block is executed if the 'expression' does not match any of the 'case' values. It's similar to the final 'else' in an 'if-else if-else' chain.
 
-### Example: Day of the Week
+## Flowchart of 'switch' Statement
+
+\`\`\`mermaid
+graph TD
+    A[Start] --> B{Expression Value?};
+    B -- Case 1 --> C[Execute Block 1];
+    B -- Case 2 --> D[Execute Block 2];
+    B -- Default --> E[Execute Default Block];
+    C -- Break --> F[End];
+    D -- Break --> F;
+    E --> F;
+    C -- No Break --> D;
+\`\`\`
+
+**Example:**
 
 \`\`\`c
 #include <stdio.h>
 
 int main() {
-    int day = 4; // Let's say 1=Monday, 2=Tuesday, ..., 7=Sunday
+    int day = 4; // Represents Thursday
 
     switch (day) {
         case 1:
@@ -73,8 +82,8 @@ int main() {
             printf("Wednesday\\n");
             break;
         case 4:
-            printf("Thursday\\n"); // This case matches, "Thursday" is printed
-            break;                 // The switch statement terminates here
+            printf("Thursday\\n");
+            break;
         case 5:
             printf("Friday\\n");
             break;
@@ -84,60 +93,92 @@ int main() {
         case 7:
             printf("Sunday\\n");
             break;
-        default: // If 'day' is not between 1 and 7
-            printf("Invalid day!\\n");
+        default:
+            printf("Invalid day number.\\n");
             break;
     }
-
+    // Output: Thursday
     return 0;
 }
 \`\`\`
 
-**Output:**
+## The Importance of 'break'
 
-\`\`\`
-Thursday
-\`\`\`
-
-### The Importance of break
-
-Consider what happens if you forget a break statement:
+Consider what happens without 'break' statements (fall-through):
 
 \`\`\`c
 #include <stdio.h>
 
 int main() {
-    int level = 1;
+    char grade = 'B';
 
-    switch (level) {
-        case 1:
-            printf("You are at Level 1.\\n");
-            // No break here! Execution falls through to case 2.
-        case 2:
-            printf("You are at Level 2.\\n");
-            break; // This break stops execution here.
-        case 3:
-            printf("You are at Level 3.\\n");
-            break;
+    switch (grade) {
+        case 'A':
+            printf("Excellent!\\n");
+        case 'B':
+            printf("Very Good!\\n"); // This will execute
+        case 'C':
+            printf("Good!\\n");      // This will also execute (fall-through)
+            break; // Stops here
         default:
-            printf("Unknown Level.\\n");
-            break;
+            printf("Needs Improvement.\\n");
     }
     // Output:
-    // You are at Level 1.
-    // You are at Level 2.
+    // Very Good!
+    // Good!
+    return 0;
+}
+\`\`\`
+In this example, if 'grade' is 'B', both "Very Good!" and "Good!" will be printed because execution falls through from 'case 'B':' to 'case 'C':' until a 'break' is encountered. This behavior can be useful in specific scenarios (e.g., handling multiple cases with the same code), but it's often a source of bugs if not intentional.
 
+## Multiple Case Labels for Same Code
+
+You can group multiple case labels if they should execute the same block of code.
+
+\`\`\`c
+#include <stdio.h>
+
+int main() {
+    int month = 2; // February
+
+    switch (month) {
+        case 1: // January
+        case 3: // March
+        case 5: // May
+        case 7: // July
+        case 8: // August
+        case 10: // October
+        case 12: // December
+            printf("This month has 31 days.\\n");
+            break;
+        case 4: // April
+        case 6: // June
+        case 9: // September
+        case 11: // November
+            printf("This month has 30 days.\\n");
+            break;
+        case 2: // February
+            printf("This month has 28 or 29 days.\\n");
+            break;
+        default:
+            printf("Invalid month.\\n");
+            break;
+    }
+    // Output: This month has 28 or 29 days.
     return 0;
 }
 \`\`\`
 
-This "fall-through" behavior can sometimes be used intentionally for specific logic, but it's often a source of bugs if not intended. Always remember break unless you have a clear reason to omit it.
-
-The switch statement is a powerful tool for handling multiple choices in a clean and efficient way in your C programs.
+<div class="my-6 p-4 rounded-lg border-l-4 border-green-600 bg-green-900/[.2] shadow-md">
+    <p class="font-bold text-lg mb-2 text-green-400">Tip</p>
+    <div class="text-base md:text-lg text-gray-200 leading-relaxed">
+        The 'switch' statement is a powerful construct for handling multiple choices cleanly, provided the decision is based on a single integer-like expression. Always remember to use 'break' unless intentional fall-through is desired.
+    </div>
+</div>
 `;
 
+
 export default function CSwitchPage() {
-  const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {
     const link = document.createElement('link');
@@ -167,48 +208,58 @@ export default function CSwitchPage() {
       if (document.head.contains(link)) {
         document.head.removeChild(link);
       }
+      if (document.body.contains(scriptCore)) {
+        document.body.removeChild(scriptCore);
+      }
     };
-  }, [LESSON_CONTENT, courseId, lessonId]);
+  }, [LESSON_CONTENT]);
+
+  const components: Components = {
+    code: ({ className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const lang = match ? match[1] : 'markup'; 
+      return (
+        <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
+          <code className={`language-${lang}`} {...props}>
+            {String(children).replace(/\n$/, '')}
+          </code>
+        </pre>
+      );
+    },
+    h1: ({ ...props }) => <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
+    h2: ({ ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
+    h3: ({ ...props }) => <h3 className="text-2xl md:text-3xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
+    p: ({ ...props }) => <p className="text-base md:text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
+    strong: ({ ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
+    a: ({ ...props }) => <a className="text-accent-purple hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+    ul: ({ ...props }) => <ul className="list-disc list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    ol: ({ ...props }) => <ol className="list-decimal list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    li: ({ ...props }) => <li className="mb-2" {...props} />,
+    blockquote: ({ ...props }) => <blockquote className="border-l-4 border-accent-purple pl-4 italic text-gray-400 my-4" {...props} />,
+    table: ({ ...props }) => <table className="w-full text-left border-collapse my-6 bg-gray-800 rounded-lg overflow-hidden" {...props} />,
+    thead: ({ ...props }) => <thead className="bg-gray-700" {...props} />,
+    th: ({ ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold text-sm" {...props} />,
+    tbody: ({ ...props }) => <tbody {...props} />,
+    td: ({ ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300 text-sm" {...props} />,
+  };
 
   return (
-    <div className="flex min-h-screen"> 
-      <LessonSidebar /> 
-      
-      <main className="flex-1 ml-0 md:ml-64"> 
-        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1 w-full max-w-full px-4 md:px-8 mx-auto">
+        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl w-full">
           <ReactMarkdown
             rehypePlugins={[rehypeRaw]}
-            components={{
-              code: ({ inline, className, children, ...props }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => {
-                const match = /language-(\w+)/.exec(className || '');
-                const lang = match ? match[1] : 'markup'; 
-
-                return !inline ? (
-                  <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
-                    <code className={`language-${lang}`} {...props}>
-                      {String(children).replace(/\n$/, '')}
-                    </code>
-                  </pre>
-                ) : (
-                  <code className="bg-gray-700 text-vibrant-teal px-1 py-0.5 rounded-md text-xs" {...props}>
-                    {children}
-                  </code>
-                );
-              },
-              h1: ({ node, ...props }) => <h1 className="text-4xl md:text-5xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
-              h2: ({ node, ...props }) => <h2 className="text-3xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
-              h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
-              p: ({ node, ...props }) => <p className="text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
-              strong: ({ node, ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
-              a: ({ node, ...props }) => <a className="text-accent-purple hover:underline" {...props} />,
-              table: ({ node, ...props }) => <table className="w-full text-left border-collapse my-6" {...props} />,
-              th: ({ node, ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold bg-gray-700" {...props} />,
-              td: ({ node, ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300" {...props} />,
-            }}
+            components={components}
           >
             {LESSON_CONTENT}
           </ReactMarkdown>
         </div>
+        <LessonNavigationButtons
+          currentCourseId="c"
+          prevLesson="c-if-else"
+          nextLesson="c-while-loop"
+          backToContentPath={`/learning/c`}
+        />
       </main>
     </div>
   );

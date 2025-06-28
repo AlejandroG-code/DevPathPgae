@@ -1,18 +1,15 @@
 // src/app/learning/page.tsx
-'use client'; // ¡MUY IMPORTANTE! Esto lo marca como un Client Component
+'use client'; 
 
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { CourseMetadata } from '@/types/learning'; // Importa la interfaz para la metadata
+import { CourseMetadata } from '@/types/learning'; 
 
-// Importa el JSON de metadata de cursos
-// ¡Asegúrate de que courses_meta.json esté en public/data/!
-// La ruta es relativa desde 'src/app/learning/page.tsx'
 import coursesMetadata from '../../../public/data/courses_meta.json';
 
 const LearningHomePage: React.FC = () => {
-  const courses = coursesMetadata as unknown as CourseMetadata[]; // Type assertion to handle optional properties
+  const courses = coursesMetadata as CourseMetadata[]; 
 
   return (
     <div className="flex flex-col items-center p-4 md:p-8 min-h-[calc(100vh-64px)] text-white">
@@ -34,9 +31,7 @@ const LearningHomePage: React.FC = () => {
           Deepen your understanding of programming concepts with our comprehensive courses and tutorials.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3, lg:gap-3, xl:gap-3, 2xl:gap-4">
-          {/* Mapea los cursos y crea una tarjeta para cada uno */}
-          {/* Utiliza motion.div para animar las tarjetas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-3 xl:gap-3 2xl:gap-4">
           {courses.map((course) => (
             <motion.div
               key={course.id}
@@ -47,8 +42,8 @@ const LearningHomePage: React.FC = () => {
               className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 flex flex-col justify-between h-full
                           hover:bg-gray-700/50 hover:border-vibrant-teal transition-all duration-300 transform hover:scale-[1.02] cursor-pointer shadow-lg"
             >
-              {/* Usa course.homePagePath si existe, sino, usa la ruta por defecto /learning/{courseId} */}
-              <Link href={course.homePagePath || `/learning/${course.id}`} className="block h-full">
+              {/* ¡EL CAMBIO AQUÍ! Ahora el enlace va a la página de contenido del curso */}
+              <Link href={`/learning/${course.id}`} className="block h-full">
                 <div>
                   <div className="text-5xl mb-4 text-center text-vibrant-teal">{course.icon || '📚'}</div>
                   <h2 className="text-2xl font-bold mb-2 text-white text-center">{course.title}</h2>

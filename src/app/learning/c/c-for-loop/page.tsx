@@ -5,10 +5,10 @@
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import LessonSidebar from '@/app/_components/LessonSidebar'; // Adjust path if _components is not used
-import { useParams } from 'next/navigation'; // Needed for useEffect dependencies
+import { useParams } from 'next/navigation';
 
-// Extend the Window interface to include the Prism property
+import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
+
 declare global {
   interface Window {
     Prism?: {
@@ -17,115 +17,150 @@ declare global {
   }
 }
 
-interface LessonPageProps {
+interface LessonMetadata {
+  id: string;
+  title: string;
+  description: string;
+}
+
+const LESSON_CONTENT = `
+# C Loops: 'for' Loop
+
+The 'for' loop is a control flow statement that allows code to be executed repeatedly. It is typically used when you know in advance how many times you want to iterate or when you need a simple counter-controlled loop.
+
+## The 'for' Loop
+
+The 'for' loop has three main parts: initialization, condition, and update, all specified in a single line within the parentheses.
+
+**Syntax:**
+
+\`\`\`c
+for (initialization; condition; update) {
+    // Code to be executed repeatedly
+}
+\`\`\`
+
+-   **initialization**: Executed once at the beginning of the loop. It typically initializes a loop counter variable.
+-   **condition**: Evaluated before each iteration. If true (non-zero), the loop body executes. If false (zero), the loop terminates.
+-   **update**: Executed after each iteration of the loop body. It typically updates the loop counter variable (e.g., incrementing or decrementing).
+-   '{}': Curly braces define the loop body. Optional for a single statement, but recommended.
+
+## Flowchart of 'for' Loop
+
+\`\`\`mermaid
+graph TD
+    A[Start] --> B(Initialization);
+    B --> C{Condition?};
+    C -- True --> D[Loop Body];
+    D --> E(Update);
+    E --> C;
+    C -- False --> F[End];
+\`\`\`
+
+**Example 1: Counting from 1 to 5**
+
+\`\`\`c
+#include <stdio.h>
+
+int main() {
+    int i; // Declare the loop variable
+
+    // i starts at 1
+    // Loop as long as i is <= 5
+    // i increments by 1 after each iteration
+    for (i = 1; i <= 5; i++) {
+        printf("%d\\n", i);
+    }
+    // Output:
+    // 1
+    // 2
+    // 3
+    // 4
+    // 5
+    return 0;
+}
+\`\`\`
+
+**Example 2: Counting down**
+
+\`\`\`c
+#include <stdio.h>
+
+int main() {
+    int count;
+    for (count = 10; count > 0; count--) {
+        printf("Count: %d\\n", count);
+    }
+    printf("Blast off!\\n");
+    return 0;
+}
+\`\`\`
+
+**Example 3: Sum of numbers using a for loop**
+
+\`\`\`c
+#include <stdio.h>
+
+int main() {
+    int sum = 0;
+    int i;
+    for (i = 1; i <= 10; i++) {
+        sum += i; // sum = sum + i;
+    }
+    printf("Sum of numbers from 1 to 10 is: %d\\n", sum); // Output: 55
+    return 0;
+}
+\`\`\`
+
+## Optional Parts of the 'for' Loop
+
+Any of the three parts (initialization, condition, update) can be omitted, but the semicolons must remain.
+
+-   **Omitting initialization:** The variable must be initialized before the loop.
+    \`\`\`c
+    int i = 1;
+    for (; i <= 5; i++) { // No initialization part here
+        printf("%d\\n", i);
+    }
+    \`\`\`
+
+-   **Omitting condition:** This creates an infinite loop unless a 'break' statement is used inside the loop body.
+    \`\`\`c
+    int i = 1;
+    for (; ; i++) { // Infinite loop
+        printf("%d\\n", i);
+        if (i == 5) {
+            break; // Exit the loop
+        }
+    }
+    \`\`\`
+
+-   **Omitting update:** The update must be done inside the loop body.
+    \`\`\`c
+    int i = 1;
+    for ( ; i <= 5; ) {
+        printf("%d\\n", i);
+        i++; // Update done here
+    }
+    \`\`\`
+
+<div class="my-6 p-4 rounded-lg border-l-4 border-green-600 bg-green-900/[.2] shadow-md">
+    <p class="font-bold text-lg mb-2 text-green-400">Tip</p>
+    <div class="text-base md:text-lg text-gray-200 leading-relaxed">
+        The 'for' loop is especially useful when you know the number of iterations in advance, or when dealing with iterative tasks like traversing arrays. It compacts the loop control elements into a single line, improving readability for such cases.
+    </div>
+</div>
+`;
+
+interface CForLoopPageProps {
   params: {
     courseId: string;
     lessonId: string;
   };
 }
 
-const LESSON_CONTENT = `
-## C For Loop
-
-The for loop is a versatile and commonly used control flow statement that provides a concise way to write loops that need to be executed a specific number of times. It's particularly useful when you know in advance how many times you want to iterate.
-
-### Syntax
-
-\`\`\`c
-for (initialization; condition; increment/decrement) {
-    // code to be executed in each iteration
-}
-\`\`\`
-
-The for loop consists of three main parts, separated by semicolons:
-
-1.  **Initialization:** Executed once at the beginning of the loop. It's typically used to declare and initialize a loop counter variable.
-2.  **Condition:** Evaluated before each iteration. If the condition is true (non-zero), the loop body is executed. If false (zero), the loop terminates.
-3.  **Increment/Decrement:** Executed after each iteration of the loop body. It's typically used to update the loop counter.
-
-### Example: Counting Up to 5
-
-\`\`\`c
-#include <stdio.h>
-
-int main() {
-    // i starts at 0
-    // Loop as long as i is less than 5
-    // Increment i by 1 after each iteration
-    for (int i = 0; i < 5; i++) {
-        printf("%d\\n", i);
-    }
-    // Output:
-    // 0
-    // 1
-    // 2
-    // 3
-    // 4
-
-    return 0;
-}
-\`\`\`
-
-### Example: Counting Down
-
-You can also use a for loop to count down:
-
-\`\`\`c
-#include <stdio.h>
-
-int main() {
-    for (int i = 5; i > 0; i--) {
-        printf("%d\\n", i);
-    }
-    // Output:
-    // 5
-    // 4
-    // 3
-    // 2
-    // 1
-
-    return 0;
-}
-\`\`\`
-
-### Nested For Loops
-
-You can place a for loop inside another for loop. This is known as a nested loop. The inner loop will execute completely for each iteration of the outer loop.
-
-\`\`\`c
-#include <stdio.h>
-
-int main() {
-    // Outer loop
-    for (int i = 1; i <= 2; i++) { // Executes 2 times
-        printf("Outer: %d\\n", i); 
-        
-        // Inner loop
-        for (int j = 1; j <= 3; j++) { // Executes 3 times for each outer loop iteration
-            printf("  Inner: %d\\n", j);
-        }
-    }
-    // Output:
-    // Outer: 1
-    //   Inner: 1
-    //   Inner: 2
-    //   Inner: 3
-    // Outer: 2
-    //   Inner: 1
-    //   Inner: 2
-    //   Inner: 3
-
-    return 0;
-}
-\`\`\`
-
-Nested loops are commonly used when working with 2D arrays (matrices) or when you need to perform repetitive tasks on combinations of data.
-
-The for loop is a powerful and efficient construct for iterative tasks in C programming, especially when the number of iterations is known.
-`;
-
-export default function CForLoopPage() {
-  const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
+export default function CForLoopPage({ params }: { params: { courseId: string; lessonId: string } }) {
+  const { courseId, lessonId } = params;
 
   useEffect(() => {
     const link = document.createElement('link');
@@ -155,48 +190,58 @@ export default function CForLoopPage() {
       if (document.head.contains(link)) {
         document.head.removeChild(link);
       }
+      if (document.body.contains(scriptCore)) {
+        document.body.removeChild(scriptCore);
+      }
     };
-  }, [LESSON_CONTENT, courseId, lessonId]);
+  }, [LESSON_CONTENT]);
+
+  const components: Components = {
+    code: ({ className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const lang = match ? match[1] : 'markup'; 
+      return (
+        <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
+          <code className={`language-${lang}`} {...props}>
+            {String(children).replace(/\n$/, '')}
+          </code>
+        </pre>
+      );
+    },
+    h1: ({ ...props }) => <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
+    h2: ({ ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
+    h3: ({ ...props }) => <h3 className="text-2xl md:text-3xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
+    p: ({ ...props }) => <p className="text-base md:text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
+    strong: ({ ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
+    a: ({ ...props }) => <a className="text-accent-purple hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+    ul: ({ ...props }) => <ul className="list-disc list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    ol: ({ ...props }) => <ol className="list-decimal list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    li: ({ ...props }) => <li className="mb-2" {...props} />,
+    blockquote: ({ ...props }) => <blockquote className="border-l-4 border-accent-purple pl-4 italic text-gray-400 my-4" {...props} />,
+    table: ({ ...props }) => <table className="w-full text-left border-collapse my-6 bg-gray-800 rounded-lg overflow-hidden" {...props} />,
+    thead: ({ ...props }) => <thead className="bg-gray-700" {...props} />,
+    th: ({ ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold text-sm" {...props} />,
+    tbody: ({ ...props }) => <tbody {...props} />,
+    td: ({ ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300 text-sm" {...props} />,
+  };
 
   return (
-    <div className="flex min-h-screen"> 
-      <LessonSidebar /> 
-      
-      <main className="flex-1 ml-0 md:ml-64"> 
-        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1 w-full max-w-full px-4 md:px-8 mx-auto">
+        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl w-full">
           <ReactMarkdown
             rehypePlugins={[rehypeRaw]}
-            components={{
-              code: ({ inline, className, children, ...props }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => {
-                const match = /language-(\w+)/.exec(className || '');
-                const lang = match ? match[1] : 'markup'; 
-
-                return !inline ? (
-                  <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
-                    <code className={`language-${lang}`} {...props}>
-                      {String(children).replace(/\n$/, '')}
-                    </code>
-                  </pre>
-                ) : (
-                  <code className="bg-gray-700 text-vibrant-teal px-1 py-0.5 rounded-md text-xs" {...props}>
-                    {children}
-                  </code>
-                );
-              },
-              h1: ({ node, ...props }) => <h1 className="text-4xl md:text-5xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
-              h2: ({ node, ...props }) => <h2 className="text-3xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
-              h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
-              p: ({ node, ...props }) => <p className="text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
-              strong: ({ node, ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
-              a: ({ node, ...props }) => <a className="text-accent-purple hover:underline" {...props} />,
-              table: ({ node, ...props }) => <table className="w-full text-left border-collapse my-6" {...props} />,
-              th: ({ node, ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold bg-gray-700" {...props} />,
-              td: ({ node, ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300" {...props} />,
-            }}
+            components={components}
           >
             {LESSON_CONTENT}
           </ReactMarkdown>
         </div>
+        <LessonNavigationButtons
+          currentCourseId="c"
+          prevLesson="c-while-loop"
+          nextLesson="c-break-continue"
+          backToContentPath={`/learning/c`}
+        />
       </main>
     </div>
   );

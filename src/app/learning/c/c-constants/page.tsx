@@ -5,10 +5,10 @@
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import LessonSidebar from '@/app/_components/LessonSidebar'; // Asegúrate que la ruta de importación sea correcta
-import { useParams } from 'next/navigation'; // Necesario para obtener courseId/lessonId para useEffect y PrismJS
+import { useParams } from 'next/navigation';
 
-// Extend the Window interface to include the Prism property
+import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
+
 declare global {
   interface Window {
     Prism?: {
@@ -17,105 +17,102 @@ declare global {
   }
 }
 
-interface LessonPageProps {
-  params: {
-    courseId: string;
-    lessonId: string;
-  };
-}
 
 const LESSON_CONTENT = `
-## C Constants
+# C Constants
 
-Constants are like variables, but their values cannot be changed once they are defined. They are fixed values that are used in your program. In C, you can define constants in two main ways: using the const keyword or using the #define preprocessor directive.
+Constants are fixed values that do not change during the execution of a program. They are useful for values that are known at compile time and remain constant throughout the program, such as the value of PI or the maximum size of a buffer.
 
-### 1. Using the const Keyword
+In C, there are two main ways to define constants:
 
-The const keyword is a type qualifier that tells the compiler that the value of a variable cannot be modified after its initialization. It's often preferred for defining "true" constants within the scope of a function or block.
+1.  Using the '#define' preprocessor directive.
+2.  Using the 'const' keyword.
+
+## 1. Using '#define'
+
+The '#define' preprocessor directive is used to define **symbolic constants** or **macros**. When the program is compiled, the preprocessor replaces all occurrences of the constant's identifier with its defined value, *before* the compiler sees the code. It's a simple text substitution.
+
+**Syntax:**
+
+\`\`\`c
+#define IDENTIFIER replacement_value
+\`\`\`
+
+\`\`\`c
+#include <stdio.h>
+
+#define PI_VALUE 3.14159 // Defines PI_VALUE as a numeric constant
+#define MAX_BUFFER_SIZE 1024 // Defines a maximum buffer size
+
+int main() {
+    printf("Value of PI: %f\\n", PI_VALUE);
+    char buffer[MAX_BUFFER_SIZE]; // MAX_BUFFER_SIZE will be replaced by 1024
+
+    printf("Buffer size: %lu bytes\\n", sizeof(buffer));
+
+    // PI_VALUE = 3.0; // COMPILE-TIME ERROR: You cannot assign a value, it's a text substitution
+    // This would expand to "3.14159 = 3.0;", which is not valid C code.
+
+    return 0;
+}
+\`\`\`
+
+### Characteristics of '#define' Constants
+
+<ul class="list-disc list-inside ml-4 text-base md:text-lg text-gray-300 space-y-1">
+    <li>They are processed by the **preprocessor**, not the compiler.</li>
+    <li>No memory is allocated for them; they are direct text substitutions.</li>
+    <li>No semicolon is needed at the end of '#define' statements.</li>
+    <li>By convention, '#define' constant names are written in 'UPPERCASE'.</li>
+    <li>They do not have a "type" in the sense of C data types, which can sometimes lead to type safety issues.</li>
+</ul>
+
+## 2. Using the 'const' Keyword
+
+The 'const' keyword is used to declare a variable as constant, meaning its value **cannot be changed after initialization**. Unlike '#define', 'const' variables are handled by the compiler, which provides **type safety** and better scope management.
 
 \`\`\`c
 #include <stdio.h>
 
 int main() {
-    // Declaring a constant integer
-    const int MY_FAVORITE_NUMBER = 7; 
-    printf("My favorite number is: %d\\n", MY_FAVORITE_NUMBER);
+    const float EARTH_RADIUS_KM = 6371.0f; // Defines a constant float
+    const int MAX_ATTEMPTS = 3;      // Defines a constant int
 
-    // Attempting to change a const variable will result in a compile-time error
-    // MY_FAVORITE_NUMBER = 10; // This line would cause an error!
+    printf("Earth Radius: %.1f km\\n", EARTH_RADIUS_KM);
+    printf("Maximum attempts: %d\\n", MAX_ATTEMPTS);
 
-    const float PI = 3.14159f; // Constants for floating-point numbers
-    printf("Value of PI: %.4f\\n", PI);
+    // EARTH_RADIUS_KM = 6378.0f; // COMPILE-TIME ERROR: Assignment of read-only variable
+    // MAX_ATTEMPTS = 5;  // COMPILE-TIME ERROR: Assignment of read-only variable
 
-    const char NEWLINE = '\\n'; // Constant for a character
-    printf("This is a new line character: %c", NEWLINE);
-    printf("End of message.\\n");
-    
     return 0;
 }
 \`\`\`
 
-**Key points about const:**
-* You must initialize a const variable when you declare it.
-* The compiler enforces the immutability, providing an error if you try to modify it.
-* It respects block scope, meaning a const variable defined inside a function is only visible within that function.
+### Characteristics of 'const' Constants
 
-### 2. Using the #define Preprocessor Directive
+<ul class="list-disc list-inside ml-4 text-base md:text-lg text-gray-300 space-y-1">
+    <li>They are handled by the **compiler**, not the preprocessor.</li>
+    <li>Memory is allocated for them, just like any other variable, but the memory is read-only.</li>
+    <li>They must be initialized at the time of their declaration.</li>
+    <li>They provide **type safety**, meaning the compiler can check if they are used correctly with other data types.</li>
+    <li>They can be declared inside functions (local scope) or globally, respecting scope rules.</li>
+</ul>
 
-The #define directive is a preprocessor command. This means that the value is substituted *before* the program is compiled. When the preprocessor encounters a '#define', it globally replaces all occurrences of the macro name with the defined value throughout the code.
+## When to Use Which?
 
-\`\`\`c
-#include <stdio.h>
-
-// Defining constants using #define (no semicolon at the end!)
-#define MAX_ATTEMPTS 3
-#define PROGRAM_NAME "My Awesome App"
-#define GRAVITY 9.81
-
-int main() {
-    printf("Maximum login attempts: %d\\n", MAX_ATTEMPTS);
-    printf("Welcome to %s!\\n", PROGRAM_NAME);
-    printf("Acceleration due to gravity: %.2f m/s^2\\n", GRAVITY);
-    
-    // MAX_ATTEMPTS = 5; // This would result in a preprocessor error/warning if attempted
-    return 0;
-}
-\`\`\`
-
-**Key points about #define:**
-* There is no semicolon at the end of a '#define' line.
-* It performs a simple text substitution. The constant doesn't actually exist as a variable in memory.
-* It's typically used for global constants or short, frequently used values.
-* It does not respect block scope; once defined, it's available from that point onward in the file.
-
-### When to Use Which?
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md">
-    <p class="text-vibrant-teal font-semibold mb-1">Use \`const\` when:</p>
-    <ul class="list-disc list-inside text-gray-300">
-      <li>You need type safety (the compiler checks the type).</li>
-      <li>You want the constant to respect scope (e.g., local to a function).</li>
-      <li>You want to store complex data types as constants (e.g., arrays, structs - though this can be advanced).</li>
-      <li>It's generally considered the modern and safer approach for defining constants.</li>
-    </ul>
-  </div>
-  <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 shadow-md">
-    <p class="text-vibrant-teal font-semibold mb-1">Use \`#define\` when:</p>
-    <ul class="list-disc list-inside text-gray-300">
-      <li>You need simple symbolic constants that will be replaced everywhere they appear.</li>
-      <li>You are defining simple values like numbers or short strings that don't require type checking.</li>
-      <li>You need to create macros (code snippets that are replaced, which is a more advanced topic).</li>
-    </ul>
-  </div>
+<div class="my-6 p-4 rounded-lg border-l-4 border-green-600 bg-green-900/[.2] shadow-md">
+    <p class="font-bold text-lg mb-2 text-green-400">Tip</p>
+    <div class="text-base md:text-lg text-gray-200 leading-relaxed">
+        <ul class="list-disc list-inside ml-4 text-gray-200 space-y-1">
+            <li>Use <strong>'#define'</strong> for simple constant values that are text substitutions, especially when you don't want them to occupy memory or for preprocessor macros.</li>
+            <li>Use <strong>'const'</strong> for constants that have a specific data type and require type checking. This is the <strong>preferred</strong> way in modern C programming due to its safety and better error handling by the compiler.</li>
+        </ul>
+    </div>
 </div>
-
-In general, for defining numeric or string constants, const is often preferred due to its type safety and adherence to scope rules, making code easier to debug and maintain. However, #define remains a powerful tool, especially for global configuration values or when creating macros.
 `;
 
+
 export default function CConstantsPage() {
-  // Obtenemos courseId y lessonId de params aquí para usarlos en useEffect si es necesario
-  const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
 
   useEffect(() => {
     const link = document.createElement('link');
@@ -145,55 +142,58 @@ export default function CConstantsPage() {
       if (document.head.contains(link)) {
         document.head.removeChild(link);
       }
+      if (document.body.contains(scriptCore)) {
+        document.body.removeChild(scriptCore);
+      }
     };
-  }, [LESSON_CONTENT, courseId, lessonId]); // Se añadió Lesson_CONTENT y los params como dependencias para consistencia.
+  }, [LESSON_CONTENT]);
+
+  const components: Components = {
+    code: ({ className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const lang = match ? match[1] : 'markup'; 
+      return (
+        <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
+          <code className={`language-${lang}`} {...props}>
+            {String(children).replace(/\n$/, '')}
+          </code>
+        </pre>
+      );
+    },
+    h1: ({ ...props }) => <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
+    h2: ({ ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
+    h3: ({ ...props }) => <h3 className="text-2xl md:text-3xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
+    p: ({ ...props }) => <p className="text-base md:text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
+    strong: ({ ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
+    a: ({ ...props }) => <a className="text-accent-purple hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+    ul: ({ ...props }) => <ul className="list-disc list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    ol: ({ ...props }) => <ol className="list-decimal list-inside ml-4 text-gray-300 mb-4 space-y-1" {...props} />,
+    li: ({ ...props }) => <li className="mb-2" {...props} />,
+    blockquote: ({ ...props }) => <blockquote className="border-l-4 border-accent-purple pl-4 italic text-gray-400 my-4" {...props} />,
+    table: ({ ...props }) => <table className="w-full text-left border-collapse my-6 bg-gray-800 rounded-lg overflow-hidden" {...props} />,
+    thead: ({ ...props }) => <thead className="bg-gray-700" {...props} />,
+    th: ({ ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold text-sm" {...props} />,
+    tbody: ({ ...props }) => <tbody {...props} />,
+    td: ({ ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300 text-sm" {...props} />,
+  };
 
   return (
-    <div className="flex min-h-screen"> 
-      {/* Componente de la barra lateral de navegación. */}
-      <LessonSidebar /> 
-      
-      {/* Contenedor del contenido principal de la lección.
-          flex-1: Hace que ocupe todo el espacio horizontal restante.
-          ml-0: Sin margen izquierdo por defecto (para móvil).
-          md:ml-64: Añade un margen izquierdo de 64 unidades (16rem, ancho de la sidebar) en pantallas medianas y grandes.
-                    Esto empuja el contenido para que no quede debajo de la sidebar fija.
-      */}
-      <main className="flex-1 ml-0 md:ml-64"> 
-        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1 w-full max-w-full px-4 md:px-8 mx-auto">
+        <div className="lesson-content p-4 md:p-8 bg-gray-900 text-white rounded-lg shadow-xl w-full">
           <ReactMarkdown
             rehypePlugins={[rehypeRaw]}
-            components={{
-              code: ({ inline, className, children, ...props }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => {
-                const match = /language-(\w+)/.exec(className || '');
-                const lang = match ? match[1] : 'markup'; 
-
-                return !inline ? (
-                  <pre className="my-4 rounded-lg overflow-x-auto border border-gray-700 bg-[#1a1b26] p-4 text-sm">
-                    <code className={`language-${lang}`} {...props}>
-                      {String(children).replace(/\n$/, '')}
-                    </code>
-                  </pre>
-                ) : (
-                  <code className="bg-gray-700 text-vibrant-teal px-1 py-0.5 rounded-md text-xs" {...props}>
-                    {children}
-                  </code>
-                );
-              },
-              h1: ({ node, ...props }) => <h1 className="text-4xl md:text-5xl font-extrabold text-vibrant-teal mb-4 mt-8 drop-shadow-md" {...props} />,
-              h2: ({ node, ...props }) => <h2 className="text-3xl font-bold text-white mb-3 mt-6 border-b border-gray-700 pb-2" {...props} />,
-              h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold text-vibrant-teal mb-2 mt-5" {...props} />,
-              p: ({ node, ...props }) => <p className="text-lg text-gray-300 mb-4 leading-relaxed" {...props} />,
-              strong: ({ node, ...props }) => <strong className="font-bold text-vibrant-teal" {...props} />,
-              a: ({ node, ...props }) => <a className="text-accent-purple hover:underline" {...props} />,
-              table: ({ node, ...props }) => <table className="w-full text-left border-collapse my-6" {...props} />,
-              th: ({ node, ...props }) => <th className="p-3 border-b-2 border-gray-600 text-white font-semibold bg-gray-700" {...props} />,
-              td: ({ node, ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300" {...props} />,
-            }}
+            components={components}
           >
             {LESSON_CONTENT}
           </ReactMarkdown>
         </div>
+        <LessonNavigationButtons
+          currentCourseId="c"
+          prevLesson="c-data-types"
+          nextLesson="c-operators"
+          backToContentPath={`/learning/c`}
+        />
       </main>
     </div>
   );
