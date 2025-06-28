@@ -25,12 +25,6 @@ interface LessonMetadata {
 
 // FIX: LessonPageProps should ONLY contain 'params' for a Server Component Page.
 // Custom props like 'lessonsData' are passed to dynamically imported Client Components.
-interface LessonPageProps {
-  params: {
-    courseId: string;
-    lessonId: string;
-  };
-}
 
 // generateStaticParams para pre-generar rutas de lecciones
 export async function generateStaticParams() {
@@ -59,7 +53,7 @@ export async function generateStaticParams() {
   return params;
 }
 
-export default async function LessonPage({ params }: LessonPageProps) {
+export default async function LessonPage({ params }: { params: { courseId: string; lessonId: string } }) {
   const { courseId, lessonId } = params;
 
   // 1. Load course metadata to get the specific lessons JSON path
