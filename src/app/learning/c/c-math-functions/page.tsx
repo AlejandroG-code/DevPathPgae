@@ -117,7 +117,7 @@ int main() {
 `;
 
 
-export default function CMathFunctionsPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CMathFunctionsPage() {
 
   useEffect(() => {
     // Load Prism CSS

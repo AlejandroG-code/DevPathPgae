@@ -202,7 +202,7 @@ int main() {
 `;
 
 
-export default function CWriteFilesPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CWriteFilesPage() {
 
   useEffect(() => {
     // Load Prism CSS

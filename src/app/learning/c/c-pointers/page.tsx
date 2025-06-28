@@ -168,7 +168,7 @@ int main() {
 `;
 
 
-export default function CPointersPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CPointersPage() {
 
   useEffect(() => {
     // Load Prism CSS

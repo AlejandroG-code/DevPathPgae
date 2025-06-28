@@ -175,7 +175,7 @@ int main() {
 `;
 
 
-export default function CEnumsPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CEnumsPage() {
 
   useEffect(() => {
     // Load Prism CSS

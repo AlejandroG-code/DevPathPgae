@@ -169,7 +169,7 @@ int main() {
 `;
 
 
-export default function CFunctionsPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CFunctionsPage() {
 
   useEffect(() => {
     // Load Prism CSS

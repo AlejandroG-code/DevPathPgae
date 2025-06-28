@@ -92,7 +92,7 @@ The memory addresses you see with the '&' operator will typically point to locat
 `;
 
 
-export default function CMemoryAddressPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CMemoryAddressPage() {
 
   useEffect(() => {
     // Load Prism CSS

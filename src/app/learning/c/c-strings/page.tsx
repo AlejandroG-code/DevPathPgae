@@ -156,7 +156,7 @@ int main() {
 `;
 
 
-export default function CStringsPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CStringsPage() {
 
   useEffect(() => {
     const link = document.createElement('link');

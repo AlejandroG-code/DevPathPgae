@@ -197,7 +197,7 @@ This 'Makefile' provides a robust way to manage your C project compilation, auto
 `;
 
 
-export default function CProjectsPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CProjectsPage() {
 
   useEffect(() => {
     // Load Prism CSS

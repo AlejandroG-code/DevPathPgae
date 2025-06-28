@@ -217,7 +217,7 @@ int main() {
 `;
 
 
-export default function CUnionsPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CUnionsPage() {
 
   useEffect(() => {
     // Load Prism CSS

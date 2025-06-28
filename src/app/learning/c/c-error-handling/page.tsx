@@ -210,7 +210,7 @@ int main() {
 `;
 
 
-export default function CErrorHandlingPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CErrorHandlingPage() {
 
   useEffect(() => {
     // Load Prism CSS

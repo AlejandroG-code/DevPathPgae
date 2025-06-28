@@ -146,7 +146,7 @@ Any of the three parts (initialization, condition, update) can be omitted, but t
 `;
 
 
-export default function CForLoopPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CForLoopPage() {
 
   useEffect(() => {
     const link = document.createElement('link');

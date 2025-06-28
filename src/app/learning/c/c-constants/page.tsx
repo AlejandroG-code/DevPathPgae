@@ -109,53 +109,52 @@ int main() {
 `;
 
 
-export default function CConstantsPage({ params }: { params: Promise<{ courseId: string; lessonId: string; }> }) {
-  const [, setLoading] = useState(true);
+export default function CConstantsPage() {
+  const [] = useState(true);
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        
-        const link = document.createElement('link');
-        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
-
-        const scriptCore = document.createElement('script');
-        scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
-        scriptCore.async = true;
-
-        scriptCore.onload = () => {
-          const scriptCLang = document.createElement('script');
-          scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
-          scriptCLang.async = true;
-
-          scriptCLang.onload = () => {
-            if (window.Prism) {
-              window.Prism.highlightAll();
-            }
-          };
-          document.body.appendChild(scriptCLang);
-        };
-        document.body.appendChild(scriptCore);
-
-        return () => {
-          if (document.head.contains(link)) {
-            document.head.removeChild(link);
-          }
-          if (document.body.contains(scriptCore)) {
-            document.body.removeChild(scriptCore);
+      // Load Prism CSS
+      const link = document.createElement('link');
+      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+  
+      // Load Prism core JS
+      const scriptCore = document.createElement('script');
+      scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
+      scriptCore.async = true;
+  
+      scriptCore.onload = () => {
+        // Load C language component after core is loaded
+        const scriptCLang = document.createElement('script');
+        scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
+        scriptCLang.async = true;
+  
+        scriptCLang.onload = () => {
+          // Highlight all code blocks after C language component is loaded
+          if (window.Prism) {
+            window.Prism.highlightAll();
           }
         };
-      } catch (error) {
-        console.error('Error loading data:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    
-    loadData();
-  }, [params]);
+        document.body.appendChild(scriptCLang);
+      };
+      document.body.appendChild(scriptCore);
+  
+      // Cleanup function
+      return () => {
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
+        if (document.body.contains(scriptCore)) {
+          document.body.removeChild(scriptCore);
+        }
+        const cLangScript = document.querySelector('script[src*="prism-c.min.js"]');
+        if (cLangScript && document.body.contains(cLangScript)) {
+          document.body.removeChild(cLangScript);
+        }
+      };
+    }, [LESSON_CONTENT]); // Re-run effect if lesson content changes
+  
 
   const components: Components = {
     code: ({ className, children, ...props }) => {

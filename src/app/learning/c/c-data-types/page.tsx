@@ -141,45 +141,52 @@ int main() {
 `;
 
 
-export default function CDataTypesPage({ params }: { params: Promise<{ courseId: string; lessonId: string; }> }) {
-  const [, setLoading] = useState(true);
+export default function CDataTypesPage() {
+  const [loading] = useState(true);
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        
-        const link = document.createElement('link');
-        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
-
-        const scriptCore = document.createElement('script');
-        scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
-        scriptCore.async = true;
-
-        scriptCore.onload = () => {
-          const scriptCLang = document.createElement('script');
-          scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
-          scriptCLang.async = true;
-
-          scriptCLang.onload = () => {
-            if (window.Prism) {
-              window.Prism.highlightAll();
-            }
-          };
-          document.body.appendChild(scriptCLang);
+      // Load Prism CSS
+      const link = document.createElement('link');
+      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+  
+      // Load Prism core JS
+      const scriptCore = document.createElement('script');
+      scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
+      scriptCore.async = true;
+  
+      scriptCore.onload = () => {
+        // Load C language component after core is loaded
+        const scriptCLang = document.createElement('script');
+        scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
+        scriptCLang.async = true;
+  
+        scriptCLang.onload = () => {
+          // Highlight all code blocks after C language component is loaded
+          if (window.Prism) {
+            window.Prism.highlightAll();
+          }
         };
-        document.body.appendChild(scriptCore);
-
-      } catch (error) {
-        console.error('Error loading data:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    
-    loadData();
-  }, [params]);
+        document.body.appendChild(scriptCLang);
+      };
+      document.body.appendChild(scriptCore);
+  
+      // Cleanup function
+      return () => {
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
+        if (document.body.contains(scriptCore)) {
+          document.body.removeChild(scriptCore);
+        }
+        const cLangScript = document.querySelector('script[src*="prism-c.min.js"]');
+        if (cLangScript && document.body.contains(cLangScript)) {
+          document.body.removeChild(cLangScript);
+        }
+      };
+    }, [LESSON_CONTENT]); // Re-run effect if lesson content changes
+  
 
   const components: Components = {
     code: ({ className, children, ...props }) => {
@@ -209,6 +216,17 @@ export default function CDataTypesPage({ params }: { params: Promise<{ courseId:
     tbody: ({ ...props }) => <tbody {...props} />,
     td: ({ ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300 text-sm" {...props} />,
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-vibrant-teal mx-auto mb-4"></div>
+          <p className="text-vibrant-teal text-xl font-semibold">Loading lesson...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen">

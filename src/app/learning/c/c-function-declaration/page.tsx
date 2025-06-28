@@ -146,7 +146,7 @@ When compiling 'main.c' and 'my_functions.c' together (e.g., 'gcc main.c my_func
 `;
 
 
-export default function CFunctionDeclarationPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CFunctionDeclarationPage() {
 
   useEffect(() => {
     // Load Prism CSS

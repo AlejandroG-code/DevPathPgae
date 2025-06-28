@@ -160,7 +160,7 @@ int main() {
 `;
 
 
-export default function CFunctionParametersPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CFunctionParametersPage() {
 
   useEffect(() => {
     // Load Prism CSS

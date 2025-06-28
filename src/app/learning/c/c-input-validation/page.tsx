@@ -221,7 +221,7 @@ int main() {
 `;
 
 
-export default function CInputValidationPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CInputValidationPage() {
 
   useEffect(() => {
     // Load Prism CSS

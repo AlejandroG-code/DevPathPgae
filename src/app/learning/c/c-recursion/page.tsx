@@ -122,7 +122,7 @@ int main() {
 `;
 
 
-export default function CRecursionPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CRecursionPage() {
 
   useEffect(() => {
     // Load Prism CSS

@@ -181,7 +181,7 @@ int main() {
 `;
 
 
-export default function CMacrosPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CMacrosPage() {
 
   useEffect(() => {
     // Load Prism CSS

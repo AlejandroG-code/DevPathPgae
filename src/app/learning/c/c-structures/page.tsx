@@ -216,7 +216,7 @@ int main() {
 `;
 
 
-export default function CStructuresPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CStructuresPage() {
 
   useEffect(() => {
     // Load Prism CSS
