@@ -1,19 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// src/app/learning/[courseId]/[lessonId]/page.tsx
-// ESTE ES UN COMPONENTE DE SERVIDOR PURO. NO USA 'use client' NI HOOKS DE REACT.
+'use client';
 
+import React, { useEffect, useState } from 'react';
 import { notFound } from 'next/navigation';
-import path from 'path';
-import { promises as fs } from 'fs';
-import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 
-// Metadata types
 interface CourseMetadata {
   id: string;
   title: string;
   description: string;
   icon: string;
-  lessonsPath: string; // e.g., "courses/c-lessons.json"
+  lessonsPath: string;
   homePagePath: string;
 }
 
@@ -23,90 +20,143 @@ interface LessonMetadata {
   description: string;
 }
 
-// FIX: LessonPageProps should ONLY contain 'params' for a Server Component Page.
-// Custom props like 'lessonsData' are passed to dynamically imported Client Components.
-
-// generateStaticParams para pre-generar rutas de lecciones
-export async function generateStaticParams() {
-  const coursesMetadataPath = path.join(process.cwd(), 'public', 'data', 'courses_meta.json');
-  const coursesMetadataRaw = await fs.readFile(coursesMetadataPath, 'utf-8');
-  const coursesMetadata: CourseMetadata[] = JSON.parse(coursesMetadataRaw);
-
-  const params: { courseId: string; lessonId: string }[] = [];
-
-  for (const course of coursesMetadata) {
-    if (course.lessonsPath) {
-      const lessonsFilePath = path.join(process.cwd(), 'public', 'data', course.lessonsPath);
-      
-      try {
-        const lessonsRaw = await fs.readFile(lessonsFilePath, 'utf-8');
-        const lessons: LessonMetadata[] = JSON.parse(lessonsRaw);
-        
-        for (const lesson of lessons) {
-          params.push({ courseId: course.id, lessonId: lesson.id });
-        }
-      } catch (err: any) {
-        console.error(`[generateStaticParams] ERROR: Failed to read lessons file for course ${course.id} at ${lessonsFilePath}. Error: ${err.message}`);
-      }
-    }
-  }
-  return params;
+interface LessonPageProps {
+  params: {
+    courseId: string;
+    lessonId: string;
+  };
 }
 
-export default async function LessonPage({ params }: { params: { courseId: string; lessonId: string } }) {
-  const { courseId, lessonId } = params;
+export default function LessonPage({ params }: LessonPageProps) {
+  const [courseMeta, setCourseMeta] = useState<CourseMetadata | null>(null);
+  const [lesson, setLesson] = useState<LessonMetadata | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // 1. Load course metadata to get the specific lessons JSON path
-  const coursesMetadataPath = path.join(process.cwd(), 'public', 'data', 'courses_meta.json');
-  const coursesMetadataRaw = await fs.readFile(coursesMetadataPath, 'utf-8');
-  const coursesMetadataData: CourseMetadata[] = JSON.parse(coursesMetadataRaw);
-  const courseMeta = coursesMetadataData.find(c => c.id === courseId);
-
-  if (!courseMeta) {
-    notFound();
-  }
-
-  // 2. Load the specific lessons JSON file (e.g., c-lessons.json)
-  const lessonsFilePath = path.join(process.cwd(), 'public', 'data', courseMeta.lessonsPath);
-  let lessonsData: LessonMetadata[] = [];
-  try {
-    const lessonsRaw = await fs.readFile(lessonsFilePath, 'utf-8');
-    lessonsData = JSON.parse(lessonsRaw) as LessonMetadata[];
-  } catch (error: any) {
-    console.error(`ERROR: Failed to load lessons data for ${courseId}:`, error.message);
-    notFound(); // If lesson data cannot be loaded, treat as not found
-  }
-
-  // Define the props interface for LessonComponent (the client component)
-  // This interface correctly includes both params and lessonsData
-  interface LessonComponentProps {
-    params: { courseId: string; lessonId: string };
-    lessonsData: LessonMetadata[];
-  }
-
-  // Dynamically import the specific lesson's client component
-  // We explicitly pass `lessonsData` here
-  const LessonComponent = dynamic<LessonComponentProps>(
-    () => import(`@/app/learning/${courseId}/${lessonId}/page`), 
-    {
-      loading: () => (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 p-4">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-vibrant-teal"></div>
-          <p className="text-vibrant-teal text-xl mt-4 font-semibold animate-pulse">Cargando lección...</p>
-          <p className="text-gray-400 text-sm mt-2">Preparando el contenido para usted.</p>
-        </div>
-      ),
-      ssr: true, // Allow SSR for client components that receive data from server
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const { courseId, lessonId } = await Promise.resolve(params);
+        
+        // Load course metadata
+        const coursesResponse = await fetch('/data/courses_meta.json');
+        const coursesData: CourseMetadata[] = await coursesResponse.json();
+        const course = coursesData.find(c => c.id === courseId);
+        
+        if (!course) {
+          notFound();
+          return;
+        }
+        
+        setCourseMeta(course);
+        
+        // Load lessons and find specific lesson
+        try {
+          const lessonsResponse = await fetch(`/data/${course.lessonsPath}`);
+          const lessonsData: LessonMetadata[] = await lessonsResponse.json();
+          const foundLesson = lessonsData.find(l => l.id === lessonId);
+          
+          if (!foundLesson) {
+            notFound();
+            return;
+          }
+          
+          setLesson(foundLesson);
+        } catch (error) {
+          console.error(`Error loading lesson ${lessonId}:`, error);
+          notFound();
+        }
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
     }
-  );
+    
+    loadData();
+  }, [params]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-vibrant-teal mx-auto mb-4"></div>
+          <p className="text-vibrant-teal text-xl font-semibold">Loading lesson...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!courseMeta || !lesson) {
+    notFound();
+    return null;
+  }
 
   return (
-    // Pass the received params AND the loaded lessonsData to the client component
-    // The main container for the page, which will hold the loaded lesson content
-    <div className="flex flex-col min-h-screen bg-gray-950">
-      <main className="flex-1 w-full max-w-full mx-auto p-4 md:p-8">
-        <LessonComponent params={params} lessonsData={lessonsData} />
-      </main>
+    <div className="flex flex-col items-center p-4 md:p-8 min-h-[calc(100vh-64px)] text-white">
+      <div className="bg-transparent backdrop-blur-md p-6 md:p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 w-full max-w-7xl mx-auto">
+        {/* Navigation */}
+        <div className="mb-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link href={`/learning/${courseMeta.id}`} className="inline-flex items-center text-vibrant-teal hover:text-white transition-colors duration-300">
+              <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+              </svg>
+              Back to {courseMeta.title} Lessons
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Lesson Header */}
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-6xl mb-6 text-vibrant-teal"
+          >
+            {courseMeta.icon}
+          </motion.div>
+          
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-4xl md:text-5xl font-extrabold mb-6 text-vibrant-teal text-center drop-shadow-md"
+          >
+            {lesson.title}
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: -10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="text-gray-200 text-base md:text-lg mb-8 text-center max-w-2xl mx-auto"
+          >
+            {lesson.description}
+          </motion.p>
+        </div>
+
+        {/* Lesson Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="bg-gray-800/50 border border-gray-700 rounded-xl p-8 text-center shadow-lg"
+        >
+          <div className="text-6xl mb-6">📖</div>
+          <h2 className="text-2xl font-bold text-white mb-4">Lesson Content</h2>
+          <p className="text-gray-300 text-lg mb-6">
+            This lesson content will be implemented based on the specific lesson requirements.
+          </p>
+          <p className="text-gray-400">
+            Content for: <span className="text-vibrant-teal font-semibold">{lesson.title}</span>
+          </p>
+        </motion.div>
+      </div>
     </div>
   );
 }
