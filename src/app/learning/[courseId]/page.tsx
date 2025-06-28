@@ -21,9 +21,9 @@ interface LessonMetadata {
 }
 
 interface CourseIndexPageProps {
-  params: {
+  params: Promise<{
     courseId: string;
-  };
+  }>;
 }
 
 export default function CourseIndexPage({ params }: CourseIndexPageProps) {
@@ -34,7 +34,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
   useEffect(() => {
     async function loadData() {
       try {
-        const { courseId } = await Promise.resolve(params);
+        const { courseId } = await params;
         
         // Load course metadata
         const coursesResponse = await fetch('/data/courses_meta.json');
