@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/app/learning/c/c-function-declaration/page.tsx
 'use client'; 
 
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { useParams } from 'next/navigation';
 
 import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
 
@@ -17,11 +15,6 @@ declare global {
   }
 }
 
-interface LessonMetadata {
-  id: string;
-  title: string;
-  description: string;
-}
 
 const LESSON_CONTENT = `
 # C Function Declaration (Prototypes)
@@ -152,15 +145,8 @@ When compiling 'main.c' and 'my_functions.c' together (e.g., 'gcc main.c my_func
 </div>
 `;
 
-interface CFunctionDeclarationPageProps {
-  params: {
-    courseId: string;
-    lessonId: string;
-  };
-}
 
-export default function CFunctionDeclarationPage({ params }: { params: { courseId: string; lessonId: string } }) {
-  const { courseId, lessonId } = params;
+export default function CFunctionDeclarationPage({ }: { params: { courseId: string; lessonId: string } }) {
 
   useEffect(() => {
     // Load Prism CSS

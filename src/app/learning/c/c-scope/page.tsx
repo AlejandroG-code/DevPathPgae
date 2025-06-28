@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/app/learning/c/c-scope/page.tsx
 'use client'; 
 
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { useParams } from 'next/navigation';
 
 import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
 
@@ -17,11 +15,6 @@ declare global {
   }
 }
 
-interface LessonMetadata {
-  id: string;
-  title: string;
-  description: string;
-}
 
 const LESSON_CONTENT = `
 # C Scope
@@ -158,15 +151,8 @@ int main() {
 </div>
 `;
 
-interface CScopePageProps {
-  params: {
-    courseId: string;
-    lessonId: string;
-  };
-}
 
-export default function CScopePage({ params }: { params: { courseId: string; lessonId: string } }) {
-  const { courseId, lessonId } = params;
+export default function CScopePage({ }: { params: { courseId: string; lessonId: string } }) {
 
   useEffect(() => {
     // Load Prism CSS
