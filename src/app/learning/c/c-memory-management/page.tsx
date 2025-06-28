@@ -218,7 +218,7 @@ int main() {
 `;
 
 
-export default function CMemoryManagementPage({ }: { params: { courseId: string; lessonId: string } }) {
+export default function CMemoryManagementPage() {
 
   useEffect(() => {
     // Load Prism CSS

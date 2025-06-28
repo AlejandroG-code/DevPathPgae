@@ -1,7 +1,7 @@
 // src/app/learning/c/c-data-types/page.tsx
 'use client'; 
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 
@@ -141,41 +141,45 @@ int main() {
 `;
 
 
-export default function CDataTypesPage() {
+export default function CDataTypesPage({ params }: { params: Promise<{ courseId: string; lessonId: string; }> }) {
+  const [, setLoading] = useState(true);
 
   useEffect(() => {
-    const link = document.createElement('link');
-    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
+    async function loadData() {
+      try {
+        
+        const link = document.createElement('link');
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
 
-    const scriptCore = document.createElement('script');
-    scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
-    scriptCore.async = true;
+        const scriptCore = document.createElement('script');
+        scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
+        scriptCore.async = true;
 
-    scriptCore.onload = () => {
-      const scriptCLang = document.createElement('script');
-      scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
-      scriptCLang.async = true;
+        scriptCore.onload = () => {
+          const scriptCLang = document.createElement('script');
+          scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
+          scriptCLang.async = true;
 
-      scriptCLang.onload = () => {
-        if (window.Prism) {
-          window.Prism.highlightAll();
-        }
-      };
-      document.body.appendChild(scriptCLang);
-    };
-    document.body.appendChild(scriptCore);
+          scriptCLang.onload = () => {
+            if (window.Prism) {
+              window.Prism.highlightAll();
+            }
+          };
+          document.body.appendChild(scriptCLang);
+        };
+        document.body.appendChild(scriptCore);
 
-    return () => {
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
       }
-      if (document.body.contains(scriptCore)) {
-        document.body.removeChild(scriptCore);
-      }
-    };
-  }, [LESSON_CONTENT]);
+    }
+    
+    loadData();
+  }, [params]);
 
   const components: Components = {
     code: ({ className, children, ...props }) => {

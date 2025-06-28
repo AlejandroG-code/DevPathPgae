@@ -1,7 +1,7 @@
 // src/app/learning/c/c-create-files/page.tsx
 'use client'; 
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 
@@ -160,6 +160,7 @@ int main() {
 
 
 export default function CCreateFilesPage({ params }: { params: Promise<{ courseId: string; lessonId: string; }> }) {
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
@@ -231,6 +232,17 @@ export default function CCreateFilesPage({ params }: { params: Promise<{ courseI
     td: ({ ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300 text-sm" {...props} />,
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-vibrant-teal mx-auto mb-4"></div>
+          <p className="text-vibrant-teal text-xl font-semibold">Loading lesson...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 w-full max-w-full px-4 md:px-8 mx-auto">
@@ -251,9 +263,5 @@ export default function CCreateFilesPage({ params }: { params: Promise<{ courseI
       </main>
     </div>
   );
-}
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function setLoading(arg0: boolean) {
-  throw new Error('Function not implemented.');
 }
 

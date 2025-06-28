@@ -1,4 +1,3 @@
-// src/app/learning/c/c-booleans/page.tsx
 'use client'; 
 
 import React, { useEffect, useState } from 'react';
@@ -17,98 +16,165 @@ declare global {
 
 
 const LESSON_CONTENT = `
-# C Booleans
+# C Conditions: if, else if, else
 
-In C, there isn't a built-in 'boolean' data type like in many other programming languages (e.g., 'true'/'false' keywords). Instead, C represents boolean (truth) values using integers:
+In C programming, decision-making is achieved using conditional statements. These statements allow you to execute different code blocks based on certain conditions.
 
--   **Zero (0)** is interpreted as **false**.
--   **Any non-zero value** (typically 1, but could be any other non-zero integer) is interpreted as **true**.
+## The 'if' Statement
 
-Since C99, a standard header '\<stdbool.h\>' was introduced, which defines a 'bool' type and 'true'/'false' macros for convenience, making C code more readable and similar to other languages.
+The 'if' statement is used to test a condition. If the condition is true, the code block inside the 'if' statement is executed.
 
-## Using Integers as Booleans
-
-Without '\<stdbool.h\>', you typically use 'int' variables to store boolean states.
+**Syntax:**
 
 \`\`\`c
-#include \<stdio.h\>
-
-int main() {
-    int isSunny = 1;    // Represents true
-    int isRaining = 0; // Represents false
-
-    if (isSunny) { // Condition is true because isSunny is non-zero
-        printf("It's sunny today!\\n");
-    }
-
-    if (isRaining) { // Condition is false because isRaining is zero
-        printf("It's raining today.\\n");
-    } else {
-        printf("It's not raining today.\\n");
-    }
-
-    int temperature = 25;
-    int isHot = (temperature > 30); // 0 (false) because 25 is not > 30
-    printf("Is it hot? %d\\n", isHot); // Output: 0
-
-    return 0;
+if (condition) {
+    // Code to execute if condition is true
 }
 \`\`\`
 
-## Using '\<stdbool.h\>' for Booleans
+## The 'else' Statement
 
-Including the '\<stdbool.h\>' header allows you to use the 'bool' data type and the 'true'/'false' keywords, which are essentially macros that map to 'int' and 1/0 internally. This makes your code more explicit and easier to read.
+The 'else' statement is used to execute a code block if the condition in the 'if' statement is false.
+
+**Syntax:**
+
+\`\`\`c
+if (condition) {
+    // Code to execute if condition is true
+} else {
+    // Code to execute if condition is false
+}
+\`\`\`
+
+## The 'else if' Statement
+
+The 'else if' statement is used to test multiple conditions. If the first condition is false, the 'else if' condition is tested. If the 'else if' condition is true, the code block inside the 'else if' statement is executed.
+
+**Syntax:**
+
+\`\`\`c
+if (condition1) {
+    // Code to execute if condition1 is true
+} else if (condition2) {
+    // Code to execute if condition2 is true
+} else {
+    // Code to execute if both condition1 and condition2 are false
+}
+\`\`\`
+
+## Example: Using 'if', 'else if', and 'else'
+
+This program will demonstrate the use of 'if', 'else if', and 'else' statements.
 
 \`\`\`c
 #include <stdio.h>
-#include \<stdbool.h\> // Include this header to use 'bool', 'true', 'false'
 
 int main() {
-    bool isLoggedIn = true;   // isLoggedIn will be stored as 1
-    bool hasPermission = false; // hasPermission will be stored as 0
+    int number;
 
-    printf("Is logged in? %d\\n", isLoggedIn);     // Output: 1
-    printf("Has permission? %d\\n", hasPermission); // Output: 0
+    printf("Enter a number: ");
+    scanf("%d", &number);
 
-    if (isLoggedIn && !hasPermission) {
-        printf("Logged in but no permission.\\n");
+    if (number > 0) {
+        printf("The number is positive.\\n");
+    } else if (number < 0) {
+        printf("The number is negative.\\n");
+    } else {
+        printf("The number is zero.\\n");
     }
 
     return 0;
 }
 \`\`\`
+
+In this example, the program will prompt the user to enter a number. It will then check if the number is positive, negative, or zero and print the appropriate message.
+
+## Nested 'if' Statements
+
+You can also nest 'if' statements inside other 'if' statements to create more complex conditions.
+
+**Syntax:**
+
+\`\`\`c
+if (condition1) {
+    // Code to execute if condition1 is true
+    if (condition2) {
+        // Code to execute if condition2 is true
+    }
+}
+\`\`\`
+
+## Example: Nested 'if' Statements
+
+This program will demonstrate the use of nested 'if' statements.
+
+\`\`\`c
+#include <stdio.h>
+
+int main() {
+    int number;
+
+    printf("Enter a number: ");
+    scanf("%d", &number);
+
+    if (number >= 0) {
+        if (number == 0) {
+            printf("The number is zero.\\n");
+        } else {
+            printf("The number is positive.\\n");
+        }
+    } else {
+        printf("The number is negative.\\n");
+    }
+
+    return 0;
+}
+\`\`\`
+
+In this example, the program will prompt the user to enter a number. It will then check if the number is positive, negative, or zero using nested 'if' statements.
+
+<div class="my-6 p-4 rounded-lg border-l-4 border-yellow-600 bg-yellow-900/[.2] shadow-md">
+    <p class="font-bold text-lg mb-2 text-yellow-400">Important!</p>
+    <div class="text-base md:text-lg text-gray-200 leading-relaxed">
+        Always use proper indentation to make your code more readable, especially when using nested 'if' statements.
+    </div>
+</div>
 
 <div class="my-6 p-4 rounded-lg border-l-4 border-green-600 bg-green-900/[.2] shadow-md">
     <p class="font-bold text-lg mb-2 text-green-400">Tip</p>
     <div class="text-base md:text-lg text-gray-200 leading-relaxed">
-        While C internally uses integers for boolean logic, using the '&ltstdbool.h&gt' header and the 'bool', 'true', 'false' keywords is highly recommended for modern C programming. It significantly improves code readability and maintainability by making the intent clearer.
+        Use 'else if' statements to test multiple conditions and avoid deeply nested 'if' statements.
     </div>
 </div>
 `;
 
 
-export default function CBooleansPage({ params }: { params: Promise<{ courseId: string; lessonId: string; }> }) {
-  const [, setLoading] = useState(true);
+export default function CConditionsPage({ params }: { params: Promise<{ courseId: string; lessonId: string; }> }) {
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       try {
         
+        // Load Prism CSS
         const link = document.createElement('link');
         link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
         link.rel = 'stylesheet';
         document.head.appendChild(link);
 
+        // Load Prism core JS
         const scriptCore = document.createElement('script');
         scriptCore.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
         scriptCore.async = true;
 
         scriptCore.onload = () => {
+          // Load C language component after core is loaded
           const scriptCLang = document.createElement('script');
           scriptCLang.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js';
           scriptCLang.async = true;
 
           scriptCLang.onload = () => {
+            // Highlight all code blocks after C language component is loaded
             if (window.Prism) {
               window.Prism.highlightAll();
             }
@@ -116,15 +182,6 @@ export default function CBooleansPage({ params }: { params: Promise<{ courseId: 
           document.body.appendChild(scriptCLang);
         };
         document.body.appendChild(scriptCore);
-
-        return () => {
-          if (document.head.contains(link)) {
-            document.head.removeChild(link);
-          }
-          if (document.body.contains(scriptCore)) {
-            document.body.removeChild(scriptCore);
-          }
-        };
       } catch (error) {
         console.error('Error loading data:', error);
       } finally {
@@ -136,6 +193,7 @@ export default function CBooleansPage({ params }: { params: Promise<{ courseId: 
   }, [params]);
 
   const components: Components = {
+    // Custom renderers for markdown elements to apply Tailwind CSS
     code: ({ className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '');
       const lang = match ? match[1] : 'markup'; 
@@ -164,6 +222,17 @@ export default function CBooleansPage({ params }: { params: Promise<{ courseId: 
     td: ({ ...props }) => <td className="p-3 border-b border-gray-700 text-gray-300 text-sm" {...props} />,
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-vibrant-teal mx-auto mb-4"></div>
+          <p className="text-vibrant-teal text-xl font-semibold">Loading lesson...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 w-full max-w-full px-4 md:px-8 mx-auto">
@@ -177,8 +246,8 @@ export default function CBooleansPage({ params }: { params: Promise<{ courseId: 
         </div>
         <LessonNavigationButtons
           currentCourseId="c"
-          prevLesson="c-operators"
-          nextLesson="c-if-else"
+          prevLesson="c-variables"
+          nextLesson="c-loops"
           backToContentPath={`/learning/c`}
         />
       </main>
