@@ -24,7 +24,7 @@ export default function LessonNavigationButtons({
           href={`/learning/${currentCourseId}/${prevLesson}`} 
           className="px-4 py-2 bg-accent-purple text-white rounded-md hover:bg-accent-purple/80 transition-colors duration-200 text-sm md:text-base whitespace-nowrap"
         >
-          ← Previous Lesson
+          ← Previous
         </Link>
       ) : (
         <span className="px-4 py-2 text-gray-100 cursor-not-allowed text-sm md:text-base whitespace-nowrap">← Previous</span>
@@ -35,7 +35,7 @@ export default function LessonNavigationButtons({
         href={backToContentPath} 
         className="px-4 py-2 bg-vibrant-teal text-gray-100 rounded-md hover:bg-vibrant-teal/80 transition-colors duration-200 text-sm md:text-base whitespace-nowrap mx-2"
       >
-        Back to {currentCourseId.toUpperCase()} Lessons
+        {currentCourseId.toUpperCase()} Lessons
       </Link>
 
       {/* Next Lesson Button */}
@@ -44,7 +44,7 @@ export default function LessonNavigationButtons({
           href={`/learning/${currentCourseId}/${nextLesson}`} 
           className="px-4 py-2 bg-accent-purple text-white rounded-md hover:bg-accent-purple/80 transition-colors duration-200 text-sm md:text-base whitespace-nowrap"
         >
-          Next Lesson →
+          Next →
         </Link>
       ) : (
         <span className="px-4 py-2 text-gray-100 cursor-not-allowed text-sm md:text-base whitespace-nowrap">Next →</span>

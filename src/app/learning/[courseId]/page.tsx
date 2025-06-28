@@ -81,15 +81,15 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
   }
 
   return (
-    <div className="flex flex-col items-center p-4 md:p-8 min-h-[calc(100vh-64px)] text-white">
-      <div className="bg-transparent backdrop-blur-md p-6 md:p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 w-full max-w-7xl mx-auto">
+    <div className="flex flex-col items-center p-2 md:p-8 min-h-[calc(100vh-64px)] text-white overflow-x-hidden">
+      <div className="bg-transparent backdrop-blur-md p-4 md:p-8 rounded-xl shadow-2xl border border-[#00FFC6]/20 w-full max-w-7xl mx-auto">
         {/* Hero Section */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.2 }}
-            className="text-8xl mb-6 text-vibrant-teal"
+            className="text-6xl md:text-8xl mb-4 md:mb-6 text-vibrant-teal"
           >
             {courseMeta.icon}
           </motion.div>
@@ -98,7 +98,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
             initial={{ opacity: 0, y: -20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.2, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-extrabold mb-6 text-vibrant-teal text-center drop-shadow-md"
+            className="text-2xl md:text-5xl font-extrabold mb-4 md:mb-6 text-vibrant-teal text-center drop-shadow-md px-2"
           >
             {courseMeta.title} Lessons
           </motion.h1>
@@ -107,7 +107,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
             initial={{ opacity: 0, y: -10 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.2, delay: 0.2 }}
-            className="text-gray-200 text-base md:text-lg mb-8 text-center max-w-2xl mx-auto"
+            className="text-gray-200 text-sm md:text-lg mb-6 md:mb-8 text-center max-w-2xl mx-auto px-2"
           >
             {courseMeta.description}
           </motion.p>
@@ -116,9 +116,10 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, delay: 0.3 }}
+            className="px-2"
           >
-            <Link href="/learning" className="inline-flex items-center px-6 py-3 rounded-full text-lg font-bold text-white bg-accent-purple/80 hover:bg-accent-purple transition-all duration-300 shadow-md hover:scale-105">
-              <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <Link href="/learning" className="inline-flex items-center px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-lg font-bold text-white bg-accent-purple/80 hover:bg-accent-purple transition-all duration-300 shadow-md hover:scale-105">
+              <svg className="mr-2 w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
               </svg>
               Back to Courses
@@ -127,12 +128,12 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
         </div>
 
         {/* Lessons Section */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6 md:mb-8">
           <motion.h2 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.09, delay: 0.1 }}
-            className="text-3xl md:text-4xl font-bold text-white mb-4"
+            className="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4 px-2"
           >
             Available Lessons
           </motion.h2>
@@ -140,7 +141,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
             initial={{ width: 0 }}
             animate={{ width: 96 }}
             transition={{ duration: 0.2, delay: 0.5 }}
-            className="h-1 bg-gradient-to-r from-vibrant-teal to-blue-400 mx-auto rounded-full"
+            className="h-1 bg-gradient-to-r from-vibrant-teal to-blue-400 mx-auto rounded-full max-w-24 md:max-w-none"
           ></motion.div>
         </div>
 
@@ -149,14 +150,14 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.2, delay: 0.6 }}
-            className="bg-gray-800/50 border border-gray-700 rounded-xl p-12 text-center shadow-lg max-w-2xl mx-auto"
+            className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 md:p-12 text-center shadow-lg max-w-2xl mx-auto"
           >
-            <div className="text-6xl mb-4">📚</div>
-            <p className="text-gray-200 text-xl font-semibold mb-2">No lessons available yet</p>
-            <p className="text-gray-400 text-lg">Check back soon for exciting new content!</p>
+            <div className="text-4xl md:text-6xl mb-3 md:mb-4">📚</div>
+            <p className="text-gray-200 text-lg md:text-xl font-semibold mb-2">No lessons available yet</p>
+            <p className="text-gray-400 text-base md:text-lg">Check back soon for exciting new content!</p>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {lessons.map((lesson, index) => (
               <motion.div
                 key={lesson.id}
@@ -164,20 +165,20 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.15, delay: 0.6 + 0.05 * index }}
                 whileHover={{ scale: 1.03, boxShadow: "0 10px 15px rgba(0,255,255,0.2)" }}
-                className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 flex flex-col justify-between h-full
+                className="bg-gray-800/50 border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col justify-between h-full
                           hover:bg-gray-700/50 hover:border-vibrant-teal transition-all duration-300 cursor-pointer shadow-lg"
               >
                 <Link href={`/learning/${courseMeta.id}/${lesson.id}`} className="block h-full">
                   <div className="flex flex-col h-full">
                     <div className="flex-grow">
-                      <h3 className="text-xl font-bold mb-3 text-white text-center">{lesson.title}</h3>
-                      <p className="text-gray-300 text-sm line-clamp-4 text-center mb-4">{lesson.description}</p>
+                      <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white text-center">{lesson.title}</h3>
+                      <p className="text-gray-300 text-xs md:text-sm line-clamp-4 text-center mb-3 md:mb-4">{lesson.description}</p>
                     </div>
                     <div className="mt-auto text-center">
-                      <button className="inline-flex items-center px-4 py-2 rounded-full text-sm font-bold text-white
+                      <button className="inline-flex items-center px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-bold text-white
                                          bg-accent-purple/80 hover:bg-accent-purple transition-all duration-300 shadow-md w-full justify-center">
                         Start Lesson
-                        <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="ml-2 w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                       </button>
