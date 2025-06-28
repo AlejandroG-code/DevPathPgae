@@ -88,7 +88,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.2 }}
             className="text-8xl mb-6 text-vibrant-teal"
           >
             {courseMeta.icon}
@@ -97,7 +97,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
           <motion.h1 
             initial={{ opacity: 0, y: -20 }} 
             animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.2, delay: 0.1 }}
             className="text-4xl md:text-5xl font-extrabold mb-6 text-vibrant-teal text-center drop-shadow-md"
           >
             {courseMeta.title} Lessons
@@ -106,7 +106,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
           <motion.p 
             initial={{ opacity: 0, y: -10 }} 
             animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.2, delay: 0.2 }}
             className="text-gray-200 text-base md:text-lg mb-8 text-center max-w-2xl mx-auto"
           >
             {courseMeta.description}
@@ -115,7 +115,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+            transition={{ duration: 0.2, delay: 0.3 }}
           >
             <Link href="/learning" className="inline-flex items-center px-6 py-3 rounded-full text-lg font-bold text-white bg-accent-purple/80 hover:bg-accent-purple transition-all duration-300 shadow-md hover:scale-105">
               <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,7 +131,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
           <motion.h2 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+            transition={{ duration: 0.09, delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold text-white mb-4"
           >
             Available Lessons
@@ -139,7 +139,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: 96 }}
-            transition={{ duration: 0.5, delay: 1 }}
+            transition={{ duration: 0.2, delay: 0.5 }}
             className="h-1 bg-gradient-to-r from-vibrant-teal to-blue-400 mx-auto rounded-full"
           ></motion.div>
         </div>
@@ -148,7 +148,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
+            transition={{ duration: 0.2, delay: 0.6 }}
             className="bg-gray-800/50 border border-gray-700 rounded-xl p-12 text-center shadow-lg max-w-2xl mx-auto"
           >
             <div className="text-6xl mb-4">📚</div>
@@ -162,7 +162,7 @@ export default function CourseIndexPage({ params }: CourseIndexPageProps) {
                 key={lesson.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 1.2 + 0.1 * index }}
+                transition={{ duration: 0.15, delay: 0.6 + 0.05 * index }}
                 whileHover={{ scale: 1.03, boxShadow: "0 10px 15px rgba(0,255,255,0.2)" }}
                 className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 flex flex-col justify-between h-full
                           hover:bg-gray-700/50 hover:border-vibrant-teal transition-all duration-300 cursor-pointer shadow-lg"
