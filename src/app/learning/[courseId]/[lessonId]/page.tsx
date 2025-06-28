@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/app/learning/[courseId]/[lessonId]/page.tsx
 // ESTE ES UN COMPONENTE DE SERVIDOR PURO. NO USA 'use client' NI HOOKS DE REACT.
 
@@ -24,13 +23,13 @@ interface LessonMetadata {
   description: string;
 }
 
+// FIX: LessonPageProps should ONLY contain 'params' for a Server Component Page.
+// Custom props like 'lessonsData' are passed to dynamically imported Client Components.
 interface LessonPageProps {
   params: {
     courseId: string;
     lessonId: string;
   };
-  // Add lessonsData prop that will be passed down to the client component
-  lessonsData?: LessonMetadata[]; 
 }
 
 // generateStaticParams para pre-generar rutas de lecciones
@@ -84,7 +83,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
     notFound(); // If lesson data cannot be loaded, treat as not found
   }
 
-  // Define the props interface for LessonComponent
+  // Define the props interface for LessonComponent (the client component)
+  // This interface correctly includes both params and lessonsData
   interface LessonComponentProps {
     params: { courseId: string; lessonId: string };
     lessonsData: LessonMetadata[];
