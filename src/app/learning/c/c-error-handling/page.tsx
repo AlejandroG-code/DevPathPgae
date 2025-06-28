@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/app/learning/c/c-error-handling/page.tsx
 'use client'; 
 
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { useParams } from 'next/navigation';
 
 import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
 
@@ -17,11 +15,6 @@ declare global {
   }
 }
 
-interface LessonMetadata {
-  id: string;
-  title: string;
-  description: string;
-}
 
 const LESSON_CONTENT = `
 # C Error Handling
@@ -216,15 +209,8 @@ int main() {
 </div>
 `;
 
-interface CErrorHandlingPageProps {
-  params: {
-    courseId: string;
-    lessonId: string;
-  };
-}
 
-export default function CErrorHandlingPage({ params }: { params: { courseId: string; lessonId: string } }) {
-  const { courseId, lessonId } = params;
+export default function CErrorHandlingPage({ }: { params: { courseId: string; lessonId: string } }) {
 
   useEffect(() => {
     // Load Prism CSS

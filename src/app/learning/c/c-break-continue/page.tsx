@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/app/learning/c/c-break-continue/page.tsx
 'use client'; 
 
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { useParams } from 'next/navigation';
 
 import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
 

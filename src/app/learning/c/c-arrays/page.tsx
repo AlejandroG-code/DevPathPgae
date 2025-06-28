@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/app/learning/c/c-arrays/page.tsx
 'use client'; 
 

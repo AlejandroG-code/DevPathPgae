@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/app/learning/c/c-for-loop/page.tsx
 'use client'; 
 
 import React, { useEffect } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { useParams } from 'next/navigation';
 
 import LessonNavigationButtons from '@/app/_components/LessonNavigationButtons';
 
@@ -17,11 +15,6 @@ declare global {
   }
 }
 
-interface LessonMetadata {
-  id: string;
-  title: string;
-  description: string;
-}
 
 const LESSON_CONTENT = `
 # C Loops: 'for' Loop
@@ -152,15 +145,8 @@ Any of the three parts (initialization, condition, update) can be omitted, but t
 </div>
 `;
 
-interface CForLoopPageProps {
-  params: {
-    courseId: string;
-    lessonId: string;
-  };
-}
 
-export default function CForLoopPage({ params }: { params: { courseId: string; lessonId: string } }) {
-  const { courseId, lessonId } = params;
+export default function CForLoopPage({ }: { params: { courseId: string; lessonId: string } }) {
 
   useEffect(() => {
     const link = document.createElement('link');
