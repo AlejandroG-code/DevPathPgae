@@ -10,7 +10,7 @@
   },
   {
     "id": "c",
-    "title": "C Programming",
+    "title": "Learn C",
     "description": "Master the powerful C language, essential for system programming and game development.",
     "icon": "⚙️",
     "lessonsPath": "courses/c-lessons.json",  
@@ -18,39 +18,48 @@
     "homePagePath": "c-home"
   },
   {
-    "id": "html-css-basics",
-    "title": "HTML & CSS Basics",
-    "description": "Master the foundational languages for building and styling web pages.",
-    "icon": "🌐",
-    "lessonsPath": "lessons/html-css-lessons.json" 
+    "id": "java",
+    "title": "Learn Java",
+    "description": "Learn Java, a versatile language used in web, mobile, and enterprise applications.",
+    "icon": "☕",
+    "lessonsPath": "courses/java-lessons.json", 
+    "mdxContentDir": "java",             
+    "homePagePath": "/learning/java/java-tutorial"
   },
   {
-    "id": "javascript-fundamentals",
-    "title": "JavaScript Fundamentals",
+    "id": "javascript",
+    "title": "Learn JavaScript",
     "description": "Learn the core concepts of JavaScript, the programming language for the web.",
     "icon": "JS",
     "lessonsPath": "lessons/javascript-fundamentals-lessons.json" 
   },
   {
-    "id": "cpp-basics",
-    "title": "C++ Fundamentals",
+    "id": "cpp",
+    "title": "Learn C++",
     "description": "Explore C++, a high-performance language for game development, systems, and more.",
     "icon": "🚀",
     "lessonsPath": "lessons/cpp-basics-lessons.json" 
   },
   {
-    "id": "csharp-basics",
-    "title": "C# Essentials",
+    "id": "csharp",
+    "title": "Learn C#",
     "description": "Learn C#, Microsoft's versatile language for .NET applications and game development (Unity).",
     "icon": "♯",
     "lessonsPath": "lessons/csharp-basics-lessons.json" 
   },
   {
-    "id": "data-structures-algorithms",
-    "title": "Data Structures & Algorithms",
-    "description": "Understand fundamental data structures and algorithms to write efficient code.",
-    "icon": "⚙️",
-    "lessonsPath": "lessons/dsa-lessons.json" 
+    "id": "html",
+    "title": "Learn HTML",
+    "description": "Learn the structure of web pages using HTML.",
+    "icon": "📄",
+    "lessonsPath": "lessons/html-lessons.json"
+  },
+  {
+    "id": "css",
+    "title": "Learn CSS",
+    "description": "Style web pages with CSS, the language for describing the presentation of web pages.",
+    "icon": "🎨",
+    "lessonsPath": "lessons/css-lessons.json"
   },
   {
     "id": "sql-databases",
@@ -58,6 +67,27 @@
     "description": "Master SQL for managing and querying relational databases.",
     "icon": "🗄️",
     "lessonsPath": "lessons/sql-lessons.json" 
+  },
+  {
+    "id": "react",
+    "title": "React Basics",
+    "description": "Learn React, a popular JavaScript library for building user interfaces.",
+    "icon": "⚛️",
+    "lessonsPath": "lessons/react-lessons.json"
+  },
+  {
+    "id": "nodejs",
+    "title": "Node.js Basics",
+    "description": "Build server-side applications using Node.js, a JavaScript runtime.",
+    "icon": "🌐",
+    "lessonsPath": "lessons/nodejs-lessons.json"
+  },
+  {
+    "id": "data-structures-algorithms",
+    "title": "Data Structures & Algorithms",
+    "description": "Understand fundamental data structures and algorithms to write efficient code.",
+    "icon": "⚙️",
+    "lessonsPath": "lessons/dsa-lessons.json" 
   },
   {
     "id": "git-github",
@@ -72,27 +102,6 @@
     "description": "Fundamental concepts of how the web works, browsers, and HTTP.",
     "icon": "✨",
     "lessonsPath": "lessons/web-basics-lessons.json" 
-  },
-  {
-    "id": "Arduino",
-    "title": "Arduino Programming",
-    "description": "Get started with Arduino, a platform for building electronics projects.",
-    "icon": "🛠️",
-    "lessonsPath": "lessons/arduino-lessons.json" 
-  },
-  {
-    "id": "robotics-fundamentals",
-    "title": "Robotics Fundamentals",
-    "description": "Learn the basics of robotics, including sensors, actuators, and control systems.",
-    "icon": "🤖",
-    "lessonsPath": "lessons/robotics-fundamentals-lessons.json" 
-  },
-  {
-    "id": "embedded-systems",
-    "title": "Embedded Systems Programming",
-    "description": "Dive into embedded systems programming with C/C++ on microcontrollers.",
-    "icon": "💻",
-    "lessonsPath": "lessons/embedded-systems-lessons.json" 
   },
   {
     "id": "web-design",
@@ -142,5 +151,26 @@
     "description": "Learn how to automate home systems using IoT devices and programming.",
     "icon": "🏠",
     "lessonsPath": "lessons/domotics-lessons.json"
+  },
+  {
+    "id": "Arduino",
+    "title": "Arduino Programming",
+    "description": "Get started with Arduino, a platform for building electronics projects.",
+    "icon": "🛠️",
+    "lessonsPath": "lessons/arduino-lessons.json" 
+  },
+  {
+    "id": "robotics-fundamentals",
+    "title": "Robotics Fundamentals",
+    "description": "Learn the basics of robotics, including sensors, actuators, and control systems.",
+    "icon": "🤖",
+    "lessonsPath": "lessons/robotics-fundamentals-lessons.json" 
+  },
+  {
+    "id": "embedded-systems",
+    "title": "Embedded Systems Programming",
+    "description": "Dive into embedded systems programming with C/C++ on microcontrollers.",
+    "icon": "💻",
+    "lessonsPath": "lessons/embedded-systems-lessons.json" 
   }
 ]
